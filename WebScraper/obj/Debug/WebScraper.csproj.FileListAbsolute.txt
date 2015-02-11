@@ -1,0 +1,5 @@
+E:\Working\Beo\manga-downloader\WebScraper\obj\Debug\WebScraper.csprojResolveAssemblyReference.cache
+E:\Working\Beo\manga-downloader\WebScraper\bin\Debug\WebScraper.dll
+E:\Working\Beo\manga-downloader\WebScraper\bin\Debug\WebScraper.pdb
+E:\Working\Beo\manga-downloader\WebScraper\obj\Debug\WebScraper.dll
+E:\Working\Beo\manga-downloader\WebScraper\obj\Debug\WebScraper.pdb

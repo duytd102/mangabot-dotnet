@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaDownloader", "MangaDow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchRenamer", "BatchRenamer\BatchRenamer.csproj", "{4D904506-656D-41A6-8A33-812DD3D445F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebScraper", "WebScraper\WebScraper.csproj", "{6DA79F70-0D1E-4D1A-808C-8C7447501AC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D904506-656D-41A6-8A33-812DD3D445F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D904506-656D-41A6-8A33-812DD3D445F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D904506-656D-41A6-8A33-812DD3D445F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DA79F70-0D1E-4D1A-808C-8C7447501AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA79F70-0D1E-4D1A-808C-8C7447501AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA79F70-0D1E-4D1A-808C-8C7447501AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DA79F70-0D1E-4D1A-808C-8C7447501AC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

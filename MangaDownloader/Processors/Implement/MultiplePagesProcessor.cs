@@ -18,7 +18,7 @@ namespace MangaDownloader.Processors.Implement
         public MultiplePagesProcessor(MangaSite site)
         {
             currentSite = site;
-            scraper = ScraperFactory.GetInstance(site);
+            scraper = ScraperFactory.CreateScraper(site);
         }
 
         public int GetTotalPages()

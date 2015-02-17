@@ -9,13 +9,15 @@ namespace WebScraper.Scrapers
 {
     public class ScraperFactory
     {
-        public static IScraper GetInstance(MangaSite site)
+        public static IScraper CreateScraper(MangaSite site)
         {
             switch (site)
             {
                 case MangaSite.BLOGTRUYEN:
                     return new BlogTruyenScraper();
+
                 default:
+                    // TODO implement if has more sites
                     throw new NotImplementedException();
             }
         }

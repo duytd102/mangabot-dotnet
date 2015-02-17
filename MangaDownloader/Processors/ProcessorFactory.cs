@@ -9,7 +9,7 @@ namespace MangaDownloader.Processors
 {
     class ProcessorFactory
     {
-        public static IProcessor GetInstance(MangaSite site)
+        public static IProcessor CreateProcessor(MangaSite site)
         {
             switch (site)
             {

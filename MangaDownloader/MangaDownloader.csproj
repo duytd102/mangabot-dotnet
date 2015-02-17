@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.10.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.4\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LinkType.cs" />
+    <Compile Include="Enums\TaskStatus.cs" />
+    <Compile Include="GUIs\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUIs\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,8 +69,19 @@
     <Compile Include="Processors\ProcessorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\OrderedDictionary.cs" />
+    <Compile Include="Workers\Data\Task.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\ListUtils.cs" />
     <Compile Include="Utils\MangaExportUtils.cs" />
+    <Compile Include="Utils\TaskUtils.cs" />
+    <Compile Include="Workers\Data\DownloadData.cs" />
+    <Compile Include="Workers\Data\WorkerHandlers.cs" />
+    <Compile Include="Workers\Implement\ThreadWorker.cs" />
+    <Compile Include="Workers\IWorker.cs" />
+    <Compile Include="Workers\WorkerFactory.cs" />
+    <Compile Include="Workers\WorkerManager.cs" />
     <EmbeddedResource Include="GUIs\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -72,6 +96,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -86,9 +111,6 @@
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Workers\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\WebScraper\WebScraper.csproj">
       <Project>{6da79f70-0d1e-4d1a-808c-8c7447501ac6}</Project>
       <Name>WebScraper</Name>
@@ -97,6 +119,58 @@
   <ItemGroup>
     <None Include="Resources\blogtruyen_logo.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mangafox_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vechai_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folderopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\multidownload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop-All-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_skip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

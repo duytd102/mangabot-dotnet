@@ -12,7 +12,6 @@ namespace MangaDownloader.Enums
         COMPLETE,
         FAILED,
         SKIPPED,
-        STOPPED,
-        PAUSED
+        STOPPED
     }
 }

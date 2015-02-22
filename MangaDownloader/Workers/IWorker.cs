@@ -8,6 +8,12 @@ namespace MangaDownloader.Workers
 {
     interface IWorker
     {
+        event Action<object> Downloading;
+        event Action<object, double> ProgressChanged;
+        event Action<object> Complete;
+        event Action<object> Cancelled;
+        event Action<object, Exception> Failed;
+
         void Start();
         void Stop();
 

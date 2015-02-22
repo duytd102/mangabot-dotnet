@@ -58,14 +58,13 @@ namespace MangaDownloader.Utils
         /// <param name="fileName">Tên tập tin cần tạo (không chứa phần mở rộng)</param>
         public static void CreateShortcut(string url, string folderPath, string fileName)
         {
-            string fn = String.IsNullOrEmpty(fileName) ? "MangaBuZz" : FileUtils.GetSafeName(fileName);
+            string fn = String.IsNullOrEmpty(fileName) ? "Manga Downloader" : FileUtils.GetSafeName(fileName);
             using (StreamWriter writer = new StreamWriter(String.Format("{0}\\{1}.url", folderPath, fn)))
             {
                 writer.WriteLine("[InternetShortcut]");
                 writer.WriteLine("URL=" + url);
                 writer.Flush();
                 writer.Close();
-
             }
         }
 

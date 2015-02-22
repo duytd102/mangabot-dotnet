@@ -11,13 +11,7 @@ namespace MangaDownloader.Processors
     {
         public static IProcessor CreateProcessor(MangaSite site)
         {
-            switch (site)
-            {
-                case MangaSite.BLOGTRUYEN:
-                    return new MultiplePagesProcessor(site);
-                default:
-                    throw new NotImplementedException();
-            }
+            return new MultiplePagesProcessor(site);
         }
     }
 }

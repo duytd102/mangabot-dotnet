@@ -1,1 +1,2 @@
-MangaDownloader/obj/**
+**/obj/**
+**/bin/**

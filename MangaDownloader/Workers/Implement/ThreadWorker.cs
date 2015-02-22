@@ -23,11 +23,10 @@ namespace MangaDownloader.Workers.Implement
         private IProcessor processor;
         private BackgroundWorker executor;
 
-        public ThreadWorker(IProcessor processor, Task task, WorkerHandlers handlers)
+        public ThreadWorker(IProcessor processor, Task task)
         {
             this.processor = processor;
             this.task = task;
-            RegisterCallbacks(handlers);
 
             executor = new BackgroundWorker();
             executor.WorkerReportsProgress = true;
@@ -172,16 +171,9 @@ namespace MangaDownloader.Workers.Implement
 
         private void DownloadPage(String pageName, String pageUrl, MangaSite site, String chapterFolderPath)
         {
-            String fixedUrl = pageUrl;
-            //switch (site)
-            //{
-            //    case MangaSite.MANGAFOX:
-            //        fixedUrl = MangaFoxGrabber.ExtractPageImage(pageUrl);
-            //        break;
-            //}
-
-            String pagePath = String.Format("{0}\\{1}{2}{3}", chapterFolderPath, pageName, site, FileUtils.GetExtension(fixedUrl));
-            HttpUtils.DownloadFile(fixedUrl, pagePath);
+            String pagePath = String.Format("{0}\\{1}-{2}{3}", 
+                chapterFolderPath, pageName, site, FileUtils.GetExtension(pageUrl));
+            HttpUtils.DownloadFile(pageUrl, pagePath);
         }
 
         private void Shortcut(string url, string folderPath, string fileName)
@@ -257,9 +249,7 @@ namespace MangaDownloader.Workers.Implement
 
         public bool IsQueued()
         {
-            return task != null & 
-                (task.Status == Enums.TaskStatus.QUEUED ||
-                task.Status == Enums.TaskStatus.STOPPED);
+            return task != null & SomeRules.CanDownloadTask(task.Status);
         }
     }
 }

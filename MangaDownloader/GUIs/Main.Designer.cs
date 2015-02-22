@@ -66,11 +66,22 @@
             this.tcTasks = new System.Windows.Forms.TabControl();
             this.tpTasks = new System.Windows.Forms.TabPage();
             this.dgvTaskList = new System.Windows.Forms.DataGridView();
+            this.colTaskID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskProgress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskSaveTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsTaskMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiTaskOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTaskSaveTo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiTaskReDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTaskDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTaskStop = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -95,15 +106,6 @@
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiContactMe = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.colTaskID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskProgress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskSaveTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -516,6 +518,85 @@
             this.dgvTaskList.Size = new System.Drawing.Size(737, 142);
             this.dgvTaskList.TabIndex = 2;
             this.dgvTaskList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTaskList_CellMouseDown);
+            this.dgvTaskList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvTaskList_KeyUp);
+            // 
+            // colTaskID
+            // 
+            this.colTaskID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTaskID.HeaderText = "ID";
+            this.colTaskID.Name = "colTaskID";
+            this.colTaskID.ReadOnly = true;
+            this.colTaskID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskID.Visible = false;
+            // 
+            // colTaskName
+            // 
+            this.colTaskName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTaskName.HeaderText = "Name";
+            this.colTaskName.Name = "colTaskName";
+            this.colTaskName.ReadOnly = true;
+            this.colTaskName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskName.Width = 44;
+            // 
+            // colTaskStatus
+            // 
+            this.colTaskStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTaskStatus.HeaderText = "Status";
+            this.colTaskStatus.Name = "colTaskStatus";
+            this.colTaskStatus.ReadOnly = true;
+            this.colTaskStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskStatus.Visible = false;
+            // 
+            // colTaskProgress
+            // 
+            this.colTaskProgress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTaskProgress.HeaderText = "Status";
+            this.colTaskProgress.Name = "colTaskProgress";
+            this.colTaskProgress.ReadOnly = true;
+            this.colTaskProgress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskProgress.Width = 48;
+            // 
+            // colTaskSaveTo
+            // 
+            this.colTaskSaveTo.HeaderText = "Save to";
+            this.colTaskSaveTo.Name = "colTaskSaveTo";
+            this.colTaskSaveTo.ReadOnly = true;
+            this.colTaskSaveTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskSaveTo.Width = 300;
+            // 
+            // colTaskType
+            // 
+            this.colTaskType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTaskType.HeaderText = "Type";
+            this.colTaskType.Name = "colTaskType";
+            this.colTaskType.ReadOnly = true;
+            this.colTaskType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskType.Width = 41;
+            // 
+            // colTaskSite
+            // 
+            this.colTaskSite.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTaskSite.HeaderText = "Site";
+            this.colTaskSite.Name = "colTaskSite";
+            this.colTaskSite.ReadOnly = true;
+            this.colTaskSite.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskSite.Width = 34;
+            // 
+            // colTaskURL
+            // 
+            this.colTaskURL.HeaderText = "URL";
+            this.colTaskURL.Name = "colTaskURL";
+            this.colTaskURL.ReadOnly = true;
+            this.colTaskURL.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskURL.Visible = false;
+            // 
+            // colTaskDescription
+            // 
+            this.colTaskDescription.HeaderText = "Description";
+            this.colTaskDescription.Name = "colTaskDescription";
+            this.colTaskDescription.ReadOnly = true;
+            this.colTaskDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTaskDescription.Visible = false;
             // 
             // cmsTaskMenu
             // 
@@ -524,6 +605,8 @@
             this.toolStripSeparator1,
             this.tsmiTaskSaveTo,
             this.toolStripSeparator4,
+            this.tsmiTaskReDownload,
+            this.toolStripSeparator5,
             this.tsmiTaskDownload,
             this.tsmiTaskStop,
             this.toolStripSeparator3,
@@ -533,39 +616,51 @@
             this.toolStripSeparator2,
             this.tsmiTaskViewOnline});
             this.cmsTaskMenu.Name = "cmsTaskMenu";
-            this.cmsTaskMenu.Size = new System.Drawing.Size(140, 204);
+            this.cmsTaskMenu.Size = new System.Drawing.Size(141, 232);
             this.cmsTaskMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cmsTaskMenu_Opening);
             // 
             // tsmiTaskOpenFolder
             // 
             this.tsmiTaskOpenFolder.Image = global::MangaDownloader.Properties.Resources.folderopen;
             this.tsmiTaskOpenFolder.Name = "tsmiTaskOpenFolder";
-            this.tsmiTaskOpenFolder.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskOpenFolder.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskOpenFolder.Text = "Open Folder";
             this.tsmiTaskOpenFolder.Click += new System.EventHandler(this.tsmiTaskOpenFolder_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
             // 
             // tsmiTaskSaveTo
             // 
             this.tsmiTaskSaveTo.Name = "tsmiTaskSaveTo";
-            this.tsmiTaskSaveTo.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskSaveTo.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskSaveTo.Text = "Save to...";
             this.tsmiTaskSaveTo.Click += new System.EventHandler(this.tsmiTaskSaveTo_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(137, 6);
+            // 
+            // tsmiTaskReDownload
+            // 
+            this.tsmiTaskReDownload.Name = "tsmiTaskReDownload";
+            this.tsmiTaskReDownload.Size = new System.Drawing.Size(140, 22);
+            this.tsmiTaskReDownload.Text = "Redownload";
+            this.tsmiTaskReDownload.Click += new System.EventHandler(this.tsmiTaskReDownload_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(137, 6);
             // 
             // tsmiTaskDownload
             // 
             this.tsmiTaskDownload.Image = global::MangaDownloader.Properties.Resources.download;
             this.tsmiTaskDownload.Name = "tsmiTaskDownload";
-            this.tsmiTaskDownload.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskDownload.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskDownload.Text = "Download";
             this.tsmiTaskDownload.Click += new System.EventHandler(this.tsmiTaskDownload_Click);
             // 
@@ -573,48 +668,46 @@
             // 
             this.tsmiTaskStop.Image = global::MangaDownloader.Properties.Resources.player_stop;
             this.tsmiTaskStop.Name = "tsmiTaskStop";
-            this.tsmiTaskStop.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskStop.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskStop.Text = "Stop";
             this.tsmiTaskStop.Click += new System.EventHandler(this.tsmiTaskStop_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(137, 6);
             // 
             // tsmiTaskReset
             // 
             this.tsmiTaskReset.Name = "tsmiTaskReset";
-            this.tsmiTaskReset.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskReset.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskReset.Text = "Reset";
             this.tsmiTaskReset.Click += new System.EventHandler(this.tsmiTaskReset_Click);
             // 
             // tsmiTaskSkip
             // 
-            this.tsmiTaskSkip.Image = global::MangaDownloader.Properties.Resources.arrow_skip;
             this.tsmiTaskSkip.Name = "tsmiTaskSkip";
-            this.tsmiTaskSkip.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskSkip.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskSkip.Text = "Skip";
             this.tsmiTaskSkip.Click += new System.EventHandler(this.tsmiTaskSkip_Click);
             // 
             // tsmiTaskRemove
             // 
-            this.tsmiTaskRemove.Image = global::MangaDownloader.Properties.Resources.remove;
             this.tsmiTaskRemove.Name = "tsmiTaskRemove";
-            this.tsmiTaskRemove.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskRemove.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskRemove.Text = "Remove";
             this.tsmiTaskRemove.Click += new System.EventHandler(this.tsmiTaskRemove_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(136, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(137, 6);
             // 
             // tsmiTaskViewOnline
             // 
             this.tsmiTaskViewOnline.Image = global::MangaDownloader.Properties.Resources.browser;
             this.tsmiTaskViewOnline.Name = "tsmiTaskViewOnline";
-            this.tsmiTaskViewOnline.Size = new System.Drawing.Size(139, 22);
+            this.tsmiTaskViewOnline.Size = new System.Drawing.Size(140, 22);
             this.tsmiTaskViewOnline.Text = "View Online";
             this.tsmiTaskViewOnline.Click += new System.EventHandler(this.tsmiTaskViewOnline_Click);
             // 
@@ -770,77 +863,6 @@
             this.tsmiAbout.Text = "About";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
-            // colTaskID
-            // 
-            this.colTaskID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTaskID.HeaderText = "ID";
-            this.colTaskID.Name = "colTaskID";
-            this.colTaskID.ReadOnly = true;
-            this.colTaskID.Visible = false;
-            this.colTaskID.Width = 25;
-            // 
-            // colTaskName
-            // 
-            this.colTaskName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTaskName.HeaderText = "Name";
-            this.colTaskName.Name = "colTaskName";
-            this.colTaskName.ReadOnly = true;
-            this.colTaskName.Width = 63;
-            // 
-            // colTaskStatus
-            // 
-            this.colTaskStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTaskStatus.HeaderText = "Status";
-            this.colTaskStatus.Name = "colTaskStatus";
-            this.colTaskStatus.ReadOnly = true;
-            this.colTaskStatus.Visible = false;
-            this.colTaskStatus.Width = 67;
-            // 
-            // colTaskProgress
-            // 
-            this.colTaskProgress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTaskProgress.HeaderText = "Status";
-            this.colTaskProgress.Name = "colTaskProgress";
-            this.colTaskProgress.ReadOnly = true;
-            this.colTaskProgress.Width = 67;
-            // 
-            // colTaskSaveTo
-            // 
-            this.colTaskSaveTo.HeaderText = "Save to";
-            this.colTaskSaveTo.Name = "colTaskSaveTo";
-            this.colTaskSaveTo.ReadOnly = true;
-            this.colTaskSaveTo.Width = 300;
-            // 
-            // colTaskType
-            // 
-            this.colTaskType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTaskType.HeaderText = "Type";
-            this.colTaskType.Name = "colTaskType";
-            this.colTaskType.ReadOnly = true;
-            this.colTaskType.Width = 60;
-            // 
-            // colTaskSite
-            // 
-            this.colTaskSite.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTaskSite.HeaderText = "Site";
-            this.colTaskSite.Name = "colTaskSite";
-            this.colTaskSite.ReadOnly = true;
-            this.colTaskSite.Width = 53;
-            // 
-            // colTaskURL
-            // 
-            this.colTaskURL.HeaderText = "URL";
-            this.colTaskURL.Name = "colTaskURL";
-            this.colTaskURL.ReadOnly = true;
-            this.colTaskURL.Visible = false;
-            // 
-            // colTaskDescription
-            // 
-            this.colTaskDescription.HeaderText = "Description";
-            this.colTaskDescription.Name = "colTaskDescription";
-            this.colTaskDescription.ReadOnly = true;
-            this.colTaskDescription.Visible = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -850,6 +872,7 @@
             this.Controls.Add(this.msTop);
             this.Name = "MainForm";
             this.Text = "Manga Downloader";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
@@ -960,6 +983,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTaskSite;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTaskURL;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTaskDescription;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTaskReDownload;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 
     }
 }

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WebScraper.Enums
+namespace MangaDownloader.Configs
 {
-    public enum MangaSite
+    class ConfigsManager
     {
-        BLOGTRUYEN,
-        MANGAFOX,
-        VECHAI
     }
 }

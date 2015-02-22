@@ -8,6 +8,7 @@ namespace MangaDownloader.Processors
 {
     public interface IProcessor
     {
+        event Action<int, int, List<Manga>> ScrapOneMangaPageComplete;
         int GetTotalPages();
         List<Manga> GetMangaList();
         List<Chapter> GetChapterList(String mangaUrl);

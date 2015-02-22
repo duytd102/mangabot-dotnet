@@ -3,14 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-
+using System.Timers;
 namespace MangaDownloader.Workers
 {
     class WorkerManager
     {
+        public event Action AllWorkersStopped;
+
         int workerLimit = 3;
         static WorkerManager instance;
         BackgroundWorker executor;
+        BackgroundWorker checkWorkerStatus;
         List<KeyValuePair<string, IWorker>> workerList;
 
         private WorkerManager()
@@ -21,6 +24,30 @@ namespace MangaDownloader.Workers
             executor.WorkerSupportsCancellation = true;
             executor.DoWork += executor_DoWork;
             executor.RunWorkerCompleted += executor_RunWorkerCompleted;
+
+            checkWorkerStatus = new BackgroundWorker();
+            checkWorkerStatus.DoWork += checkWorkerStatus_DoWork;
+            checkWorkerStatus.RunWorkerCompleted += checkWorkerStatus_RunWorkerCompleted;
+        }
+
+        void checkWorkerStatus_DoWork(object sender, DoWorkEventArgs e)
+        {
+            foreach(KeyValuePair<string, IWorker> entry in workerList)
+            {
+                if (entry.Value.IsBusy())
+                {
+                    e.Result = false;
+                    break;
+                }
+            }
+            e.Result = true;
+        }
+
+        void checkWorkerStatus_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            bool allWorkersStopped = (bool)e.Result;
+            if (allWorkersStopped)
+                AllWorkersStopped();
         }
 
         public static WorkerManager GetInstance()
@@ -37,6 +64,7 @@ namespace MangaDownloader.Workers
                 if (executor.CancellationPending)
                 {
                     StopAllWorkers();
+                    checkWorkerStatus.RunWorkerAsync();
                     e.Cancel = true;
                     break;
                 }
@@ -55,7 +83,10 @@ namespace MangaDownloader.Workers
 
         void executor_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            if (e.Cancelled)
+            {
+                AllWorkersStopped();
+            }
         }
 
         private void StopAllWorkers()

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using WebScraper.Data;
 using WebScraper.Enums;
 using WebScraper.Scrapers;
@@ -10,6 +8,8 @@ namespace MangaDownloader.Processors.Implement
 {
     public class MultiplePagesProcessor : IProcessor
     {
+        public event Action<int, int, List<Manga>> ScrapOneMangaPageComplete;
+
         int totalPages;
         int limitRows;
         MangaSite currentSite;
@@ -47,6 +47,8 @@ namespace MangaDownloader.Processors.Implement
                         limitRows = 200;
                     else 
                         limitRows = partialList.Count;
+
+                ScrapOneMangaPageComplete(totalPages, i, partialList);
             }
 
             return mangaList;

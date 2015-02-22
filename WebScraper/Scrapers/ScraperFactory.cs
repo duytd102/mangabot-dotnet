@@ -15,9 +15,11 @@ namespace WebScraper.Scrapers
             {
                 case MangaSite.BLOGTRUYEN:
                     return new BlogTruyenScraper();
+                case MangaSite.MANGAFOX:
+                    return new MangaFoxScraper();
 
                 default:
-                    // TODO implement if has more sites
+                    // REVIEW implement if has more sites
                     throw new NotImplementedException();
             }
         }

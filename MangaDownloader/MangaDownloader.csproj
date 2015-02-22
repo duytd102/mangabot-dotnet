@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configs\Configs.cs" />
+    <Compile Include="Configs\ConfigsManager.cs" />
     <Compile Include="Configs\Implements\BlogTruyenConfigs.cs" />
     <Compile Include="Configs\Implements\MangaFoxConfigs.cs" />
     <Compile Include="Configs\Implements\VeChaiConfigs.cs" />

@@ -1,11 +1,13 @@
 ﻿using CsvHelper;
 using MangaDownloader.Enums;
+using MangaDownloader.Settings;
 using MangaDownloader.Workers.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using WebScraper.Enums;
 
 namespace MangaDownloader.Utils
@@ -14,7 +16,7 @@ namespace MangaDownloader.Utils
     {
         public static void Export(List<Task> taskList)
         {
-            string taskPath = "D:\\BlogTruyen\\tasks.csv";
+            string taskPath = Application.StartupPath + "\\tasks.csv";
             using (StreamWriter writer = new StreamWriter(taskPath, false, Encoding.UTF8))
             {
                 var csv = new CsvWriter(writer);
@@ -40,12 +42,14 @@ namespace MangaDownloader.Utils
                     csv.WriteField(task.Description);
                     csv.NextRecord();
                 }
+
+                writer.Close();
             }
         }
 
         public static List<Task> Import()
         {
-            string taskPath = "D:\\BlogTruyen\\tasks.csv";
+            string taskPath = Application.StartupPath + "\\tasks.csv";
             List<Task> taskList = new List<Task>();
             Task task;
             if (File.Exists(taskPath))
@@ -66,6 +70,8 @@ namespace MangaDownloader.Utils
                         task.Description = csv.GetField<string>(7);
                         taskList.Add(task);
                     }
+
+                    reader.Close();
                 }
             }
             return taskList;

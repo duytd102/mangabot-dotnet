@@ -23,11 +23,8 @@ namespace MangaDownloader.Workers.Implement
         private IProcessor processor;
         private BackgroundWorker executor;
 
-        public ThreadWorker(IProcessor processor, Task task)
+        public ThreadWorker()
         {
-            this.processor = processor;
-            this.task = task;
-
             executor = new BackgroundWorker();
             executor.WorkerReportsProgress = true;
             executor.WorkerSupportsCancellation = true;
@@ -38,10 +35,12 @@ namespace MangaDownloader.Workers.Implement
 
         public bool IsBusy() { return executor.IsBusy; }
 
-        public void Start()
+        public void Start(Task task)
         {
             if (!IsBusy())
             {
+                this.task = task;
+                this.processor = ProcessorFactory.CreateProcessor(task.Site);
                 Downloading(task.Sender);
                 executor.RunWorkerAsync();
             }
@@ -55,10 +54,7 @@ namespace MangaDownloader.Workers.Implement
             }
         }
 
-        public void SetTask(Task task)
-        {
-            this.task = task;
-        }
+        public Task GetTask() { return task; }
 
         void executor_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -67,12 +63,17 @@ namespace MangaDownloader.Workers.Implement
             switch (task.Type)
             {
                 case Enums.LinkType.MANGA:
+                    GoogleAnalyticsUtils.SendEvent(task.Site, Enums.EventAction.DOWNLOAD_MANGA, task.Url);
                     DownloadManga(e, task);
                     break;
+
                 case Enums.LinkType.CHAPTER:
+                    GoogleAnalyticsUtils.SendEvent(task.Site, Enums.EventAction.DOWNLOAD_CHAPTER, task.Url);
                     DownloadChapter(e, task);
                     break;
+
                 case Enums.LinkType.PAGE:
+                    GoogleAnalyticsUtils.SendEvent(task.Site, Enums.EventAction.DOWNLOAD_PAGE, task.Url);
                     DownloadPage(task.Name, task.Url, task.Site, parentFolderPath);
                     executor.ReportProgress(1, new DownloadData(task.Sender, 100));
                     break;
@@ -206,50 +207,6 @@ namespace MangaDownloader.Workers.Implement
             bool autoDeleteImages = false;
             if (autoDeleteImages)
                 Directory.Delete(folderPath, true);
-        }
-
-        private void RegisterCallbacks(WorkerHandlers handlers)
-        {
-            if (handlers != null)
-            {
-                this.Downloading = ((object sender) =>
-                {
-                    if (handlers.Downloading != null)
-                        handlers.Downloading(sender);
-                });
-                this.ProgressChanged = ((object sender, double percent) =>
-                {
-                    if (handlers.ProgressChanged != null)
-                        handlers.ProgressChanged(sender, percent);
-                });
-                this.Complete = ((object sender) =>
-                {
-                    if (handlers.Complete != null)
-                        handlers.Complete(sender);
-                });
-                this.Cancelled = ((object sender) =>
-                {
-                    if (handlers.Cancelled != null)
-                        handlers.Cancelled(sender);
-                });
-                this.Failed = ((object sender, Exception ex) =>
-                {
-                    if (handlers.Failed != null)
-                        handlers.Failed(sender, ex);
-                });
-            }
-        }
-
-
-        public Task GetTask()
-        {
-            return task;
-        }
-
-
-        public bool IsQueued()
-        {
-            return task != null & SomeRules.CanDownloadTask(task.Status);
         }
     }
 }

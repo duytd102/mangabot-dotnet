@@ -9,10 +9,9 @@ namespace MangaDownloader.Workers
     {
         private WorkerFactory() { }
 
-        public static IWorker CreateWorker(Task task, WorkerHandlers handlers)
+        public static IWorker CreateWorker(WorkerHandlers handlers)
         {
-            IProcessor processor = ProcessorFactory.CreateProcessor(task.Site);
-            IWorker worker = new ThreadWorker(processor, task);
+            IWorker worker = new ThreadWorker();
             RegisterCallbacks(worker, handlers);
             return worker;
         }

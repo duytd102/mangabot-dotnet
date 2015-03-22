@@ -103,10 +103,7 @@ namespace MangaDownloader.Utils
                     }
                 }
             }
-            catch (Exception)
-            {
-                // TODO usually is document has no page
-            }
+            catch (Exception) { }
         }
 
         private static bool CheckIfImage(string path)

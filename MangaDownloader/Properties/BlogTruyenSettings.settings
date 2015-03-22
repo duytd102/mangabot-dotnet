@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MangaDownloader.Settings" GeneratedClassName="BlogTruyenSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SiteName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BlogTruyen</Value>
+    </Setting>
+    <Setting Name="SiteTag" Type="System.String" Scope="Application">
+      <Value Profile="(Default)"> - blogtruyen.com</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

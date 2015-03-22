@@ -1,7 +1,36 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MangaDownloader.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Manga Downloader</Value>
+    </Setting>
+    <Setting Name="AppVersion" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">03/22/2015 09:34:00</Value>
+    </Setting>
+    <Setting Name="ContactEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dangduy2910@gmail.com</Value>
+    </Setting>
+    <Setting Name="Website1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://tdduy89.wordpress.com/</Value>
+    </Setting>
+    <Setting Name="Website2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://tdduy89.blogspot.com/</Value>
+    </Setting>
+    <Setting Name="Author" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Duy Tran</Value>
+    </Setting>
+    <Setting Name="GaBaseURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.google-analytics.com/collect</Value>
+    </Setting>
+    <Setting Name="GaTrackingID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UA-61053646-2</Value>
+    </Setting>
+    <Setting Name="GaClientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
 </SettingsFile>

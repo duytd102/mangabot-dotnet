@@ -8,7 +8,7 @@ namespace MangaDownloader.Processors.Implement
 {
     public class MultiplePagesProcessor : IProcessor
     {
-        public event Action<int, int, List<Manga>> ScrapOneMangaPageComplete;
+        public event Action<int, int, int, List<Manga>> ScrapOneMangaPageComplete;
 
         int totalPages;
         int limitRows;
@@ -31,24 +31,23 @@ namespace MangaDownloader.Processors.Implement
         {
             List<Manga> mangaList = new List<Manga>();
             List<Manga> partialList;
-
+            int totalManga = 0;
             totalPages = GetTotalPages();
-            
+
             for (int i = 1; i <= totalPages; i++)
             {
                 partialList = scraper.GetMangaList(i);
                 mangaList.AddRange(partialList);
 
                 if (i == 1)
+                {
                     limitRows = partialList.Count;
+                    totalManga = limitRows * totalPages;
+                }
+                else if (i < totalPages && limitRows != partialList.Count)
+                    limitRows = 200;
 
-                else if (i < totalPages)
-                    if (limitRows != partialList.Count)
-                        limitRows = 200;
-                    else 
-                        limitRows = partialList.Count;
-
-                ScrapOneMangaPageComplete(totalPages, i, partialList);
+                ScrapOneMangaPageComplete(totalManga, totalPages, i, partialList);
             }
 
             return mangaList;

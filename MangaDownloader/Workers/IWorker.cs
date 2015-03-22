@@ -14,12 +14,12 @@ namespace MangaDownloader.Workers
         event Action<object> Cancelled;
         event Action<object, Exception> Failed;
 
-        void Start();
+        void Start(Task task);
+
         void Stop();
 
         bool IsBusy();
-        bool IsQueued();
-        void SetTask(Task task);
+
         Task GetTask();
     }
 }

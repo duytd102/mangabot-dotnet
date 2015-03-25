@@ -31,6 +31,11 @@ namespace MangaDownloader.Settings
             return instance;
         }
 
+        public Properties.Settings GetSettings()
+        {
+            return Properties.Settings.Default;
+        }
+
         public CommonSettings GetCommonSettings()
         {
             return Properties.CommonSettings.Default;

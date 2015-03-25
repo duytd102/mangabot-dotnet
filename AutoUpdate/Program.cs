@@ -1,9 +1,8 @@
-﻿using MangaDownloader.GUIs;
-using System;
-using System.Threading;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace MangaDownloader
+namespace AutoUpdate
 {
     static class Program
     {
@@ -15,8 +14,7 @@ namespace MangaDownloader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.ThreadException += new ThreadExceptionEventHandler(GlobalExceptionCatcher.UnhandledThreadExceptionHandler);
-            Application.Run(new MainForm());
+            Application.Run(new AutoUpdate());
         }
     }
 }

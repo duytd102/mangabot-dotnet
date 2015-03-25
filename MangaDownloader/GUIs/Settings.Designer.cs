@@ -51,7 +51,7 @@
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(35, 22);
             this.btBrowse.TabIndex = 28;
-            this.btBrowse.UseVisualStyleBackColor = false;
+            this.btBrowse.UseVisualStyleBackColor = true;
             this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
             // 
             // cbAutoClean
@@ -73,7 +73,7 @@
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 25;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tbDefaultFolder

@@ -71,7 +71,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\EventAction.cs" />
+    <Compile Include="GenerateVersion.cs" />
     <Compile Include="GlobalExceptionCatcher.cs" />
+    <Compile Include="GUIs\AutoUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\AutoUpdate.Designer.cs">
+      <DependentUpon>AutoUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +130,7 @@
     </Compile>
     <Compile Include="Utils\GoogleAnalyticsUtils.cs" />
     <Compile Include="Utils\SomeRules.cs" />
+    <Compile Include="Utils\VersionUtils.cs" />
     <Compile Include="Workers\Data\Task.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
@@ -137,6 +145,9 @@
     <Compile Include="Workers\WorkerFactory.cs" />
     <EmbeddedResource Include="GUIs\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\AutoUpdate.resx">
+      <DependentUpon>AutoUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -281,6 +292,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\label_new_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChangeLogs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

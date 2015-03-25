@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using MangaDownloader.Settings;
+using MangaDownloader.Utils;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -18,14 +17,22 @@ namespace MangaDownloader.GUIs
 
         private void About_Load(object sender, EventArgs e)
         {
-            lbVersion.Text = String.Format("Version: {0:0.0}", Properties.Settings.Default.AppVersion);
-            lbRelease.Text = String.Format("Release: {0:yyyy-MM-dd}", Properties.Settings.Default.ReleaseDate);
+            lbVersion.Text = String.Format("Version: {0:0.0} ({1:yyyy-MM-dd})",
+                SettingsManager.GetInstance().GetSettings().AppVersion,
+                SettingsManager.GetInstance().GetSettings().ReleaseDate);
             tbDescription.Text = GetDesc();
         }
 
         private String GetDesc()
         {
-            var settings = Properties.Settings.Default;
+            string changeLogsPath = Application.StartupPath + "\\ChangeLogs.txt";
+            string[] lines = new string[] { };
+            if (File.Exists(changeLogsPath))
+            {
+                lines = System.IO.File.ReadAllLines(changeLogsPath);
+            }
+
+            var settings = SettingsManager.GetInstance().GetSettings();
             StringBuilder bd = new StringBuilder();
             bd.AppendLine("A tool for downloading manga from the internet.");
             bd.AppendLine("It's TOTALLY FREE 4EVER (NO ADS).");
@@ -38,9 +45,26 @@ namespace MangaDownloader.GUIs
             bd.AppendLine("          or: " + settings.Website2);
             bd.AppendLine();
             bd.AppendLine("=== Changelogs ===");
-            bd.AppendLine("v1.0 (2015-03-22)");
-            bd.AppendLine("Support blogtruyen.com, mangafox.in");
+            foreach (var l in lines)
+                bd.AppendLine(l);
             return bd.ToString();
+        }
+
+        private void btCheckUpdates_Click(object sender, EventArgs e)
+        {
+            btCheckUpdates.Enabled = false;
+            AutoUpdate au = new AutoUpdate();
+            if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                VersionData vd = au.VersionData;
+                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.GetVersionString() + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try { Process.Start(vd.URL); }
+                    catch { }
+                }
+            }
+            btCheckUpdates.Enabled = true;
         }
     }
 }

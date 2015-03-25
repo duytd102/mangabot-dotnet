@@ -58,7 +58,6 @@ namespace MangaDownloader.Workers
         {
             if (IsBusy)
             {
-                // TODO callback when all workers stopped
                 foreach (var w in workerList)
                     w.Stop();
                 IsStopping = true;
@@ -79,7 +78,7 @@ namespace MangaDownloader.Workers
         {
             foreach (var w in workerList)
             {
-                if (w.GetTask().Equals(task))
+                if (w.GetTask() != null && w.GetTask().Equals(task))
                 {
                     w.Stop();
                 }

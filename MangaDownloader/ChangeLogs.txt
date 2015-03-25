@@ -1,0 +1,30 @@
+﻿Version 1.4 (2015-03-26)
+[Enhancement]
+- Optimize UI more clean
+
+Version 1.3 (2014-06-04)
+[Bugfix]
+- Ignore the redundant images
+
+Version 1.2 (2014-05-07)
+[Features]
+- Support two sites vechai.info
+
+[Bugfix]
+- Ignore the redundant images
+
+Version 1.1 (2014-05-04)
+[Features]
+- Allow to grab list of chapters from an url of manga. Only two sites blogtruyen.com and mangafox.me
+- Allow to convert the images to PDF file
+- Massively rename
+
+[Bugfix]
+- Cannot create zip file
+
+Version 1.0 (2014-04-30)
+[Features]
+- Support to get list of manga from two sites blogtruyen.com and mangafox.me
+- Allow to download manga to see them offline later
+- Automatically create ZIP or PDF file after download completed
+- Automatically shutdown your computer after queue were downloaded completed

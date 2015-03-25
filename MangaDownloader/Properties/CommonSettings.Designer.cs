@@ -106,26 +106,5 @@ namespace MangaDownloader.Properties {
                 this["RootDownloadFolderPath"] = value;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("task.csv")]
-        public string TaskListFileName {
-            get {
-                return ((string)(this["TaskListFileName"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string MangaListFileName {
-            get {
-                return ((string)(this["MangaListFileName"]));
-            }
-            set {
-                this["MangaListFileName"] = value;
-            }
-        }
     }
 }

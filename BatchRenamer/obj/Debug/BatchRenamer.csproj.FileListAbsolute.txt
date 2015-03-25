@@ -5,4 +5,3 @@ E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.Properties.R
 E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.csproj.GenerateResource.Cache
 E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.exe
 E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.pdb
-E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.csprojResolveAssemblyReference.cache

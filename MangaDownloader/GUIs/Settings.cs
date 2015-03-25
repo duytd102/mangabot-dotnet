@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -39,16 +40,23 @@ namespace MangaDownloader.GUIs
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var commonSettings = SettingsManager.GetInstance().GetCommonSettings();
-            commonSettings.TotalConcurrentWorkers = (int)nudTotalWorkers.Value;
-            commonSettings.AutoUpdate = cbAutoUpdate.Checked;
-            commonSettings.AutoCreateShortcut = cbAutoCreateShortcut.Checked;
-            commonSettings.AutoCreateZip = cbAutoCreateZip.Checked;
-            commonSettings.AutoCreatePdf = cbAutoCreatePDF.Checked;
-            commonSettings.AutoClean = cbAutoClean.Checked;
-            commonSettings.RootDownloadFolderPath = tbDefaultFolder.Text;
-            commonSettings.Save();
-            this.Close();
+            if (Directory.Exists(tbDefaultFolder.Text))
+            {
+                var commonSettings = SettingsManager.GetInstance().GetCommonSettings();
+                commonSettings.TotalConcurrentWorkers = (int)nudTotalWorkers.Value;
+                commonSettings.AutoUpdate = cbAutoUpdate.Checked;
+                commonSettings.AutoCreateShortcut = cbAutoCreateShortcut.Checked;
+                commonSettings.AutoCreateZip = cbAutoCreateZip.Checked;
+                commonSettings.AutoCreatePdf = cbAutoCreatePDF.Checked;
+                commonSettings.AutoClean = cbAutoClean.Checked;
+                commonSettings.RootDownloadFolderPath = tbDefaultFolder.Text;
+                commonSettings.Save();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Download path doesn't exist", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void cbAutoCreateZip_CheckedChanged(object sender, EventArgs e)

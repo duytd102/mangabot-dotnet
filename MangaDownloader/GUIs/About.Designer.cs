@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.tbDescription = new System.Windows.Forms.TextBox();
-            this.lbRelease = new System.Windows.Forms.Label();
             this.lbVersion = new System.Windows.Forms.Label();
             this.lbAppName = new System.Windows.Forms.Label();
+            this.btCheckUpdates = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbDescription
@@ -41,57 +41,56 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDescription.BackColor = System.Drawing.SystemColors.Window;
             this.tbDescription.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDescription.Location = new System.Drawing.Point(12, 71);
+            this.tbDescription.Location = new System.Drawing.Point(12, 90);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDescription.Size = new System.Drawing.Size(309, 158);
+            this.tbDescription.Size = new System.Drawing.Size(374, 185);
             this.tbDescription.TabIndex = 3;
-            // 
-            // lbRelease
-            // 
-            this.lbRelease.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbRelease.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRelease.Location = new System.Drawing.Point(12, 48);
-            this.lbRelease.Name = "lbRelease";
-            this.lbRelease.Size = new System.Drawing.Size(309, 13);
-            this.lbRelease.TabIndex = 2;
-            this.lbRelease.Text = "Release: 2015-03-22";
-            this.lbRelease.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbVersion
             // 
             this.lbVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbVersion.ForeColor = System.Drawing.Color.Red;
-            this.lbVersion.Location = new System.Drawing.Point(12, 31);
+            this.lbVersion.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbVersion.Location = new System.Drawing.Point(12, 38);
             this.lbVersion.Name = "lbVersion";
-            this.lbVersion.Size = new System.Drawing.Size(309, 13);
+            this.lbVersion.Size = new System.Drawing.Size(374, 13);
             this.lbVersion.TabIndex = 1;
-            this.lbVersion.Text = "Version: 1.0";
+            this.lbVersion.Text = "Version: 1.0 (2015-03-22)";
             this.lbVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbAppName
             // 
             this.lbAppName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbAppName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAppName.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAppName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbAppName.Location = new System.Drawing.Point(0, 0);
             this.lbAppName.Name = "lbAppName";
-            this.lbAppName.Size = new System.Drawing.Size(333, 33);
+            this.lbAppName.Size = new System.Drawing.Size(398, 38);
             this.lbAppName.TabIndex = 0;
             this.lbAppName.Text = "Manga Downloader";
             this.lbAppName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btCheckUpdates
+            // 
+            this.btCheckUpdates.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btCheckUpdates.Location = new System.Drawing.Point(127, 59);
+            this.btCheckUpdates.Name = "btCheckUpdates";
+            this.btCheckUpdates.Size = new System.Drawing.Size(145, 25);
+            this.btCheckUpdates.TabIndex = 4;
+            this.btCheckUpdates.Text = "Check for updates";
+            this.btCheckUpdates.UseVisualStyleBackColor = true;
+            this.btCheckUpdates.Click += new System.EventHandler(this.btCheckUpdates_Click);
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 241);
+            this.ClientSize = new System.Drawing.Size(398, 287);
+            this.Controls.Add(this.btCheckUpdates);
             this.Controls.Add(this.tbDescription);
-            this.Controls.Add(this.lbRelease);
             this.Controls.Add(this.lbVersion);
             this.Controls.Add(this.lbAppName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -112,7 +111,7 @@
 
         private System.Windows.Forms.Label lbAppName;
         private System.Windows.Forms.Label lbVersion;
-        private System.Windows.Forms.Label lbRelease;
         private System.Windows.Forms.TextBox tbDescription;
+        private System.Windows.Forms.Button btCheckUpdates;
     }
 }

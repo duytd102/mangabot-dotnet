@@ -43,7 +43,7 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("03/26/2015 09:34:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("03/28/2015 00:30:00")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));
@@ -97,7 +97,7 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UA-61053646-2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("UA-61053646-1")]
         public string GaTrackingID {
             get {
                 return ((string)(this["GaTrackingID"]));
@@ -118,8 +118,8 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader-latest-versio" +
-            "n.csv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloa" +
+            "der-latest-version.csv")]
         public string VersionURL {
             get {
                 return ((string)(this["VersionURL"]));

@@ -884,7 +884,9 @@
             this.ClientSize = new System.Drawing.Size(753, 480);
             this.Controls.Add(this.scMain);
             this.Controls.Add(this.msTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manga Downloader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);

@@ -48,7 +48,6 @@ namespace MangaDownloader.Utils
                         data.Version = csv.GetField<double>(0);
                         data.ReleaseDate = csv.GetField<DateTime>(1);
                         data.URL = csv.GetField(2);
-                        data.ChangeLogs = csv.GetField(3);
                         list.Add(data);
                     }
                 }
@@ -68,7 +67,6 @@ namespace MangaDownloader.Utils
                     csv.WriteField("Version");
                     csv.WriteField("Release Date");
                     csv.WriteField("URL");
-                    csv.WriteField("Changelogs");
                     csv.NextRecord();
 
                     foreach (VersionData v in list)
@@ -76,7 +74,6 @@ namespace MangaDownloader.Utils
                         csv.WriteField(v.Version);
                         csv.WriteField(v.ReleaseDate.ToString("yyyy-MM-dd"));
                         csv.WriteField(v.URL);
-                        csv.WriteField(v.ChangeLogs);
                         csv.NextRecord();
                     }
 

@@ -13,5 +13,19 @@ namespace MangaDownloader.GUIs
         {
             this.Font = new System.Drawing.Font("Tahoma", 9);
         }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
+            this.SuspendLayout();
+            // 
+            // BaseForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "BaseForm";
+            this.ResumeLayout(false);
+
+        }
     }
 }

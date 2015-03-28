@@ -489,6 +489,27 @@ namespace MangaDownloader.GUIs
             }
         }
 
+        private void tsmiMangaDowload_Click(object sender, EventArgs e)
+        {
+            List<int> indexes = new List<int>();
+
+            foreach (DataGridViewRow row in dgvMangaList.SelectedRows)
+                indexes.Add(row.Index);
+
+            indexes.Sort();
+
+            foreach (int index in indexes)
+            {
+                DataGridViewRow row = dgvMangaList.Rows[index];
+                String name = row.Cells[COLUMN_MANGA_NAME].Value.ToString();
+                LinkType type = LinkType.MANGA;
+                MangaSite site = currentSite;
+                String url = row.Cells[COLUMN_MANGA_URL].Value.ToString();
+                Task task = AddToQueue(name, type, site, url);
+                DownloadTask(task);
+            }
+        }
+
         private void cmsChapterMenu_Opening(object sender, CancelEventArgs e)
         {
             if (dgvChapterList.SelectedRows.Count == 0)
@@ -544,6 +565,27 @@ namespace MangaDownloader.GUIs
             }
         }
 
+        private void tsmiChapterDownload_Click(object sender, EventArgs e)
+        {
+            List<int> indexes = new List<int>();
+
+            foreach (DataGridViewRow row in dgvChapterList.SelectedRows)
+                indexes.Add(row.Index);
+
+            indexes.Sort();
+
+            foreach (int index in indexes)
+            {
+                DataGridViewRow row = dgvChapterList.Rows[index];
+                String name = row.Cells[COLUMN_CHAPTER_NAME].Value.ToString();
+                LinkType type = EnumUtils.Parse<LinkType>(row.Cells[COLUMN_CHAPTER_LINK_TYPE].Value.ToString());
+                MangaSite site = currentSite;
+                String url = row.Cells[COLUMN_CHAPTER_URL].Value.ToString();
+                Task task = AddToQueue(name, type, site, url);
+                DownloadTask(task);
+            }
+        }
+
         private void cmsTaskMenu_Opening(object sender, CancelEventArgs e)
         {
             if (dgvTaskList.SelectedRows.Count == 0)
@@ -569,8 +611,16 @@ namespace MangaDownloader.GUIs
 
         private void tsmiTaskReDownload_Click(object sender, EventArgs e)
         {
+            List<int> indexes = new List<int>();
+
             foreach (DataGridViewRow row in dgvTaskList.SelectedRows)
+                indexes.Add(row.Index);
+
+            indexes.Sort();
+
+            foreach (int index in indexes)
             {
+                DataGridViewRow row = dgvTaskList.Rows[index];
                 TaskStatus status = EnumUtils.Parse<TaskStatus>(row.Cells[COLUMN_TASK_STATUS].Value.ToString());
                 string url = row.Cells[COLUMN_TASK_URL].Value.ToString();
                 if (SomeRules.CanReDownloadTask(status))
@@ -591,8 +641,16 @@ namespace MangaDownloader.GUIs
 
         private void tsmiTaskDownload_Click(object sender, EventArgs e)
         {
+            List<int> indexes = new List<int>();
+
             foreach (DataGridViewRow row in dgvTaskList.SelectedRows)
+                indexes.Add(row.Index);
+
+            indexes.Sort();
+
+            foreach(int index in indexes)
             {
+                DataGridViewRow row = dgvTaskList.Rows[index];
                 TaskStatus status = EnumUtils.Parse<TaskStatus>(row.Cells[COLUMN_TASK_STATUS].Value.ToString());
                 string url = row.Cells[COLUMN_TASK_URL].Value.ToString();
                 if (SomeRules.CanDownloadTask(status))
@@ -601,6 +659,12 @@ namespace MangaDownloader.GUIs
                     workerManager.Download(task, workerHandlers);
                 }
             }
+        }
+
+        public void DownloadTask(Task task)
+        {
+            if (SomeRules.CanDownloadTask(task.Status))
+                workerManager.Download(task, workerHandlers);
         }
 
         private void tsmiTaskStop_Click(object sender, EventArgs e)
@@ -620,9 +684,10 @@ namespace MangaDownloader.GUIs
             }
         }
 
-        public void AddToQueue(String name, LinkType type, MangaSite site, String url)
+        public Task AddToQueue(String name, LinkType type, MangaSite site, String url)
         {
-            if (taskList.Exists(p => p.Url.Equals(url))) return;
+            if (taskList.Exists(p => p.Url.Equals(url)))
+                return taskList.First(p => p.Url.Equals(url));
 
             string folderPath = SettingsManager.GetInstance().GetDownloadFolderPath(site);
             string saveTo = String.Format("{0}\\{1}", folderPath, FileUtils.GetSafeName(name));
@@ -644,6 +709,8 @@ namespace MangaDownloader.GUIs
             t.Url = url;
             taskList.Add(t);
             TaskUtils.Export(taskList);
+
+            return t;
         }
 
         private void AddToQueue(Task task)
@@ -672,22 +739,34 @@ namespace MangaDownloader.GUIs
 
         private void OnWorkerDownloading(object dataRowSender)
         {
-            dgvTaskList.Invoke(new MethodInvoker(() =>
+            try
             {
-                DataGridViewRow row = dataRowSender as DataGridViewRow;
-                if (row.Index > -1)
+                dgvTaskList.Invoke(new MethodInvoker(() =>
                 {
-                    row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.DOWNLOADING);
-                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.DOWNLOADING, 0);
-                }
-            }));
+                    DataGridViewRow row = dataRowSender as DataGridViewRow;
+                    if (row.Index > -1)
+                    {
+                        row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.DOWNLOADING);
+                        row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.DOWNLOADING, 0);
+
+                        String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
+                        Task t = taskList.Find(p => p.Url.Equals(url));
+                        if (t != null)
+                        {
+                            t.Percent = 0;
+                            t.Status = TaskStatus.DOWNLOADING;
+                        }
+                    }
+                }));
+            }
+            catch (InvalidOperationException) { }
         }
 
         private void OnWorkerProgressChanged(object dataRowSender, double percent)
         {
-            dgvTaskList.Invoke(new MethodInvoker(() =>
+            try
             {
-                try
+                dgvTaskList.Invoke(new MethodInvoker(() =>
                 {
                     DataGridViewRow row = dataRowSender as DataGridViewRow;
                     if (row.Index > -1)
@@ -703,76 +782,88 @@ namespace MangaDownloader.GUIs
                             TaskUtils.Export(taskList);
                         }
                     }
-                }
-                catch { }
-            }));
+                }));
+            }
+            catch (InvalidOperationException) { }
         }
 
         private void OnWorkerComplete(object dataRowSender)
         {
-            dgvTaskList.Invoke(new MethodInvoker(() =>
+            try
             {
-                DataGridViewRow row = dataRowSender as DataGridViewRow;
-                if (row.Index > -1)
+                dgvTaskList.Invoke(new MethodInvoker(() =>
                 {
-                    TaskStatus completeStatus = TaskStatus.COMPLETE;
-                    row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(completeStatus);
-                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(completeStatus, 0);
-
-                    String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
-                    Task t = taskList.Find(p => p.Url.Equals(url));
-                    if (t != null)
+                    DataGridViewRow row = dataRowSender as DataGridViewRow;
+                    if (row.Index > -1)
                     {
-                        t.Percent = 100;
-                        t.Status = completeStatus;
-                        TaskUtils.Export(taskList);
+                        TaskStatus completeStatus = TaskStatus.COMPLETE;
+                        row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(completeStatus);
+                        row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(completeStatus, 0);
+
+                        String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
+                        Task t = taskList.Find(p => p.Url.Equals(url));
+                        if (t != null)
+                        {
+                            t.Percent = 100;
+                            t.Status = completeStatus;
+                            TaskUtils.Export(taskList);
+                        }
                     }
-                }
-            }));
+                }));
+            }
+            catch (InvalidOperationException) { }
         }
 
         private void OnWorkerCancelled(object dataRowSender)
         {
-            dgvTaskList.Invoke(new MethodInvoker(() =>
+            try
             {
-                DataGridViewRow row = dataRowSender as DataGridViewRow;
-                if (row.Index > -1)
+                dgvTaskList.Invoke(new MethodInvoker(() =>
                 {
-                    row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.STOPPED);
-                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.STOPPED, 0);
-
-                    String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
-                    Task t = taskList.Find(p => p.Url.Equals(url));
-                    if (t != null)
+                    DataGridViewRow row = dataRowSender as DataGridViewRow;
+                    if (row.Index > -1)
                     {
-                        t.Status = TaskStatus.STOPPED;
-                        TaskUtils.Export(taskList);
+                        row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.STOPPED);
+                        row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.STOPPED, 0);
+
+                        String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
+                        Task t = taskList.Find(p => p.Url.Equals(url));
+                        if (t != null)
+                        {
+                            t.Status = TaskStatus.STOPPED;
+                            TaskUtils.Export(taskList);
+                        }
                     }
-                }
-            }));
+                }));
+            }
+            catch (InvalidOperationException) { }
         }
 
         private void OnWorkerFailed(object dataRowSender, Exception e)
         {
-            dgvTaskList.Invoke(new MethodInvoker(() =>
+            try
             {
-                DataGridViewRow row = dataRowSender as DataGridViewRow;
-                if (row.Index > -1)
+                dgvTaskList.Invoke(new MethodInvoker(() =>
                 {
-                    row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.FAILED);
-                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.FAILED, 0);
-                    row.Cells[COLUMN_TASK_DESCRIPTION].Value = e.StackTrace;
-
-                    String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
-                    Task t = taskList.Find(p => p.Url.Equals(url));
-                    if (t != null)
+                    DataGridViewRow row = dataRowSender as DataGridViewRow;
+                    if (row.Index > -1)
                     {
-                        t.Status = TaskStatus.COMPLETE;
-                        t.Description = e.Message;
-                        TaskUtils.Export(taskList);
+                        row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.FAILED);
+                        row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.FAILED, 0);
+                        row.Cells[COLUMN_TASK_DESCRIPTION].Value = e.StackTrace;
+
+                        String url = row.Cells[COLUMN_TASK_URL].Value.ToString();
+                        Task t = taskList.Find(p => p.Url.Equals(url));
+                        if (t != null)
+                        {
+                            t.Status = TaskStatus.FAILED;
+                            t.Description = e.Message;
+                            TaskUtils.Export(taskList);
+                        }
                     }
-                }
-            }));
+                }));
+            }
+            catch (InvalidOperationException) { }
         }
 
         private void dgvMangaList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)

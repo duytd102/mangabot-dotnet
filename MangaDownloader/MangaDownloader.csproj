@@ -336,7 +336,7 @@
     <None Include="Resources\new_4.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ChangeLogs.txt">
+    <Content Include="changelogs.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />

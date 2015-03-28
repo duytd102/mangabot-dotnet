@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MangaDownloader.Enums
 {
-    enum TaskStatus
+    public enum TaskStatus
     {
         QUEUED,
         DOWNLOADING,

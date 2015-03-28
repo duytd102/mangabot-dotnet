@@ -14,12 +14,14 @@ namespace MangaDownloader.Workers
         public event Action AllWorkersStopped;
         public bool IsBusy = false;
 
+        const int MANUAL_WORKER_LIMIT = 10;
         static QueueWorkerManager instance;
         Timer taskTimer;
         bool IsStopping = false;
         int workerLimit = 3;
         List<Task> taskList = new List<Task>();
         List<IWorker> workerList = new List<IWorker>();
+        List<IWorker> manualWorkerList = new List<IWorker>();
 
         private QueueWorkerManager()
         {
@@ -40,6 +42,7 @@ namespace MangaDownloader.Workers
             if (!IsBusy)
             {
                 this.workerLimit = workerLimit;
+
                 this.taskList.Clear();
                 foreach (var task in taskList)
                     this.taskList.Add(task);
@@ -60,41 +63,33 @@ namespace MangaDownloader.Workers
             {
                 foreach (var w in workerList)
                     w.Stop();
+
                 IsStopping = true;
             }
         }
 
         public void Download(Task task, WorkerHandlers handlers)
         {
-            if (SomeRules.CanDownloadTask(task.Status))
+            int totalRunningManualWorkers = CountRunningManualWorkers();
+            if (totalRunningManualWorkers < MANUAL_WORKER_LIMIT && SomeRules.CanDownloadTask(task.Status))
             {
-                IWorker worker = WorkerFactory.CreateWorker(handlers);
+                IWorker worker = GetFreeManualWorker();
+                if (worker == null) 
+                    worker = WorkerFactory.CreateWorker(handlers);
                 worker.Start(task);
-                workerList.Add(worker);
+                manualWorkerList.Add(worker);
             }
         }
 
         public void Stop(Task task)
         {
             foreach (var w in workerList)
-            {
                 if (w.GetTask() != null && w.GetTask().Equals(task))
-                {
                     w.Stop();
-                }
-            }
-        }
 
-        public bool RemoveTask(Task task)
-        {
-            if (task.Status == Enums.TaskStatus.DOWNLOADING)
-                return false;
-
-            lock (taskList)
-            {
-                taskList.Remove(task);
-            }
-            return true;
+            foreach (var mw in manualWorkerList)
+                if (mw.GetTask() != null && mw.GetTask().Equals(task))
+                    mw.Stop();
         }
 
         void taskTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -110,21 +105,23 @@ namespace MangaDownloader.Workers
                 CallEventSafely(AllWorkersStopped);
                 return;
             }
-
-            while (taskList.Count > 0 && totalRunningWorkers < workerLimit)
+            else if (!IsStopping)
             {
-                int firstIndex = 0;
-                Task firstTask = taskList[firstIndex];
-                taskList.RemoveAt(firstIndex);
-
-                if (SomeRules.CanDownloadTask(firstTask.Status))
+                while (taskList.Count > 0 && totalRunningWorkers < workerLimit)
                 {
-                    IWorker worker = GetFreeWorker();
-                    if (worker != null)
-                        worker.Start(firstTask);
-                }
+                    int firstIndex = 0;
+                    Task firstTask = taskList[firstIndex];
+                    taskList.RemoveAt(firstIndex);
 
-                totalRunningWorkers = CountRunningWorkers();
+                    if (SomeRules.CanDownloadTask(firstTask.Status))
+                    {
+                        IWorker worker = GetFreeWorker();
+                        if (worker != null)
+                            worker.Start(firstTask);
+                    }
+
+                    totalRunningWorkers = CountRunningWorkers();
+                }
             }
 
             taskTimer.Start();
@@ -134,20 +131,33 @@ namespace MangaDownloader.Workers
         {
             int count = 0;
             foreach (var w in workerList)
-            {
                 if (w.IsBusy())
                     count++;
-            }
+            return count;
+        }
+
+        private int CountRunningManualWorkers()
+        {
+            int count = 0;
+            foreach (var w in manualWorkerList)
+                if (w.IsBusy())
+                    count++;
             return count;
         }
 
         private IWorker GetFreeWorker()
         {
             foreach (var w in workerList)
-            {
                 if (!w.IsBusy())
                     return w;
-            }
+            return null;
+        }
+
+        private IWorker GetFreeManualWorker()
+        {
+            foreach (var w in manualWorkerList)
+                if (!w.IsBusy())
+                    return w;
             return null;
         }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using WebScraper.Data;
 using WebScraper.Enums;
 using WebScraper.Utils;
@@ -19,6 +20,8 @@ namespace MangaDownloader.Workers.Implement
         public event Action<object> Complete;
         public event Action<object> Cancelled;
         public event Action<object, Exception> Failed;
+
+        const int MILLISECONDS_DELAY = 200;
 
         private Task task;
         private IProcessor processor;
@@ -83,8 +86,11 @@ namespace MangaDownloader.Workers.Implement
 
         void executor_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            DownloadData downloadData = e.UserState as DownloadData;
-            ProgressChanged(downloadData.DataRowSender, downloadData.Percent);
+            if (!executor.CancellationPending)
+            {
+                DownloadData downloadData = e.UserState as DownloadData;
+                ProgressChanged(downloadData.DataRowSender, downloadData.Percent);
+            }
         }
 
         void executor_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -118,8 +124,9 @@ namespace MangaDownloader.Workers.Implement
                 if (executor.CancellationPending)
                 {
                     e.Cancel = true;
-                    break;
+                    return;
                 }
+
                 string chapterName = FileUtils.GetSafeName(chapter.Name);
                 string chapterFolderPath = String.Format("{0}\\{1}", mangaFolderPath, chapterName);
                 Directory.CreateDirectory(chapterFolderPath);
@@ -130,17 +137,21 @@ namespace MangaDownloader.Workers.Implement
                     if (executor.CancellationPending)
                     {
                         e.Cancel = true;
-                        break;
+                        return;
                     }
+
                     DownloadPage(page.Name, page.Url, site, chapterFolderPath);
                     totalPercent += percentPerPage;
                     executor.ReportProgress(1, new DownloadData(dataRowSender, totalPercent));
+                    Thread.Sleep(MILLISECONDS_DELAY);  // prevent firing OnCancelled and OnProgressChanged at the same time
                 }
+
                 Shortcut(chapter.Url, chapterFolderPath, chapterName);
                 ZipFolder(chapterFolderPath, chapterName);
                 CreatePDF(chapterFolderPath, chapterName);
                 DeleteImages(chapterFolderPath);
             }
+
             Shortcut(mangaUrl, mangaFolderPath, mangaName);
         }
 
@@ -159,11 +170,13 @@ namespace MangaDownloader.Workers.Implement
                 if (executor.CancellationPending)
                 {
                     e.Cancel = true;
-                    break;
+                    return;
                 }
+
                 DownloadPage(page.Name, page.Url, site, chapterFolderPath);
                 totalPercent += percentPerPage;
                 executor.ReportProgress(1, new DownloadData(dataRowSender, totalPercent));
+                Thread.Sleep(MILLISECONDS_DELAY);
             }
             Shortcut(chapterUrl, chapterFolderPath, chapterName);
             ZipFolder(chapterFolderPath, chapterName);

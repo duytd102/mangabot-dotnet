@@ -1,5 +1,6 @@
 ﻿using MangaDownloader.Enums;
 using MangaDownloader.Processors;
+using MangaDownloader.Workers.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -98,11 +99,38 @@ namespace MangaDownloader.GUIs
 
         private void tsmiAddToQueue_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow r in dgvChapterList.SelectedRows)
+            List<int> indexes = new List<int>();
+
+            foreach(DataGridViewRow row in dgvChapterList.SelectedRows)
+                indexes.Add(row.Index);
+
+            indexes.Sort();
+
+            foreach (int index in indexes)
             {
+                DataGridViewRow r = dgvChapterList.Rows[index];
                 String name = r.Cells[COLUMN_NAME].Value.ToString();
                 String url = r.Cells[COLUMN_URL].Value.ToString();
                 this.mainForm.AddToQueue(name, LinkType.CHAPTER, currentSite, url);
+            }
+        }
+
+        private void tsmiDownload_Click(object sender, EventArgs e)
+        {
+            List<int> indexes = new List<int>();
+
+            foreach(DataGridViewRow row in dgvChapterList.SelectedRows)
+                indexes.Add(row.Index);
+
+            indexes.Sort();
+
+            foreach (int index in indexes)
+            {
+                DataGridViewRow row = dgvChapterList.Rows[index];
+                String name = row.Cells[COLUMN_NAME].Value.ToString();
+                String url = row.Cells[COLUMN_URL].Value.ToString();
+                Task task = this.mainForm.AddToQueue(name, LinkType.CHAPTER, currentSite, url);
+                this.mainForm.DownloadTask(task);
             }
         }
 

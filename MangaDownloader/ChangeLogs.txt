@@ -1,9 +1,13 @@
 ﻿Version 1.5 (2015-03-29)
 [Features]
 - Grabber form, to get chapters from a manga url
+- Button Download to add manga/chapter/page to queue and download them right
 
 [Enhancement]
 - Search box has an agility to search by manga url
+
+[Bugfix]
+- A task wasn't updated to STOPPED despite it was stopped when stop queue
 
 Version 1.4 (2015-03-28)
 [Enhancement]

@@ -7,7 +7,7 @@ using WebScraper.Enums;
 
 namespace MangaDownloader.Workers.Data
 {
-    class Task
+    public class Task
     {
         public object Sender;
         public String Name;

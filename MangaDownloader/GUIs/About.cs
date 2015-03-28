@@ -25,7 +25,7 @@ namespace MangaDownloader.GUIs
 
         private String GetDesc()
         {
-            string changeLogsPath = Application.StartupPath + "\\ChangeLogs.txt";
+            string changeLogsPath = Application.StartupPath + "\\changelogs.txt";
             string[] lines = new string[] { };
             if (File.Exists(changeLogsPath))
             {

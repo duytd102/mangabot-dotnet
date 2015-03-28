@@ -1,4 +1,11 @@
-﻿Version 1.4 (2015-03-26)
+﻿Version 1.5 (2015-03-29)
+[Features]
+- Grabber form, to get chapters from a manga url
+
+[Enhancement]
+- Search box has an agility to search by manga url
+
+Version 1.4 (2015-03-28)
 [Enhancement]
 - Optimize UI more clean
 

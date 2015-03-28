@@ -81,6 +81,7 @@ namespace MangaDownloader.GUIs
             tslbLoading.Visible = false;
             tsbtnStartAll.Enabled = true;
             tsbtnStopAll.Enabled = false;
+            tsmiNewVersion.Visible = false;
 
             this.Text = String.Format("{0} v{1:0.0}", SettingsManager.GetInstance().GetSettings().AppName, SettingsManager.GetInstance().GetSettings().AppVersion);
 
@@ -117,11 +118,11 @@ namespace MangaDownloader.GUIs
 
                         if (VersionUtils.CheckForUpdates(out vd))
                         {
-                            tsTaskCommands.Invoke(new MethodInvoker(() =>
+                            msTop.Invoke(new MethodInvoker(() =>
                             {
-                                tsbtGetNewUpdates.Text = "New version " + vd.GetVersionString();
-                                tsbtGetNewUpdates.Tag = vd.URL;
-                                tsbtGetNewUpdates.Visible = true;
+                                tsmiNewVersion.Text = "New version " + vd.GetVersionString();
+                                tsmiNewVersion.Tag = vd.URL;
+                                tsmiNewVersion.Visible = true;
                             }));
                         }
                     }
@@ -619,7 +620,7 @@ namespace MangaDownloader.GUIs
             }
         }
 
-        private void AddToQueue(String name, LinkType type, MangaSite site, String url)
+        public void AddToQueue(String name, LinkType type, MangaSite site, String url)
         {
             if (taskList.Exists(p => p.Url.Equals(url))) return;
 
@@ -820,10 +821,10 @@ namespace MangaDownloader.GUIs
         {
             if (e.KeyCode != Keys.Enter) return;
 
-            String keyword = tstbSearch.Text;
+            String keyword = tstbSearch.Text.ToUpper();
             List<Manga> resultList = new List<Manga>();
-            foreach(Manga manga in mangaList)
-                if (manga.Name.ToUpper().Contains(keyword.ToUpper()))
+            foreach (Manga manga in mangaList)
+                if (manga.Name.ToUpper().Contains(keyword) || manga.Url.ToUpper().Contains(keyword))
                     resultList.Add(manga);
             UpdateMangaListGridView(resultList);
         }
@@ -1048,14 +1049,20 @@ namespace MangaDownloader.GUIs
             }
         }
 
-        private void tsbtGetNewUpdates_Click(object sender, EventArgs e)
+        private void tsmiNewVersion_Click(object sender, EventArgs e)
         {
             try
             {
-                string updateUrl = tsbtGetNewUpdates.Tag as String;
+                string updateUrl = tsmiNewVersion.Tag as String;
                 Process.Start(updateUrl);
             }
             catch { }
+        }
+
+        private void tsmiGrabber_Click(object sender, EventArgs e)
+        {
+            Grabber g = new Grabber(this);
+            g.ShowDialog();
         }
     }
 }

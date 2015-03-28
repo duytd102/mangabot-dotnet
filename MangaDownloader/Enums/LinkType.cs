@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MangaDownloader.Enums
 {
-    enum LinkType
+    public enum LinkType
     {
         MANGA, CHAPTER, PAGE
     }

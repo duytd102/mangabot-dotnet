@@ -100,6 +100,12 @@
     <Compile Include="GUIs\AutoUpdate.Designer.cs">
       <DependentUpon>AutoUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIs\Grabber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\Grabber.Designer.cs">
+      <DependentUpon>Grabber.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\Grabber.resx">
+      <DependentUpon>Grabber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -331,6 +340,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\link_add.png" />
+    <None Include="Resources\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

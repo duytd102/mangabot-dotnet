@@ -6,7 +6,7 @@ using WebScraper.Data;
 
 namespace WebScraper.Scrapers
 {
-    public interface IScraper
+    interface IScraper
     {
         int GetTotalPages();
         List<Manga> GetMangaList(int pageIndex);

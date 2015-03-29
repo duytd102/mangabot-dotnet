@@ -173,16 +173,6 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap label_new_yellow {
-            get {
-                object obj = ResourceManager.GetObject("label_new_yellow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap link_add {
             get {
                 object obj = ResourceManager.GetObject("link_add", resourceCulture);
@@ -206,6 +196,16 @@ namespace MangaDownloader.Properties {
         internal static System.Drawing.Bitmap mangafox_logo {
             get {
                 object obj = ResourceManager.GetObject("mangafox_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mangavn_logo {
+            get {
+                object obj = ResourceManager.GetObject("mangavn_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

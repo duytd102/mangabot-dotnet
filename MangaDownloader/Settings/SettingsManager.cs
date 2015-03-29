@@ -54,6 +54,7 @@ namespace MangaDownloader.Settings
                 case MangaSite.BLOGTRUYEN: return Resources.blogtruyen_logo;
                 case MangaSite.MANGAFOX: return Resources.mangafox_logo;
                 case MangaSite.VECHAI: return Resources.vechai_logo;
+                case MangaSite.MANGAVN: return Resources.mangavn_logo;
                 default: throw new NotImplementedException();
             }
         }

@@ -8,10 +8,11 @@ namespace WebScraper.Data
 {
     public class Chapter
     {
-        string id = "";
-        string name = "";
-        string url = "";
-        string localPath = "";
+        string id;
+        string name;
+        string url;
+        string localPath;
+        string publishedDate;
         MangaSite site = MangaSite.BLOGTRUYEN;
         Manga manga;
 
@@ -37,6 +38,12 @@ namespace WebScraper.Data
         {
             get { return localPath; }
             set { localPath = value; }
+        }
+
+        public string PublishedDate
+        {
+            get { return publishedDate; }
+            set { publishedDate = value; }
         }
 
         public MangaSite Site

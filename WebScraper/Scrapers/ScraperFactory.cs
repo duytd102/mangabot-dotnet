@@ -7,7 +7,7 @@ using WebScraper.Scrapers.Implement;
 
 namespace WebScraper.Scrapers
 {
-    public class ScraperFactory
+    class ScraperFactory
     {
         public static IScraper CreateScraper(MangaSite site)
         {
@@ -19,6 +19,8 @@ namespace WebScraper.Scrapers
                     return new MangaFoxScraper();
                 case MangaSite.VECHAI:
                     return new VeChaiScraper();
+                case MangaSite.MANGAVN:
+                    return new MangaVnScraper();
 
                 default:
                     // TODO implement if has more sites

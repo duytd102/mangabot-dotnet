@@ -1,5 +1,4 @@
 ﻿using MangaDownloader.Enums;
-using MangaDownloader.Processors;
 using MangaDownloader.Workers.Data;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using WebScraper.Data;
 using WebScraper.Enums;
+using WebScraper.Processors;
 using WebScraper.Utils;
 
 namespace MangaDownloader.GUIs

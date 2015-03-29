@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -79,46 +80,83 @@ namespace WebScraper.Scrapers.Implement
         public List<Chapter> GetChapterList(string mangaUrl)
         {
             List<Chapter> chapterList = new List<Chapter>();
-            Chapter chapter;
-            string startPointExp = "<div[^>]*?id\\s*=\\s*[\"|']\\s*list-chapters\\s*[\"|'][^>]*?>";
-            string listExp = "(?<LIST>(.|\\n)*?)";
-            string endPointExp = "<div[^>]*?class\\s*=\\s*[\"|']\\s*votes[^>]*?[\"|'][^>]*?>";
-            string chapterExp = "<p[^>]*?>(?<TEXT>.*?)</p>";
-            string nameAndUrlExp = "<a[^>]*?href\\s*=\\s*[\"|'](?<CHAPTER_URL>.*?)[\"|'][^>]*?>(?<CHAPTER_NAME>.*?)</a>";
-            string name, url;
-            try
+            String mangaHtmlSrc = HttpUtils.MakeHttpGet(mangaUrl);
+            HtmlDocument chapterDoc = new HtmlDocument();
+            chapterDoc.LoadHtml(mangaHtmlSrc);
+
+            HtmlNode listChapters = chapterDoc.GetElementbyId("list-chapters");
+            if (listChapters != null)
             {
-                Uri rootUrl = new Uri(DOMAIN);
-                String mangaHtmlSrc = HttpUtils.MakeHttpGet(mangaUrl);
-                Match listBlock = Regex.Match(mangaHtmlSrc, startPointExp + listExp + endPointExp, RegexOptions.IgnoreCase);
-                MatchCollection chapterBlocks = Regex.Matches(listBlock.Groups["LIST"].Value, chapterExp, RegexOptions.IgnoreCase);
-                foreach (Match blk in chapterBlocks)
+                List<HtmlNode> chapterBlocks = listChapters.Descendants().Where(x => x.Name.Equals("p")).ToList();
+                foreach (HtmlNode chapterBlk in chapterBlocks)
                 {
-                    Match nameAndUrlGroup = Regex.Match(blk.Groups["TEXT"].Value, nameAndUrlExp, RegexOptions.IgnoreCase);
-
-                    name = nameAndUrlGroup.Groups["CHAPTER_NAME"].Value.Trim();
-                    name = WebUtility.HtmlDecode(name);
-
-                    url = nameAndUrlGroup.Groups["CHAPTER_URL"].Value.Trim().Replace("../", "");
-                    if (url.IndexOf(rootUrl.Scheme + "://" + rootUrl.Host) < 0)
+                    try
                     {
-                        if (!url.StartsWith("/")) url = "/" + url;
-                        url = rootUrl.Scheme + "://" + rootUrl.Host + url;
+                        HtmlNode title = chapterBlk.Descendants()
+                            .FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("title")).Descendants()
+                            .FirstOrDefault(x => x.Name.Equals("a"));
+                        HtmlNode publishedDate = chapterBlk.Descendants()
+                            .FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("publishedDate"));
+
+                        string name = WebUtility.HtmlDecode(title.InnerText.Trim());
+                        string url = title.GetAttributeValue("href", "").Replace("../", "").Trim();
+                        if (url.IndexOf(DOMAIN) < 0)
+                        {
+                            url = HttpUtils.CombineUrl(DOMAIN, url);
+                        }
+                        url = WebUtility.HtmlDecode(url);
+
+                        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(url))
+                            continue;
+
+                        Chapter chapter = new Chapter();
+                        chapter.ID = Guid.NewGuid().ToString();
+                        chapter.Name = name;
+                        chapter.Url = url;
+                        chapter.PublishedDate = publishedDate.InnerText;
+                        chapter.Site = MangaSite.BLOGTRUYEN;
+                        chapterList.Add(chapter);
                     }
-                    url = WebUtility.HtmlDecode(url);
-
-                    if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(url)) continue;
-
-                    chapter = new Chapter();
-                    chapter.ID = Guid.NewGuid().ToString();
-                    chapter.Name = name;
-                    chapter.Url = url;
-                    chapter.LocalPath = "";
-                    chapter.Site = MangaSite.BLOGTRUYEN;
-                    chapterList.Add(chapter);
+                    catch (Exception) { }
                 }
             }
-            catch (Exception e) { }
+            else
+            {
+                Uri uri = new Uri(mangaUrl);
+                String mobileMangaSrc = HttpUtils.MakeHttpGet(uri.Scheme + "://m." + uri.Host + uri.PathAndQuery);
+                HtmlDocument mobileDoc = new HtmlDocument();
+                mobileDoc.LoadHtml(mobileMangaSrc);
+
+                List<HtmlNode> rows = mobileDoc.DocumentNode.Descendants()
+                    .FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("danhsach")).Descendants()
+                    .Where(x => x.GetAttributeValue("class", "").Contains("row")).ToList();
+
+                foreach(HtmlNode r in rows)
+                {
+                    try
+                    {
+                        HtmlNode info = r.Descendants().First(x => x.Name.Equals("a"));
+                        string name = WebUtility.HtmlDecode(info.InnerText.Trim());
+                        string url = info.GetAttributeValue("href", "").Replace("../", "").Trim();
+                        if (url.IndexOf(DOMAIN) < 0)
+                        {
+                            url = HttpUtils.CombineUrl(DOMAIN, url);
+                        }
+                        url = WebUtility.HtmlDecode(url);
+
+                        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(url))
+                            continue;
+
+                        Chapter chapter = new Chapter();
+                        chapter.ID = Guid.NewGuid().ToString();
+                        chapter.Name = name;
+                        chapter.Url = url;
+                        chapter.Site = MangaSite.BLOGTRUYEN;
+                        chapterList.Add(chapter);
+                    }
+                    catch { }
+                }
+            }
             return chapterList;
         }
 

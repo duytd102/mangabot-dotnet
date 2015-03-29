@@ -10,6 +10,7 @@ namespace WebScraper.Enums
         UNKNOWN,
         BLOGTRUYEN,
         MANGAFOX,
-        VECHAI
+        VECHAI,
+        MANGAVN
     }
 }

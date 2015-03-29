@@ -36,7 +36,6 @@
             this.cbAutoCreatePDF = new System.Windows.Forms.CheckBox();
             this.cbAutoCreateZip = new System.Windows.Forms.CheckBox();
             this.cbAutoCreateShortcut = new System.Windows.Forms.CheckBox();
-            this.cbAutoUpdate = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.nudTotalWorkers = new System.Windows.Forms.NumericUpDown();
@@ -47,7 +46,7 @@
             // 
             this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btBrowse.Image = global::MangaDownloader.Properties.Resources.folder_explore;
-            this.btBrowse.Location = new System.Drawing.Point(251, 184);
+            this.btBrowse.Location = new System.Drawing.Point(231, 151);
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(35, 22);
             this.btBrowse.TabIndex = 28;
@@ -58,7 +57,7 @@
             // 
             this.cbAutoClean.AutoSize = true;
             this.cbAutoClean.Enabled = false;
-            this.cbAutoClean.Location = new System.Drawing.Point(12, 129);
+            this.cbAutoClean.Location = new System.Drawing.Point(12, 107);
             this.cbAutoClean.Name = "cbAutoClean";
             this.cbAutoClean.Size = new System.Drawing.Size(132, 18);
             this.cbAutoClean.TabIndex = 27;
@@ -68,7 +67,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(113, 212);
+            this.btnSave.Location = new System.Drawing.Point(103, 181);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 25;
@@ -80,15 +79,15 @@
             // 
             this.tbDefaultFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDefaultFolder.Location = new System.Drawing.Point(12, 184);
+            this.tbDefaultFolder.Location = new System.Drawing.Point(12, 151);
             this.tbDefaultFolder.Name = "tbDefaultFolder";
-            this.tbDefaultFolder.Size = new System.Drawing.Size(233, 22);
+            this.tbDefaultFolder.Size = new System.Drawing.Size(213, 22);
             this.tbDefaultFolder.TabIndex = 24;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 167);
+            this.label3.Location = new System.Drawing.Point(9, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 14);
             this.label3.TabIndex = 23;
@@ -97,7 +96,7 @@
             // cbAutoCreatePDF
             // 
             this.cbAutoCreatePDF.AutoSize = true;
-            this.cbAutoCreatePDF.Location = new System.Drawing.Point(12, 105);
+            this.cbAutoCreatePDF.Location = new System.Drawing.Point(12, 83);
             this.cbAutoCreatePDF.Name = "cbAutoCreatePDF";
             this.cbAutoCreatePDF.Size = new System.Drawing.Size(210, 18);
             this.cbAutoCreatePDF.TabIndex = 22;
@@ -108,7 +107,7 @@
             // cbAutoCreateZip
             // 
             this.cbAutoCreateZip.AutoSize = true;
-            this.cbAutoCreateZip.Location = new System.Drawing.Point(12, 81);
+            this.cbAutoCreateZip.Location = new System.Drawing.Point(12, 59);
             this.cbAutoCreateZip.Name = "cbAutoCreateZip";
             this.cbAutoCreateZip.Size = new System.Drawing.Size(207, 18);
             this.cbAutoCreateZip.TabIndex = 21;
@@ -119,24 +118,12 @@
             // cbAutoCreateShortcut
             // 
             this.cbAutoCreateShortcut.AutoSize = true;
-            this.cbAutoCreateShortcut.Location = new System.Drawing.Point(12, 57);
+            this.cbAutoCreateShortcut.Location = new System.Drawing.Point(12, 35);
             this.cbAutoCreateShortcut.Name = "cbAutoCreateShortcut";
             this.cbAutoCreateShortcut.Size = new System.Drawing.Size(184, 18);
             this.cbAutoCreateShortcut.TabIndex = 20;
             this.cbAutoCreateShortcut.Text = "Create a shortcut to chapter";
             this.cbAutoCreateShortcut.UseVisualStyleBackColor = true;
-            // 
-            // cbAutoUpdate
-            // 
-            this.cbAutoUpdate.AutoSize = true;
-            this.cbAutoUpdate.Checked = true;
-            this.cbAutoUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoUpdate.Location = new System.Drawing.Point(12, 33);
-            this.cbAutoUpdate.Name = "cbAutoUpdate";
-            this.cbAutoUpdate.Size = new System.Drawing.Size(130, 18);
-            this.cbAutoUpdate.TabIndex = 19;
-            this.cbAutoUpdate.Text = "Automatic updates";
-            this.cbAutoUpdate.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -182,7 +169,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 254);
+            this.ClientSize = new System.Drawing.Size(281, 223);
             this.Controls.Add(this.btBrowse);
             this.Controls.Add(this.cbAutoClean);
             this.Controls.Add(this.btnSave);
@@ -191,7 +178,6 @@
             this.Controls.Add(this.cbAutoCreatePDF);
             this.Controls.Add(this.cbAutoCreateZip);
             this.Controls.Add(this.cbAutoCreateShortcut);
-            this.Controls.Add(this.cbAutoUpdate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nudTotalWorkers);
@@ -218,7 +204,6 @@
         private System.Windows.Forms.CheckBox cbAutoCreatePDF;
         private System.Windows.Forms.CheckBox cbAutoCreateZip;
         private System.Windows.Forms.CheckBox cbAutoCreateShortcut;
-        private System.Windows.Forms.CheckBox cbAutoUpdate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nudTotalWorkers;

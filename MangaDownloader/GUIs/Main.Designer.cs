@@ -67,9 +67,10 @@
             this.colMangaURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMangaSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsMangaCommands = new System.Windows.Forms.ToolStrip();
-            this.tsbtSiteName = new System.Windows.Forms.ToolStripButton();
+            this.tslbSiteLogo = new System.Windows.Forms.ToolStripLabel();
             this.tstbSearch = new System.Windows.Forms.ToolStripTextBox();
             this.tslbTotalManga = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtSiteUpdate = new System.Windows.Forms.ToolStripButton();
             this.tslbMangaLoading = new System.Windows.Forms.ToolStripLabel();
             this.dgvChapterList = new System.Windows.Forms.DataGridView();
             this.colChapterNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,6 +104,7 @@
             this.tsmiVietnameseSites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiBlogTruyen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiVeChai = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMangaVN = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglishSites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaFox = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiGrabber = new System.Windows.Forms.ToolStripMenuItem();
@@ -380,7 +382,7 @@
             this.scList.Panel2.Controls.Add(this.dgvChapterList);
             this.scList.Panel2.Controls.Add(this.tsChapterNavigation);
             this.scList.Size = new System.Drawing.Size(753, 246);
-            this.scList.SplitterDistance = 269;
+            this.scList.SplitterDistance = 293;
             this.scList.SplitterWidth = 6;
             this.scList.TabIndex = 0;
             // 
@@ -406,7 +408,7 @@
             this.dgvMangaList.ReadOnly = true;
             this.dgvMangaList.RowHeadersVisible = false;
             this.dgvMangaList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMangaList.Size = new System.Drawing.Size(269, 221);
+            this.dgvMangaList.Size = new System.Drawing.Size(293, 221);
             this.dgvMangaList.TabIndex = 1;
             this.dgvMangaList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMangaList_CellDoubleClick);
             this.dgvMangaList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMangaList_CellMouseDown);
@@ -459,26 +461,25 @@
             // 
             this.tsMangaCommands.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMangaCommands.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbtSiteName,
+            this.tslbSiteLogo,
             this.tstbSearch,
             this.tslbTotalManga,
+            this.tsbtSiteUpdate,
             this.tslbMangaLoading});
             this.tsMangaCommands.Location = new System.Drawing.Point(0, 0);
             this.tsMangaCommands.Name = "tsMangaCommands";
             this.tsMangaCommands.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tsMangaCommands.Size = new System.Drawing.Size(269, 25);
+            this.tsMangaCommands.Size = new System.Drawing.Size(293, 25);
             this.tsMangaCommands.Stretch = true;
             this.tsMangaCommands.TabIndex = 0;
             this.tsMangaCommands.Text = "toolStrip1";
             // 
-            // tsbtSiteName
+            // tslbSiteLogo
             // 
-            this.tsbtSiteName.Image = global::MangaDownloader.Properties.Resources.blogtruyen_logo;
-            this.tsbtSiteName.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtSiteName.Name = "tsbtSiteName";
-            this.tsbtSiteName.Size = new System.Drawing.Size(88, 22);
-            this.tsbtSiteName.Text = "BlogTruyen";
-            this.tsbtSiteName.Click += new System.EventHandler(this.tsbtSiteName_Click);
+            this.tslbSiteLogo.Image = global::MangaDownloader.Properties.Resources.blogtruyen_logo;
+            this.tslbSiteLogo.Name = "tslbSiteLogo";
+            this.tslbSiteLogo.Size = new System.Drawing.Size(84, 22);
+            this.tslbSiteLogo.Text = "BlogTruyen";
             // 
             // tstbSearch
             // 
@@ -494,6 +495,18 @@
             this.tslbTotalManga.Size = new System.Drawing.Size(57, 15);
             this.tslbTotalManga.Text = "100 items";
             this.tslbTotalManga.Visible = false;
+            // 
+            // tsbtSiteUpdate
+            // 
+            this.tsbtSiteUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtSiteUpdate.Image = global::MangaDownloader.Properties.Resources.refresh;
+            this.tsbtSiteUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtSiteUpdate.Name = "tsbtSiteUpdate";
+            this.tsbtSiteUpdate.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.tsbtSiteUpdate.Size = new System.Drawing.Size(23, 22);
+            this.tsbtSiteUpdate.Text = "Update";
+            this.tsbtSiteUpdate.ToolTipText = "Update manga list";
+            this.tsbtSiteUpdate.Click += new System.EventHandler(this.tsbtSiteUpdate_Click);
             // 
             // tslbMangaLoading
             // 
@@ -527,7 +540,7 @@
             this.dgvChapterList.ReadOnly = true;
             this.dgvChapterList.RowHeadersVisible = false;
             this.dgvChapterList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapterList.Size = new System.Drawing.Size(478, 221);
+            this.dgvChapterList.Size = new System.Drawing.Size(454, 221);
             this.dgvChapterList.TabIndex = 1;
             this.dgvChapterList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChapterList_CellDoubleClick);
             this.dgvChapterList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvChapterList_CellMouseDown);
@@ -588,7 +601,7 @@
             this.tsChapterNavigation.Location = new System.Drawing.Point(0, 0);
             this.tsChapterNavigation.Name = "tsChapterNavigation";
             this.tsChapterNavigation.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tsChapterNavigation.Size = new System.Drawing.Size(478, 25);
+            this.tsChapterNavigation.Size = new System.Drawing.Size(454, 25);
             this.tsChapterNavigation.TabIndex = 0;
             this.tsChapterNavigation.Text = "toolStrip1";
             // 
@@ -821,7 +834,8 @@
             // 
             this.tsmiVietnameseSites.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiBlogTruyen,
-            this.tsmiVeChai});
+            this.tsmiVeChai,
+            this.tsmiMangaVN});
             this.tsmiVietnameseSites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiVietnameseSites.Image = global::MangaDownloader.Properties.Resources.vn;
             this.tsmiVietnameseSites.Name = "tsmiVietnameseSites";
@@ -844,6 +858,14 @@
             this.tsmiVeChai.Text = "VeChai";
             this.tsmiVeChai.Click += new System.EventHandler(this.tsmiVeChai_Click);
             // 
+            // tsmiMangaVN
+            // 
+            this.tsmiMangaVN.Image = global::MangaDownloader.Properties.Resources.mangavn_logo;
+            this.tsmiMangaVN.Name = "tsmiMangaVN";
+            this.tsmiMangaVN.Size = new System.Drawing.Size(138, 22);
+            this.tsmiMangaVN.Text = "MangaVN";
+            this.tsmiMangaVN.Click += new System.EventHandler(this.tsmiMangaVN_Click);
+            // 
             // tsmiEnglishSites
             // 
             this.tsmiEnglishSites.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -857,8 +879,8 @@
             // 
             this.tsmiMangaFox.Image = global::MangaDownloader.Properties.Resources.mangafox_logo;
             this.tsmiMangaFox.Name = "tsmiMangaFox";
-            this.tsmiMangaFox.Size = new System.Drawing.Size(134, 22);
-            this.tsmiMangaFox.Text = "Manga Fox";
+            this.tsmiMangaFox.Size = new System.Drawing.Size(131, 22);
+            this.tsmiMangaFox.Text = "MangaFox";
             this.tsmiMangaFox.Click += new System.EventHandler(this.tsmiMangaFox_Click);
             // 
             // tsmiGrabber
@@ -1027,7 +1049,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiTaskReDownload;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.GroupBox gbTasks;
-        private System.Windows.Forms.ToolStripButton tsbtSiteName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMangaNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMangaID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMangaName;
@@ -1046,6 +1067,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsmiChapterDownload;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMangaVN;
+        private System.Windows.Forms.ToolStripButton tsbtSiteUpdate;
+        private System.Windows.Forms.ToolStripLabel tslbSiteLogo;
 
     }
 }

@@ -1,5 +1,4 @@
 ﻿using MangaDownloader.Enums;
-using MangaDownloader.Processors;
 using MangaDownloader.Settings;
 using MangaDownloader.Utils;
 using MangaDownloader.Workers;
@@ -17,6 +16,7 @@ using System.Threading;
 using System.Windows.Forms;
 using WebScraper.Data;
 using WebScraper.Enums;
+using WebScraper.Processors;
 using WebScraper.Scrapers;
 using WebScraper.Utils;
 
@@ -83,7 +83,9 @@ namespace MangaDownloader.GUIs
             tsbtnStopAll.Enabled = false;
             tsmiNewVersion.Visible = false;
 
-            this.Text = String.Format("{0} v{1:0.0}", SettingsManager.GetInstance().GetSettings().AppName, SettingsManager.GetInstance().GetSettings().AppVersion);
+            this.Text = String.Format("{0} v{1:0.0}",
+                SettingsManager.GetInstance().GetSettings().AppName,
+                SettingsManager.GetInstance().GetSettings().AppVersion);
 
             workerManager.AllWorkersStopped += workerManager_AllWorkersStopped;
 
@@ -107,30 +109,26 @@ namespace MangaDownloader.GUIs
             gaThread.IsBackground = true;
             gaThread.Start();
 
-            bool isAutoUpdate = SettingsManager.GetInstance().GetCommonSettings().AutoUpdate;
-            if (isAutoUpdate)
+            Thread versionThread = new Thread(new ThreadStart(() =>
             {
-                Thread versionThread = new Thread(new ThreadStart(() =>
+                try
                 {
-                    try
-                    {
-                        VersionData vd;
+                    VersionData vd;
 
-                        if (VersionUtils.CheckForUpdates(out vd))
+                    if (VersionUtils.CheckForUpdates(out vd))
+                    {
+                        msTop.Invoke(new MethodInvoker(() =>
                         {
-                            msTop.Invoke(new MethodInvoker(() =>
-                            {
-                                tsmiNewVersion.Text = "New version " + vd.GetVersionString();
-                                tsmiNewVersion.Tag = vd.URL;
-                                tsmiNewVersion.Visible = true;
-                            }));
-                        }
+                            tsmiNewVersion.Text = "New version " + vd.GetVersionString();
+                            tsmiNewVersion.Tag = vd.URL;
+                            tsmiNewVersion.Visible = true;
+                        }));
                     }
-                    catch { }
-                }));
-                versionThread.IsBackground = true;
-                versionThread.Start();
-            }
+                }
+                catch { }
+            }));
+            versionThread.IsBackground = true;
+            versionThread.Start();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -180,6 +178,11 @@ namespace MangaDownloader.GUIs
             setCurrentSite(MangaSite.VECHAI);
         }
 
+        private void tsmiMangaVN_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.MANGAVN);
+        }
+
         private void tsmiMangaFox_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.MANGAFOX);
@@ -193,17 +196,22 @@ namespace MangaDownloader.GUIs
             switch(site)
             {
                 case MangaSite.BLOGTRUYEN:
-                    tsbtSiteName.Text = "Blog Truyen";
-                    tsbtSiteName.Image = Properties.Resources.blogtruyen_logo;
+                    tslbSiteLogo.Text = "BlogTruyen";
+                    tslbSiteLogo.Image = Properties.Resources.blogtruyen_logo;
                     break;
                 case MangaSite.VECHAI:
-                    tsbtSiteName.Text = "Ve Chai";
-                    tsbtSiteName.Image = Properties.Resources.vechai_logo;
+                    tslbSiteLogo.Text = "VeChai";
+                    tslbSiteLogo.Image = Properties.Resources.vechai_logo;
                     break;
 
                 case MangaSite.MANGAFOX:
-                    tsbtSiteName.Text = "Manga Fox";
-                    tsbtSiteName.Image = Properties.Resources.mangafox_logo;
+                    tslbSiteLogo.Text = "MangaFox";
+                    tslbSiteLogo.Image = Properties.Resources.mangafox_logo;
+                    break;
+
+                case MangaSite.MANGAVN:
+                    tslbSiteLogo.Text = "MangaVN";
+                    tslbSiteLogo.Image = Properties.Resources.mangavn_logo;
                     break;
 
                 default:
@@ -211,18 +219,6 @@ namespace MangaDownloader.GUIs
                     throw new NotImplementedException();
             }
             ImportMangaList();
-        }
-
-        private void tsbtSiteName_Click(object sender, EventArgs e)
-        {
-            if (mangaWorker.IsBusy) return;
-
-            ((DataTable)dgvMangaList.DataSource).Rows.Clear();
-
-            tslbTotalManga.Visible = false;
-            tslbMangaLoading.Visible = true;
-            tsbtSiteName.Enabled = false;
-            mangaWorker.RunWorkerAsync();
         }
 
         private void tsbtnStartAll_Click(object sender, EventArgs e)
@@ -358,7 +354,7 @@ namespace MangaDownloader.GUIs
             tslbMangaLoading.Visible = false;
             tslbTotalManga.Text = mangaList.Count + " item(s)";
             tslbTotalManga.Visible = true;
-            tsbtSiteName.Enabled = true;
+            tsbtSiteUpdate.Visible = true;
         }
 
         private void UpdateMangaListGridView(List<Manga> mangaList)
@@ -1154,6 +1150,18 @@ namespace MangaDownloader.GUIs
         {
             Grabber g = new Grabber(this);
             g.ShowDialog();
+        }
+
+        private void tsbtSiteUpdate_Click(object sender, EventArgs e)
+        {
+            if (mangaWorker.IsBusy) return;
+
+            ((DataTable)dgvMangaList.DataSource).Rows.Clear();
+
+            tslbTotalManga.Visible = false;
+            tslbMangaLoading.Visible = true;
+            tsbtSiteUpdate.Visible = false;
+            mangaWorker.RunWorkerAsync();
         }
     }
 }

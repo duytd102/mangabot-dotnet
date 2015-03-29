@@ -22,7 +22,6 @@ namespace MangaDownloader.GUIs
         {
             var commonSettings = SettingsManager.GetInstance().GetCommonSettings();
             nudTotalWorkers.Value = commonSettings.TotalConcurrentWorkers;
-            cbAutoUpdate.Checked = commonSettings.AutoUpdate;
             cbAutoCreateShortcut.Checked = commonSettings.AutoCreateShortcut;
             cbAutoCreateZip.Checked = commonSettings.AutoCreateZip;
             cbAutoCreatePDF.Checked = commonSettings.AutoCreatePdf;
@@ -44,7 +43,6 @@ namespace MangaDownloader.GUIs
             {
                 var commonSettings = SettingsManager.GetInstance().GetCommonSettings();
                 commonSettings.TotalConcurrentWorkers = (int)nudTotalWorkers.Value;
-                commonSettings.AutoUpdate = cbAutoUpdate.Checked;
                 commonSettings.AutoCreateShortcut = cbAutoCreateShortcut.Checked;
                 commonSettings.AutoCreateZip = cbAutoCreateZip.Checked;
                 commonSettings.AutoCreatePdf = cbAutoCreatePDF.Checked;

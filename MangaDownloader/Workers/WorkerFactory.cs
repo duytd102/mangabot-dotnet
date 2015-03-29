@@ -1,5 +1,4 @@
-﻿using MangaDownloader.Processors;
-using MangaDownloader.Workers.Data;
+﻿using MangaDownloader.Workers.Data;
 using MangaDownloader.Workers.Implement;
 using System;
 

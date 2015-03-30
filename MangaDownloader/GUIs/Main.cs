@@ -213,6 +213,10 @@ namespace MangaDownloader.GUIs
                     tslbSiteLogo.Text = "MangaVN";
                     tslbSiteLogo.Image = Properties.Resources.mangavn_logo;
                     break;
+                case MangaSite.MANGA24H:
+                    tslbSiteLogo.Text = "Manga24h";
+                    tslbSiteLogo.Image = Properties.Resources.manga24h_logo;
+                    break;
 
                 default:
                     // TODO Add logo for more sites
@@ -1162,6 +1166,11 @@ namespace MangaDownloader.GUIs
             tslbMangaLoading.Visible = true;
             tsbtSiteUpdate.Visible = false;
             mangaWorker.RunWorkerAsync();
+        }
+
+        private void tsmiManga24h_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.MANGA24H);
         }
     }
 }

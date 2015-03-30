@@ -12,6 +12,7 @@ namespace WebScraper.Utils
         const string domain_mangafox = "http://mangafox.me";
         const string domain_vechai = "http://vechai.info";
         const string domain_mangavn = "http://www.mangavn.net";
+        const string domain_manga24h = "http://manga24h.com";
 
         public static MangaSite GetSite(String url)
         {
@@ -23,6 +24,8 @@ namespace WebScraper.Utils
                 return MangaSite.VECHAI;
             else if (url.IndexOf(domain_mangavn) >= 0)
                 return MangaSite.MANGAVN;
+            else if (url.IndexOf(domain_manga24h) >= 0)
+                return MangaSite.MANGA24H;
 
             // TODO: Analyze more urls if has more sites
             return MangaSite.UNKNOWN;

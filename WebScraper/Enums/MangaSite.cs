@@ -8,9 +8,13 @@ namespace WebScraper.Enums
     public enum MangaSite
     {
         UNKNOWN,
+
         BLOGTRUYEN,
-        MANGAFOX,
         VECHAI,
-        MANGAVN
+        MANGAVN,
+        MANGA24H,
+
+
+        MANGAFOX,
     }
 }

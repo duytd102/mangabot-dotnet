@@ -217,6 +217,10 @@ namespace MangaDownloader.GUIs
                     tslbSiteLogo.Text = "Manga24h";
                     tslbSiteLogo.Image = Properties.Resources.manga24h_logo;
                     break;
+                case MangaSite.TRUYENTRANHTUAN:
+                    tslbSiteLogo.Text = "TruyenTranhTuan";
+                    tslbSiteLogo.Image = Properties.Resources.truyentranhtuan_logo;
+                    break;
 
                 default:
                     // TODO Add logo for more sites
@@ -1171,6 +1175,11 @@ namespace MangaDownloader.GUIs
         private void tsmiManga24h_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.MANGA24H);
+        }
+
+        private void tsmiTruyenTranhTuan_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.TRUYENTRANHTUAN);
         }
     }
 }

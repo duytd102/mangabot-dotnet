@@ -1,4 +1,9 @@
-﻿Version 1.5 (2015-03-29)
+﻿Version 1.6 (2015-04-)
+[Features]
+- Support manga24h.com, truyentranhtuan.com
+
+
+Version 1.5 (2015-03-29)
 [Features]
 - Support mangavn.net
 - Grabber form, to get chapters from a manga url

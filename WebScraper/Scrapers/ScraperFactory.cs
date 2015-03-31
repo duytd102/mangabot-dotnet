@@ -23,6 +23,8 @@ namespace WebScraper.Scrapers
                     return new MangaVnScraper();
                 case MangaSite.MANGA24H:
                     return new Manga24hScraper();
+                case MangaSite.TRUYENTRANHTUAN:
+                    return new TruyenTranhTuanScraper();
 
                 default:
                     // TODO implement if has more sites

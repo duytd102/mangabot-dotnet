@@ -163,6 +163,9 @@
   <data name="blogtruyen_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blogtruyen_logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="manga24h_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\manga24h_logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -205,7 +208,7 @@
   <data name="browser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\browser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="manga24h_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\manga24h_logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="truyentranhtuan_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\truyentranhtuan_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

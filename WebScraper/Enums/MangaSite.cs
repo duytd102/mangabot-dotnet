@@ -13,6 +13,7 @@ namespace WebScraper.Enums
         VECHAI,
         MANGAVN,
         MANGA24H,
+        TRUYENTRANHTUAN,
 
 
         MANGAFOX,

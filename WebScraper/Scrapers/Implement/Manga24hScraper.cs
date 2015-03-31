@@ -35,7 +35,7 @@ namespace WebScraper.Scrapers.Implement
 
             HtmlNode table = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "").Contains("table"));
             List<HtmlNode> trTags = table.Descendants().Where(x => x.Name.Equals("tr")).ToList();
-            foreach(HtmlNode tr in trTags)
+            foreach (HtmlNode tr in trTags)
             {
                 List<HtmlNode> tdTags = tr.Elements("td").ToList();
                 if (tdTags.Count > 0)
@@ -100,7 +100,7 @@ namespace WebScraper.Scrapers.Implement
             doc.LoadHtml(src);
 
             List<HtmlNode> scriptTags = doc.DocumentNode.Descendants().Where(x => x.Name.Equals("script")).ToList();
-            foreach(HtmlNode script in scriptTags)
+            foreach (HtmlNode script in scriptTags)
             {
                 Match imageData = Regex.Match(script.InnerHtml, pattern, RegexOptions.IgnoreCase);
                 string urls = imageData.Groups["urls"].Value;
@@ -116,7 +116,7 @@ namespace WebScraper.Scrapers.Implement
                         page.Url = WebUtility.HtmlDecode(u);
                         page.Site = MangaSite.MANGA24H;
 
-                        if (String.IsNullOrEmpty(page.Name) || String.IsNullOrEmpty(page.Url))
+                        if (String.IsNullOrEmpty(page.Url))
                             continue;
 
                         pageList.Add(page);

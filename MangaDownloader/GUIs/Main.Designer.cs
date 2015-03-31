@@ -106,6 +106,7 @@
             this.tsmiVeChai = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaVN = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiManga24h = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTruyenTranhTuan = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglishSites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaFox = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiGrabber = new System.Windows.Forms.ToolStripMenuItem();
@@ -839,7 +840,8 @@
             this.tsmiBlogTruyen,
             this.tsmiVeChai,
             this.tsmiMangaVN,
-            this.tsmiManga24h});
+            this.tsmiManga24h,
+            this.tsmiTruyenTranhTuan});
             this.tsmiVietnameseSites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiVietnameseSites.Image = global::MangaDownloader.Properties.Resources.vn;
             this.tsmiVietnameseSites.Name = "tsmiVietnameseSites";
@@ -850,7 +852,7 @@
             // 
             this.tsmiBlogTruyen.Image = ((System.Drawing.Image)(resources.GetObject("tsmiBlogTruyen.Image")));
             this.tsmiBlogTruyen.Name = "tsmiBlogTruyen";
-            this.tsmiBlogTruyen.Size = new System.Drawing.Size(152, 22);
+            this.tsmiBlogTruyen.Size = new System.Drawing.Size(172, 22);
             this.tsmiBlogTruyen.Text = "BlogTruyen";
             this.tsmiBlogTruyen.Click += new System.EventHandler(this.tsmiBlogTruyen_Click);
             // 
@@ -858,7 +860,7 @@
             // 
             this.tsmiVeChai.Image = global::MangaDownloader.Properties.Resources.vechai_logo;
             this.tsmiVeChai.Name = "tsmiVeChai";
-            this.tsmiVeChai.Size = new System.Drawing.Size(152, 22);
+            this.tsmiVeChai.Size = new System.Drawing.Size(172, 22);
             this.tsmiVeChai.Text = "VeChai";
             this.tsmiVeChai.Click += new System.EventHandler(this.tsmiVeChai_Click);
             // 
@@ -866,7 +868,7 @@
             // 
             this.tsmiMangaVN.Image = global::MangaDownloader.Properties.Resources.mangavn_logo;
             this.tsmiMangaVN.Name = "tsmiMangaVN";
-            this.tsmiMangaVN.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMangaVN.Size = new System.Drawing.Size(172, 22);
             this.tsmiMangaVN.Text = "MangaVN";
             this.tsmiMangaVN.Click += new System.EventHandler(this.tsmiMangaVN_Click);
             // 
@@ -874,9 +876,17 @@
             // 
             this.tsmiManga24h.Image = global::MangaDownloader.Properties.Resources.manga24h_logo;
             this.tsmiManga24h.Name = "tsmiManga24h";
-            this.tsmiManga24h.Size = new System.Drawing.Size(152, 22);
+            this.tsmiManga24h.Size = new System.Drawing.Size(172, 22);
             this.tsmiManga24h.Text = "Manga24h";
             this.tsmiManga24h.Click += new System.EventHandler(this.tsmiManga24h_Click);
+            // 
+            // tsmiTruyenTranhTuan
+            // 
+            this.tsmiTruyenTranhTuan.Image = global::MangaDownloader.Properties.Resources.truyentranhtuan_logo;
+            this.tsmiTruyenTranhTuan.Name = "tsmiTruyenTranhTuan";
+            this.tsmiTruyenTranhTuan.Size = new System.Drawing.Size(172, 22);
+            this.tsmiTruyenTranhTuan.Text = "TruyenTranhTuan";
+            this.tsmiTruyenTranhTuan.Click += new System.EventHandler(this.tsmiTruyenTranhTuan_Click);
             // 
             // tsmiEnglishSites
             // 
@@ -1083,6 +1093,7 @@
         private System.Windows.Forms.ToolStripButton tsbtSiteUpdate;
         private System.Windows.Forms.ToolStripLabel tslbSiteLogo;
         private System.Windows.Forms.ToolStripMenuItem tsmiManga24h;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTruyenTranhTuan;
 
     }
 }

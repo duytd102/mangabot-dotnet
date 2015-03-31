@@ -333,6 +333,16 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap truyentranhtuan_logo {
+            get {
+                object obj = ResourceManager.GetObject("truyentranhtuan_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap us {
             get {
                 object obj = ResourceManager.GetObject("us", resourceCulture);

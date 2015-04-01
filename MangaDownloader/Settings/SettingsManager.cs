@@ -57,6 +57,8 @@ namespace MangaDownloader.Settings
                 case MangaSite.MANGAVN: return Resources.mangavn_logo;
                 case MangaSite.MANGA24H: return Resources.manga24h_logo;
                 case MangaSite.TRUYENTRANHTUAN: return Resources.truyentranhtuan_logo;
+                case MangaSite.TRUYENTRANHNHANH: return Resources.truyentranhnhanh_logo;
+                case MangaSite.TRUYENTRANH8: return Resources.truyentranh8_logo;
                 default: throw new NotImplementedException();
             }
         }

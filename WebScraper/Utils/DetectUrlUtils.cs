@@ -14,6 +14,8 @@ namespace WebScraper.Utils
         const string mangavn = "mangavn.net";
         const string manga24h = "manga24h.com";
         const string truyentranhtuan = "truyentranhtuan.com";
+        const string truyentranhnhanh = "truyentranhnhanh.com";
+        const string truyentranh8 = "truyentranh8.net";
 
         public static MangaSite GetSite(String url)
         {
@@ -34,6 +36,10 @@ namespace WebScraper.Utils
                     return MangaSite.MANGA24H;
                 else if (host.IndexOf(truyentranhtuan) >= 0)
                     return MangaSite.TRUYENTRANHTUAN;
+                else if (host.IndexOf(truyentranhnhanh) >= 0)
+                    return MangaSite.TRUYENTRANHNHANH;
+                else if (host.IndexOf(truyentranh8) >= 0)
+                    return MangaSite.TRUYENTRANH8;
             }
             catch { }
 

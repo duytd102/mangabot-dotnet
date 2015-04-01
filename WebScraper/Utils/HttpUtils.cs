@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -23,6 +24,8 @@ namespace WebScraper.Utils
                 HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
                 httpRequest.Method = "POST";
                 httpRequest.ContentType = "application/x-www-form-urlencoded";
+                httpRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22";
 
                 byte[] bytedata = Encoding.UTF8.GetBytes(data);
                 httpRequest.ContentLength = bytedata.Length;
@@ -47,6 +50,19 @@ namespace WebScraper.Utils
             }
             catch { }
             return "";
+        }
+
+        public static string MakeHttpPost(string url, Hashtable dataModel)
+        {
+            string p = "";
+            IEnumerator ie = dataModel.Keys.GetEnumerator();
+            while(ie.MoveNext())
+            {
+                string key = ie.Current as string;
+                p += p.Length > 0 ? "&" : "";
+                p += String.Format("{0}={1}", key, dataModel[key].ToString());
+            }
+            return MakeHttpPost(url, p);
         }
 
         /// <summary>

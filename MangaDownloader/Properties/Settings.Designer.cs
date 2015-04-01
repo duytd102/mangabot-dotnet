@@ -97,7 +97,7 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UA-61053646-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("UA-61053646-2")]
         public string GaTrackingID {
             get {
                 return ((string)(this["GaTrackingID"]));

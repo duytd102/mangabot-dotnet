@@ -339,6 +339,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\truyentranh8_logo.gif" />
+    <None Include="Resources\truyentranhnhanh_logo.png" />
     <None Include="Resources\truyentranhtuan_logo.png" />
     <None Include="Resources\manga24h_logo.jpg" />
     <None Include="Resources\mangavn_logo.png" />

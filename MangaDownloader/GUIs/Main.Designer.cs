@@ -109,6 +109,7 @@
             this.tsmiTruyenTranhTuan = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTruyenTranhNhanh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTruyenTranh8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiIZManga = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglishSites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaFox = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiGrabber = new System.Windows.Forms.ToolStripMenuItem();
@@ -845,7 +846,8 @@
             this.tsmiManga24h,
             this.tsmiTruyenTranhTuan,
             this.tsmiTruyenTranhNhanh,
-            this.tsmiTruyenTranh8});
+            this.tsmiTruyenTranh8,
+            this.tsmiIZManga});
             this.tsmiVietnameseSites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiVietnameseSites.Image = global::MangaDownloader.Properties.Resources.vn;
             this.tsmiVietnameseSites.Name = "tsmiVietnameseSites";
@@ -907,6 +909,14 @@
             this.tsmiTruyenTranh8.Size = new System.Drawing.Size(181, 22);
             this.tsmiTruyenTranh8.Text = "TruyenTranh8";
             this.tsmiTruyenTranh8.Click += new System.EventHandler(this.tsmiTruyenTranh8_Click);
+            // 
+            // tsmiIZManga
+            // 
+            this.tsmiIZManga.Image = global::MangaDownloader.Properties.Resources.izmanga_logo;
+            this.tsmiIZManga.Name = "tsmiIZManga";
+            this.tsmiIZManga.Size = new System.Drawing.Size(181, 22);
+            this.tsmiIZManga.Text = "IZManga";
+            this.tsmiIZManga.Click += new System.EventHandler(this.tsmiIZManga_Click);
             // 
             // tsmiEnglishSites
             // 
@@ -1116,6 +1126,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiTruyenTranhTuan;
         private System.Windows.Forms.ToolStripMenuItem tsmiTruyenTranhNhanh;
         private System.Windows.Forms.ToolStripMenuItem tsmiTruyenTranh8;
+        private System.Windows.Forms.ToolStripMenuItem tsmiIZManga;
 
     }
 }

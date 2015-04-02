@@ -16,6 +16,7 @@ namespace WebScraper.Utils
         const string truyentranhtuan = "truyentranhtuan.com";
         const string truyentranhnhanh = "truyentranhnhanh.com";
         const string truyentranh8 = "truyentranh8.net";
+        const string izmanga = "izmanga.com";
 
         public static MangaSite GetSite(String url)
         {
@@ -40,6 +41,8 @@ namespace WebScraper.Utils
                     return MangaSite.TRUYENTRANHNHANH;
                 else if (host.IndexOf(truyentranh8) >= 0)
                     return MangaSite.TRUYENTRANH8;
+                else if (host.IndexOf(izmanga) >= 0)
+                    return MangaSite.IZMANGA;
             }
             catch { }
 

@@ -16,6 +16,7 @@ namespace WebScraper.Enums
         TRUYENTRANHTUAN,
         TRUYENTRANHNHANH,
         TRUYENTRANH8,
+        IZMANGA,
 
         MANGAFOX,
     }

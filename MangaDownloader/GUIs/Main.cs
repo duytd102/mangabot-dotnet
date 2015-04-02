@@ -229,6 +229,10 @@ namespace MangaDownloader.GUIs
                     tslbSiteLogo.Text = "TruyenTranh8";
                     tslbSiteLogo.Image = Properties.Resources.truyentranh8_logo;
                     break;
+                case MangaSite.IZMANGA:
+                    tslbSiteLogo.Text = "IZManga";
+                    tslbSiteLogo.Image = Properties.Resources.izmanga_logo;
+                    break;
 
                 default:
                     // TODO Add logo for more sites
@@ -1198,6 +1202,11 @@ namespace MangaDownloader.GUIs
         private void tsmiTruyenTranh8_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.TRUYENTRANH8);
+        }
+
+        private void tsmiIZManga_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.IZMANGA);
         }
     }
 }

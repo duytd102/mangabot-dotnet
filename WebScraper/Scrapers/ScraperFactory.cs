@@ -29,6 +29,8 @@ namespace WebScraper.Scrapers
                     return new TruyenTranhNhanhScraper();
                 case MangaSite.TRUYENTRANH8:
                     return new TruyenTranh8Scraper();
+                case MangaSite.IZMANGA:
+                    return new IzMangaScraper();
 
                 default:
                     // TODO implement if has more sites

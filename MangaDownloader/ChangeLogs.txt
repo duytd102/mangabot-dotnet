@@ -1,7 +1,10 @@
-﻿Version 1.6 (2015-04-01)
+﻿Version 1.7 (2015-04-02)
+[Features]
+- Support izmanga.com
+
+Version 1.6 (2015-04-01)
 [Features]
 - Support manga24h.com, truyentranhtuan.com, truyentranh8.net, truyentranhnhanh.com
-
 
 Version 1.5 (2015-03-29)
 [Features]

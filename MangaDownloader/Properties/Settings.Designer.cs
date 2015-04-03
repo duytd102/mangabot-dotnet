@@ -34,7 +34,7 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.8")]
         public double AppVersion {
             get {
                 return ((double)(this["AppVersion"]));
@@ -43,7 +43,7 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("04/02/2015 23:40:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("04/03/2015 23:40:00")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));

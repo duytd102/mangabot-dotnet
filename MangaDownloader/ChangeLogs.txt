@@ -1,4 +1,13 @@
-﻿Version 1.7 (2015-04-02)
+﻿Version 1.8 (2015-04-03)
+[Features]
+- Turn off computer after queue downloaded complete
+- Hide to notification area of taskbar when close app
+
+[Enhancement]
+- Always show search box
+- Move task toolbar up to task list
+
+Version 1.7 (2015-04-02)
 [Features]
 - Support izmanga.com
 

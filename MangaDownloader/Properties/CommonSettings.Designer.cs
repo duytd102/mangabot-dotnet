@@ -106,5 +106,17 @@ namespace MangaDownloader.Properties {
                 this["RootDownloadFolderPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TurnOffWhenDone {
+            get {
+                return ((bool)(this["TurnOffWhenDone"]));
+            }
+            set {
+                this["TurnOffWhenDone"] = value;
+            }
+        }
     }
 }

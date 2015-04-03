@@ -57,6 +57,7 @@ namespace MangaDownloader.GUIs
         WorkerHandlers workerHandlers = new WorkerHandlers();
         bool IsClosingForm = false;
         int concurrentWorkersLimit = 3;
+        bool isStoppingQueue = false;
 
         public MainForm()
             : base()
@@ -83,9 +84,11 @@ namespace MangaDownloader.GUIs
             tsbtnStopAll.Enabled = false;
             tsmiNewVersion.Visible = false;
 
-            this.Text = String.Format("{0} v{1:0.0}",
-                SettingsManager.GetInstance().GetSettings().AppName,
-                SettingsManager.GetInstance().GetSettings().AppVersion);
+            SettingsManager sm = SettingsManager.GetInstance();
+
+            tscbDoWhenDone.SelectedIndex = sm.GetCommonSettings().TurnOffWhenDone ? 1 : 0;
+
+            this.Text = String.Format("{0} v{1:0.0}", sm.GetSettings().AppName, sm.GetSettings().AppVersion);
 
             workerManager.AllWorkersStopped += workerManager_AllWorkersStopped;
 
@@ -133,11 +136,13 @@ namespace MangaDownloader.GUIs
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (workerManager.IsBusy)
+            e.Cancel = true;
+            if (this.WindowState != FormWindowState.Minimized)
             {
-                workerManager.StopQueue();
-                IsClosingForm = true;
-                e.Cancel = true;
+                notifyIcon.Visible = true;
+                this.Hide();
+                this.Tag = this.WindowState;
+                this.WindowState = FormWindowState.Minimized;
             }
         }
 
@@ -153,18 +158,17 @@ namespace MangaDownloader.GUIs
             {
                 Application.Exit();
             }
+            else if (!isStoppingQueue && SettingsManager.GetInstance().GetCommonSettings().TurnOffWhenDone)
+            {
+                WindowUtils.TurnOffComputer();
+            }
+
+            isStoppingQueue = false;
         }
 
         private void ImportMangaList()
         {
             mangaList = MangaExportUtils.Import(currentSite);
-
-            tsMangaCommands.Invoke(new MethodInvoker(() =>
-            {
-                tslbTotalManga.Text = mangaList.Count + " item(s)";
-                tslbTotalManga.Visible = true;
-            }));
-
             UpdateMangaListGridView(mangaList);
         }
 
@@ -245,6 +249,7 @@ namespace MangaDownloader.GUIs
         {
             tsbtnStartAll.Enabled = false;
             tsbtnStopAll.Enabled = true;
+            isStoppingQueue = false;
             workerManager.StartQueue(concurrentWorkersLimit, taskList, workerHandlers);
         }
 
@@ -252,6 +257,7 @@ namespace MangaDownloader.GUIs
         {
             if (MessageBox.Show("Are you sure you want to stop all tasks?", "Stop", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                isStoppingQueue = true;
                 workerManager.StopQueue();
             }
         }
@@ -372,8 +378,6 @@ namespace MangaDownloader.GUIs
         void mangaWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             tslbMangaLoading.Visible = false;
-            tslbTotalManga.Text = mangaList.Count + " item(s)";
-            tslbTotalManga.Visible = true;
             tsbtSiteUpdate.Visible = true;
         }
 
@@ -1178,7 +1182,6 @@ namespace MangaDownloader.GUIs
 
             ((DataTable)dgvMangaList.DataSource).Rows.Clear();
 
-            tslbTotalManga.Visible = false;
             tslbMangaLoading.Visible = true;
             tsbtSiteUpdate.Visible = false;
             mangaWorker.RunWorkerAsync();
@@ -1207,6 +1210,56 @@ namespace MangaDownloader.GUIs
         private void tsmiIZManga_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.IZMANGA);
+        }
+
+        private void tsMangaCommands_Resize(object sender, EventArgs e)
+        {
+             tstbSearch.Width = tsMangaCommands.Width - tslbSiteLogo.Width - tsbtSiteUpdate.Width - 30;
+        }
+
+        private void tscbDoWhenDone_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SettingsManager sm = SettingsManager.GetInstance();
+            sm.GetCommonSettings().TurnOffWhenDone = tscbDoWhenDone.SelectedIndex == 1;
+            sm.GetCommonSettings().Save();
+        }
+
+        private void tsmiNotifyShow_Click(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = false;
+
+            this.Show();
+
+            try
+            {
+                FormWindowState fws = (FormWindowState)this.Tag;
+                this.WindowState = fws;
+            }
+            catch
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void tsmiNotifyExit_Click(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = false;
+
+            if (workerManager.IsBusy)
+            {
+                workerManager.StopQueue();
+                IsClosingForm = true;
+            }
+            else
+            {
+                Application.ExitThread();
+                Application.Exit();
+            }
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            tsmiNotifyShow_Click(sender, e);
         }
     }
 }

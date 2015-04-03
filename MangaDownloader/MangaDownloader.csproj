@@ -157,6 +157,7 @@
     <Compile Include="Utils\GoogleAnalyticsUtils.cs" />
     <Compile Include="Utils\SomeRules.cs" />
     <Compile Include="Utils\VersionUtils.cs" />
+    <Compile Include="Utils\WindowUtils.cs" />
     <Compile Include="Workers\Data\Task.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
@@ -339,6 +340,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\eye_show.png" />
+    <None Include="Resources\quit.png" />
     <None Include="Resources\izmanga_logo.png" />
     <None Include="Resources\truyentranh8_logo.gif" />
     <None Include="Resources\truyentranhnhanh_logo.png" />

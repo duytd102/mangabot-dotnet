@@ -45,23 +45,5 @@ namespace MangaDownloader.Settings
         {
             return GetCommonSettings().RootDownloadFolderPath + "\\" + site.ToString();
         }
-
-        public Bitmap GetSiteLogo(MangaSite site)
-        {
-            // TODO implement if has more sites
-            switch (site)
-            {
-                case MangaSite.BLOGTRUYEN: return Resources.blogtruyen_logo;
-                case MangaSite.MANGAFOX: return Resources.mangafox_logo;
-                case MangaSite.VECHAI: return Resources.vechai_logo;
-                case MangaSite.MANGAVN: return Resources.mangavn_logo;
-                case MangaSite.MANGA24H: return Resources.manga24h_logo;
-                case MangaSite.TRUYENTRANHTUAN: return Resources.truyentranhtuan_logo;
-                case MangaSite.TRUYENTRANHNHANH: return Resources.truyentranhnhanh_logo;
-                case MangaSite.TRUYENTRANH8: return Resources.truyentranh8_logo;
-                case MangaSite.IZMANGA: return Resources.izmanga_logo;
-                default: throw new NotImplementedException();
-            }
-        }
     }
 }

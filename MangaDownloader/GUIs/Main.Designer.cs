@@ -114,6 +114,7 @@
             this.tsmiEnglishSites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaFox = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiGrabber = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAdvancedSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCheckForUpdates = new System.Windows.Forms.ToolStripMenuItem();
@@ -849,6 +850,7 @@
             this.tsmiVietnameseSites,
             this.tsmiEnglishSites,
             this.tsmiGrabber,
+            this.tsmiAdvancedSearch,
             this.tsmiHelp,
             this.tsmiNewVersion});
             this.msTop.Location = new System.Drawing.Point(0, 0);
@@ -963,6 +965,15 @@
             this.tsmiGrabber.Size = new System.Drawing.Size(81, 20);
             this.tsmiGrabber.Text = "Grabber";
             this.tsmiGrabber.Click += new System.EventHandler(this.tsmiGrabber_Click);
+            // 
+            // tsmiAdvancedSearch
+            // 
+            this.tsmiAdvancedSearch.Image = global::MangaDownloader.Properties.Resources.search2;
+            this.tsmiAdvancedSearch.Name = "tsmiAdvancedSearch";
+            this.tsmiAdvancedSearch.Size = new System.Drawing.Size(73, 20);
+            this.tsmiAdvancedSearch.Text = "Search";
+            this.tsmiAdvancedSearch.ToolTipText = "Advanced Search";
+            this.tsmiAdvancedSearch.Click += new System.EventHandler(this.tsmiAdvancedSearch_Click);
             // 
             // tsmiHelp
             // 
@@ -1188,6 +1199,7 @@
         private System.Windows.Forms.ContextMenuStrip cmsNotify;
         private System.Windows.Forms.ToolStripMenuItem tsmiNotifyShow;
         private System.Windows.Forms.ToolStripMenuItem tsmiNotifyExit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAdvancedSearch;
 
     }
 }

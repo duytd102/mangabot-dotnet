@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using WebScraper.Enums;
 
 namespace MangaDownloader.Utils
 {
-    class MangaExportUtils
+    class MangaUtils
     {
         public static void Export(MangaSite site, List<Manga> mangaList)
         {
@@ -62,6 +63,43 @@ namespace MangaDownloader.Utils
             }
             catch { }
             return mangaList;
+        }
+
+        public static Bitmap GetLogo(MangaSite site)
+        {
+            switch (site)
+            {
+                case MangaSite.BLOGTRUYEN:
+                    return Properties.Resources.blogtruyen_logo;
+
+                case MangaSite.VECHAI:
+                    return Properties.Resources.vechai_logo;
+
+                case MangaSite.MANGAFOX:
+                    return Properties.Resources.mangafox_logo;
+
+                case MangaSite.MANGAVN:
+                    return Properties.Resources.mangavn_logo;
+
+                case MangaSite.MANGA24H:
+                    return Properties.Resources.manga24h_logo;
+
+                case MangaSite.TRUYENTRANHTUAN:
+                    return Properties.Resources.truyentranhtuan_logo;
+
+                case MangaSite.TRUYENTRANHNHANH:
+                    return Properties.Resources.truyentranhnhanh_logo;
+
+                case MangaSite.TRUYENTRANH8:
+                    return Properties.Resources.truyentranh8_logo;
+
+                case MangaSite.IZMANGA:
+                    return Properties.Resources.izmanga_logo;
+
+                default:
+                    // TODO Add logo for more sites
+                    throw new NotImplementedException();
+            }
         }
     }
 }

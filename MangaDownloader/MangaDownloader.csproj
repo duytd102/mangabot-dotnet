@@ -96,6 +96,12 @@
     <Compile Include="Enums\EventAction.cs" />
     <Compile Include="GenerateVersion.cs" />
     <Compile Include="GlobalExceptionCatcher.cs" />
+    <Compile Include="GUIs\AdvancedSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\AdvancedSearch.Designer.cs">
+      <DependentUpon>AdvancedSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\AutoUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,12 @@
     </Compile>
     <Compile Include="GUIs\Grabber.Designer.cs">
       <DependentUpon>Grabber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIs\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIs\Settings.cs">
       <SubType>Form</SubType>
@@ -162,7 +174,7 @@
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\ListUtils.cs" />
-    <Compile Include="Utils\MangaExportUtils.cs" />
+    <Compile Include="Utils\MangaUtils.cs" />
     <Compile Include="Utils\TaskUtils.cs" />
     <Compile Include="Workers\Data\DownloadData.cs" />
     <Compile Include="Workers\Data\WorkerHandlers.cs" />
@@ -173,6 +185,9 @@
     <EmbeddedResource Include="GUIs\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\AdvancedSearch.resx">
+      <DependentUpon>AdvancedSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUIs\AutoUpdate.resx">
       <DependentUpon>AutoUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Grabber.resx">
       <DependentUpon>Grabber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -340,6 +358,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\search2.png" />
     <None Include="Resources\eye_show.png" />
     <None Include="Resources\quit.png" />
     <None Include="Resources\izmanga_logo.png" />

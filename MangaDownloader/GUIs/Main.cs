@@ -58,6 +58,7 @@ namespace MangaDownloader.GUIs
         bool IsClosingForm = false;
         int concurrentWorkersLimit = 3;
         bool isStoppingQueue = false;
+        Loading loadingForm;
 
         public MainForm()
             : base()
@@ -67,14 +68,7 @@ namespace MangaDownloader.GUIs
 
         private void Main_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add(new DataColumn("no"));
-            dt.Columns.Add(new DataColumn("id"));
-            dt.Columns.Add(new DataColumn("name"));
-            dt.Columns.Add(new DataColumn("url"));
-            dt.Columns.Add(new DataColumn("site"));
             dgvMangaList.AutoGenerateColumns = false;
-            dgvMangaList.DataSource = dt;
 
             tsbtnManga.Visible = false;
             tslbSlash.Visible = false;
@@ -98,12 +92,16 @@ namespace MangaDownloader.GUIs
             workerHandlers.Cancelled = OnWorkerCancelled;
             workerHandlers.Failed = OnWorkerFailed;
 
+            loadingForm = new Loading("Loading manga list... please wait");
+            loadingForm.Show();
+
             initWorkers();
 
             Thread loadThread = new Thread(new ThreadStart(() =>
             {
                 ImportMangaList();
                 importTaskList();
+                Invoke(new MethodInvoker(() => { loadingForm.Close(); }));
             }));
             loadThread.IsBackground = true;
             loadThread.Start();
@@ -168,7 +166,7 @@ namespace MangaDownloader.GUIs
 
         private void ImportMangaList()
         {
-            mangaList = MangaExportUtils.Import(currentSite);
+            mangaList = MangaUtils.Import(currentSite);
             UpdateMangaListGridView(mangaList);
         }
 
@@ -196,52 +194,11 @@ namespace MangaDownloader.GUIs
         {
             // TODO how to cancel manga worker???
             if (mangaWorker.IsBusy) mangaWorker.CancelAsync();
+
             currentSite = site;
-            switch(site)
-            {
-                case MangaSite.BLOGTRUYEN:
-                    tslbSiteLogo.Text = "BlogTruyen";
-                    tslbSiteLogo.Image = Properties.Resources.blogtruyen_logo;
-                    break;
-                case MangaSite.VECHAI:
-                    tslbSiteLogo.Text = "VeChai";
-                    tslbSiteLogo.Image = Properties.Resources.vechai_logo;
-                    break;
+            tslbSiteLogo.Image = MangaUtils.GetLogo(currentSite);
+            tslbSiteLogo.Text = EnumUtils.Capitalize(site);
 
-                case MangaSite.MANGAFOX:
-                    tslbSiteLogo.Text = "MangaFox";
-                    tslbSiteLogo.Image = Properties.Resources.mangafox_logo;
-                    break;
-
-                case MangaSite.MANGAVN:
-                    tslbSiteLogo.Text = "MangaVN";
-                    tslbSiteLogo.Image = Properties.Resources.mangavn_logo;
-                    break;
-                case MangaSite.MANGA24H:
-                    tslbSiteLogo.Text = "Manga24h";
-                    tslbSiteLogo.Image = Properties.Resources.manga24h_logo;
-                    break;
-                case MangaSite.TRUYENTRANHTUAN:
-                    tslbSiteLogo.Text = "TruyenTranhTuan";
-                    tslbSiteLogo.Image = Properties.Resources.truyentranhtuan_logo;
-                    break;
-                case MangaSite.TRUYENTRANHNHANH:
-                    tslbSiteLogo.Text = "TruyenTranhNhanh";
-                    tslbSiteLogo.Image = Properties.Resources.truyentranhnhanh_logo;
-                    break;
-                case MangaSite.TRUYENTRANH8:
-                    tslbSiteLogo.Text = "TruyenTranh8";
-                    tslbSiteLogo.Image = Properties.Resources.truyentranh8_logo;
-                    break;
-                case MangaSite.IZMANGA:
-                    tslbSiteLogo.Text = "IZManga";
-                    tslbSiteLogo.Image = Properties.Resources.izmanga_logo;
-                    break;
-
-                default:
-                    // TODO Add logo for more sites
-                    throw new NotImplementedException();
-            }
             ImportMangaList();
         }
 
@@ -371,7 +328,7 @@ namespace MangaDownloader.GUIs
         void processor_ScrapOneMangaPageComplete(int totalManga, int totalPages, int pageIndex, List<Manga> partialList)
         {
             mangaList.AddRange(partialList);
-            MangaExportUtils.Export(currentSite, mangaList);
+            MangaUtils.Export(currentSite, mangaList);
             AppendMangaListGridView(totalManga, partialList);
         }
 
@@ -383,39 +340,47 @@ namespace MangaDownloader.GUIs
 
         private void UpdateMangaListGridView(List<Manga> mangaList)
         {
-            dgvMangaList.Invoke(new MethodInvoker(() =>
-            {
-                DataTable dt = (DataTable)dgvMangaList.DataSource;
-                dt.Rows.Clear();
+            DataTable dt = CreateDataSource();
 
-                int currentRowIndex = 0;
-                foreach (Manga manga in mangaList)
-                {
-                    currentRowIndex++;
-                    dt.Rows.Add(StringUtils.GenerateOrdinal(mangaList.Count, currentRowIndex),
-                        manga.ID, manga.Name, manga.Url, manga.Site.ToString());
-                }
-            }));
+            int currentRowIndex = 0;
+            foreach (Manga manga in mangaList)
+            {
+                currentRowIndex++;
+                dt.Rows.Add(StringUtils.GenerateOrdinal(mangaList.Count, currentRowIndex),
+                    manga.ID, manga.Name, manga.Url, manga.Site.ToString());
+            }
+
+            dgvMangaList.Invoke(new MethodInvoker(() => { dgvMangaList.DataSource = dt; }));
         }
 
         private void AppendMangaListGridView(int totalManga, List<Manga> partialList)
         {
+            DataTable dt = CreateDataSource();
+            int currentRowIndex = 0;
+            if (dt.Rows.Count > 0)
+                currentRowIndex = int.Parse(dt.Rows[dt.Rows.Count - 1][0].ToString());
+            foreach (Manga manga in partialList)
+            {
+                currentRowIndex++;
+                dt.Rows.Add(StringUtils.GenerateOrdinal(totalManga, currentRowIndex),
+                    manga.ID, manga.Name, manga.Url, manga.Site.ToString());
+            }
+
             dgvMangaList.Invoke(new MethodInvoker(() =>
             {
-                DataTable dt = (DataTable)dgvMangaList.DataSource;
-                if (dt != null)
-                {
-                    int currentRowIndex = 0;
-                    if (dt.Rows.Count > 0)
-                        currentRowIndex = int.Parse(dt.Rows[dt.Rows.Count - 1][0].ToString());
-                    foreach (Manga manga in partialList)
-                    {
-                        currentRowIndex++;
-                        dt.Rows.Add(StringUtils.GenerateOrdinal(totalManga, currentRowIndex),
-                            manga.ID, manga.Name, manga.Url, manga.Site.ToString());
-                    }
-                }
+                ((DataTable)dgvMangaList.DataSource).Merge(dt);
             }));
+        }
+
+        private DataTable CreateDataSource()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("no"));
+            dt.Columns.Add(new DataColumn("id"));
+            dt.Columns.Add(new DataColumn("name"));
+            dt.Columns.Add(new DataColumn("url"));
+            dt.Columns.Add(new DataColumn("site"));
+            return dt;
         }
 
         void chapterWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -1260,6 +1225,12 @@ namespace MangaDownloader.GUIs
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
             tsmiNotifyShow_Click(sender, e);
+        }
+
+        private void tsmiAdvancedSearch_Click(object sender, EventArgs e)
+        {
+            AdvancedSearch s = new AdvancedSearch(this);
+            s.ShowDialog();
         }
     }
 }

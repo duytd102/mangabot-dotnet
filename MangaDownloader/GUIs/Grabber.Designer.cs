@@ -34,15 +34,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btGrab = new System.Windows.Forms.Button();
             this.dgvChapterList = new System.Windows.Forms.DataGridView();
+            this.cmsChapterList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiAddToQueue = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiViewOnline = new System.Windows.Forms.ToolStripMenuItem();
             this.cNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmsChapterList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiAddToQueue = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDownload = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiViewOnline = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChapterList)).BeginInit();
             this.cmsChapterList.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +102,55 @@
             this.dgvChapterList.TabIndex = 3;
             this.dgvChapterList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvChapterList_CellMouseDown);
             // 
+            // cmsChapterList
+            // 
+            this.cmsChapterList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDownload,
+            this.toolStripSeparator1,
+            this.tsmiAddToQueue,
+            this.tsmiCopyURL,
+            this.tsmiViewOnline});
+            this.cmsChapterList.Name = "cmsChapterList";
+            this.cmsChapterList.Size = new System.Drawing.Size(149, 98);
+            this.cmsChapterList.Opening += new System.ComponentModel.CancelEventHandler(this.cmsChapterList_Opening);
+            // 
+            // tsmiDownload
+            // 
+            this.tsmiDownload.Image = global::MangaDownloader.Properties.Resources.download;
+            this.tsmiDownload.Name = "tsmiDownload";
+            this.tsmiDownload.Size = new System.Drawing.Size(148, 22);
+            this.tsmiDownload.Text = "Download";
+            this.tsmiDownload.Click += new System.EventHandler(this.tsmiDownload_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            // 
+            // tsmiAddToQueue
+            // 
+            this.tsmiAddToQueue.Image = global::MangaDownloader.Properties.Resources.add;
+            this.tsmiAddToQueue.Name = "tsmiAddToQueue";
+            this.tsmiAddToQueue.Size = new System.Drawing.Size(148, 22);
+            this.tsmiAddToQueue.Text = "Add to Queue";
+            this.tsmiAddToQueue.Click += new System.EventHandler(this.tsmiAddToQueue_Click);
+            // 
+            // tsmiCopyURL
+            // 
+            this.tsmiCopyURL.Image = global::MangaDownloader.Properties.Resources.copy;
+            this.tsmiCopyURL.Name = "tsmiCopyURL";
+            this.tsmiCopyURL.Size = new System.Drawing.Size(148, 22);
+            this.tsmiCopyURL.Text = "Copy URL";
+            this.tsmiCopyURL.Click += new System.EventHandler(this.tsmiCopyURL_Click);
+            // 
+            // tsmiViewOnline
+            // 
+            this.tsmiViewOnline.Image = global::MangaDownloader.Properties.Resources.browser;
+            this.tsmiViewOnline.Name = "tsmiViewOnline";
+            this.tsmiViewOnline.Size = new System.Drawing.Size(148, 22);
+            this.tsmiViewOnline.Text = "View online";
+            this.tsmiViewOnline.Click += new System.EventHandler(this.tsmiViewOnline_Click);
+            // 
             // cNo
             // 
             this.cNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -122,60 +171,10 @@
             // 
             // cURL
             // 
-            this.cURL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.cURL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.cURL.HeaderText = "URL";
             this.cURL.Name = "cURL";
             this.cURL.ReadOnly = true;
-            this.cURL.Width = 53;
-            // 
-            // cmsChapterList
-            // 
-            this.cmsChapterList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDownload,
-            this.toolStripSeparator1,
-            this.tsmiAddToQueue,
-            this.tsmiCopyURL,
-            this.tsmiViewOnline});
-            this.cmsChapterList.Name = "cmsChapterList";
-            this.cmsChapterList.Size = new System.Drawing.Size(153, 120);
-            this.cmsChapterList.Opening += new System.ComponentModel.CancelEventHandler(this.cmsChapterList_Opening);
-            // 
-            // tsmiAddToQueue
-            // 
-            this.tsmiAddToQueue.Image = global::MangaDownloader.Properties.Resources.add;
-            this.tsmiAddToQueue.Name = "tsmiAddToQueue";
-            this.tsmiAddToQueue.Size = new System.Drawing.Size(152, 22);
-            this.tsmiAddToQueue.Text = "Add to Queue";
-            this.tsmiAddToQueue.Click += new System.EventHandler(this.tsmiAddToQueue_Click);
-            // 
-            // tsmiDownload
-            // 
-            this.tsmiDownload.Image = global::MangaDownloader.Properties.Resources.download;
-            this.tsmiDownload.Name = "tsmiDownload";
-            this.tsmiDownload.Size = new System.Drawing.Size(152, 22);
-            this.tsmiDownload.Text = "Download";
-            this.tsmiDownload.Click += new System.EventHandler(this.tsmiDownload_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // tsmiCopyURL
-            // 
-            this.tsmiCopyURL.Image = global::MangaDownloader.Properties.Resources.copy;
-            this.tsmiCopyURL.Name = "tsmiCopyURL";
-            this.tsmiCopyURL.Size = new System.Drawing.Size(152, 22);
-            this.tsmiCopyURL.Text = "Copy URL";
-            this.tsmiCopyURL.Click += new System.EventHandler(this.tsmiCopyURL_Click);
-            // 
-            // tsmiViewOnline
-            // 
-            this.tsmiViewOnline.Image = global::MangaDownloader.Properties.Resources.browser;
-            this.tsmiViewOnline.Name = "tsmiViewOnline";
-            this.tsmiViewOnline.Size = new System.Drawing.Size(152, 22);
-            this.tsmiViewOnline.Text = "View online";
-            this.tsmiViewOnline.Click += new System.EventHandler(this.tsmiViewOnline_Click);
             // 
             // Grabber
             // 
@@ -186,8 +185,6 @@
             this.Controls.Add(this.btGrab);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbMangaURL);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Grabber";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -211,10 +208,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddToQueue;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyURL;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewOnline;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDownload;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cURL;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDownload;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

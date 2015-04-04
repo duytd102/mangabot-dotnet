@@ -118,5 +118,17 @@ namespace MangaDownloader.Properties {
                 this["TurnOffWhenDone"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTaskbarInfoOnMinimize {
+            get {
+                return ((bool)(this["ShowTaskbarInfoOnMinimize"]));
+            }
+            set {
+                this["ShowTaskbarInfoOnMinimize"] = value;
+            }
+        }
     }
 }

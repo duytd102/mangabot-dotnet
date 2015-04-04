@@ -1,11 +1,13 @@
-﻿Version 1.8 (2015-04-03)
+﻿Version 1.8 (2015-04-04)
 [Features]
 - Turn off computer after queue downloaded complete
 - Hide to notification area of taskbar when close app
+- Advanced search
 
 [Enhancement]
 - Always show search box
 - Move task toolbar up to task list
+- Not hang UI when open app
 
 Version 1.7 (2015-04-02)
 [Features]

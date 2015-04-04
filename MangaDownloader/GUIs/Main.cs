@@ -1,4 +1,5 @@
 ﻿using MangaDownloader.Enums;
+using MangaDownloader.Properties;
 using MangaDownloader.Settings;
 using MangaDownloader.Utils;
 using MangaDownloader.Workers;
@@ -137,10 +138,17 @@ namespace MangaDownloader.GUIs
             e.Cancel = true;
             if (this.WindowState != FormWindowState.Minimized)
             {
-                notifyIcon.Visible = true;
                 this.Hide();
                 this.Tag = this.WindowState;
                 this.WindowState = FormWindowState.Minimized;
+                notifyIcon.Visible = true;
+
+                if (SettingsManager.GetInstance().GetCommonSettings().ShowTaskbarInfoOnMinimize)
+                {
+                    ShowPopup("Manga Downloader is still running",
+                        "Manga Downloader is still running, so your manga will still be able to download." +
+                        "\n\nClick here to disable this message in the future.", ToolTipIcon.Info);
+                }
             }
         }
 
@@ -1231,6 +1239,19 @@ namespace MangaDownloader.GUIs
         {
             AdvancedSearch s = new AdvancedSearch(this);
             s.ShowDialog();
+        }
+
+        private void ShowPopup(string title, string text, ToolTipIcon icon)
+        {
+            try { notifyIcon.ShowBalloonTip(1000, title, text, icon); }
+            catch { }
+        }
+
+        private void notifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            CommonSettings cs = SettingsManager.GetInstance().GetCommonSettings();
+            cs.ShowTaskbarInfoOnMinimize = false;
+            cs.Save();
         }
     }
 }

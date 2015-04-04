@@ -126,22 +126,7 @@
     <Compile Include="GUIs\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\MangaFoxSettings.Designer.cs">
-      <DependentUpon>MangaFoxSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Settings\SettingsManager.cs" />
-    <Compile Include="Properties\VeChaiSettings.Designer.cs">
-      <DependentUpon>VeChaiSettings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Properties\BlogTruyenSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>BlogTruyenSettings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Enums\LinkType.cs" />
     <Compile Include="Enums\TaskStatus.cs" />
     <Compile Include="GUIs\About.cs">
@@ -217,18 +202,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="Properties\MangaFoxSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>MangaFoxSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\VeChaiSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>VeChaiSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\BlogTruyenSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>BlogTruyenSettings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

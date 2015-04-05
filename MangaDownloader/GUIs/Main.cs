@@ -79,9 +79,9 @@ namespace MangaDownloader.GUIs
             tsbtnStopAll.Enabled = false;
             tsmiNewVersion.Visible = false;
 
-            SettingsManager sm = SettingsManager.GetInstance();
+            EnableOrDisableTurnOffComputerOption();
 
-            tscbDoWhenDone.SelectedIndex = sm.GetCommonSettings().TurnOffWhenDone ? 1 : 0;
+            SettingsManager sm = SettingsManager.GetInstance();
 
             this.Text = String.Format("{0} v{1:0.0}", sm.GetSettings().AppName, sm.GetSettings().AppVersion);
 
@@ -1113,6 +1113,7 @@ namespace MangaDownloader.GUIs
         private void tsmiSettings_Click(object sender, EventArgs e)
         {
             new Settings().ShowDialog();
+            EnableOrDisableTurnOffComputerOption();
         }
 
         private void tsmiCheckForUpdates_Click(object sender, EventArgs e)
@@ -1252,6 +1253,11 @@ namespace MangaDownloader.GUIs
             CommonSettings cs = SettingsManager.GetInstance().GetCommonSettings();
             cs.ShowTaskbarInfoOnMinimize = false;
             cs.Save();
+        }
+
+        private void EnableOrDisableTurnOffComputerOption()
+        {
+            tscbDoWhenDone.SelectedIndex = SettingsManager.GetInstance().GetCommonSettings().TurnOffWhenDone ? 1 : 0;
         }
     }
 }

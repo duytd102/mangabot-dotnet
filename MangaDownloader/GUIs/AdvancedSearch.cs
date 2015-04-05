@@ -41,6 +41,7 @@ namespace MangaDownloader.GUIs
         private void AdvancedSearch_Load(object sender, EventArgs e)
         {
             dgvMangaList.AutoGenerateColumns = false;
+            tbKeyword.Focus();
 
             Thread thread = new Thread(new ThreadStart(() => { ImportMangaList(); }));
             thread.IsBackground = true;

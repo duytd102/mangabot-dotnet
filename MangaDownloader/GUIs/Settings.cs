@@ -26,6 +26,7 @@ namespace MangaDownloader.GUIs
             cbAutoCreateZip.Checked = commonSettings.AutoCreateZip;
             cbAutoCreatePDF.Checked = commonSettings.AutoCreatePdf;
             cbAutoClean.Checked = commonSettings.AutoClean;
+            cbTurnOffComputerWhenDone.Checked = commonSettings.TurnOffWhenDone;
             tbDefaultFolder.Text = commonSettings.RootDownloadFolderPath;
         }
 
@@ -47,6 +48,7 @@ namespace MangaDownloader.GUIs
                 commonSettings.AutoCreateZip = cbAutoCreateZip.Checked;
                 commonSettings.AutoCreatePdf = cbAutoCreatePDF.Checked;
                 commonSettings.AutoClean = cbAutoClean.Checked;
+                commonSettings.TurnOffWhenDone = cbTurnOffComputerWhenDone.Checked;
                 commonSettings.RootDownloadFolderPath = tbDefaultFolder.Text;
                 commonSettings.Save();
                 this.Close();

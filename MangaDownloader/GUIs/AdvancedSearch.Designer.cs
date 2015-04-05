@@ -36,8 +36,8 @@
             this.tsmiCopyURL = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiViewOnline = new System.Windows.Forms.ToolStripMenuItem();
             this.gbKeyword = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.tbKeyword = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.lbNote = new System.Windows.Forms.Label();
             this.btSearch = new System.Windows.Forms.Button();
             this.dgvMangaList = new System.Windows.Forms.DataGridView();
@@ -102,8 +102,8 @@
             // 
             this.gbKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbKeyword.Controls.Add(this.label2);
             this.gbKeyword.Controls.Add(this.tbKeyword);
+            this.gbKeyword.Controls.Add(this.label2);
             this.gbKeyword.Controls.Add(this.lbNote);
             this.gbKeyword.Controls.Add(this.btSearch);
             this.gbKeyword.Location = new System.Drawing.Point(12, 12);
@@ -113,6 +113,16 @@
             this.gbKeyword.TabStop = false;
             this.gbKeyword.Text = "Keyword";
             // 
+            // tbKeyword
+            // 
+            this.tbKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbKeyword.Location = new System.Drawing.Point(77, 21);
+            this.tbKeyword.Name = "tbKeyword";
+            this.tbKeyword.Size = new System.Drawing.Size(327, 22);
+            this.tbKeyword.TabIndex = 0;
+            this.tbKeyword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKeyword_KeyUp);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -121,16 +131,6 @@
             this.label2.Size = new System.Drawing.Size(65, 14);
             this.label2.TabIndex = 7;
             this.label2.Text = "Search by:";
-            // 
-            // tbKeyword
-            // 
-            this.tbKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbKeyword.Location = new System.Drawing.Point(77, 21);
-            this.tbKeyword.Name = "tbKeyword";
-            this.tbKeyword.Size = new System.Drawing.Size(327, 22);
-            this.tbKeyword.TabIndex = 2;
-            this.tbKeyword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbKeyword_KeyUp);
             // 
             // lbNote
             // 

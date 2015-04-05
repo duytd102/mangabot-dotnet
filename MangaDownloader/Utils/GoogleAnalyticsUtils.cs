@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -16,7 +17,7 @@ namespace MangaDownloader.Utils
         private static String TRACKING_ID = Properties.Settings.Default.GaTrackingID;
         private static String CID = Properties.Settings.Default.GaClientID;
         private static String APPLICATION_NAME = Properties.Settings.Default.AppName;
-        private static String APPLICATION_VERSION = String.Format("{0:0.0}", Properties.Settings.Default.AppVersion);
+        private static String APPLICATION_VERSION = WindowUtils.FormatDouble("{0:0.0}", Properties.Settings.Default.AppVersion);
 
         static GoogleAnalyticsUtils()
         {
@@ -43,7 +44,7 @@ namespace MangaDownloader.Utils
         {
             NameValueCollection values = GetDefaultParams();
             values["t"] = "exception";      // HIT TYPE
-            values["exd"] = e.Message;      // EXCEPTION DESCRIPTION
+            values["exd"] = e.StackTrace;   // EXCEPTION DESCRIPTION
 
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }

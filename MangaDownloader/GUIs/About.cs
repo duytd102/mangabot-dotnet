@@ -17,8 +17,8 @@ namespace MangaDownloader.GUIs
 
         private void About_Load(object sender, EventArgs e)
         {
-            lbVersion.Text = String.Format("Version: {0:0.0} ({1:yyyy-MM-dd})",
-                SettingsManager.GetInstance().GetSettings().AppVersion,
+            lbVersion.Text = String.Format("Version: {0} ({1:yyyy-MM-dd})",
+                WindowUtils.FormatDouble("{0:0.0}", SettingsManager.GetInstance().GetSettings().AppVersion),
                 SettingsManager.GetInstance().GetSettings().ReleaseDate);
             tbDescription.Text = GetDesc();
         }

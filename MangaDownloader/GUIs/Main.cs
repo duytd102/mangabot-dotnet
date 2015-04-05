@@ -321,7 +321,7 @@ namespace MangaDownloader.GUIs
                 }
             }
             TaskUtils.Export(taskList);
-            foreach(Task t in taskList)
+            foreach (Task t in taskList)
                 AddToQueue(t);
         }
 
@@ -363,20 +363,20 @@ namespace MangaDownloader.GUIs
 
         private void AppendMangaListGridView(int totalManga, List<Manga> partialList)
         {
-            DataTable dt = CreateDataSource();
-            int currentRowIndex = 0;
-            if (dt.Rows.Count > 0)
-                currentRowIndex = int.Parse(dt.Rows[dt.Rows.Count - 1][0].ToString());
-            foreach (Manga manga in partialList)
-            {
-                currentRowIndex++;
-                dt.Rows.Add(StringUtils.GenerateOrdinal(totalManga, currentRowIndex),
-                    manga.ID, manga.Name, manga.Url, manga.Site.ToString());
-            }
-
             dgvMangaList.Invoke(new MethodInvoker(() =>
             {
-                ((DataTable)dgvMangaList.DataSource).Merge(dt);
+                DataTable dt = (DataTable)dgvMangaList.DataSource;
+
+                int currentRowIndex = 0;
+                if (dt.Rows.Count > 0)
+                    currentRowIndex = int.Parse(dt.Rows[dt.Rows.Count - 1][0].ToString());
+
+                foreach (Manga manga in partialList)
+                {
+                    currentRowIndex++;
+                    dt.Rows.Add(StringUtils.GenerateOrdinal(totalManga, currentRowIndex),
+                        manga.ID, manga.Name, manga.Url, manga.Site.ToString());
+                }
             }));
         }
 
@@ -466,12 +466,12 @@ namespace MangaDownloader.GUIs
         {
             List<int> indexes = new List<int>();
 
-            foreach(DataGridViewRow row in dgvMangaList.SelectedRows)
+            foreach (DataGridViewRow row in dgvMangaList.SelectedRows)
                 indexes.Add(row.Index);
 
             indexes.Sort();
 
-            foreach(int index in indexes)
+            foreach (int index in indexes)
             {
                 DataGridViewRow row = dgvMangaList.Rows[index];
                 String name = row.Cells[COLUMN_MANGA_NAME].Value.ToString();
@@ -641,7 +641,7 @@ namespace MangaDownloader.GUIs
 
             indexes.Sort();
 
-            foreach(int index in indexes)
+            foreach (int index in indexes)
             {
                 DataGridViewRow row = dgvTaskList.Rows[index];
                 TaskStatus status = EnumUtils.Parse<TaskStatus>(row.Cells[COLUMN_TASK_STATUS].Value.ToString());
@@ -687,8 +687,8 @@ namespace MangaDownloader.GUIs
             Directory.CreateDirectory(saveTo);
             TaskStatus status = TaskStatus.QUEUED;
             int newRowIndex = dgvTaskList.Rows.Add(0, name, EnumUtils.Capitalize(status),
-                GetProgressText(status, 0), saveTo, EnumUtils.Capitalize(type), 
-                EnumUtils.Capitalize(site), url, "");
+                GetProgressText(status, 0), EnumUtils.Capitalize(type), EnumUtils.Capitalize(site),
+                saveTo, url, "");
 
             Task t = new Task();
             t.Sender = dgvTaskList.Rows[newRowIndex];
@@ -711,8 +711,8 @@ namespace MangaDownloader.GUIs
             dgvTaskList.Invoke(new MethodInvoker(() =>
             {
                 int newRowIndex = dgvTaskList.Rows.Add(0, task.Name, EnumUtils.Capitalize(task.Status),
-                    GetProgressText(task.Status, task.Percent), task.Path, EnumUtils.Capitalize(task.Type),
-                    EnumUtils.Capitalize(task.Site), task.Url, task.Description);
+                    GetProgressText(task.Status, task.Percent), EnumUtils.Capitalize(task.Type),
+                    EnumUtils.Capitalize(task.Site), task.Path, task.Url, task.Description);
 
                 task.Sender = dgvTaskList.Rows[newRowIndex];
             }));
@@ -720,11 +720,11 @@ namespace MangaDownloader.GUIs
 
         private string GetProgressText(TaskStatus taskStatus, double percent)
         {
-            switch(taskStatus)
+            switch (taskStatus)
             {
                 case TaskStatus.DOWNLOADING:
                     return String.Format("{0:0.##}%", percent);
-                    
+
                 default:
                     return EnumUtils.Capitalize(taskStatus);
             }
@@ -969,8 +969,11 @@ namespace MangaDownloader.GUIs
                 if (SomeRules.CanSkipTask(status))
                 {
                     row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.SKIPPED);
+                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.SKIPPED, 0);
+
                     Task task = taskList.Find(p => p.Url.Equals(url));
                     task.Status = TaskStatus.SKIPPED;
+                    task.Percent = 0;
                 }
             }
             TaskUtils.Export(taskList);
@@ -1081,11 +1084,12 @@ namespace MangaDownloader.GUIs
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string selectedPath = dialog.SelectedPath;
-                foreach(DataGridViewRow row in dgvTaskList.SelectedRows)
+                foreach (DataGridViewRow row in dgvTaskList.SelectedRows)
                 {
                     string name = row.Cells[COLUMN_TASK_NAME].Value.ToString();
                     string url = row.Cells[COLUMN_TASK_URL].Value.ToString();
-                    string path = String.Format("{0}\\{1}", selectedPath, FileUtils.GetSafeName(name));
+                    MangaSite site = EnumUtils.Parse<MangaSite>(row.Cells[COLUMN_TASK_SITE].Value.ToString());
+                    string path = String.Format("{0}\\{1}\\{2}", selectedPath, site, FileUtils.GetSafeName(name));
 
                     row.Cells[COLUMN_TASK_SAVE_TO].Value = path;
 
@@ -1119,7 +1123,7 @@ namespace MangaDownloader.GUIs
         private void tsmiCheckForUpdates_Click(object sender, EventArgs e)
         {
             AutoUpdate au = new AutoUpdate();
-            if(au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 VersionData vd = au.VersionData;
                 DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.GetVersionString() + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -1188,7 +1192,7 @@ namespace MangaDownloader.GUIs
 
         private void tsMangaCommands_Resize(object sender, EventArgs e)
         {
-             tstbSearch.Width = tsMangaCommands.Width - tslbSiteLogo.Width - tsbtSiteUpdate.Width - 30;
+            tstbSearch.Width = tsMangaCommands.Width - tslbSiteLogo.Width - tsbtSiteUpdate.Width - 30;
         }
 
         private void tscbDoWhenDone_SelectedIndexChanged(object sender, EventArgs e)

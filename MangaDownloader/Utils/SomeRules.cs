@@ -30,7 +30,7 @@ namespace MangaDownloader.Utils
 
         public static bool CanSkipTask(TaskStatus status)
         {
-            return status == TaskStatus.FAILED || status == TaskStatus.SKIPPED;
+            return status == TaskStatus.FAILED || status == TaskStatus.QUEUED || status == TaskStatus.STOPPED;
         }
 
         public static bool CanAssignSaveToTask(TaskStatus status)

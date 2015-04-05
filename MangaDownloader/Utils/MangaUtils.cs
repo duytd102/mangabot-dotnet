@@ -17,7 +17,10 @@ namespace MangaDownloader.Utils
         {
             try
             {
-                String mangaFilePath = String.Format("{0}\\{1}.csv", Application.StartupPath, site.ToString().ToLower());
+                string folder = Application.StartupPath + "\\data";
+                Directory.CreateDirectory(folder);
+
+                String mangaFilePath = folder + "\\" + site.ToString().ToLower();
                 using (StreamWriter sw = new StreamWriter(mangaFilePath, false, Encoding.UTF8))
                 {
                     var csv = new CsvWriter(sw);
@@ -40,11 +43,12 @@ namespace MangaDownloader.Utils
 
         public static List<Manga> Import(MangaSite site)
         {
-            List<Manga> mangaList = new List<Manga>();
-            Manga manga;
-            String mangaFilePath = String.Format("{0}\\{1}.csv", Application.StartupPath, site.ToString().ToLower());
             try
             {
+                List<Manga> mangaList = new List<Manga>();
+                Manga manga;
+
+                String mangaFilePath = Application.StartupPath + "\\data\\" + site.ToString().ToLower();
                 using (StreamReader sr = new StreamReader(mangaFilePath, Encoding.UTF8))
                 {
                     var csv = new CsvReader(sr);
@@ -60,9 +64,13 @@ namespace MangaDownloader.Utils
 
                     sr.Close();
                 }
+
+                return mangaList;
             }
-            catch { }
-            return mangaList;
+            catch
+            {
+                return new List<Manga>();
+            }
         }
 
         public static Bitmap GetLogo(MangaSite site)

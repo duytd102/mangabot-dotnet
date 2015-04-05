@@ -61,8 +61,8 @@ namespace MangaDownloader.Workers
         {
             if (IsBusy)
             {
-                foreach (var w in workerList)
-                    w.Stop();
+                for (int i = workerList.Count - 1; i >= 0; i--)
+                    workerList[i].Stop();
 
                 IsStopping = true;
             }
@@ -74,22 +74,30 @@ namespace MangaDownloader.Workers
             if (totalRunningManualWorkers < MANUAL_WORKER_LIMIT && SomeRules.CanDownloadTask(task.Status))
             {
                 IWorker worker = GetFreeManualWorker();
-                if (worker == null) 
+                if (worker == null)
+                {
                     worker = WorkerFactory.CreateWorker(handlers);
+                    manualWorkerList.Add(worker);
+                }
                 worker.Start(task);
-                manualWorkerList.Add(worker);
             }
         }
 
         public void Stop(Task task)
         {
-            foreach (var w in workerList)
+            for (int i = workerList.Count - 1; i >= 0; i--)
+            {
+                IWorker w = workerList[i];
                 if (w.GetTask() != null && w.GetTask().Equals(task))
                     w.Stop();
+            }
 
-            foreach (var mw in manualWorkerList)
+            for (int i = manualWorkerList.Count - 1; i >= 0; i--)
+            {
+                IWorker mw = manualWorkerList[i];
                 if (mw.GetTask() != null && mw.GetTask().Equals(task))
                     mw.Stop();
+            }
         }
 
         void taskTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -130,34 +138,38 @@ namespace MangaDownloader.Workers
         private int CountRunningWorkers()
         {
             int count = 0;
-            foreach (var w in workerList)
-                if (w.IsBusy())
+            for (int i = workerList.Count - 1; i >= 0; i--)
+                if (workerList[i].IsBusy())
                     count++;
+
             return count;
         }
 
         private int CountRunningManualWorkers()
         {
             int count = 0;
-            foreach (var w in manualWorkerList)
-                if (w.IsBusy())
+            for (int i = manualWorkerList.Count - 1; i >= 0; i--)
+                if (manualWorkerList[i].IsBusy())
                     count++;
+
             return count;
         }
 
         private IWorker GetFreeWorker()
         {
-            foreach (var w in workerList)
-                if (!w.IsBusy())
-                    return w;
+            for (int i = workerList.Count - 1; i >= 0; i--)
+                if (!workerList[i].IsBusy())
+                    return workerList[i];
+
             return null;
         }
 
         private IWorker GetFreeManualWorker()
         {
-            foreach (var w in manualWorkerList)
-                if (!w.IsBusy())
-                    return w;
+            for (int i = manualWorkerList.Count - 1; i >= 0; i--)
+                if (!manualWorkerList[i].IsBusy())
+                    return manualWorkerList[i];
+
             return null;
         }
 

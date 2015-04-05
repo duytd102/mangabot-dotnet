@@ -76,9 +76,9 @@
             // btCheckUpdates
             // 
             this.btCheckUpdates.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btCheckUpdates.Location = new System.Drawing.Point(127, 59);
+            this.btCheckUpdates.Location = new System.Drawing.Point(138, 59);
             this.btCheckUpdates.Name = "btCheckUpdates";
-            this.btCheckUpdates.Size = new System.Drawing.Size(145, 25);
+            this.btCheckUpdates.Size = new System.Drawing.Size(123, 25);
             this.btCheckUpdates.TabIndex = 4;
             this.btCheckUpdates.Text = "Check for updates";
             this.btCheckUpdates.UseVisualStyleBackColor = true;

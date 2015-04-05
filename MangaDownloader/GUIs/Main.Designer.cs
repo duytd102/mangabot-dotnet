@@ -89,9 +89,9 @@
             this.colTaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaskStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaskProgress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaskSaveTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaskType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaskSite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaskSaveTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaskURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tsTaskCommands = new System.Windows.Forms.ToolStrip();
@@ -373,8 +373,9 @@
             // scMain.Panel2
             // 
             this.scMain.Panel2.Controls.Add(this.gbTasks);
-            this.scMain.Size = new System.Drawing.Size(723, 454);
-            this.scMain.SplitterDistance = 246;
+            this.scMain.Panel2MinSize = 150;
+            this.scMain.Size = new System.Drawing.Size(663, 382);
+            this.scMain.SplitterDistance = 225;
             this.scMain.SplitterWidth = 6;
             this.scMain.TabIndex = 0;
             // 
@@ -394,8 +395,8 @@
             // 
             this.scList.Panel2.Controls.Add(this.dgvChapterList);
             this.scList.Panel2.Controls.Add(this.tsChapterNavigation);
-            this.scList.Size = new System.Drawing.Size(723, 246);
-            this.scList.SplitterDistance = 313;
+            this.scList.Size = new System.Drawing.Size(663, 225);
+            this.scList.SplitterDistance = 269;
             this.scList.SplitterWidth = 6;
             this.scList.TabIndex = 0;
             // 
@@ -421,7 +422,7 @@
             this.dgvMangaList.ReadOnly = true;
             this.dgvMangaList.RowHeadersVisible = false;
             this.dgvMangaList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMangaList.Size = new System.Drawing.Size(313, 221);
+            this.dgvMangaList.Size = new System.Drawing.Size(269, 200);
             this.dgvMangaList.TabIndex = 1;
             this.dgvMangaList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMangaList_CellDoubleClick);
             this.dgvMangaList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMangaList_CellMouseDown);
@@ -481,7 +482,7 @@
             this.tsMangaCommands.Location = new System.Drawing.Point(0, 0);
             this.tsMangaCommands.Name = "tsMangaCommands";
             this.tsMangaCommands.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tsMangaCommands.Size = new System.Drawing.Size(313, 25);
+            this.tsMangaCommands.Size = new System.Drawing.Size(269, 25);
             this.tsMangaCommands.Stretch = true;
             this.tsMangaCommands.TabIndex = 0;
             this.tsMangaCommands.Text = "toolStrip1";
@@ -501,7 +502,7 @@
             this.tstbSearch.AutoSize = false;
             this.tstbSearch.Name = "tstbSearch";
             this.tstbSearch.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.tstbSearch.Size = new System.Drawing.Size(190, 25);
+            this.tstbSearch.Size = new System.Drawing.Size(140, 25);
             this.tstbSearch.ToolTipText = "Press Enter to search";
             this.tstbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tstbSearch_KeyUp);
             // 
@@ -522,7 +523,7 @@
             this.tslbMangaLoading.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tslbMangaLoading.Image = global::MangaDownloader.Properties.Resources.loading;
             this.tslbMangaLoading.Name = "tslbMangaLoading";
-            this.tslbMangaLoading.Size = new System.Drawing.Size(16, 16);
+            this.tslbMangaLoading.Size = new System.Drawing.Size(16, 22);
             this.tslbMangaLoading.Text = "toolStripLabel1";
             this.tslbMangaLoading.Visible = false;
             // 
@@ -549,7 +550,7 @@
             this.dgvChapterList.ReadOnly = true;
             this.dgvChapterList.RowHeadersVisible = false;
             this.dgvChapterList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChapterList.Size = new System.Drawing.Size(404, 221);
+            this.dgvChapterList.Size = new System.Drawing.Size(388, 200);
             this.dgvChapterList.TabIndex = 1;
             this.dgvChapterList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChapterList_CellDoubleClick);
             this.dgvChapterList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvChapterList_CellMouseDown);
@@ -610,7 +611,7 @@
             this.tsChapterNavigation.Location = new System.Drawing.Point(0, 0);
             this.tsChapterNavigation.Name = "tsChapterNavigation";
             this.tsChapterNavigation.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tsChapterNavigation.Size = new System.Drawing.Size(404, 25);
+            this.tsChapterNavigation.Size = new System.Drawing.Size(388, 25);
             this.tsChapterNavigation.TabIndex = 0;
             this.tsChapterNavigation.Text = "toolStrip1";
             // 
@@ -656,7 +657,7 @@
             this.gbTasks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbTasks.Location = new System.Drawing.Point(0, 0);
             this.gbTasks.Name = "gbTasks";
-            this.gbTasks.Size = new System.Drawing.Size(723, 202);
+            this.gbTasks.Size = new System.Drawing.Size(663, 151);
             this.gbTasks.TabIndex = 3;
             this.gbTasks.TabStop = false;
             this.gbTasks.Text = "Task List";
@@ -674,9 +675,9 @@
             this.colTaskName,
             this.colTaskStatus,
             this.colTaskProgress,
-            this.colTaskSaveTo,
             this.colTaskType,
             this.colTaskSite,
+            this.colTaskSaveTo,
             this.colTaskURL,
             this.colTaskDescription});
             this.dgvTaskList.ContextMenuStrip = this.cmsTaskMenu;
@@ -686,7 +687,7 @@
             this.dgvTaskList.ReadOnly = true;
             this.dgvTaskList.RowHeadersVisible = false;
             this.dgvTaskList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTaskList.Size = new System.Drawing.Size(717, 156);
+            this.dgvTaskList.Size = new System.Drawing.Size(657, 105);
             this.dgvTaskList.TabIndex = 2;
             this.dgvTaskList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTaskList_CellMouseDown);
             this.dgvTaskList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvTaskList_KeyUp);
@@ -727,14 +728,6 @@
             this.colTaskProgress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTaskProgress.Width = 48;
             // 
-            // colTaskSaveTo
-            // 
-            this.colTaskSaveTo.HeaderText = "Save to";
-            this.colTaskSaveTo.Name = "colTaskSaveTo";
-            this.colTaskSaveTo.ReadOnly = true;
-            this.colTaskSaveTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTaskSaveTo.Width = 300;
-            // 
             // colTaskType
             // 
             this.colTaskType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -752,6 +745,14 @@
             this.colTaskSite.ReadOnly = true;
             this.colTaskSite.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTaskSite.Width = 34;
+            // 
+            // colTaskSaveTo
+            // 
+            this.colTaskSaveTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTaskSaveTo.HeaderText = "Save to";
+            this.colTaskSaveTo.Name = "colTaskSaveTo";
+            this.colTaskSaveTo.ReadOnly = true;
+            this.colTaskSaveTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colTaskURL
             // 
@@ -782,7 +783,7 @@
             this.tsTaskCommands.Location = new System.Drawing.Point(3, 18);
             this.tsTaskCommands.Name = "tsTaskCommands";
             this.tsTaskCommands.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tsTaskCommands.Size = new System.Drawing.Size(717, 25);
+            this.tsTaskCommands.Size = new System.Drawing.Size(657, 25);
             this.tsTaskCommands.TabIndex = 1;
             this.tsTaskCommands.Text = "toolStrip1";
             // 
@@ -856,7 +857,7 @@
             this.msTop.Location = new System.Drawing.Point(0, 0);
             this.msTop.Name = "msTop";
             this.msTop.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            this.msTop.Size = new System.Drawing.Size(723, 26);
+            this.msTop.Size = new System.Drawing.Size(663, 26);
             this.msTop.TabIndex = 1;
             this.msTop.Text = "menuStrip1";
             // 
@@ -1064,10 +1065,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 480);
+            this.ClientSize = new System.Drawing.Size(663, 408);
             this.Controls.Add(this.scMain);
             this.Controls.Add(this.msTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(679, 446);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manga Downloader";
@@ -1157,15 +1159,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiTaskSaveTo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem tsmiTaskReset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskProgress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskSaveTo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskSite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskURL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskDescription;
         private System.Windows.Forms.ToolStripMenuItem tsmiTaskReDownload;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.GroupBox gbTasks;
@@ -1201,6 +1194,15 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiNotifyShow;
         private System.Windows.Forms.ToolStripMenuItem tsmiNotifyExit;
         private System.Windows.Forms.ToolStripMenuItem tsmiAdvancedSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskProgress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskSite;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskSaveTo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskURL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaskDescription;
 
     }
 }

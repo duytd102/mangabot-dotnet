@@ -16,48 +16,56 @@ namespace MangaDownloader.Utils
     {
         public static void Export(List<Task> taskList)
         {
-            string taskPath = Application.StartupPath + "\\tasks.csv";
-            using (StreamWriter writer = new StreamWriter(taskPath, false, Encoding.UTF8))
+            try
             {
-                var csv = new CsvWriter(writer);
-                csv.WriteField("Name");
-                csv.WriteField("Url");
-                csv.WriteField("Type");
-                csv.WriteField("Site");
-                csv.WriteField("Status");
-                csv.WriteField("Percent");
-                csv.WriteField("Path");
-                csv.WriteField("Desc");
-                csv.NextRecord();
+                string folder = Application.StartupPath + "\\data";
+                Directory.CreateDirectory(folder);
 
-                foreach (Task task in taskList)
+                string taskPath = folder + "\\tasks";
+                using (StreamWriter writer = new StreamWriter(taskPath, false, Encoding.UTF8))
                 {
-                    csv.WriteField(task.Name);
-                    csv.WriteField(task.Url);
-                    csv.WriteField(task.Type);
-                    csv.WriteField(task.Site);
-                    csv.WriteField(task.Status);
-                    csv.WriteField(task.Percent);
-                    csv.WriteField(task.Path);
-                    csv.WriteField(task.Description);
+                    var csv = new CsvWriter(writer);
+                    csv.WriteField("Name");
+                    csv.WriteField("Url");
+                    csv.WriteField("Type");
+                    csv.WriteField("Site");
+                    csv.WriteField("Status");
+                    csv.WriteField("Percent");
+                    csv.WriteField("Path");
+                    csv.WriteField("Desc");
                     csv.NextRecord();
-                }
 
-                writer.Close();
+                    foreach (Task task in taskList)
+                    {
+                        csv.WriteField(task.Name);
+                        csv.WriteField(task.Url);
+                        csv.WriteField(task.Type);
+                        csv.WriteField(task.Site);
+                        csv.WriteField(task.Status);
+                        csv.WriteField(task.Percent);
+                        csv.WriteField(task.Path);
+                        csv.WriteField(task.Description);
+                        csv.NextRecord();
+                    }
+
+                    writer.Close();
+                }
             }
+            catch { }
         }
 
         public static List<Task> Import()
         {
-            string taskPath = Application.StartupPath + "\\tasks.csv";
-            List<Task> taskList = new List<Task>();
-            Task task;
-            if (File.Exists(taskPath))
+            try
             {
+                List<Task> taskList = new List<Task>();
+                Task task;
+
+                string taskPath = Application.StartupPath + "\\data\\tasks";
                 using (StreamReader reader = new StreamReader(taskPath, Encoding.UTF8))
                 {
                     var csv = new CsvReader(reader);
-                    while(csv.Read())
+                    while (csv.Read())
                     {
                         task = new Task();
                         task.Name = csv.GetField<string>(0);
@@ -73,8 +81,13 @@ namespace MangaDownloader.Utils
 
                     reader.Close();
                 }
+
+                return taskList;
             }
-            return taskList;
+            catch
+            {
+                return new List<Task>();
+            }
         }
     }
 }

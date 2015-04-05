@@ -101,7 +101,7 @@ namespace MangaDownloader.Utils
 
         public String GetVersionString()
         {
-            return String.Format("{0:0.0}", this.Version);
+            return WindowUtils.FormatDouble("{0:0.0}", this.Version);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MangaDownloader.Utils
 
         public static string FormatDouble(string format, double d)
         {
-            return String.Format(new CultureInfo("en-US", false), format, Properties.Settings.Default.AppVersion);
+            return String.Format(new CultureInfo("en-US", false), format, d);
         }
     }
 }

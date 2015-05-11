@@ -1,4 +1,8 @@
-﻿Version 1.8 (2015-04-05)
+﻿Version 1.9 (2015-05-11)
+[Bugfix]
+- Cannot download from manga24h.com
+
+Version 1.8 (2015-04-05)
 [Features]
 - Turn off computer after queue downloaded complete
 - Hide to notification area of taskbar when close app

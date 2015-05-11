@@ -13,6 +13,7 @@ namespace WebScraper.Scrapers.Implement
 {
     class Manga24hScraper : IScraper
     {
+        private const String DOMAIN = "http://manga24h.com/";
         private const String FIRST_PAGE_URL = "http://manga24h.com/danhsach";
         public int GetTotalPages()
         {
@@ -37,15 +38,15 @@ namespace WebScraper.Scrapers.Implement
             List<HtmlNode> trTags = table.Descendants().Where(x => x.Name.Equals("tr")).ToList();
             foreach (HtmlNode tr in trTags)
             {
-                List<HtmlNode> tdTags = tr.Elements("td").ToList();
-                if (tdTags.Count > 0)
+                HtmlNode tdTitle = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td") && x.GetAttributeValue("class", "").Contains("panel-update-each-item-title"));
+                if (tdTitle != null)
                 {
-                    HtmlNode a = tdTags[0].Element("span").Element("a");
+                    HtmlNode a = tdTitle.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
 
                     Manga manga = new Manga();
                     manga.ID = Guid.NewGuid().ToString();
                     manga.Name = WebUtility.HtmlDecode(a.InnerText.Trim());
-                    manga.Url = WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
+                    manga.Url = DOMAIN + WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
                     manga.Site = MangaSite.MANGA24H;
 
                     if (String.IsNullOrEmpty(manga.Name) || String.IsNullOrEmpty(manga.Url))
@@ -64,21 +65,19 @@ namespace WebScraper.Scrapers.Implement
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode table = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "").Contains("table_manga"));
+            HtmlNode table = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "").Contains("chapt-table"));
             List<HtmlNode> trTags = table.Descendants().Where(x => x.Name.Equals("tr")).ToList();
             foreach (HtmlNode tr in trTags)
             {
-                List<HtmlNode> tdTags = tr.Elements("td").ToList();
-                if (tdTags.Count > 0)
+                HtmlNode td = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td"));
+                if (td != null)
                 {
-                    HtmlNode a = tdTags[0].Element("a");
-                    HtmlNode date = tdTags[1].Element("span");
+                    HtmlNode a = td.Element("a");
 
                     Chapter chapter = new Chapter();
                     chapter.ID = Guid.NewGuid().ToString();
                     chapter.Name = WebUtility.HtmlDecode(a.InnerText.Trim());
-                    chapter.Url = WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
-                    chapter.PublishedDate = date.InnerText.Trim();
+                    chapter.Url = DOMAIN + WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
                     chapter.Site = MangaSite.MANGA24H;
 
                     if (String.IsNullOrEmpty(chapter.Name) || String.IsNullOrEmpty(chapter.Url))

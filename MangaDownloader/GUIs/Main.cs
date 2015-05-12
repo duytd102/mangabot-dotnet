@@ -83,7 +83,7 @@ namespace MangaDownloader.GUIs
 
             SettingsManager sm = SettingsManager.GetInstance();
 
-            this.Text = String.Format("{0} v{1:0.0}", sm.GetSettings().AppName, sm.GetSettings().AppVersion);
+            this.Text = String.Format("{0} v{1}", sm.GetSettings().AppName, sm.GetSettings().AppVersion);
 
             workerManager.AllWorkersStopped += workerManager_AllWorkersStopped;
 
@@ -121,7 +121,7 @@ namespace MangaDownloader.GUIs
                     {
                         msTop.Invoke(new MethodInvoker(() =>
                         {
-                            tsmiNewVersion.Text = "New version " + vd.GetVersionString();
+                            tsmiNewVersion.Text = "New version " + vd.Version;
                             tsmiNewVersion.Tag = vd.URL;
                             tsmiNewVersion.Visible = true;
                         }));
@@ -1126,7 +1126,7 @@ namespace MangaDownloader.GUIs
             if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 VersionData vd = au.VersionData;
-                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.GetVersionString() + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     try

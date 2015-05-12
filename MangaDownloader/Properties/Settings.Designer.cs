@@ -34,16 +34,16 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.9")]
-        public double AppVersion {
+        [global::System.Configuration.DefaultSettingValueAttribute("1.10")]
+        public string AppVersion {
             get {
-                return ((double)(this["AppVersion"]));
+                return ((string)(this["AppVersion"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2015-05-11")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-05-12")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));

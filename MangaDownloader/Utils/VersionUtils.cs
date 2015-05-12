@@ -17,14 +17,14 @@ namespace MangaDownloader.Utils
         {
             SettingsManager sm = SettingsManager.GetInstance();
             String versionUrl = sm.GetSettings().VersionURL;
-            double currentVersion = sm.GetSettings().AppVersion;
+            String currentVersion = sm.GetSettings().AppVersion;
 
             string response = HttpUtils.MakeHttpGetWithAppendLine(versionUrl);
             List<VersionData> list = VersionUtils.Read(response);
             if (list.Count > 0)
             {
                 VersionData v = list[0];
-                if (currentVersion < v.Version)
+                if (CompareVersion(currentVersion, v.Version) == -1)
                 {
                     newVersion = v;
                     return true;
@@ -45,7 +45,7 @@ namespace MangaDownloader.Utils
                     while (csv.Read())
                     {
                         data = new VersionData();
-                        data.Version = csv.GetField<double>(0);
+                        data.Version = csv.GetField<String>(0);
                         data.ReleaseDate = csv.GetField<DateTime>(1);
                         data.URL = csv.GetField(2);
                         list.Add(data);
@@ -82,11 +82,34 @@ namespace MangaDownloader.Utils
             }
             catch { }
         }
+
+        private static int CompareVersion(String src, String compareWith)
+        {
+            int SMALLER = -1;
+            int EQUALS = 0;
+            int LARGER = 1;
+
+            string[] srcParts = src.Split('.');
+            string[] cwp = compareWith.Split('.');
+            int len = srcParts.Length > cwp.Length ? cwp.Length : srcParts.Length;
+            for (int i = 0; i < len; i++)
+            {
+                int sd = int.Parse(srcParts[i]);
+                int cd = int.Parse(cwp[i]);
+                if (sd < cd) return SMALLER;
+                else if (sd > cd) return LARGER;
+            }
+
+            if (srcParts.Length < cwp.Length) return SMALLER;
+            else if (srcParts.Length > cwp.Length) return LARGER;
+            
+            return EQUALS;
+        }
     }
 
     public class VersionData
     {
-        public double Version;
+        public String Version;
         public DateTime ReleaseDate;
         public String URL;
         public String ChangeLogs;
@@ -97,11 +120,6 @@ namespace MangaDownloader.Utils
             string[] arr = this.ChangeLogs.Split(new String[] { "<br>" }, StringSplitOptions.None);
             list.AddRange(arr);
             return list;
-        }
-
-        public String GetVersionString()
-        {
-            return WindowUtils.FormatDouble("{0:0.0}", this.Version);
         }
     }
 }

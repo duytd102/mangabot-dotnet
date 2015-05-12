@@ -30,10 +30,14 @@ namespace MangaDownloader.GUIs
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 }
 
-                this.Invoke(new MethodInvoker(() =>
+                try
                 {
-                    this.Close();
-                }));
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        this.Close();
+                    }));
+                }
+                catch { }
             });
             mainThread.Start();
         }

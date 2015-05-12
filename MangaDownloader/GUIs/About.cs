@@ -18,7 +18,7 @@ namespace MangaDownloader.GUIs
         private void About_Load(object sender, EventArgs e)
         {
             lbVersion.Text = String.Format("Version: {0} ({1:yyyy-MM-dd})",
-                WindowUtils.FormatDouble("{0:0.0}", SettingsManager.GetInstance().GetSettings().AppVersion),
+                SettingsManager.GetInstance().GetSettings().AppVersion,
                 SettingsManager.GetInstance().GetSettings().ReleaseDate);
             tbDescription.Text = GetDesc();
         }
@@ -57,7 +57,7 @@ namespace MangaDownloader.GUIs
             if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 VersionData vd = au.VersionData;
-                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.GetVersionString() + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     try { Process.Start(vd.URL); }

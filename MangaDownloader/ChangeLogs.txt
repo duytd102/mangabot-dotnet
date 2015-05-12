@@ -1,4 +1,8 @@
-﻿Version 1.9 (2015-05-11)
+﻿Version 1.10 (2015-05-12)
+[Bugfix]
+- Cannot close auto update form
+
+Version 1.9 (2015-05-11)
 [Bugfix]
 - Cannot download from manga24h.com
 

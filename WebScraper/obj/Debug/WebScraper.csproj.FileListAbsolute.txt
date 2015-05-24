@@ -2,3 +2,11 @@ E:\Working\Beo\manga-downloader\WebScraper\bin\Debug\WebScraper.dll
 E:\Working\Beo\manga-downloader\WebScraper\bin\Debug\WebScraper.pdb
 E:\Working\Beo\manga-downloader\WebScraper\obj\Debug\WebScraper.dll
 E:\Working\Beo\manga-downloader\WebScraper\obj\Debug\WebScraper.pdb
+E:\Working\manga-downloader\WebScraper\bin\Debug\WebScraper.dll
+E:\Working\manga-downloader\WebScraper\bin\Debug\WebScraper.pdb
+E:\Working\manga-downloader\WebScraper\bin\Debug\HtmlAgilityPack.dll
+E:\Working\manga-downloader\WebScraper\bin\Debug\HtmlAgilityPack.pdb
+E:\Working\manga-downloader\WebScraper\bin\Debug\HtmlAgilityPack.xml
+E:\Working\manga-downloader\WebScraper\obj\Debug\WebScraper.dll
+E:\Working\manga-downloader\WebScraper\obj\Debug\WebScraper.pdb
+E:\Working\manga-downloader\WebScraper\obj\Debug\WebScraper.csprojResolveAssemblyReference.cache

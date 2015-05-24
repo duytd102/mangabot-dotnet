@@ -5,3 +5,10 @@ E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.Properties.R
 E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.csproj.GenerateResource.Cache
 E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.exe
 E:\Working\Beo\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.pdb
+E:\Working\manga-downloader\BatchRenamer\bin\Debug\BatchRenamer.exe.config
+E:\Working\manga-downloader\BatchRenamer\bin\Debug\BatchRenamer.exe
+E:\Working\manga-downloader\BatchRenamer\bin\Debug\BatchRenamer.pdb
+E:\Working\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.Properties.Resources.resources
+E:\Working\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.csproj.GenerateResource.Cache
+E:\Working\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.exe
+E:\Working\manga-downloader\BatchRenamer\obj\Debug\BatchRenamer.pdb

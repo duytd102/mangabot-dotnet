@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Manga Downloader")]
-[assembly: AssemblyDescription("A tool for downloading manga from the internet")]
+[assembly: AssemblyTitle("Converter")]
+[assembly: AssemblyDescription("Convert to PDF, Zip")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Duy Tran")]
-[assembly: AssemblyProduct("Manga Downloader")]
-[assembly: AssemblyCopyright("Copyright © DuyTran 2015")]
+[assembly: AssemblyProduct("Converter")]
+[assembly: AssemblyCopyright("Copyright © DuyTran  2015")]
 [assembly: AssemblyTrademark("dangduy2910@gmail.com")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2be11409-58e6-4831-b18b-e886f5bbea37")]
+[assembly: Guid("5ee96405-5c21-4154-9990-e71b340e0e98")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.11.0.0")]
-[assembly: AssemblyFileVersion("1.11.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

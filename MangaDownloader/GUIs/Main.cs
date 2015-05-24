@@ -1263,5 +1263,11 @@ namespace MangaDownloader.GUIs
         {
             tscbDoWhenDone.SelectedIndex = SettingsManager.GetInstance().GetCommonSettings().TurnOffWhenDone ? 1 : 0;
         }
+
+        private void tsmiConverter_Click(object sender, EventArgs e)
+        {
+            try { Process.Start("Converter.exe"); }
+            catch { MessageBox.Show("Cannot found Converter.exe, please make sure it's on the same directory with this.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
     }
 }

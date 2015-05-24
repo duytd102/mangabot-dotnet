@@ -1,4 +1,8 @@
-﻿Version 1.10 (2015-05-12)
+﻿Version 1.11 (2015-05-24)
+[Features]
+- Converter to convert photos to PDF or zip
+
+Version 1.10 (2015-05-12)
 [Bugfix]
 - Cannot close auto update form
 

@@ -3,7 +3,7 @@
 - Converter to convert photos to PDF or zip
 
 [Enhancement]
-- Get actual photo size when blogtruyen use proxy url
+- Get actual photo size when blogtruyen uses proxy url
 
 [Bugfix]
 - Not to update concurrent worker limit when updating settings

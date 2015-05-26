@@ -43,7 +43,7 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2015-05-24")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-05-27")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));
@@ -83,36 +83,6 @@ namespace MangaDownloader.Properties {
         public string Author {
             get {
                 return ((string)(this["Author"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.google-analytics.com/collect")]
-        public string GaBaseURL {
-            get {
-                return ((string)(this["GaBaseURL"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UA-61053646-2")]
-        public string GaTrackingID {
-            get {
-                return ((string)(this["GaTrackingID"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GaClientID {
-            get {
-                return ((string)(this["GaClientID"]));
-            }
-            set {
-                this["GaClientID"] = value;
             }
         }
         

@@ -122,11 +122,17 @@ namespace Converter
                 {
                     List<string> images = (List<string>)list;
                     FileUtils.ImagesToPDF(images.ToArray(), tbSaveTo.Text);
-                    SetLabelStatus("Complete");
                     EnableOrDisableButtons(true);
+                    SetLabelStatus("Complete");
                     ShowMessageBox("Convert successfully");
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    GoogleAnalyticsUtils.SendError(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, ex);
+                    EnableOrDisableButtons(true);
+                    SetLabelStatus("Failed");
+                    ShowMessageBox("Convert failed");
+                }
             })).Start(rows);
         }
 
@@ -205,11 +211,17 @@ namespace Converter
                 {
                     List<string> images = (List<string>)list;
                     FileUtils.ZipFiles(images.ToArray(), tbSaveTo.Text);
-                    SetLabelStatus("Complete");
                     EnableOrDisableButtons(true);
+                    SetLabelStatus("Complete");
                     ShowMessageBox("Convert successfully");
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    GoogleAnalyticsUtils.SendError(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, ex);
+                    EnableOrDisableButtons(true);
+                    SetLabelStatus("Failed");
+                    ShowMessageBox("Convert failed");
+                }
             })).Start(rows);
         }
 

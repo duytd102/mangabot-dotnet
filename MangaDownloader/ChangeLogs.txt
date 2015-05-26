@@ -1,6 +1,12 @@
-﻿Version 1.11 (2015-05-24)
+﻿Version 1.11 (2015-05-27)
 [Features]
 - Converter to convert photos to PDF or zip
+
+[Enhancement]
+- Get actual photo size when blogtruyen use proxy url
+
+[Bugfix]
+- Not to update concurrent worker limit when updating settings
 
 Version 1.10 (2015-05-12)
 [Bugfix]

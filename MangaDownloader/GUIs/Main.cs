@@ -110,7 +110,10 @@ namespace MangaDownloader.GUIs
             loadThread.IsBackground = true;
             loadThread.Start();
 
-            Thread gaThread = new Thread(new ThreadStart(() => { GoogleAnalyticsUtils.SendView(Properties.Settings.Default.AppVersion, Properties.Settings.Default.GaScreen); }));
+            Thread gaThread = new Thread(new ThreadStart(() =>
+            {
+                GoogleAnalyticsUtils.SendView(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, Properties.Settings.Default.GaScreen);
+            }));
             gaThread.IsBackground = true;
             gaThread.Start();
 

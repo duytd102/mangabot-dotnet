@@ -52,14 +52,5 @@ namespace Common.Properties {
                 this["GaClientID"] = value;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Manga Downloader")]
-        public string AppName {
-            get {
-                return ((string)(this["AppName"]));
-            }
-        }
     }
 }

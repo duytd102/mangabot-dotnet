@@ -14,7 +14,6 @@ namespace Common
         private static String GA_URL = Common.Properties.AppSettings.Default.GaBaseURL;
         private static String TRACKING_ID = Common.Properties.AppSettings.Default.GaTrackingID;
         private static String CID = Common.Properties.AppSettings.Default.GaClientID;
-        private static String APPLICATION_NAME = Common.Properties.AppSettings.Default.AppName;
 
         static GoogleAnalyticsUtils()
         {
@@ -26,9 +25,9 @@ namespace Common
             CID = Common.Properties.AppSettings.Default.GaClientID;
         }
 
-        public static void SendEvent(String appVersion, String site, EventAction eventAction, String url)
+        public static void SendEvent(String appName, String appVersion, String site, EventAction eventAction, String url)
         {
-            NameValueCollection values = GetDefaultParams(appVersion);
+            NameValueCollection values = GetDefaultParams(appName, appVersion);
             values["t"] = "event";                      // HIT TYPE
             values["ec"] = site;             // EVENT CATEGORY
             values["ea"] = eventAction.ToString();      // EVENT ACTION
@@ -37,32 +36,32 @@ namespace Common
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }
 
-        public static void SendError(String appVersion, Exception e)
+        public static void SendError(String appName, String appVersion, Exception e)
         {
-            NameValueCollection values = GetDefaultParams(appVersion);
+            NameValueCollection values = GetDefaultParams(appName, appVersion);
             values["t"] = "exception";      // HIT TYPE
-            values["exd"] = e.StackTrace;   // EXCEPTION DESCRIPTION
+            values["exd"] = e.Message + "#" + e.StackTrace;   // EXCEPTION DESCRIPTION
 
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }
 
-        public static void SendView(String appVersion, String screen)
+        public static void SendView(String appName, String appVersion, String screen)
         {
-            NameValueCollection values = GetDefaultParams(appVersion);
+            NameValueCollection values = GetDefaultParams(appName, appVersion);
             values["t"] = "screenview";     // HIT TYPE
             values["cd"] = screen;          // SCREEN VIEW
 
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }
 
-        private static NameValueCollection GetDefaultParams(String appVersion)
+        private static NameValueCollection GetDefaultParams(String appName, String appVersion)
         {
             NameValueCollection values = new NameValueCollection();
             values["v"] = "1";                      // VERSION
             values["tid"] = TRACKING_ID;            // TRACKING ID
             values["cid"] = CID;                    // CLIENT ID
 
-            values["an"] = APPLICATION_NAME;        // APPLICATION NAME
+            values["an"] = appName;                 // APPLICATION NAME
             values["av"] = appVersion;              // APPLICATION VERSION
 
             return values;

@@ -1,4 +1,5 @@
-﻿using CsvHelper;
+﻿using Common;
+using CsvHelper;
 using MangaDownloader.Enums;
 using MangaDownloader.Settings;
 using MangaDownloader.Workers.Data;

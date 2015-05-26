@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MangaDownloader.Utils
+namespace Common
 {
-    class ListUtils
+    public class ListUtils
     {
         public static void Swap<T>(List<T> list, int fromIndex, int toIndex)
         {

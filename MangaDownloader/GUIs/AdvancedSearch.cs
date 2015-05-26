@@ -1,4 +1,5 @@
-﻿using MangaDownloader.Enums;
+﻿using Common;
+using MangaDownloader.Enums;
 using MangaDownloader.Utils;
 using MangaDownloader.Workers.Data;
 using System;

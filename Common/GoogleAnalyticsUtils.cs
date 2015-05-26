@@ -11,18 +11,18 @@ namespace Common
 {
     public class GoogleAnalyticsUtils
     {
-        private static String GA_URL = Common.Properties.AppSettings.Default.GaBaseURL;
-        private static String TRACKING_ID = Common.Properties.AppSettings.Default.GaTrackingID;
-        private static String CID = Common.Properties.AppSettings.Default.GaClientID;
+        private static String GA_URL = Common.Properties.Settings.Default.GaBaseURL;
+        private static String TRACKING_ID = Common.Properties.Settings.Default.GaTrackingID;
+        private static String CID = Common.Properties.Settings.Default.GaClientID;
 
         static GoogleAnalyticsUtils()
         {
             if (String.IsNullOrEmpty(CID))
             {
-                Common.Properties.AppSettings.Default.GaClientID = Guid.NewGuid().ToString();
-                Common.Properties.AppSettings.Default.Save();
+                Common.Properties.Settings.Default.GaClientID = Guid.NewGuid().ToString();
+                Common.Properties.Settings.Default.Save();
             }
-            CID = Common.Properties.AppSettings.Default.GaClientID;
+            CID = Common.Properties.Settings.Default.GaClientID;
         }
 
         public static void SendEvent(String appName, String appVersion, String site, EventAction eventAction, String url)

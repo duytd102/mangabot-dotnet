@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace MangaDownloader.Utils
+namespace Common
 {
-    class WindowUtils
+    public class WindowUtils
     {
         public static void TurnOffComputer()
         {

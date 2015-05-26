@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MangaDownloader.Utils
+namespace Common
 {
-    class EnumUtils
+    public class EnumUtils
     {
         public static T Parse<T>(string value)
         {

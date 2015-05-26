@@ -91,7 +91,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\EventAction.cs" />
     <Compile Include="GenerateVersion.cs" />
     <Compile Include="GlobalExceptionCatcher.cs" />
     <Compile Include="GUIs\AdvancedSearch.cs">
@@ -105,12 +104,6 @@
     </Compile>
     <Compile Include="GUIs\AutoUpdate.Designer.cs">
       <DependentUpon>AutoUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUIs\Converter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUIs\Converter.Designer.cs">
-      <DependentUpon>Converter.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIs\Grabber.cs">
       <SubType>Form</SubType>
@@ -155,13 +148,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>CommonSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Utils\GoogleAnalyticsUtils.cs" />
     <Compile Include="Utils\SomeRules.cs" />
     <Compile Include="Utils\VersionUtils.cs" />
     <Compile Include="Utils\WindowUtils.cs" />
     <Compile Include="Workers\Data\Task.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
-    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\ListUtils.cs" />
     <Compile Include="Utils\MangaUtils.cs" />
     <Compile Include="Utils\TaskUtils.cs" />
@@ -182,9 +173,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUIs\Converter.resx">
-      <DependentUpon>Converter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Grabber.resx">
       <DependentUpon>Grabber.cs</DependentUpon>
@@ -228,6 +216,10 @@
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{1dbe90ae-365b-4c54-abf2-4d2663529cee}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebScraper\WebScraper.csproj">
       <Project>{6da79f70-0d1e-4d1a-808c-8c7447501ac6}</Project>
       <Name>WebScraper</Name>

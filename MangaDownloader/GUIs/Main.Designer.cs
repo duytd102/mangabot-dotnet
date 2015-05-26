@@ -33,14 +33,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.cmsMangaMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMangaAddToQueue = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMangaDowload = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiMangaDowload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaCopyURL = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaViewOnline = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsChapterMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiChapterAddToQueue = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiChapterDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiChapterDownload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiChapterCopyURL = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiChapterViewOnline = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsTaskMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -168,6 +168,11 @@
             this.tsmiMangaAddToQueue.Text = "Add to Queue";
             this.tsmiMangaAddToQueue.Click += new System.EventHandler(this.tsmiMangaAddToQueue_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
+            // 
             // tsmiMangaDowload
             // 
             this.tsmiMangaDowload.Image = global::MangaDownloader.Properties.Resources.download;
@@ -175,11 +180,6 @@
             this.tsmiMangaDowload.Size = new System.Drawing.Size(148, 22);
             this.tsmiMangaDowload.Text = "Download";
             this.tsmiMangaDowload.Click += new System.EventHandler(this.tsmiMangaDowload_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
             // 
             // tsmiMangaCopyURL
             // 
@@ -206,35 +206,35 @@
             this.tsmiChapterCopyURL,
             this.tsmiChapterViewOnline});
             this.cmsChapterMenu.Name = "cmsChapterMenu";
-            this.cmsChapterMenu.Size = new System.Drawing.Size(153, 120);
+            this.cmsChapterMenu.Size = new System.Drawing.Size(149, 98);
             this.cmsChapterMenu.Opening += new System.ComponentModel.CancelEventHandler(this.cmsChapterMenu_Opening);
             // 
             // tsmiChapterAddToQueue
             // 
             this.tsmiChapterAddToQueue.Image = global::MangaDownloader.Properties.Resources.add;
             this.tsmiChapterAddToQueue.Name = "tsmiChapterAddToQueue";
-            this.tsmiChapterAddToQueue.Size = new System.Drawing.Size(152, 22);
+            this.tsmiChapterAddToQueue.Size = new System.Drawing.Size(148, 22);
             this.tsmiChapterAddToQueue.Text = "Add to Queue";
             this.tsmiChapterAddToQueue.Click += new System.EventHandler(this.tsmiChapterAddToQueue_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
             // 
             // tsmiChapterDownload
             // 
             this.tsmiChapterDownload.Image = global::MangaDownloader.Properties.Resources.download;
             this.tsmiChapterDownload.Name = "tsmiChapterDownload";
-            this.tsmiChapterDownload.Size = new System.Drawing.Size(152, 22);
+            this.tsmiChapterDownload.Size = new System.Drawing.Size(148, 22);
             this.tsmiChapterDownload.Text = "Download";
             this.tsmiChapterDownload.Click += new System.EventHandler(this.tsmiChapterDownload_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
             // 
             // tsmiChapterCopyURL
             // 
             this.tsmiChapterCopyURL.Image = global::MangaDownloader.Properties.Resources.copy;
             this.tsmiChapterCopyURL.Name = "tsmiChapterCopyURL";
-            this.tsmiChapterCopyURL.Size = new System.Drawing.Size(152, 22);
+            this.tsmiChapterCopyURL.Size = new System.Drawing.Size(148, 22);
             this.tsmiChapterCopyURL.Text = "Copy URL";
             this.tsmiChapterCopyURL.Click += new System.EventHandler(this.tsmiChapterCopyURL_Click);
             // 
@@ -242,7 +242,7 @@
             // 
             this.tsmiChapterViewOnline.Image = global::MangaDownloader.Properties.Resources.browser;
             this.tsmiChapterViewOnline.Name = "tsmiChapterViewOnline";
-            this.tsmiChapterViewOnline.Size = new System.Drawing.Size(152, 22);
+            this.tsmiChapterViewOnline.Size = new System.Drawing.Size(148, 22);
             this.tsmiChapterViewOnline.Text = "View Online";
             this.tsmiChapterViewOnline.Click += new System.EventHandler(this.tsmiChapterViewOnline_Click);
             // 

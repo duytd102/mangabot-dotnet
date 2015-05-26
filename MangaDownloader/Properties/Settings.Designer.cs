@@ -125,5 +125,14 @@ namespace MangaDownloader.Properties {
                 return ((string)(this["VersionURL"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Main")]
+        public string GaScreen {
+            get {
+                return ((string)(this["GaScreen"]));
+            }
+        }
     }
 }

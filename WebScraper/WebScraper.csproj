@@ -80,11 +80,15 @@
     <Compile Include="Scrapers\IScraper.cs" />
     <Compile Include="Scrapers\ScraperFactory.cs" />
     <Compile Include="Utils\DetectUrlUtils.cs" />
-    <Compile Include="Utils\HttpUtils.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{1dbe90ae-365b-4c54-abf2-4d2663529cee}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

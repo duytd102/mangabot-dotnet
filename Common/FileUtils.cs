@@ -7,11 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MangaDownloader.Utils
+namespace Common
 {
-    class FileUtils
+    public class FileUtils
     {
         static List<string> imageExtensions = new List<string> { ".BMP", ".PNG", ".JPEG", ".JPG", ".GIF", ".TIFF" };
+        public static string PHOTO_EXTS = "*.bmp|*.jpg|*.jpeg|*.jpe|*.giff|*.png|*.tif|*.tiff";
+        public static string PHOTO_FILTERS = "All|*.bmp;*.jpg;*.jpeg;*.jpe;*.giff;*.png;*.tif;*.tiff|Bitmap|*.bmp|JPEG|*.jpg;*.jpeg;*.jpe|GIFF|*.giff|PNG|*.png|TIFF|*.tif;*.tiff";
 
         /// <summary>
         /// Loại bỏ những ký tự không hợp lệ trong tên thư mục hoặc tập tin.
@@ -80,6 +82,21 @@ namespace MangaDownloader.Utils
             }
         }
 
+        public static void ZipFiles(string[] files, string zipToFile)
+        {
+            using (ZipFile zip = new ZipFile())
+            {
+                zip.ZipErrorAction = ZipErrorAction.Skip;
+                for (int i = 0; i < files.Length; i++)
+                {
+                    string folder = Path.GetDirectoryName(files[i]);
+                    string fileName = Path.GetFileName(files[i]);
+                    zip.AddFile(files[i], "").FileName = Common.StringUtils.GenerateOrdinal(files.Length, i) + "_" + fileName;
+                }
+                zip.Save(zipToFile);
+            }
+        }
+
         public static void ImagesToPDF(string[] images, string pdfPath)
         {
             try
@@ -90,7 +107,7 @@ namespace MangaDownloader.Utils
                     doc.Open();
                     foreach (string imagePath in images)
                     {
-                        if (CheckIfImage(imagePath))
+                        if (IsPhoto(imagePath))
                         {
                             doc.NewPage();
                             Image gif = Image.GetInstance(imagePath);
@@ -106,7 +123,7 @@ namespace MangaDownloader.Utils
             catch (Exception) { }
         }
 
-        private static bool CheckIfImage(string path)
+        public static bool IsPhoto(string path)
         {
             bool img = false;
             string extension = Path.GetExtension(path);

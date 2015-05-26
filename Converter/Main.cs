@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,8 +15,6 @@ namespace Converter
     {
         private const string COLUMN_FILENAME = "cName";
         private const string COLUMN_PATH = "cPath";
-        private const string PHOTO_EXTS = "*.bmp|*.jpg|*.jpeg|*.jpe|*.giff|*.png|*.tif|*.tiff";
-        private const string PHOTO_FILTERS = "All|*.bmp;*.jpg;*.jpeg;*.jpe;*.giff;*.png;*.tif;*.tiff|Bitmap|*.bmp|JPEG|*.jpg;*.jpeg;*.jpe|GIFF|*.giff|PNG|*.png|TIFF|*.tif;*.tiff";
 
         public Main()
         {
@@ -33,7 +32,7 @@ namespace Converter
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = true;
-            ofd.Filter = PHOTO_FILTERS;
+            ofd.Filter = FileUtils.PHOTO_FILTERS;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 foreach (string path in ofd.FileNames)
                     dgvPhotos.Rows.Add(Path.GetFileName(path), path);
@@ -49,7 +48,7 @@ namespace Converter
             {
                 string[] files = Directory.GetFiles(fd.SelectedPath, "*.*", SearchOption.AllDirectories);
                 foreach (string path in files)
-                    if (FileUtils.isPhoto(path))
+                    if (FileUtils.IsPhoto(path))
                         dgvPhotos.Rows.Add(Path.GetFileName(path), path);
 
                 UpdateLabelStatus();
@@ -143,7 +142,7 @@ namespace Converter
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = true;
-            ofd.Filter = PHOTO_FILTERS;
+            ofd.Filter = FileUtils.PHOTO_FILTERS;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 foreach (string path in ofd.FileNames)
@@ -161,7 +160,7 @@ namespace Converter
             {
                 string[] files = Directory.GetFiles(fd.SelectedPath, "*.*", SearchOption.AllDirectories);
                 foreach (string path in files)
-                    if (FileUtils.isPhoto(path))
+                    if (FileUtils.IsPhoto(path))
                         dgvPhotos.Rows.Add(Path.GetFileName(path), path);
 
                 UpdateLabelStatus();

@@ -1,4 +1,5 @@
 ﻿
+using Common;
 using CsvHelper;
 using MangaDownloader.Settings;
 using System;

@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -176,6 +177,11 @@ namespace WebScraper.Scrapers.Implement
                 foreach (Match blk in pageBlockes)
                 {
                     url = blk.Groups["URL"].Value.Trim();
+                    if (url.IndexOf("&url=", StringComparison.CurrentCulture) > -1)
+                    {
+                        Match m = Regex.Match(url, ".+&url=(?<ACTUAL_URL>[^&]+)");
+                        url = m.Groups["ACTUAL_URL"].Value.Trim();
+                    }
                     url = WebUtility.HtmlDecode(url);
 
                     page = new Page();

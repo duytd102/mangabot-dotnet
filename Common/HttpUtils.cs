@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace WebScraper.Utils
+namespace Common
 {
     public class HttpUtils
     {

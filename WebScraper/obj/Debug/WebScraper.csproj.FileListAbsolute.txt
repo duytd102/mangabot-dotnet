@@ -10,3 +10,9 @@ E:\Working\manga-downloader\WebScraper\bin\Debug\HtmlAgilityPack.xml
 E:\Working\manga-downloader\WebScraper\obj\Debug\WebScraper.dll
 E:\Working\manga-downloader\WebScraper\obj\Debug\WebScraper.pdb
 E:\Working\manga-downloader\WebScraper\obj\Debug\WebScraper.csprojResolveAssemblyReference.cache
+E:\Working\manga-downloader\WebScraper\bin\Debug\Common.exe
+E:\Working\manga-downloader\WebScraper\bin\Debug\Common.pdb
+E:\Working\manga-downloader\WebScraper\bin\Debug\Ionic.Zip.dll
+E:\Working\manga-downloader\WebScraper\bin\Debug\itextsharp.dll
+E:\Working\manga-downloader\WebScraper\bin\Debug\Ionic.Zip.xml
+E:\Working\manga-downloader\WebScraper\bin\Debug\itextsharp.xml

@@ -1,4 +1,5 @@
-﻿using MangaDownloader.Enums;
+﻿using Common;
+using MangaDownloader.Enums;
 using MangaDownloader.Properties;
 using MangaDownloader.Settings;
 using MangaDownloader.Utils;
@@ -85,6 +86,8 @@ namespace MangaDownloader.GUIs
 
             this.Text = String.Format("{0} v{1}", sm.GetSettings().AppName, sm.GetSettings().AppVersion);
 
+            concurrentWorkersLimit = sm.GetCommonSettings().TotalConcurrentWorkers;
+
             workerManager.AllWorkersStopped += workerManager_AllWorkersStopped;
 
             workerHandlers.Downloading = OnWorkerDownloading;
@@ -107,7 +110,7 @@ namespace MangaDownloader.GUIs
             loadThread.IsBackground = true;
             loadThread.Start();
 
-            Thread gaThread = new Thread(new ThreadStart(() => { GoogleAnalyticsUtils.SendView(); }));
+            Thread gaThread = new Thread(new ThreadStart(() => { GoogleAnalyticsUtils.SendView(Properties.Settings.Default.AppVersion, Properties.Settings.Default.GaScreen); }));
             gaThread.IsBackground = true;
             gaThread.Start();
 
@@ -181,21 +184,25 @@ namespace MangaDownloader.GUIs
         private void tsmiBlogTruyen_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.BLOGTRUYEN);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiVeChai_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.VECHAI);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiMangaVN_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.MANGAVN);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiMangaFox_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.MANGAFOX);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void setCurrentSite(MangaSite site)
@@ -1117,6 +1124,7 @@ namespace MangaDownloader.GUIs
         private void tsmiSettings_Click(object sender, EventArgs e)
         {
             new Settings().ShowDialog();
+            concurrentWorkersLimit = Properties.CommonSettings.Default.TotalConcurrentWorkers;
             EnableOrDisableTurnOffComputerOption();
         }
 
@@ -1168,26 +1176,31 @@ namespace MangaDownloader.GUIs
         private void tsmiManga24h_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.MANGA24H);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiTruyenTranhTuan_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.TRUYENTRANHTUAN);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiTruyenTranhNhanh_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.TRUYENTRANHNHANH);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiTruyenTranh8_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.TRUYENTRANH8);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsmiIZManga_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.IZMANGA);
+            tsMangaCommands_Resize(sender, e);
         }
 
         private void tsMangaCommands_Resize(object sender, EventArgs e)

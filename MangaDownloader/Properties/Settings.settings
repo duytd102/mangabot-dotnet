@@ -9,7 +9,7 @@
       <Value Profile="(Default)">1.11</Value>
     </Setting>
     <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2015-05-27</Value>
+      <Value Profile="(Default)">2015-05-28</Value>
     </Setting>
     <Setting Name="ContactEmail" Type="System.String" Scope="Application">
       <Value Profile="(Default)">dangduy2910@gmail.com</Value>

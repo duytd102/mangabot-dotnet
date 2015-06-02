@@ -1,4 +1,8 @@
-﻿Version 1.11 (2015-05-28)
+﻿Version 1.12 (2015-06-04)
+[Features]
+- Ability to download from kissmanga.com
+
+Version 1.11 (2015-05-28)
 [Features]
 - Converter to convert photos to PDF or zip
 

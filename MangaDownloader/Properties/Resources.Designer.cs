@@ -223,6 +223,16 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap kissmanga_logo {
+            get {
+                object obj = ResourceManager.GetObject("kissmanga_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap link_add {
             get {
                 object obj = ResourceManager.GetObject("link_add", resourceCulture);

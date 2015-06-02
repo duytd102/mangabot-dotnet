@@ -169,6 +169,7 @@ namespace MangaDownloader.GUIs
             mangaList = new List<Manga>();
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.BLOGTRUYEN));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.IZMANGA));
+            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.KISSMANGA));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGA24H));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAFOX));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAVN));

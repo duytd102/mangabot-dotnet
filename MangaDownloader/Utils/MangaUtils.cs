@@ -104,6 +104,9 @@ namespace MangaDownloader.Utils
                 case MangaSite.IZMANGA:
                     return Properties.Resources.izmanga_logo;
 
+                case MangaSite.KISSMANGA:
+                    return Properties.Resources.kissmanga_logo;
+
                 default:
                     // TODO Add logo for more sites
                     throw new NotImplementedException();

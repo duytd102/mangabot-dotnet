@@ -68,6 +68,7 @@
     <Compile Include="Processors\IProcessor.cs" />
     <Compile Include="Processors\ProcessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scrapers\Implement\KissMangaScraper.cs" />
     <Compile Include="Scrapers\Implement\Manga24hScraper.cs" />
     <Compile Include="Scrapers\Implement\MangaFoxScraper.cs" />
     <Compile Include="Scrapers\Implement\BlogTruyenScraper.cs" />

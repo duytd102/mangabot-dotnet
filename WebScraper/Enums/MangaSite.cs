@@ -19,5 +19,6 @@ namespace WebScraper.Enums
         IZMANGA,
 
         MANGAFOX,
+        KISSMANGA
     }
 }

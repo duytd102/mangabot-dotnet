@@ -1285,5 +1285,11 @@ namespace MangaDownloader.GUIs
             try { Process.Start("Converter.exe"); }
             catch { MessageBox.Show("Cannot found Converter.exe, please make sure it's on the same directory with this.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+
+        private void tsmiKissManga_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.KISSMANGA);
+            tsMangaCommands_Resize(sender, e);
+        }
     }
 }

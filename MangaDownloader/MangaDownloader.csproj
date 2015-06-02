@@ -321,6 +321,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\kissmanga_logo.png" />
     <None Include="Resources\add_folders.png" />
     <None Include="Resources\add_photos.png" />
     <None Include="Resources\exchange.png" />

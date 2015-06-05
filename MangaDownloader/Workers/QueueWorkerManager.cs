@@ -37,15 +37,16 @@ namespace MangaDownloader.Workers
             return instance;
         }
 
-        public void StartQueue(int workerLimit, List<Task> taskList, WorkerHandlers handlers)
+        public List<Task> GetTaskList()
+        {
+            return taskList;
+        }
+
+        public void StartQueue(int workerLimit, WorkerHandlers handlers)
         {
             if (!IsBusy)
             {
                 this.workerLimit = workerLimit;
-
-                this.taskList.Clear();
-                foreach (var task in taskList)
-                    this.taskList.Add(task);
 
                 if (workerList.Count < workerLimit)
                     for (int i = workerList.Count + 1; i <= workerLimit; i++)
@@ -103,8 +104,9 @@ namespace MangaDownloader.Workers
         void taskTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             int totalRunningWorkers = CountRunningWorkers();
-            bool noTask = taskList.Count == 0 && totalRunningWorkers == 0;
+            Task task = taskList.Find(x => x.Status == Enums.TaskStatus.QUEUED);
             bool canStop = IsStopping && totalRunningWorkers == 0;
+            bool noTask = task == null && totalRunningWorkers == 0;
 
             if (noTask || canStop)
             {
@@ -115,20 +117,12 @@ namespace MangaDownloader.Workers
             }
             else if (!IsStopping)
             {
-                while (taskList.Count > 0 && totalRunningWorkers < workerLimit)
+                while (task != null && totalRunningWorkers < workerLimit)
                 {
-                    int firstIndex = 0;
-                    Task firstTask = taskList[firstIndex];
-                    taskList.RemoveAt(firstIndex);
-
-                    if (SomeRules.CanDownloadTask(firstTask.Status))
-                    {
-                        IWorker worker = GetFreeWorker();
-                        if (worker != null)
-                            worker.Start(firstTask);
-                    }
-
+                    IWorker worker = GetFreeWorker();
+                    if (worker != null) worker.Start(task);
                     totalRunningWorkers = CountRunningWorkers();
+                    task = taskList.Find(x => x.Status == Enums.TaskStatus.QUEUED);
                 }
             }
 

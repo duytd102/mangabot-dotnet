@@ -96,6 +96,8 @@ namespace MangaDownloader.GUIs
             workerHandlers.Cancelled = OnWorkerCancelled;
             workerHandlers.Failed = OnWorkerFailed;
 
+            taskList = workerManager.GetTaskList();
+
             loadingForm = new Loading("Loading manga list... please wait");
             loadingForm.Show();
 
@@ -225,7 +227,30 @@ namespace MangaDownloader.GUIs
             tsbtnStartAll.Enabled = false;
             tsbtnStopAll.Enabled = true;
             isStoppingQueue = false;
-            workerManager.StartQueue(concurrentWorkersLimit, taskList, workerHandlers);
+            ResetTaskStatusBeforeDownload();
+            workerManager.StartQueue(concurrentWorkersLimit, workerHandlers);
+        }
+
+        private void ResetTaskStatusBeforeDownload()
+        {
+            foreach (DataGridViewRow row in dgvTaskList.Rows)
+            {
+                TaskStatus status = EnumUtils.Parse<TaskStatus>(row.Cells[COLUMN_TASK_STATUS].Value.ToString());
+                string url = row.Cells[COLUMN_TASK_URL].Value.ToString();
+                if (SomeRules.CanDownloadTask(status))
+                {
+                    row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.QUEUED);
+                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.QUEUED, 0);
+
+                    Task task = taskList.Find(p => p.Url.Equals(url));
+                    if (task != null)
+                    {
+                        task.Status = TaskStatus.QUEUED;
+                        task.Percent = 0;
+                    }
+                }
+            }
+            TaskUtils.Export(taskList);
         }
 
         private void tsbtnStopAll_Click(object sender, EventArgs e)
@@ -322,7 +347,8 @@ namespace MangaDownloader.GUIs
 
         private void importTaskList()
         {
-            taskList = TaskUtils.Import();
+            taskList.Clear();
+            taskList.AddRange(TaskUtils.Import());
             foreach (var task in taskList)
             {
                 if (task.Status == TaskStatus.DOWNLOADING)
@@ -629,10 +655,13 @@ namespace MangaDownloader.GUIs
                 if (SomeRules.CanReDownloadTask(status))
                 {
                     row.Cells[COLUMN_TASK_STATUS].Value = TaskStatus.QUEUED;
+                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.QUEUED, 0);
+
                     Task task = taskList.Find(p => p.Url.Equals(url));
                     if (task != null)
                     {
                         task.Status = TaskStatus.QUEUED;
+                        task.Percent = 0;
                     }
                 }
             }
@@ -645,6 +674,7 @@ namespace MangaDownloader.GUIs
         private void tsmiTaskDownload_Click(object sender, EventArgs e)
         {
             List<int> indexes = new List<int>();
+            List<Task> tl = new List<Task>();
 
             foreach (DataGridViewRow row in dgvTaskList.SelectedRows)
                 indexes.Add(row.Index);
@@ -658,9 +688,23 @@ namespace MangaDownloader.GUIs
                 string url = row.Cells[COLUMN_TASK_URL].Value.ToString();
                 if (SomeRules.CanDownloadTask(status))
                 {
+                    row.Cells[COLUMN_TASK_STATUS].Value = EnumUtils.Capitalize(TaskStatus.QUEUED);
+                    row.Cells[COLUMN_TASK_PROGRESS].Value = GetProgressText(TaskStatus.QUEUED, 0);
+
                     Task task = taskList.First(p => p.Url.Equals(url));
-                    workerManager.Download(task, workerHandlers);
+                    if (task != null)
+                    {
+                        task.Status = TaskStatus.QUEUED;
+                        task.Percent = 0;
+                        tl.Add(task);
+                    }
                 }
+            }
+            TaskUtils.Export(taskList);
+
+            foreach (Task t in tl)
+            {
+                workerManager.Download(t, workerHandlers);
             }
         }
 

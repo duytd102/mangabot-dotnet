@@ -1,6 +1,9 @@
-﻿Version 1.12 (2015-06-04)
+﻿Version 1.12 (2015-06-06)
 [Features]
-- Ability to download from kissmanga.com
+- Support kissmanga.com
+- Change task priority to download
+[Enhancement]
+- Ability to add more tasks meanwhile starting queue
 
 Version 1.11 (2015-05-28)
 [Features]

@@ -1,4 +1,5 @@
-﻿using MangaDownloader.Settings;
+﻿using Common;
+using MangaDownloader.Settings;
 using MangaDownloader.Utils;
 using System;
 using System.Diagnostics;
@@ -17,9 +18,7 @@ namespace MangaDownloader.GUIs
 
         private void About_Load(object sender, EventArgs e)
         {
-            lbVersion.Text = String.Format("Version: {0} ({1:yyyy-MM-dd})",
-                SettingsManager.GetInstance().GetSettings().AppVersion,
-                SettingsManager.GetInstance().GetSettings().ReleaseDate);
+            lbVersion.Text = String.Format("Version: {0} ({1:yyyy-MM-dd})", CommonProperties.MDVersion, CommonProperties.ReleaseDate);
             tbDescription.Text = GetDesc();
         }
 

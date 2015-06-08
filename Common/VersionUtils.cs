@@ -1,27 +1,20 @@
-﻿
-using Common;
-using CsvHelper;
-using MangaDownloader.Settings;
+﻿using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using WebScraper.Utils;
 
-namespace MangaDownloader.Utils
+namespace Common
 {
-    class VersionUtils
+    public class VersionUtils
     {
         public static bool CheckForUpdates(out VersionData newVersion)
         {
-            SettingsManager sm = SettingsManager.GetInstance();
-            String versionUrl = sm.GetSettings().VersionURL;
-            String currentVersion = sm.GetSettings().AppVersion;
-
+            string currentVersion = Properties.Settings.Default.MDVersion;
+            String versionUrl = Properties.Settings.Default.VersionURL;
             string response = HttpUtils.MakeHttpGetWithAppendLine(versionUrl);
-            List<VersionData> list = VersionUtils.Read(response);
+            List<VersionData> list = Read(response);
             if (list.Count > 0)
             {
                 VersionData v = list[0];
@@ -57,11 +50,11 @@ namespace MangaDownloader.Utils
             return list;
         }
 
-        public static void Write(List<VersionData> list)
+        public static void Write(String folderPath, List<VersionData> list)
         {
             try
             {
-                String mangaFilePath = Application.StartupPath + "\\version.csv";
+                String mangaFilePath = folderPath + "\\version.csv";
                 using (StreamWriter sw = new StreamWriter(mangaFilePath, false, Encoding.UTF8))
                 {
                     var csv = new CsvWriter(sw);
@@ -103,7 +96,7 @@ namespace MangaDownloader.Utils
 
             if (srcParts.Length < cwp.Length) return SMALLER;
             else if (srcParts.Length > cwp.Length) return LARGER;
-            
+
             return EQUALS;
         }
     }

@@ -70,6 +70,12 @@ namespace Common
             }
         }
 
+        public static bool IsFolder(string path)
+        {
+            FileAttributes attr = File.GetAttributes(path);
+            return (attr & FileAttributes.Directory) == FileAttributes.Directory;
+        }
+
         public static void ZipFolder(string folderPath, string fileNameWithoutExtension)
         {
             using (ZipFile zip = new ZipFile())

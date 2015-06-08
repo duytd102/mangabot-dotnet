@@ -69,7 +69,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsvHelper">
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CsvHelper.2.13.0.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -85,7 +86,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenerateVersion.cs" />
     <Compile Include="GlobalExceptionCatcher.cs" />
     <Compile Include="GUIs\AdvancedSearch.cs">
       <SubType>Form</SubType>
@@ -143,7 +143,6 @@
       <DependentUpon>CommonSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Utils\SomeRules.cs" />
-    <Compile Include="Utils\VersionUtils.cs" />
     <Compile Include="Workers\Data\Task.cs" />
     <Compile Include="Utils\MangaUtils.cs" />
     <Compile Include="Utils\TaskUtils.cs" />

@@ -1,4 +1,6 @@
-﻿using MangaDownloader.Utils;
+﻿using Common;
+using MangaDownloader.Settings;
+using MangaDownloader.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

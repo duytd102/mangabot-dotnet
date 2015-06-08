@@ -52,5 +52,32 @@ namespace Common.Properties {
                 this["GaClientID"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/123.csv")]
+        public string VersionURL {
+            get {
+                return ((string)(this["VersionURL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.11")]
+        public string MDVersion {
+            get {
+                return ((string)(this["MDVersion"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-06-08")]
+        public global::System.DateTime ReleaseDate {
+            get {
+                return ((global::System.DateTime)(this["ReleaseDate"]));
+            }
+        }
     }
 }

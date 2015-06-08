@@ -49,6 +49,8 @@ namespace MangaDownloader.GUIs
         const String COLUMN_TASK_URL = "colTaskURL";
         const String COLUMN_TASK_DESCRIPTION = "colTaskDescription";
 
+        const String AUTO_UPDATE_APP_NAME = "AutoUpdate.exe";
+
         BackgroundWorker mangaWorker;
         BackgroundWorker chapterWorker;
         BackgroundWorker pageWorker;
@@ -84,7 +86,7 @@ namespace MangaDownloader.GUIs
 
             SettingsManager sm = SettingsManager.GetInstance();
 
-            this.Text = String.Format("{0} v{1}", sm.GetSettings().AppName, sm.GetSettings().AppVersion);
+            this.Text = String.Format("{0} v{1}", sm.GetSettings().AppName, CommonProperties.MDVersion);
 
             concurrentWorkersLimit = sm.GetCommonSettings().TotalConcurrentWorkers;
 
@@ -114,7 +116,7 @@ namespace MangaDownloader.GUIs
 
             Thread gaThread = new Thread(new ThreadStart(() =>
             {
-                GoogleAnalyticsUtils.SendView(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, Properties.Settings.Default.GaScreen);
+                GoogleAnalyticsUtils.SendView(Properties.Settings.Default.AppName, CommonProperties.MDVersion, Properties.Settings.Default.GaScreen);
             }));
             gaThread.IsBackground = true;
             gaThread.Start();
@@ -124,7 +126,6 @@ namespace MangaDownloader.GUIs
                 try
                 {
                     VersionData vd;
-
                     if (VersionUtils.CheckForUpdates(out vd))
                     {
                         msTop.Invoke(new MethodInvoker(() =>
@@ -1197,8 +1198,8 @@ namespace MangaDownloader.GUIs
         {
             try
             {
-                string updateUrl = tsmiNewVersion.Tag as String;
-                Process.Start(updateUrl);
+                Process.Start(AUTO_UPDATE_APP_NAME);
+                Environment.Exit(0);
             }
             catch { }
         }

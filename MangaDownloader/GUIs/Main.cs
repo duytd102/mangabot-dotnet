@@ -140,6 +140,21 @@ namespace MangaDownloader.GUIs
             }));
             versionThread.IsBackground = true;
             versionThread.Start();
+
+            System.Timers.Timer t = new System.Timers.Timer(2000);
+            t.Elapsed += t_Elapsed;
+            t.AutoReset = false;
+            t.Start();
+        }
+
+        void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string autoUpdatePath = String.Format("{0}\\{1}.tmp", Application.StartupPath, "AutoUpdate.exe");
+            if (File.Exists(autoUpdatePath))
+            {
+                File.Copy(autoUpdatePath, autoUpdatePath.Replace(".tmp", ""), true);
+                File.Delete(autoUpdatePath);
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

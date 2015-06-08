@@ -19,8 +19,8 @@ namespace AutoUpdate
     {
         private string unZipFolder = String.Format("{0}/{1}", Application.StartupPath, Guid.NewGuid().ToString().Replace("-", ""));
         private string zipFile = "";
-        private string versionURL = "";
         private const string MD_APP_NAME = "Manga Downloader.exe";
+        private const string AUTO_UPDATE_APP_NAME = "AutoUpdate.exe";
 
         public MainForm()
         {
@@ -37,12 +37,10 @@ namespace AutoUpdate
                 {
                     VersionData vd;
                     if (VersionUtils.CheckForUpdates(out vd))
-                    {
-                        versionURL = vd.URL;
                         DownloadFile(vd.URL, zipFile);
-                    }
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message);
                 }
             }));
@@ -53,12 +51,6 @@ namespace AutoUpdate
         private void btCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void lnklbUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try { Process.Start(versionURL); }
-            catch { }
         }
 
         private void DownloadFile(string url, string filePath)
@@ -81,12 +73,9 @@ namespace AutoUpdate
             {
                 ZipUtils.UnZip(zipFile);
                 MoveToUpdate();
+                MoveAutoUpdate();
                 File.Delete(zipFile);
                 Directory.Delete(unZipFolder, true);
-            }
-            catch { }
-            try
-            {
                 Process.Start(MD_APP_NAME);
                 this.Invoke(new MethodInvoker(() => { this.Close(); }));
             }
@@ -98,7 +87,29 @@ namespace AutoUpdate
             string[] paths = Directory.GetFiles(unZipFolder);
             foreach (string p in paths)
             {
-                File.Copy(p, Application.StartupPath + "/" + Path.GetFileName(p), true);
+                string fn = Path.GetFileName(p);
+                if (!fn.Equals(AUTO_UPDATE_APP_NAME))
+                    File.Copy(p, String.Format("{0}\\{1}", Application.StartupPath, fn), true);
+            }
+
+            string[] folders = Directory.GetDirectories(unZipFolder);
+            foreach (string f in folders)
+            {
+                string relativePath = f.Replace(unZipFolder + "\\", "");
+                string toPath = Application.StartupPath + "\\" + relativePath;
+                if (Directory.Exists(toPath)) Directory.Delete(toPath, true);
+                Directory.Move(f, toPath);
+            }
+        }
+
+        private void MoveAutoUpdate()
+        {
+            string[] paths = Directory.GetFiles(unZipFolder);
+            foreach (string p in paths)
+            {
+                string fn = Path.GetFileName(p);
+                if (fn.Equals(AUTO_UPDATE_APP_NAME))
+                    File.Copy(p, String.Format("{0}\\{1}.tmp", Application.StartupPath, fn), true);
             }
         }
 

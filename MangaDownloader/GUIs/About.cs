@@ -11,6 +11,8 @@ namespace MangaDownloader.GUIs
 {
     public partial class About : BaseForm
     {
+        const String AUTO_UPDATE_APP_NAME = "AutoUpdate.exe";
+
         public About()
         {
             InitializeComponent();
@@ -59,7 +61,11 @@ namespace MangaDownloader.GUIs
                 DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    try { Process.Start(vd.URL); }
+                    try
+                    {
+                        Process.Start(AUTO_UPDATE_APP_NAME);
+                        Environment.Exit(0);
+                    }
                     catch { }
                 }
             }

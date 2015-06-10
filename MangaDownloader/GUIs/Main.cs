@@ -127,14 +127,7 @@ namespace MangaDownloader.GUIs
                 {
                     VersionData vd;
                     if (VersionUtils.CheckForUpdates(out vd))
-                    {
-                        msTop.Invoke(new MethodInvoker(() =>
-                        {
-                            tsmiNewVersion.Text = "New version " + vd.Version;
-                            tsmiNewVersion.Tag = vd.URL;
-                            tsmiNewVersion.Visible = true;
-                        }));
-                    }
+                        UpdateVersionHighlight(vd);
                 }
                 catch { }
             }));
@@ -145,6 +138,16 @@ namespace MangaDownloader.GUIs
             t.Elapsed += t_Elapsed;
             t.AutoReset = false;
             t.Start();
+        }
+
+        private void UpdateVersionHighlight(VersionData vd)
+        {
+            msTop.Invoke(new MethodInvoker(() =>
+            {
+                tsmiNewVersion.Text = "New version " + vd.Version;
+                tsmiNewVersion.Tag = vd.URL;
+                tsmiNewVersion.Visible = true;
+            }));
         }
 
         void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -1200,16 +1203,17 @@ namespace MangaDownloader.GUIs
                 DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    try
-                    {
-                        Process.Start(vd.URL);
-                    }
-                    catch { }
+                    RunAutoUpdate();
                 }
             }
         }
 
         private void tsmiNewVersion_Click(object sender, EventArgs e)
+        {
+            RunAutoUpdate();
+        }
+
+        private void RunAutoUpdate()
         {
             try
             {

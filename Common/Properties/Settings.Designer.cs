@@ -55,7 +55,8 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/123.csv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloa" +
+            "der-latest-version.csv")]
         public string VersionURL {
             get {
                 return ((string)(this["VersionURL"]));
@@ -64,7 +65,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.11")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.13")]
         public string MDVersion {
             get {
                 return ((string)(this["MDVersion"]));
@@ -73,7 +74,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2015-06-08")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-06-12")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));

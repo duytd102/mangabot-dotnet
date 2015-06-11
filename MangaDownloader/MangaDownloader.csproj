@@ -137,11 +137,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\CommonSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>CommonSettings.settings</DependentUpon>
-    </Compile>
+    <Compile Include="Utils\SettingsUtils.cs" />
     <Compile Include="Utils\SomeRules.cs" />
     <Compile Include="Workers\Data\Task.cs" />
     <Compile Include="Utils\MangaUtils.cs" />
@@ -197,10 +193,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Properties\CommonSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>CommonSettings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\refresh.png" />

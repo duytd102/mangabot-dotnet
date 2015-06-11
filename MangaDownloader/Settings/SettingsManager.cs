@@ -1,4 +1,5 @@
 ﻿using MangaDownloader.Properties;
+using MangaDownloader.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,17 +13,9 @@ namespace MangaDownloader.Settings
     class SettingsManager
     {
         private static SettingsManager instance;
+        private static SettingsData settingsData;
 
-        private SettingsManager()
-        {
-            string rootPath = Properties.CommonSettings.Default.RootDownloadFolderPath;
-            if (String.IsNullOrEmpty(rootPath))
-            {
-                Properties.CommonSettings.Default.RootDownloadFolderPath = Application.StartupPath;
-                Properties.CommonSettings.Default.Save();
-            }
-
-        }
+        private SettingsManager() { }
 
         public static SettingsManager GetInstance()
         {
@@ -31,19 +24,29 @@ namespace MangaDownloader.Settings
             return instance;
         }
 
+        public static void Import()
+        {
+            settingsData = SettingsUtils.Read();
+        }
+
+        public static void SaveChanges()
+        {
+            SettingsUtils.Write(settingsData);
+        }
+
         public Properties.Settings GetSettings()
         {
             return Properties.Settings.Default;
         }
 
-        public CommonSettings GetCommonSettings()
+        public SettingsData GetAppSettings()
         {
-            return Properties.CommonSettings.Default;
+            return settingsData;
         }
 
         public String GetDownloadFolderPath(MangaSite site)
         {
-            return GetCommonSettings().RootDownloadFolderPath + "\\" + site.ToString();
+            return GetAppSettings().DownloadFolder + "\\" + site.ToString();
         }
     }
 }

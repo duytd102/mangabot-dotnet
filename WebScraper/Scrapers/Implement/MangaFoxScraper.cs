@@ -30,7 +30,7 @@ namespace WebScraper.Scrapers.Implement
                 String maxPage = aMatch.Groups["PAGINATION_NUMBER"].Value;
                 return int.Parse(maxPage);
             }
-            catch (Exception e) {  }
+            catch {  }
             return 0;
         }
 
@@ -63,7 +63,7 @@ namespace WebScraper.Scrapers.Implement
                     mangaList.Add(manga);
                 }
             }
-            catch (Exception e) {  }
+            catch {  }
             return mangaList;
         }
 
@@ -102,7 +102,7 @@ namespace WebScraper.Scrapers.Implement
                     }
                 }
             }
-            catch (Exception e) {  }
+            catch {  }
             return chapterList;
         }
 
@@ -135,7 +135,7 @@ namespace WebScraper.Scrapers.Implement
                     index++;
                 }
             }
-            catch (Exception e) {  }
+            catch {  }
             return pageList;
         }
 
@@ -151,7 +151,7 @@ namespace WebScraper.Scrapers.Implement
                 String imageUrl = pageMatch.Groups["PAGE_URL"].Value;
                 return WebUtility.HtmlDecode(imageUrl);
             }
-            catch (Exception e) {  }
+            catch {  }
             return "";
         }
 

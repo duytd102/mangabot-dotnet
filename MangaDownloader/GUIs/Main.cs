@@ -82,13 +82,15 @@ namespace MangaDownloader.GUIs
             tsbtnStopAll.Enabled = false;
             tsmiNewVersion.Visible = false;
 
+            SettingsManager.Import();
+
             EnableOrDisableTurnOffComputerOption();
 
             SettingsManager sm = SettingsManager.GetInstance();
 
             this.Text = String.Format("{0} v{1}", sm.GetSettings().AppName, CommonProperties.MDVersion);
 
-            concurrentWorkersLimit = sm.GetCommonSettings().TotalConcurrentWorkers;
+            concurrentWorkersLimit = sm.GetAppSettings().TotalConcurrentWorkers;
 
             workerManager.AllWorkersStopped += workerManager_AllWorkersStopped;
 
@@ -170,7 +172,7 @@ namespace MangaDownloader.GUIs
                 this.WindowState = FormWindowState.Minimized;
                 notifyIcon.Visible = true;
 
-                if (SettingsManager.GetInstance().GetCommonSettings().ShowTaskbarInfoOnMinimize)
+                if (SettingsManager.GetInstance().GetAppSettings().ShowTaskbarInfoOnMinimize)
                 {
                     ShowPopup("Manga Downloader is still running",
                         "Manga Downloader is still running, so your manga will still be able to download." +
@@ -191,7 +193,7 @@ namespace MangaDownloader.GUIs
             {
                 Application.Exit();
             }
-            else if (!isStoppingQueue && SettingsManager.GetInstance().GetCommonSettings().TurnOffWhenDone)
+            else if (!isStoppingQueue && SettingsManager.GetInstance().GetAppSettings().AutoShutdown)
             {
                 WindowUtils.TurnOffComputer();
             }
@@ -1190,7 +1192,7 @@ namespace MangaDownloader.GUIs
         private void tsmiSettings_Click(object sender, EventArgs e)
         {
             new Settings().ShowDialog();
-            concurrentWorkersLimit = Properties.CommonSettings.Default.TotalConcurrentWorkers;
+            concurrentWorkersLimit = SettingsManager.GetInstance().GetAppSettings().TotalConcurrentWorkers;
             EnableOrDisableTurnOffComputerOption();
         }
 
@@ -1277,9 +1279,8 @@ namespace MangaDownloader.GUIs
 
         private void tscbDoWhenDone_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SettingsManager sm = SettingsManager.GetInstance();
-            sm.GetCommonSettings().TurnOffWhenDone = tscbDoWhenDone.SelectedIndex == 1;
-            sm.GetCommonSettings().Save();
+            SettingsManager.GetInstance().GetAppSettings().AutoShutdown = tscbDoWhenDone.SelectedIndex == 1;
+            SettingsManager.SaveChanges();
         }
 
         private void tsmiNotifyShow_Click(object sender, EventArgs e)
@@ -1334,14 +1335,13 @@ namespace MangaDownloader.GUIs
 
         private void notifyIcon_BalloonTipClicked(object sender, EventArgs e)
         {
-            CommonSettings cs = SettingsManager.GetInstance().GetCommonSettings();
-            cs.ShowTaskbarInfoOnMinimize = false;
-            cs.Save();
+            SettingsManager.GetInstance().GetAppSettings().ShowTaskbarInfoOnMinimize = false;
+            SettingsManager.SaveChanges();
         }
 
         private void EnableOrDisableTurnOffComputerOption()
         {
-            tscbDoWhenDone.SelectedIndex = SettingsManager.GetInstance().GetCommonSettings().TurnOffWhenDone ? 1 : 0;
+            tscbDoWhenDone.SelectedIndex = SettingsManager.GetInstance().GetAppSettings().AutoShutdown ? 1 : 0;
         }
 
         private void tsmiConverter_Click(object sender, EventArgs e)

@@ -194,21 +194,21 @@ namespace MangaDownloader.Workers.Implement
 
         private void Shortcut(string url, string folderPath, string fileName)
         {
-            bool autoCreateShortCut = SettingsManager.GetInstance().GetCommonSettings().AutoCreateShortcut;
+            bool autoCreateShortCut = SettingsManager.GetInstance().GetAppSettings().AutoCreateShortcut;
             if (autoCreateShortCut)
                 FileUtils.CreateShortcut(url, folderPath, fileName);
         }
 
         private void ZipFolder(string folderPath, string fileName)
         {
-            bool autoCreateZip = SettingsManager.GetInstance().GetCommonSettings().AutoCreateZip;
+            bool autoCreateZip = SettingsManager.GetInstance().GetAppSettings().AutoCreateZip;
             if (autoCreateZip)
                 FileUtils.ZipFolder(folderPath, fileName);
         }
 
         private void CreatePDF(string folderPath, string fileName)
         {
-            bool autoCreatePdf = SettingsManager.GetInstance().GetCommonSettings().AutoCreatePdf;
+            bool autoCreatePdf = SettingsManager.GetInstance().GetAppSettings().AutoCreatePdf;
             if (autoCreatePdf)
             {
                 String saveToFolder = Path.GetDirectoryName(folderPath);
@@ -219,7 +219,7 @@ namespace MangaDownloader.Workers.Implement
 
         private void DeleteImages(String folderPath)
         {
-            bool autoDeleteImages = SettingsManager.GetInstance().GetCommonSettings().AutoClean;
+            bool autoDeleteImages = SettingsManager.GetInstance().GetAppSettings().AutoCleanup;
             if (autoDeleteImages)
                 Directory.Delete(folderPath, true);
         }

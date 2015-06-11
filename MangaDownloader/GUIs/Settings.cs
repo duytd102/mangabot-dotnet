@@ -20,14 +20,14 @@ namespace MangaDownloader.GUIs
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            var commonSettings = SettingsManager.GetInstance().GetCommonSettings();
+            var commonSettings = SettingsManager.GetInstance().GetAppSettings();
             nudTotalWorkers.Value = commonSettings.TotalConcurrentWorkers;
             cbAutoCreateShortcut.Checked = commonSettings.AutoCreateShortcut;
             cbAutoCreateZip.Checked = commonSettings.AutoCreateZip;
             cbAutoCreatePDF.Checked = commonSettings.AutoCreatePdf;
-            cbAutoClean.Checked = commonSettings.AutoClean;
-            cbTurnOffComputerWhenDone.Checked = commonSettings.TurnOffWhenDone;
-            tbDefaultFolder.Text = commonSettings.RootDownloadFolderPath;
+            cbAutoClean.Checked = commonSettings.AutoCleanup;
+            cbTurnOffComputerWhenDone.Checked = commonSettings.AutoShutdown;
+            tbDefaultFolder.Text = commonSettings.DownloadFolder;
         }
 
         private void btBrowse_Click(object sender, EventArgs e)
@@ -42,15 +42,15 @@ namespace MangaDownloader.GUIs
         {
             if (Directory.Exists(tbDefaultFolder.Text))
             {
-                var commonSettings = SettingsManager.GetInstance().GetCommonSettings();
+                var commonSettings = SettingsManager.GetInstance().GetAppSettings();
                 commonSettings.TotalConcurrentWorkers = (int)nudTotalWorkers.Value;
                 commonSettings.AutoCreateShortcut = cbAutoCreateShortcut.Checked;
                 commonSettings.AutoCreateZip = cbAutoCreateZip.Checked;
                 commonSettings.AutoCreatePdf = cbAutoCreatePDF.Checked;
-                commonSettings.AutoClean = cbAutoClean.Checked;
-                commonSettings.TurnOffWhenDone = cbTurnOffComputerWhenDone.Checked;
-                commonSettings.RootDownloadFolderPath = tbDefaultFolder.Text;
-                commonSettings.Save();
+                commonSettings.AutoCleanup = cbAutoClean.Checked;
+                commonSettings.AutoShutdown = cbTurnOffComputerWhenDone.Checked;
+                commonSettings.DownloadFolder = tbDefaultFolder.Text;
+                SettingsManager.SaveChanges();
                 this.Close();
             }
             else

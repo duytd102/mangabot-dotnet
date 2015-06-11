@@ -34,7 +34,7 @@ namespace WebScraper.Scrapers.Implement
                 mc = Regex.Matches(pagingBlock, pagingIndexFilter, RegexOptions.IgnoreCase);
                 totalPages = mc.Count > 0 ? int.Parse(mc[mc.Count - 1].Groups["INDEX"].Value) : 1;
             }
-            catch (Exception e) { }
+            catch { }
             return totalPages;
         }
 
@@ -74,7 +74,7 @@ namespace WebScraper.Scrapers.Implement
                     mangaList.Add(manga);
                 }
             }
-            catch (Exception e) { }
+            catch { }
             return mangaList;
         }
 
@@ -194,10 +194,7 @@ namespace WebScraper.Scrapers.Implement
                     index++;
                 }
             }
-            catch (Exception e)
-            {
-
-            }
+            catch { }
             return pageList;
         }
 

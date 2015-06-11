@@ -120,8 +120,9 @@ namespace Converter
             {
                 try
                 {
+                    string filePath = Path.GetDirectoryName(tbSaveTo.Text) + "\\" + Path.GetFileNameWithoutExtension(tbSaveTo.Text) + ".pdf";
                     List<string> images = (List<string>)list;
-                    FileUtils.ImagesToPDF(images.ToArray(), tbSaveTo.Text);
+                    FileUtils.ImagesToPDF(images.ToArray(), filePath);
                     EnableOrDisableButtons(true);
                     SetLabelStatus("Complete");
                     ShowMessageBox("Convert successfully");
@@ -209,8 +210,9 @@ namespace Converter
             {
                 try
                 {
+                    string filePath = Path.GetDirectoryName(tbSaveTo.Text) + "\\" + Path.GetFileNameWithoutExtension(tbSaveTo.Text) + ".zip";
                     List<string> images = (List<string>)list;
-                    FileUtils.ZipFiles(images.ToArray(), tbSaveTo.Text);
+                    FileUtils.ZipFiles(images.ToArray(), filePath);
                     EnableOrDisableButtons(true);
                     SetLabelStatus("Complete");
                     ShowMessageBox("Convert successfully");

@@ -86,7 +86,44 @@ namespace Common
                 //httpRequest.ContentType = "application/x-www-form-urlencoded";
                 httpRequest.ContentType = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
                 httpRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22";
+                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36";
+
+                HttpWebResponse httpWebResponse = (HttpWebResponse)httpRequest.GetResponse();
+                Stream responseStream = httpWebResponse.GetResponseStream();
+
+                StringBuilder sb = new StringBuilder();
+                using (StreamReader reader = new StreamReader(responseStream, System.Text.Encoding.UTF8))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        sb.Append(line);
+                    }
+                }
+
+                return sb.ToString();
+            }
+            catch { }
+            return "";
+        }
+
+        public static string MakeHttpGet(string url, Dictionary<String, String> headers, string queryString = "")
+        {
+            try
+            {
+                // Combine url and queryString
+                if (!String.IsNullOrEmpty(queryString))
+                    url = String.Format("{0}?{1}", url, queryString);
+
+                HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpRequest.Method = "GET";
+                //httpRequest.ContentType = "application/x-www-form-urlencoded";
+                httpRequest.ContentType = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                httpRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36";
+                //httpRequest.Headers.Add("X-Requested-With", "XMLHttpRequest");
+                foreach (KeyValuePair<string, string> pair in headers)
+                    httpRequest.Headers.Add(pair.Key, pair.Value);
 
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpRequest.GetResponse();
                 Stream responseStream = httpWebResponse.GetResponseStream();

@@ -1,6 +1,9 @@
-﻿Version 1.13 (2015-06-12)
+﻿Version 1.13 (2015-06-13)
 [Features]
 - Able to update automatically the new versions
+
+[Bugfix]
+- Fix vechai.info
 
 Version 1.12 (2015-06-06)
 [Features]

@@ -1,4 +1,5 @@
 ﻿using Common;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,82 +15,74 @@ namespace WebScraper.Scrapers.Implement
     class VeChaiScraper : IScraper
     {
         private const String DOMAIN = "http://vechai.info/";
-        private const String TOTAL_PAGES_URL = "http://vechai.info/danh-sach/";
-        private const String ROOT_LIST = "http://vechai.info/list.php?job=ajaxlist&letter=all&sort=1&page=";
+        private const String ROOT_LIST = "http://vechai.info/danh-sach.tall.p{0}.json";
 
         public int GetTotalPages()
         {
-            String idContentPattern = "<div[^>]*?id\\s*=\\s*[\"|']\\s*content\\s*[\"|'].*?>.*?<div[^>]*?id\\s*=\\s*[\"|']\\s*page-footer\\s*[\"|'].*?>";
-            String paginationPattern = "<div[^>]*?class\\s*=\\s*[\"|']\\s*list-manga-paging\\s*[\"|'].*?>.*?</div>";
-            String pageIndexPattern = "<span[^>]*?>(?<PAGE_INDEX>.*?)</span>";
-            String listSrc = HttpUtils.MakeHttpGet(TOTAL_PAGES_URL);
-            Match idContentMatch = Regex.Match(listSrc, idContentPattern);
-            Match paginationMatch = Regex.Match(idContentMatch.Value, paginationPattern);
-            MatchCollection pageIndexesMatchCollection = Regex.Matches(paginationMatch.Value, pageIndexPattern);
-            if (pageIndexesMatchCollection.Count == 0) return 0;
-            Match lastPageIndexMatch = pageIndexesMatchCollection[pageIndexesMatchCollection.Count - 1];
-            return int.Parse(lastPageIndexMatch.Groups["PAGE_INDEX"].Value);
+            return 300;
         }
 
         public List<Manga> GetMangaList(int pageIndex)
         {
-            String trPattern = "<tr[^>]*?>.*?</tr>";
-            String tdPattern = "<td[^>]*?>.*?</td>";
-            String aPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<MANGA_URL>.*?)[\"|'].*?>(?<MANGA_NAME>.*?)</a>";
             List<Manga> mangaList = new List<Manga>();
-            Manga manga;
-            String url;
-            String mangaListUrl = String.Format("{0}{1}", ROOT_LIST, pageIndex);
-            String mangaListSrc = HttpUtils.MakeHttpGet(mangaListUrl);
-            MatchCollection trMatchCollection = Regex.Matches(mangaListSrc, trPattern);
-            for (int i = 1; i < trMatchCollection.Count; i++)
+            string listUrl = String.Format(ROOT_LIST, pageIndex);
+            string src = HttpUtils.MakeHttpGet(listUrl);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(src);
+
+            HtmlNode ul = doc.GetElementbyId("comic-list");
+            List<HtmlNode> liTags = ul.Descendants().Where(x => x.Name.Equals("li")).ToList();
+            foreach (HtmlNode li in liTags)
             {
-                MatchCollection tdMatchCollection = Regex.Matches(trMatchCollection[i].Value, tdPattern);
-                Match firstTdMatch = tdMatchCollection[0];
-                Match aMatch = Regex.Match(firstTdMatch.Value, aPattern);
+                HtmlNode a = li.Descendants().FirstOrDefault(x => x.Name.Equals("a") && x.GetAttributeValue("class", "").Contains("StoryName"));
+                if (a != null)
+                {
+                    string name = a.InnerText.Trim();
+                    if (String.IsNullOrWhiteSpace(name))
+                    {
+                        HtmlNode sibling = a.NextSibling.NextSibling;
+                        name = sibling.InnerText.Trim();
+                    }
 
-                url = WebUtility.HtmlDecode(aMatch.Groups["MANGA_URL"].Value.Trim());
-                url = HttpUtils.CombineUrl(DOMAIN, url);
+                    Manga manga = new Manga();
+                    manga.ID = Guid.NewGuid().ToString();
+                    manga.Name = WebUtility.HtmlDecode(name);
+                    manga.Url = WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
+                    manga.Site = MangaSite.VECHAI;
 
-                manga = new Manga();
-                manga.ID = Guid.NewGuid().ToString();
-                manga.Name = WebUtility.HtmlDecode(aMatch.Groups["MANGA_NAME"].Value.Trim());
-                manga.Url = url;
-                manga.Site = MangaSite.VECHAI;
-                mangaList.Add(manga);
+                    if (String.IsNullOrEmpty(manga.Name) || String.IsNullOrEmpty(manga.Url))
+                        continue;
+
+                    mangaList.Add(manga);
+                }
             }
             return mangaList;
         }
 
         public List<Chapter> GetChapterList(string mangaUrl)
         {
-            String chapterListPattern = "<div[^>]*?id\\s*=\\s*[\"|']\\s*zoomtext\\s*[\"|'].*?>.*?<div[^>]*?id\\s*=\\s*[\"|']\\s*commentWrapper\\s*[\"|'].*?>";
-            String pListPattern = "<p[^>]*?>.*?</p>";
-            String aPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<CHAPTER_URL>.*?)[\"|'].*?>(?<CHAPTER_NAME>.*?)</a>";
             List<Chapter> chapterList = new List<Chapter>();
-            Chapter chapter;
-            String name, url;
-            String mangaSrc = HttpUtils.MakeHttpGet(mangaUrl);
-            Match chapterListMatch = Regex.Match(mangaSrc, chapterListPattern);
-            MatchCollection pListMatchCollection = Regex.Matches(chapterListMatch.Value, pListPattern);
-            foreach (Match pMatch in pListMatchCollection)
+            string src = HttpUtils.MakeHttpGet(mangaUrl);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(src);
+
+            HtmlNode ul = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "").Contains("accordion"));
+            List<HtmlNode> ulTags = ul.Descendants().Where(x => x.Name.Equals("ul") && x.GetAttributeValue("class", "").Contains("List")).ToList();
+            if (ulTags.Count > 0) ulTags.RemoveAt(0);
+            foreach (HtmlNode ulTag in ulTags)
             {
-                MatchCollection aMatchCollection = Regex.Matches(pMatch.Value, aPattern);
-                foreach (Match aMatch in aMatchCollection)
+                HtmlNode a = ulTag.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
+                if (a != null)
                 {
-                    name = WebUtility.HtmlDecode(aMatch.Groups["CHAPTER_NAME"].Value.Trim());
-                    name = RemoveHtmlTag(name);
-                    if (name.IndexOf("<img") >= 0) continue;
-
-                    url = aMatch.Groups["CHAPTER_URL"].Value.Trim();
-                    if (url.Length == 0) continue;
-                    url = WebUtility.HtmlDecode(url);
-
-                    chapter = new Chapter();
+                    Chapter chapter = new Chapter();
                     chapter.ID = Guid.NewGuid().ToString();
-                    chapter.Name = name;
-                    chapter.Url = url;
+                    chapter.Name = WebUtility.HtmlDecode(a.InnerText.Trim());
+                    chapter.Url = WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
                     chapter.Site = MangaSite.VECHAI;
+
+                    if (String.IsNullOrEmpty(chapter.Name) || String.IsNullOrEmpty(chapter.Url))
+                        continue;
+
                     chapterList.Add(chapter);
                 }
             }
@@ -98,16 +91,42 @@ namespace WebScraper.Scrapers.Implement
 
         public List<Page> GetPageList(string chapterUrl)
         {
-            const String DOMAIN_DOCTRUYEN = "http://doctruyen.vechai.info/";
-            const String DOMAIN_VECHAI = "http://vechai.info/";
+            //const String DOMAIN_DOCTRUYEN = "http://doctruyen.vechai.info/";
+            //const String DOMAIN_VECHAI = "http://vechai.info/";
 
-            if (chapterUrl.IndexOf(DOMAIN_DOCTRUYEN) >= 0)
-                return GetPageListFromDocTruyen(chapterUrl);
+            //if (chapterUrl.IndexOf(DOMAIN_DOCTRUYEN) >= 0)
+            //    return GetPageListFromDocTruyen(chapterUrl);
 
-            if (chapterUrl.IndexOf(DOMAIN_VECHAI) >= 0)
-                return GetPageListFromVeChai(chapterUrl);
+            //if (chapterUrl.IndexOf(DOMAIN_VECHAI) >= 0)
+            //    return GetPageListFromVeChai(chapterUrl);
 
-            return GetPageListFromBlogger(chapterUrl);
+            //return GetPageListFromBlogger(chapterUrl);
+
+
+            List<Page> pageList = new List<Page>();
+            int index = 1;
+
+            string src = HttpUtils.MakeHttpGet(chapterUrl);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(src);
+
+            HtmlNode container = doc.GetElementbyId("contentChapter");
+            List<HtmlNode> imgTags = container.Descendants().Where(x => x.Name.Equals("img")).ToList();
+            foreach (HtmlNode img in imgTags)
+            {
+                Page page = new Page();
+                page.ID = Guid.NewGuid().ToString();
+                page.Name = "Trang " + StringUtils.GenerateOrdinal(imgTags.Count, index);
+                page.Url = WebUtility.HtmlDecode(img.GetAttributeValue("src", "").Trim());
+                page.Site = MangaSite.VECHAI;
+
+                if (String.IsNullOrEmpty(page.Url))
+                    continue;
+
+                pageList.Add(page);
+                index++;
+            }
+            return pageList;
         }
 
         private List<Page> GetPageListFromBlogger(String chapterUrl)

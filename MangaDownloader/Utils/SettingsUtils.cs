@@ -18,6 +18,7 @@ namespace MangaDownloader.Utils
         private static string SHUTDOWN = "Shutdown";
         private static string DOWNLOAD_FOLDER = "DownloadFolder";
         private static string SHOW_TASKBAR_INFO = "ShowInfo";
+        private static string IGNORE_VERSION = "IgnoreVersion";
 
         public static void Write(SettingsData sd)
         {
@@ -37,7 +38,8 @@ namespace MangaDownloader.Utils
                         .AppendFormat("{0}={1}{2}", CLEANUP, sd.AutoCleanup, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", SHUTDOWN, sd.AutoShutdown, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", DOWNLOAD_FOLDER, sd.DownloadFolder, Environment.NewLine)
-                        .AppendFormat("{0}={1}", SHOW_TASKBAR_INFO, sd.ShowTaskbarInfoOnMinimize);
+                        .AppendFormat("{0}={1}{2}", SHOW_TASKBAR_INFO, sd.ShowTaskbarInfoOnMinimize, Environment.NewLine)
+                        .AppendFormat("{0}={1}", IGNORE_VERSION, sd.IgnoreVersion);
                     sw.WriteLine(builder.ToString());
                     sw.Close();
                 }
@@ -77,6 +79,8 @@ namespace MangaDownloader.Utils
                                 sd.DownloadFolder = parts[1];
                             else if (parts[0] == SHOW_TASKBAR_INFO)
                                 sd.ShowTaskbarInfoOnMinimize = bool.Parse(parts[1]);
+                            else if (parts[0] == IGNORE_VERSION)
+                                sd.IgnoreVersion = parts[1];
                         }
                     }
                     sr.Close();
@@ -97,6 +101,7 @@ namespace MangaDownloader.Utils
         public bool AutoShutdown;
         public string DownloadFolder;
         public bool ShowTaskbarInfoOnMinimize;
+        public string IgnoreVersion;
 
         public SettingsData()
         {
@@ -108,6 +113,7 @@ namespace MangaDownloader.Utils
             AutoShutdown = false;
             DownloadFolder = Application.StartupPath;
             ShowTaskbarInfoOnMinimize = true;
+            IgnoreVersion = "";
         }
     }
 }

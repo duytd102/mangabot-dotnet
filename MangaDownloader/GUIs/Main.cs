@@ -129,7 +129,22 @@ namespace MangaDownloader.GUIs
                 {
                     VersionData vd;
                     if (VersionUtils.CheckForUpdates(out vd))
+                    {
                         UpdateVersionHighlight(vd);
+                        SettingsData sd = SettingsManager.GetInstance().GetAppSettings();
+                        string ignoreVersion = sd.IgnoreVersion;
+                        if (!ignoreVersion.Equals(vd.Version))
+                        {
+                            DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == System.Windows.Forms.DialogResult.Yes)
+                                RunAutoUpdate();
+                            else
+                            {
+                                sd.IgnoreVersion = vd.Version;
+                                SettingsManager.SaveChanges();
+                            }
+                        }
+                    }
                 }
                 catch { }
             }));

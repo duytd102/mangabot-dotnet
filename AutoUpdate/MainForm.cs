@@ -38,6 +38,8 @@ namespace AutoUpdate
                     VersionData vd;
                     if (VersionUtils.CheckForUpdates(out vd))
                         DownloadFile(vd.URL, zipFile);
+                    else
+                        this.Close();
                 }
                 catch (Exception ex)
                 {

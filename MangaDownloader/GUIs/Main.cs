@@ -49,7 +49,7 @@ namespace MangaDownloader.GUIs
         const String COLUMN_TASK_URL = "colTaskURL";
         const String COLUMN_TASK_DESCRIPTION = "colTaskDescription";
 
-        const String AUTO_UPDATE_APP_NAME = "AutoUpdate.exe";
+        const String AUTO_UPDATE_APP_NAME = "Auto Update.exe";
 
         BackgroundWorker mangaWorker;
         BackgroundWorker chapterWorker;
@@ -169,7 +169,7 @@ namespace MangaDownloader.GUIs
 
         void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            string autoUpdatePath = String.Format("{0}\\{1}.tmp", Application.StartupPath, "AutoUpdate.exe");
+            string autoUpdatePath = String.Format("{0}\\{1}.tmp", Application.StartupPath, AUTO_UPDATE_APP_NAME);
             if (File.Exists(autoUpdatePath))
             {
                 File.Copy(autoUpdatePath, autoUpdatePath.Replace(".tmp", ""), true);

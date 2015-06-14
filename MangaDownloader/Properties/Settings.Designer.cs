@@ -70,16 +70,6 @@ namespace MangaDownloader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloa" +
-            "der-latest-version.csv")]
-        public string VersionURL {
-            get {
-                return ((string)(this["VersionURL"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Main")]
         public string GaScreen {
             get {

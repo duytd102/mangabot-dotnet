@@ -1,6 +1,8 @@
 ﻿using MangaDownloader.GUIs;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -34,6 +36,8 @@ namespace MangaDownloader
                 }
             }
 
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
             if (!run)
             {
                 Application.EnableVisualStyles();
@@ -46,6 +50,16 @@ namespace MangaDownloader
                 MessageBox.Show("Manga Downloader is running, please check it in taskbar.", "Manga Downloader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            var binPath = Path.GetFullPath(Application.StartupPath + "\\bin\\" + args.Name.Substring(0, args.Name.IndexOf(",")) + ".dll");
+
+            if (File.Exists(binPath))
+                return Assembly.LoadFrom(binPath);
+
+            return null;
         }
     }
 }

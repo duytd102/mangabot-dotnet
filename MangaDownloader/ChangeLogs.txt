@@ -1,4 +1,4 @@
-﻿Version 1.13 (2015-06-13)
+﻿Version 1.13 (2015-06-14)
 [Features]
 - Able to update automatically the new versions
 

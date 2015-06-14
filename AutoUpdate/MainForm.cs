@@ -20,7 +20,7 @@ namespace AutoUpdate
         private string unZipFolder = String.Format("{0}/{1}", Application.StartupPath, Guid.NewGuid().ToString().Replace("-", ""));
         private string zipFile = "";
         private const string MD_APP_NAME = "Manga Downloader.exe";
-        private const string AUTO_UPDATE_APP_NAME = "AutoUpdate.exe";
+        private const string AUTO_UPDATE_APP_NAME = "Auto Update.exe";
 
         public MainForm()
         {

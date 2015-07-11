@@ -1370,5 +1370,17 @@ namespace MangaDownloader.GUIs
             setCurrentSite(MangaSite.KISSMANGA);
             tsMangaCommands_Resize(sender, e);
         }
+
+        private void tsmiOtakuFC_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.OTAKUFC);
+            tsMangaCommands_Resize(sender, e);
+        }
+
+        private void tsmiHVTT_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.HOCVIENTRUYENTRANH);
+            tsMangaCommands_Resize(sender, e);
+        }
     }
 }

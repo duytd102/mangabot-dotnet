@@ -1,7 +1,12 @@
-﻿Version 1.13 (2015-06-14)
+﻿Version 1.14 (2015-07-11)
+[Features]
+- New site otakufc.com, truyen.academyvn.com
+[Enhancement]
+- Converter UX
+
+Version 1.13 (2015-06-14)
 [Features]
 - Able to update automatically the new versions
-
 [Bugfix]
 - Fix vechai.info
 
@@ -9,24 +14,20 @@ Version 1.12 (2015-06-06)
 [Features]
 - Support kissmanga.com
 - Change task priority to download
-
 [Enhancement]
 - Ability to add more tasks meanwhile starting queue
 
 Version 1.11 (2015-05-28)
 [Features]
 - Converter to convert photos to PDF or zip
-
 [Enhancement]
 - Get actual photo size when blogtruyen uses proxy url
-
 [Bugfix]
 - Not to update concurrent worker limit when updating settings
 
 Version 1.10 (2015-05-12)
 [Bugfix]
 - Cannot close auto update form
-
 Version 1.9 (2015-05-11)
 [Bugfix]
 - Cannot download from manga24h.com
@@ -36,14 +37,12 @@ Version 1.8 (2015-04-05)
 - Turn off computer after queue downloaded complete
 - Hide to notification area of taskbar when close app
 - Advanced search
-
 [Enhancement]
 - Always show search box
 - Move task toolbar up to task list
 - Not hang UI when open app
 - Always use en-US number format for versioning format
 - Rearrange task list columns
-
 [Bugfix]
 - Manual downloading
 - Button skip doesn't work
@@ -61,12 +60,10 @@ Version 1.5 (2015-03-29)
 - Support mangavn.net
 - Grabber form, to get chapters from a manga url
 - Button Download to add manga/chapter/page to queue and download them right
-
 [Enhancement]
 - Search box has an agility to search by manga url
 - Remove AutoUpdate option, it means to check for updates always
 - Agility to get chapter list from unverified manga of BlogTruyen
-
 [Bugfix]
 - A task wasn't updated to STOPPED despite it was stopped when stop queue
 
@@ -81,7 +78,6 @@ Version 1.3 (2014-06-04)
 Version 1.2 (2014-05-07)
 [Features]
 - Support two sites vechai.info
-
 [Bugfix]
 - Ignore the redundant images
 
@@ -90,7 +86,6 @@ Version 1.1 (2014-05-04)
 - Allow to grab list of chapters from an url of manga. Only two sites blogtruyen.com and mangafox.me
 - Allow to convert the images to PDF file
 - Massively rename
-
 [Bugfix]
 - Cannot create zip file
 

@@ -18,6 +18,8 @@ namespace WebScraper.Utils
         const string truyentranh8 = "truyentranh8.net";
         const string izmanga = "izmanga.com";
         const string kissmanga = "kissmanga.com";
+        const string otakufc = "otakufc.com";
+        const string hvtt = "truyen.academyvn.com";
 
         public static MangaSite GetSite(String url)
         {
@@ -46,6 +48,10 @@ namespace WebScraper.Utils
                     return MangaSite.IZMANGA;
                 else if (host.IndexOf(kissmanga) >= 0)
                     return MangaSite.KISSMANGA;
+                else if (host.IndexOf(otakufc) >= 0)
+                    return MangaSite.OTAKUFC;
+                else if (host.IndexOf(hvtt) >= 0)
+                    return MangaSite.HOCVIENTRUYENTRANH;
             }
             catch { }
 

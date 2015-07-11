@@ -40,16 +40,11 @@
             this.tsbtMoveDown = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.tsslbStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btBrowse = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbSaveTo = new System.Windows.Forms.TextBox();
             this.dgvPhotos = new System.Windows.Forms.DataGridView();
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhotos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,46 +147,6 @@
             this.tsslbStatus.Size = new System.Drawing.Size(79, 17);
             this.tsslbStatus.Text = "99 files added";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btBrowse);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.tbSaveTo);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(549, 29);
-            this.panel1.TabIndex = 6;
-            // 
-            // btBrowse
-            // 
-            this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowse.Location = new System.Drawing.Point(471, 3);
-            this.btBrowse.Name = "btBrowse";
-            this.btBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btBrowse.TabIndex = 2;
-            this.btBrowse.Text = "Browse";
-            this.btBrowse.UseVisualStyleBackColor = true;
-            this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Save to:";
-            // 
-            // tbSaveTo
-            // 
-            this.tbSaveTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSaveTo.Location = new System.Drawing.Point(62, 5);
-            this.tbSaveTo.Name = "tbSaveTo";
-            this.tbSaveTo.Size = new System.Drawing.Size(403, 20);
-            this.tbSaveTo.TabIndex = 0;
-            // 
             // dgvPhotos
             // 
             this.dgvPhotos.AllowUserToAddRows = false;
@@ -206,12 +161,12 @@
             this.cName,
             this.cPath});
             this.dgvPhotos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPhotos.Location = new System.Drawing.Point(0, 54);
+            this.dgvPhotos.Location = new System.Drawing.Point(0, 25);
             this.dgvPhotos.Name = "dgvPhotos";
             this.dgvPhotos.ReadOnly = true;
             this.dgvPhotos.RowHeadersVisible = false;
             this.dgvPhotos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPhotos.Size = new System.Drawing.Size(549, 279);
+            this.dgvPhotos.Size = new System.Drawing.Size(549, 308);
             this.dgvPhotos.TabIndex = 7;
             this.dgvPhotos.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvPhotos_KeyUp);
             // 
@@ -238,7 +193,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 355);
             this.Controls.Add(this.dgvPhotos);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -250,8 +204,6 @@
             this.toolStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhotos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -267,10 +219,6 @@
         private System.Windows.Forms.ToolStripButton tsbtToPDF;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel tsslbStatus;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btBrowse;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbSaveTo;
         private System.Windows.Forms.DataGridView dgvPhotos;
         private System.Windows.Forms.DataGridViewTextBoxColumn cName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cPath;

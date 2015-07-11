@@ -68,12 +68,14 @@
     <Compile Include="Processors\IProcessor.cs" />
     <Compile Include="Processors\ProcessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scrapers\Implement\HocVienTruyenTranhScraper.cs" />
     <Compile Include="Scrapers\Implement\KissMangaScraper.cs" />
     <Compile Include="Scrapers\Implement\Manga24hScraper.cs" />
     <Compile Include="Scrapers\Implement\MangaFoxScraper.cs" />
     <Compile Include="Scrapers\Implement\BlogTruyenScraper.cs" />
     <Compile Include="Scrapers\Implement\MangaVnScraper.cs" />
     <Compile Include="Scrapers\Implement\IzMangaScraper.cs" />
+    <Compile Include="Scrapers\Implement\OtakufcScraper.cs" />
     <Compile Include="Scrapers\Implement\TruyenTranh8Scraper.cs" />
     <Compile Include="Scrapers\Implement\TruyenTranhNhanhScraper.cs" />
     <Compile Include="Scrapers\Implement\TruyenTranhTuanScraper.cs" />
@@ -83,13 +85,13 @@
     <Compile Include="Utils\DetectUrlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{39193cc4-be97-401b-be70-1736467566cd}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

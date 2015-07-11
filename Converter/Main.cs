@@ -104,45 +104,39 @@ namespace Converter
                 return;
             }
 
-            if (String.IsNullOrEmpty(tbSaveTo.Text) || !Directory.Exists(Path.GetDirectoryName(tbSaveTo.Text)))
-            {
-                btBrowse_Click(sender, e);
-            }
-
-            List<string> rows = new List<string>();
-            foreach (DataGridViewRow r in dgvPhotos.Rows)
-                if (File.Exists(r.Cells[COLUMN_PATH].Value.ToString()))
-                    rows.Add(r.Cells[COLUMN_PATH].Value.ToString());
-
-            SetLabelStatus("Converting to PDF...");
-            EnableOrDisableButtons(false);
-            new Thread(new ParameterizedThreadStart((object list) =>
-            {
-                try
-                {
-                    string filePath = Path.GetDirectoryName(tbSaveTo.Text) + "\\" + Path.GetFileNameWithoutExtension(tbSaveTo.Text) + ".pdf";
-                    List<string> images = (List<string>)list;
-                    FileUtils.ImagesToPDF(images.ToArray(), filePath);
-                    EnableOrDisableButtons(true);
-                    SetLabelStatus("Complete");
-                    ShowMessageBox("Convert successfully");
-                }
-                catch (Exception ex)
-                {
-                    GoogleAnalyticsUtils.SendError(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, ex);
-                    EnableOrDisableButtons(true);
-                    SetLabelStatus("Failed");
-                    ShowMessageBox("Convert failed");
-                }
-            })).Start(rows);
-        }
-
-        private void btBrowse_Click(object sender, EventArgs e)
-        {
             SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "All|*.pdf;*.zip|PDF|*.pdf|ZIP|*.zip";
+            sf.Filter = "PDF|*.pdf";
             if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                tbSaveTo.Text = sf.FileName;
+            {
+                string fileName = sf.FileName;
+                List<string> rows = new List<string>();
+                foreach (DataGridViewRow r in dgvPhotos.Rows)
+                    if (File.Exists(r.Cells[COLUMN_PATH].Value.ToString()))
+                        rows.Add(r.Cells[COLUMN_PATH].Value.ToString());
+
+                SetLabelStatus("Converting to PDF...");
+                EnableOrDisableButtons(false);
+                new Thread(new ParameterizedThreadStart((object list) =>
+                {
+                    try
+                    {
+                        string filePath = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) + ".pdf";
+                        List<string> images = (List<string>)list;
+                        FileUtils.ImagesToPDF(images.ToArray(), filePath);
+                        EnableOrDisableButtons(true);
+                        SetLabelStatus("Complete");
+                        ShowMessageBox("Convert successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        GoogleAnalyticsUtils.SendError(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, ex);
+                        EnableOrDisableButtons(true);
+                        SetLabelStatus("Failed");
+                        ShowMessageBox("Convert failed");
+                    }
+                })).Start(rows);
+
+            }
         }
 
         private void tsbtAddFiles_Click(object sender, EventArgs e)
@@ -194,37 +188,38 @@ namespace Converter
                 return;
             }
 
-            if (String.IsNullOrEmpty(tbSaveTo.Text) || !Directory.Exists(Path.GetDirectoryName(tbSaveTo.Text)))
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Filter = "ZIP|*.zip";
+            if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                btBrowse_Click(sender, e);
+                String fileName = sf.FileName;
+                List<string> rows = new List<string>();
+                foreach (DataGridViewRow r in dgvPhotos.Rows)
+                    if (File.Exists(r.Cells[COLUMN_PATH].Value.ToString()))
+                        rows.Add(r.Cells[COLUMN_PATH].Value.ToString());
+
+                SetLabelStatus("Zipping photos...");
+                EnableOrDisableButtons(false);
+                new Thread(new ParameterizedThreadStart((object list) =>
+                {
+                    try
+                    {
+                        string filePath = Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) + ".zip";
+                        List<string> images = (List<string>)list;
+                        FileUtils.ZipFiles(images.ToArray(), filePath);
+                        EnableOrDisableButtons(true);
+                        SetLabelStatus("Complete");
+                        ShowMessageBox("Convert successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        GoogleAnalyticsUtils.SendError(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, ex);
+                        EnableOrDisableButtons(true);
+                        SetLabelStatus("Failed");
+                        ShowMessageBox("Convert failed");
+                    }
+                })).Start(rows);
             }
-
-            List<string> rows = new List<string>();
-            foreach (DataGridViewRow r in dgvPhotos.Rows)
-                if (File.Exists(r.Cells[COLUMN_PATH].Value.ToString()))
-                    rows.Add(r.Cells[COLUMN_PATH].Value.ToString());
-
-            SetLabelStatus("Zipping photos...");
-            EnableOrDisableButtons(false);
-            new Thread(new ParameterizedThreadStart((object list) =>
-            {
-                try
-                {
-                    string filePath = Path.GetDirectoryName(tbSaveTo.Text) + "\\" + Path.GetFileNameWithoutExtension(tbSaveTo.Text) + ".zip";
-                    List<string> images = (List<string>)list;
-                    FileUtils.ZipFiles(images.ToArray(), filePath);
-                    EnableOrDisableButtons(true);
-                    SetLabelStatus("Complete");
-                    ShowMessageBox("Convert successfully");
-                }
-                catch (Exception ex)
-                {
-                    GoogleAnalyticsUtils.SendError(Properties.Settings.Default.AppName, Properties.Settings.Default.AppVersion, ex);
-                    EnableOrDisableButtons(true);
-                    SetLabelStatus("Failed");
-                    ShowMessageBox("Convert failed");
-                }
-            })).Start(rows);
         }
 
         private void UpdateLabelStatus()
@@ -281,8 +276,6 @@ namespace Converter
                     tsbtToZip.Enabled = enabled;
                 }));
 
-                btBrowse.Invoke(new MethodInvoker(() => { btBrowse.Enabled = enabled; }));
-                tbSaveTo.Invoke(new MethodInvoker(() => { tbSaveTo.Enabled = enabled; }));
                 dgvPhotos.Invoke(new MethodInvoker(() => { dgvPhotos.Enabled = enabled; }));
             }
             catch { }

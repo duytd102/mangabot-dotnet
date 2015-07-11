@@ -106,6 +106,12 @@ namespace MangaDownloader.Utils
                 case MangaSite.KISSMANGA:
                     return Properties.Resources.kissmanga_logo;
 
+                case MangaSite.OTAKUFC:
+                    return null;
+
+                case MangaSite.HOCVIENTRUYENTRANH:
+                    return Properties.Resources.hocvientruyentranh;
+
                 default:
                     // TODO Add logo for more sites
                     throw new NotImplementedException();

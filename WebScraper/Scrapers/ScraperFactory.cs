@@ -33,6 +33,10 @@ namespace WebScraper.Scrapers
                     return new IzMangaScraper();
                 case MangaSite.KISSMANGA:
                     return new KissMangaScraper();
+                case MangaSite.OTAKUFC:
+                    return new OtakufcScraper();
+                case MangaSite.HOCVIENTRUYENTRANH:
+                    return new HocVienTruyenTranhScraper();
 
                 default:
                     // TODO implement if has more sites

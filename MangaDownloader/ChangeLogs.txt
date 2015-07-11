@@ -1,4 +1,4 @@
-﻿Version 1.14 (2015-07-11)
+﻿Version 1.14 (2015-07-12)
 [Features]
 - New site otakufc.com, truyen.academyvn.com
 [Enhancement]

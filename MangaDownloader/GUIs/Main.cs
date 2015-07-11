@@ -109,9 +109,13 @@ namespace MangaDownloader.GUIs
 
             Thread loadThread = new Thread(new ThreadStart(() =>
             {
-                ImportMangaList();
-                importTaskList();
-                Invoke(new MethodInvoker(() => { loadingForm.Close(); }));
+                try
+                {
+                    ImportMangaList();
+                    importTaskList();
+                    Invoke(new MethodInvoker(() => { loadingForm.Close(); }));
+                }
+                catch { }
             }));
             loadThread.IsBackground = true;
             loadThread.Start();
@@ -536,6 +540,8 @@ namespace MangaDownloader.GUIs
 
         private void tsmiMangaAddToQueue_Click(object sender, EventArgs e)
         {
+            ValidateDownloadPath();
+
             List<int> indexes = new List<int>();
 
             foreach (DataGridViewRow row in dgvMangaList.SelectedRows)
@@ -556,6 +562,8 @@ namespace MangaDownloader.GUIs
 
         private void tsmiMangaDowload_Click(object sender, EventArgs e)
         {
+            ValidateDownloadPath();
+
             List<int> indexes = new List<int>();
 
             foreach (DataGridViewRow row in dgvMangaList.SelectedRows)
@@ -572,6 +580,16 @@ namespace MangaDownloader.GUIs
                 String url = row.Cells[COLUMN_MANGA_URL].Value.ToString();
                 Task task = AddToQueue(name, type, site, url);
                 DownloadTask(task);
+            }
+        }
+
+        private void ValidateDownloadPath()
+        {
+            var settings = SettingsManager.GetInstance().GetAppSettings();
+            if (!Directory.Exists(settings.DownloadFolder))
+            {
+                settings.DownloadFolder = Application.StartupPath;
+                SettingsManager.SaveChanges();
             }
         }
 
@@ -612,6 +630,8 @@ namespace MangaDownloader.GUIs
 
         private void tsmiChapterAddToQueue_Click(object sender, EventArgs e)
         {
+            ValidateDownloadPath();
+
             List<int> indexes = new List<int>();
 
             foreach (DataGridViewRow row in dgvChapterList.SelectedRows)
@@ -632,6 +652,8 @@ namespace MangaDownloader.GUIs
 
         private void tsmiChapterDownload_Click(object sender, EventArgs e)
         {
+            ValidateDownloadPath();
+
             List<int> indexes = new List<int>();
 
             foreach (DataGridViewRow row in dgvChapterList.SelectedRows)

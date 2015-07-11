@@ -65,7 +65,7 @@ namespace MangaDownloader.GUIs
 
             Thread thread = new Thread(new ThreadStart(() =>
             {
-                List<Manga> filteredList = mangaList.Where(x => x.Name.Contains(keyword) || x.Url.Contains(keyword)).ToList();
+                List<Manga> filteredList = mangaList.Where(x => x.Name.ToUpper().Contains(keyword.ToUpper()) || x.Url.ToUpper().Contains(keyword.ToUpper())).ToList();
 
                 DataTable dt = CreateDataTable();
                 foreach (Manga manga in filteredList)

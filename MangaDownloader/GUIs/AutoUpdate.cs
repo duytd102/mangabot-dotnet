@@ -34,10 +34,7 @@ namespace MangaDownloader.GUIs
 
                 try
                 {
-                    this.Invoke(new MethodInvoker(() =>
-                    {
-                        this.Close();
-                    }));
+                    this.Invoke(new MethodInvoker(() =>  { this.Close(); }));
                 }
                 catch { }
             });

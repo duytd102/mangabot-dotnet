@@ -14,7 +14,7 @@ namespace MangaDownloader
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             bool run = false;
             Process process = Process.GetCurrentProcess();
@@ -43,7 +43,7 @@ namespace MangaDownloader
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ThreadException += new ThreadExceptionEventHandler(GlobalExceptionCatcher.UnhandledThreadExceptionHandler);
-                Application.Run(new MainForm());
+                Application.Run(args.Length == 0 ? new MainForm() : new MainForm(args[0]));
             }
             else
             {

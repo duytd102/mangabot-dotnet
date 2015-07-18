@@ -1,34 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AutoUpdate
 {
     static class Program
     {
+        private static string MD_APP_NAME = "Manga Downloader.exe";
+        private static string AUTO_UPDATE_APP_NAME = "Auto Update.exe";
+        private static string path;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            if (args.Length > 0)
+            {
+                Thread.Sleep(5000);
+                try
+                {
+                    path = args[0];
+                    MoveToUpdate();
+                    String newAutoUpdatePath = MoveAutoUpdate();
+                    Directory.Delete(path, true);
+                    Process.Start(MD_APP_NAME, newAutoUpdatePath);
+                }
+                catch { }
+            }
         }
 
-        static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        static void MoveToUpdate()
         {
-            var binPath = Path.GetFullPath(Application.StartupPath + "\\bin\\" + args.Name.Substring(0, args.Name.IndexOf(",")) + ".dll");
+            string[] paths = Directory.GetFiles(path);
+            foreach (string p in paths)
+            {
+                string fn = Path.GetFileName(p);
+                if (!fn.Equals(AUTO_UPDATE_APP_NAME))
+                    File.Copy(p, String.Format("{0}\\{1}", Application.StartupPath, fn), true);
+            }
 
-            if (File.Exists(binPath))
-                return Assembly.LoadFrom(binPath);
+            string[] folders = Directory.GetDirectories(path);
+            foreach (string f in folders)
+            {
+                string relativePath = f.Replace(path + "\\", "");
+                string toPath = Application.StartupPath + "\\" + relativePath;
+                if (Directory.Exists(toPath)) Directory.Delete(toPath, true);
+                Directory.Move(f, toPath);
+            }
+        }
 
-            return null;
+        static String MoveAutoUpdate()
+        {
+            string[] paths = Directory.GetFiles(path);
+            foreach (string p in paths)
+            {
+                string fn = Path.GetFileName(p);
+                if (fn.Equals(AUTO_UPDATE_APP_NAME))
+                {
+                    string newFn = String.Format("{0}\\{1}.tmp", Application.StartupPath, fn);
+                    File.Copy(p, newFn, true);
+                    return newFn;
+                }
+            }
+            return "";
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace AutoUpdate
+﻿namespace MangaDownloader.GUIs
 {
-    partial class MainForm
+    partial class Download
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.btCancel = new System.Windows.Forms.Button();
-            this.lbDescription = new System.Windows.Forms.Label();
+            this.lblDesc = new System.Windows.Forms.Label();
+            this.pbProgress = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // btCancel
             // 
-            this.btCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btCancel.Location = new System.Drawing.Point(99, 49);
+            this.btCancel.Location = new System.Drawing.Point(110, 87);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(87, 25);
             this.btCancel.TabIndex = 0;
@@ -43,40 +43,47 @@
             this.btCancel.UseVisualStyleBackColor = true;
             this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
-            // lbDescription
+            // lblDesc
             // 
-            this.lbDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbDescription.Location = new System.Drawing.Point(12, 19);
-            this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(260, 25);
-            this.lbDescription.TabIndex = 1;
-            this.lbDescription.Text = "Downloading manga-downloader-v1.12.rar";
+            this.lblDesc.AutoSize = true;
+            this.lblDesc.Location = new System.Drawing.Point(12, 19);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(154, 14);
+            this.lblDesc.TabIndex = 1;
+            this.lblDesc.Text = "Downloading... [{0} / {1}]";
             // 
-            // MainForm
+            // pbProgress
+            // 
+            this.pbProgress.Location = new System.Drawing.Point(12, 45);
+            this.pbProgress.Name = "pbProgress";
+            this.pbProgress.Size = new System.Drawing.Size(282, 25);
+            this.pbProgress.TabIndex = 2;
+            // 
+            // Download
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 86);
-            this.Controls.Add(this.lbDescription);
+            this.ClientSize = new System.Drawing.Size(306, 125);
+            this.Controls.Add(this.pbProgress);
+            this.Controls.Add(this.lblDesc);
             this.Controls.Add(this.btCancel);
-            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "Download";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Auto Update";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Download";
+            this.Load += new System.EventHandler(this.Download_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btCancel;
-        private System.Windows.Forms.Label lbDescription;
+        private System.Windows.Forms.Label lblDesc;
+        private System.Windows.Forms.ProgressBar pbProgress;
     }
 }
-

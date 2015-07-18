@@ -31,7 +31,6 @@
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.lbVersion = new System.Windows.Forms.Label();
             this.lbAppName = new System.Windows.Forms.Label();
-            this.btCheckUpdates = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbDescription
@@ -41,12 +40,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDescription.BackColor = System.Drawing.SystemColors.Window;
             this.tbDescription.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDescription.Location = new System.Drawing.Point(12, 90);
+            this.tbDescription.Location = new System.Drawing.Point(12, 78);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDescription.Size = new System.Drawing.Size(374, 185);
+            this.tbDescription.Size = new System.Drawing.Size(374, 197);
             this.tbDescription.TabIndex = 3;
             // 
             // lbVersion
@@ -73,23 +72,11 @@
             this.lbAppName.Text = "Manga Downloader";
             this.lbAppName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btCheckUpdates
-            // 
-            this.btCheckUpdates.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btCheckUpdates.Location = new System.Drawing.Point(138, 59);
-            this.btCheckUpdates.Name = "btCheckUpdates";
-            this.btCheckUpdates.Size = new System.Drawing.Size(123, 25);
-            this.btCheckUpdates.TabIndex = 4;
-            this.btCheckUpdates.Text = "Check for updates";
-            this.btCheckUpdates.UseVisualStyleBackColor = true;
-            this.btCheckUpdates.Click += new System.EventHandler(this.btCheckUpdates_Click);
-            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 287);
-            this.Controls.Add(this.btCheckUpdates);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.lbVersion);
             this.Controls.Add(this.lbAppName);
@@ -112,6 +99,5 @@
         private System.Windows.Forms.Label lbAppName;
         private System.Windows.Forms.Label lbVersion;
         private System.Windows.Forms.TextBox tbDescription;
-        private System.Windows.Forms.Button btCheckUpdates;
     }
 }

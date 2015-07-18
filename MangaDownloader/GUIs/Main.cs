@@ -62,12 +62,19 @@ namespace MangaDownloader.GUIs
         bool IsClosingForm = false;
         int concurrentWorkersLimit = 3;
         bool isStoppingQueue = false;
-        Loading loadingForm;
+        String newAutoUpdatePath;
 
         public MainForm()
             : base()
         {
             InitializeComponent();
+        }
+
+        public MainForm(String autoUpdateFilePath)
+            : base()
+        {
+            InitializeComponent();
+            newAutoUpdatePath = autoUpdateFilePath;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -102,8 +109,8 @@ namespace MangaDownloader.GUIs
 
             taskList = workerManager.GetTaskList();
 
-            loadingForm = new Loading("Loading manga list... please wait");
-            loadingForm.Show();
+            //loadingForm = new Loading("Loading manga list... please wait");
+            //loadingForm.Show();
 
             initWorkers();
 
@@ -113,7 +120,7 @@ namespace MangaDownloader.GUIs
                 {
                     ImportMangaList();
                     importTaskList();
-                    Invoke(new MethodInvoker(() => { loadingForm.Close(); }));
+                    //loadingForm.Invoke(new MethodInvoker(() => { loadingForm.Close(); }));
                 }
                 catch { }
             }));
@@ -155,10 +162,21 @@ namespace MangaDownloader.GUIs
             versionThread.IsBackground = true;
             versionThread.Start();
 
-            System.Timers.Timer t = new System.Timers.Timer(2000);
+            System.Timers.Timer t = new System.Timers.Timer(5000);
             t.Elapsed += t_Elapsed;
             t.AutoReset = false;
             t.Start();
+        }
+
+        void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (File.Exists(newAutoUpdatePath))
+            {
+                File.SetAttributes(newAutoUpdatePath, FileAttributes.Normal);
+                String fn = String.Format("{0}\\{1}", Application.StartupPath, AUTO_UPDATE_APP_NAME);
+                File.Copy(newAutoUpdatePath, fn, true);
+                File.Delete(newAutoUpdatePath);
+            }
         }
 
         private void UpdateVersionHighlight(VersionData vd)
@@ -169,16 +187,6 @@ namespace MangaDownloader.GUIs
                 tsmiNewVersion.Tag = vd.URL;
                 tsmiNewVersion.Visible = true;
             }));
-        }
-
-        void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            string autoUpdatePath = String.Format("{0}\\{1}.tmp", Application.StartupPath, AUTO_UPDATE_APP_NAME);
-            if (File.Exists(autoUpdatePath))
-            {
-                File.Copy(autoUpdatePath, autoUpdatePath.Replace(".tmp", ""), true);
-                File.Delete(autoUpdatePath);
-            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1235,16 +1243,7 @@ namespace MangaDownloader.GUIs
 
         private void tsmiCheckForUpdates_Click(object sender, EventArgs e)
         {
-            AutoUpdate au = new AutoUpdate();
-            if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                VersionData vd = au.VersionData;
-                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    RunAutoUpdate();
-                }
-            }
+            RunAutoUpdate();
         }
 
         private void tsmiNewVersion_Click(object sender, EventArgs e)
@@ -1254,12 +1253,25 @@ namespace MangaDownloader.GUIs
 
         private void RunAutoUpdate()
         {
-            try
+            AutoUpdate au = new AutoUpdate();
+            if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Process.Start(AUTO_UPDATE_APP_NAME);
-                Environment.Exit(0);
+                VersionData vd = au.VersionData;
+                DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    Download d = new Download(vd.URL);
+                    if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        try
+                        {
+                            Process.Start(AUTO_UPDATE_APP_NAME, d.GetDownloadedPath());
+                            Environment.Exit(0);
+                        }
+                        catch { }
+                    }
+                }
             }
-            catch { }
         }
 
         private void tsmiGrabber_Click(object sender, EventArgs e)

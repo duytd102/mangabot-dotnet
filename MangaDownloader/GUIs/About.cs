@@ -53,7 +53,6 @@ namespace MangaDownloader.GUIs
 
         private void btCheckUpdates_Click(object sender, EventArgs e)
         {
-            btCheckUpdates.Enabled = false;
             AutoUpdate au = new AutoUpdate();
             if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -69,7 +68,6 @@ namespace MangaDownloader.GUIs
                     catch { }
                 }
             }
-            btCheckUpdates.Enabled = true;
         }
     }
 }

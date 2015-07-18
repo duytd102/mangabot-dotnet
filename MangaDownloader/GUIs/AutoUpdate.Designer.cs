@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 14);
             this.label1.TabIndex = 0;
@@ -45,7 +45,7 @@
             // btCancel
             // 
             this.btCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btCancel.Location = new System.Drawing.Point(118, 55);
+            this.btCancel.Location = new System.Drawing.Point(118, 75);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(87, 25);
             this.btCancel.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProgress.Location = new System.Drawing.Point(12, 26);
+            this.pbProgress.Location = new System.Drawing.Point(12, 36);
             this.pbProgress.MarqueeAnimationSpeed = 10;
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.Size = new System.Drawing.Size(299, 20);
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 92);
+            this.ClientSize = new System.Drawing.Size(323, 112);
             this.Controls.Add(this.pbProgress);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.label1);

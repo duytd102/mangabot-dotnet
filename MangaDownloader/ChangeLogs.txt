@@ -1,4 +1,10 @@
-﻿Version 1.14 (2015-07-12)
+﻿Version 1.15 (2015-07-19)
+[Enhancement]
+- Improve how to update automatically
+[Bugfix]
+- Remove loading form
+
+Version 1.14 (2015-07-12)
 [Features]
 - New site otakufc.com, truyen.academyvn.com
 [Enhancement]

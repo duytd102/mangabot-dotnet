@@ -22,7 +22,7 @@ namespace WebScraper.Scrapers.Implement
             String aPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<PAGINATION_URL>[^>]*?)[\"|'][^>]*?>(?<PAGINATION_NUMBER>.*?)</a>";
             try
             {
-                String firstPageSrc = HttpUtils.MakeHttpGet(ROOT_URL);
+                String firstPageSrc = HttpUtils.DoGetWithDecompression(ROOT_URL);
                 Match navMatch = Regex.Match(firstPageSrc, navPattern);
                 MatchCollection liMatchCollection = Regex.Matches(navMatch.Value, liPattern);
                 Match maxPageMatch = liMatchCollection[liMatchCollection.Count - 2];
@@ -45,7 +45,7 @@ namespace WebScraper.Scrapers.Implement
             String name, url;
             try
             {
-                String mangaSrc = HttpUtils.MakeHttpGet(mangaPageUrl);
+                String mangaSrc = HttpUtils.DoGetWithDecompression(mangaPageUrl);
                 Match mangaListMatch = Regex.Match(mangaSrc, mangaListPattern);
                 MatchCollection liMatchCollection = Regex.Matches(mangaListMatch.Value, liPattern);
                 foreach (Match li in liMatchCollection)
@@ -78,7 +78,7 @@ namespace WebScraper.Scrapers.Implement
             Chapter chapter;
             try
             {
-                String mangaSrc = HttpUtils.MakeHttpGet(mangaUrl);
+                String mangaSrc = HttpUtils.DoGetWithDecompression(mangaUrl);
                 Match chaptersBlockMatch = Regex.Match(mangaSrc, chaptersBlockPattern);
                 MatchCollection chapterListMatchCollection = Regex.Matches(chaptersBlockMatch.Value, chapterListPattern);
                 foreach (Match chapterListMatch in chapterListMatchCollection)
@@ -117,7 +117,7 @@ namespace WebScraper.Scrapers.Implement
             try
             {
                 String partialChapterUrl = GetParentPath(chapterUrl);
-                String chapterSrc = HttpUtils.MakeHttpGet(chapterUrl);
+                String chapterSrc = HttpUtils.DoGetWithDecompression(chapterUrl);
                 Match formMatch = Regex.Match(chapterSrc, formPattern);
                 MatchCollection optionMatchCollection = Regex.Matches(formMatch.Value, optionPattern);
                 int maxPage = int.Parse(optionMatchCollection[optionMatchCollection.Count - 2].Groups["PAGE_INDEX"].Value);
@@ -145,7 +145,7 @@ namespace WebScraper.Scrapers.Implement
             String pagePattern = "<img[^>]*?src\\s*=\\s*['|\"]\\s*(?<PAGE_URL>.*?)\\s*['|\"].*?>";
             try
             {
-                String pageSrc = HttpUtils.MakeHttpGet(pageUrl);
+                String pageSrc = HttpUtils.DoGetWithDecompression(pageUrl);
                 Match pageBlockMatch = Regex.Match(pageSrc, pageBlockPattern);
                 Match pageMatch = Regex.Match(pageBlockMatch.Value, pagePattern);
                 String imageUrl = pageMatch.Groups["PAGE_URL"].Value;

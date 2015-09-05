@@ -28,6 +28,7 @@ namespace MangaDownloader.GUIs
             cbAutoClean.Checked = commonSettings.AutoCleanup;
             cbTurnOffComputerWhenDone.Checked = commonSettings.AutoShutdown;
             tbDefaultFolder.Text = commonSettings.DownloadFolder;
+            cbMinimizeTaskbar.Checked = commonSettings.MinimizeTaskbar;
         }
 
         private void btBrowse_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace MangaDownloader.GUIs
                 commonSettings.AutoCleanup = cbAutoClean.Checked;
                 commonSettings.AutoShutdown = cbTurnOffComputerWhenDone.Checked;
                 commonSettings.DownloadFolder = tbDefaultFolder.Text;
+                commonSettings.MinimizeTaskbar = cbMinimizeTaskbar.Checked;
                 SettingsManager.SaveChanges();
                 this.Close();
             }

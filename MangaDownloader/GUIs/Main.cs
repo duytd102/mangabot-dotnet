@@ -191,19 +191,23 @@ namespace MangaDownloader.GUIs
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            if (this.WindowState != FormWindowState.Minimized)
+            SettingsData sd = SettingsManager.GetInstance().GetAppSettings();
+            if (sd.MinimizeTaskbar)
             {
-                this.Hide();
-                this.Tag = this.WindowState;
-                this.WindowState = FormWindowState.Minimized;
-                notifyIcon.Visible = true;
-
-                if (SettingsManager.GetInstance().GetAppSettings().ShowTaskbarInfoOnMinimize)
+                e.Cancel = true;
+                if (this.WindowState != FormWindowState.Minimized)
                 {
-                    ShowPopup("Manga Downloader is still running",
-                        "Manga Downloader is still running, so your manga will still be able to download." +
-                        "\n\nClick here to disable this message in the future.", ToolTipIcon.Info);
+                    this.Hide();
+                    this.Tag = this.WindowState;
+                    this.WindowState = FormWindowState.Minimized;
+                    notifyIcon.Visible = true;
+
+                    if (SettingsManager.GetInstance().GetAppSettings().ShowTaskbarInfoOnMinimize)
+                    {
+                        ShowPopup("Manga Downloader is still running",
+                            "Manga Downloader is still running, so your manga will still be able to download." +
+                            "\n\nClick here to disable this message in the future.", ToolTipIcon.Info);
+                    }
                 }
             }
         }

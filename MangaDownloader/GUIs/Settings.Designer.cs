@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.nudTotalWorkers = new System.Windows.Forms.NumericUpDown();
             this.cbTurnOffComputerWhenDone = new System.Windows.Forms.CheckBox();
+            this.cbMinimizeTaskbar = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalWorkers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btBrowse.Image = global::MangaDownloader.Properties.Resources.folder_explore;
-            this.btBrowse.Location = new System.Drawing.Point(231, 184);
+            this.btBrowse.Location = new System.Drawing.Point(231, 204);
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(35, 22);
             this.btBrowse.TabIndex = 28;
@@ -68,7 +69,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(103, 219);
+            this.btnSave.Location = new System.Drawing.Point(103, 240);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 25;
@@ -80,7 +81,7 @@
             // 
             this.tbDefaultFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDefaultFolder.Location = new System.Drawing.Point(12, 184);
+            this.tbDefaultFolder.Location = new System.Drawing.Point(12, 204);
             this.tbDefaultFolder.Name = "tbDefaultFolder";
             this.tbDefaultFolder.Size = new System.Drawing.Size(213, 22);
             this.tbDefaultFolder.TabIndex = 24;
@@ -88,7 +89,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 167);
+            this.label3.Location = new System.Drawing.Point(9, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 14);
             this.label3.TabIndex = 23;
@@ -176,11 +177,22 @@
             this.cbTurnOffComputerWhenDone.Text = "Turn off computer when queue done";
             this.cbTurnOffComputerWhenDone.UseVisualStyleBackColor = true;
             // 
+            // cbMinimizeTaskbar
+            // 
+            this.cbMinimizeTaskbar.AutoSize = true;
+            this.cbMinimizeTaskbar.Location = new System.Drawing.Point(12, 155);
+            this.cbMinimizeTaskbar.Name = "cbMinimizeTaskbar";
+            this.cbMinimizeTaskbar.Size = new System.Drawing.Size(226, 18);
+            this.cbMinimizeTaskbar.TabIndex = 30;
+            this.cbMinimizeTaskbar.Text = "Minimize to the taskbar when I close";
+            this.cbMinimizeTaskbar.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 261);
+            this.ClientSize = new System.Drawing.Size(281, 282);
+            this.Controls.Add(this.cbMinimizeTaskbar);
             this.Controls.Add(this.cbTurnOffComputerWhenDone);
             this.Controls.Add(this.btBrowse);
             this.Controls.Add(this.cbAutoClean);
@@ -221,5 +233,6 @@
         private System.Windows.Forms.NumericUpDown nudTotalWorkers;
         private System.Windows.Forms.Button btBrowse;
         private System.Windows.Forms.CheckBox cbTurnOffComputerWhenDone;
+        private System.Windows.Forms.CheckBox cbMinimizeTaskbar;
     }
 }

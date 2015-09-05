@@ -498,7 +498,7 @@
             this.tslbSiteLogo.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.tslbSiteLogo.Name = "tslbSiteLogo";
             this.tslbSiteLogo.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.tslbSiteLogo.Size = new System.Drawing.Size(84, 22);
+            this.tslbSiteLogo.Size = new System.Drawing.Size(83, 22);
             this.tslbSiteLogo.Text = "BlogTruyen";
             // 
             // tstbSearch
@@ -870,15 +870,15 @@
             // 
             this.tsmiVietnameseSites.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiBlogTruyen,
-            this.tsmiVeChai,
-            this.tsmiMangaVN,
+            this.tsmiHVTT,
+            this.tsmiTruyenTranh8,
             this.tsmiManga24h,
             this.tsmiTruyenTranhTuan,
-            this.tsmiTruyenTranhNhanh,
-            this.tsmiTruyenTranh8,
+            this.tsmiVeChai,
+            this.tsmiMangaVN,
             this.tsmiIZManga,
             this.tsmiOtakuFC,
-            this.tsmiHVTT});
+            this.tsmiTruyenTranhNhanh});
             this.tsmiVietnameseSites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiVietnameseSites.Image = global::MangaDownloader.Properties.Resources.vn;
             this.tsmiVietnameseSites.Name = "tsmiVietnameseSites";

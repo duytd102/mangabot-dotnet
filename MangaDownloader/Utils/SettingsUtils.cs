@@ -19,6 +19,7 @@ namespace MangaDownloader.Utils
         private static string DOWNLOAD_FOLDER = "DownloadFolder";
         private static string SHOW_TASKBAR_INFO = "ShowInfo";
         private static string IGNORE_VERSION = "IgnoreVersion";
+        private static string MINIMIZE_TASKBAR = "MinimizeTaskbar";
 
         public static void Write(SettingsData sd)
         {
@@ -32,14 +33,15 @@ namespace MangaDownloader.Utils
                 {
                     StringBuilder builder = new StringBuilder();
                     builder.AppendFormat("{0}={1}{2}", TOTAL_WORKERS, sd.TotalConcurrentWorkers, Environment.NewLine)
-                        .AppendFormat("{0}={1}{2}", SHORTCUT, sd.AutoCreateShortcut, Environment.NewLine)
-                        .AppendFormat("{0}={1}{2}", ZIP, sd.AutoCreateZip, Environment.NewLine)
-                        .AppendFormat("{0}={1}{2}", PDF, sd.AutoCreatePdf, Environment.NewLine)
-                        .AppendFormat("{0}={1}{2}", CLEANUP, sd.AutoCleanup, Environment.NewLine)
-                        .AppendFormat("{0}={1}{2}", SHUTDOWN, sd.AutoShutdown, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", SHORTCUT, sd.AutoCreateShortcut ? 1 : 0, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", ZIP, sd.AutoCreateZip ? 1 : 0, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", PDF, sd.AutoCreatePdf ? 1 : 0, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", CLEANUP, sd.AutoCleanup ? 1 : 0, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", SHUTDOWN, sd.AutoShutdown ? 1 : 0, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", DOWNLOAD_FOLDER, sd.DownloadFolder, Environment.NewLine)
-                        .AppendFormat("{0}={1}{2}", SHOW_TASKBAR_INFO, sd.ShowTaskbarInfoOnMinimize, Environment.NewLine)
-                        .AppendFormat("{0}={1}", IGNORE_VERSION, sd.IgnoreVersion);
+                        .AppendFormat("{0}={1}{2}", SHOW_TASKBAR_INFO, sd.ShowTaskbarInfoOnMinimize ? 1 : 0, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", IGNORE_VERSION, sd.IgnoreVersion, Environment.NewLine)
+                        .AppendFormat("{0}={1}", MINIMIZE_TASKBAR, sd.MinimizeTaskbar ? 1 : 0);
                     sw.WriteLine(builder.ToString());
                     sw.Close();
                 }
@@ -66,21 +68,23 @@ namespace MangaDownloader.Utils
                             if (parts[0] == TOTAL_WORKERS)
                                 sd.TotalConcurrentWorkers = int.Parse(parts[1]);
                             else if (parts[0] == SHORTCUT)
-                                sd.AutoCreateShortcut = bool.Parse(parts[1]);
+                                sd.AutoCreateShortcut = ConvertToBoolean(parts[1], true);
                             else if (parts[0] == ZIP)
-                                sd.AutoCreateZip = bool.Parse(parts[1]);
+                                sd.AutoCreateZip = ConvertToBoolean(parts[1], false);
                             else if (parts[0] == PDF)
-                                sd.AutoCreatePdf = bool.Parse(parts[1]);
+                                sd.AutoCreatePdf = ConvertToBoolean(parts[1], false);
                             else if (parts[0] == CLEANUP)
-                                sd.AutoCleanup = bool.Parse(parts[1]);
+                                sd.AutoCleanup = ConvertToBoolean(parts[1], false);
                             else if (parts[0] == SHUTDOWN)
-                                sd.AutoShutdown = bool.Parse(parts[1]);
+                                sd.AutoShutdown = ConvertToBoolean(parts[1], false);
                             else if (parts[0] == DOWNLOAD_FOLDER)
                                 sd.DownloadFolder = parts[1];
                             else if (parts[0] == SHOW_TASKBAR_INFO)
-                                sd.ShowTaskbarInfoOnMinimize = bool.Parse(parts[1]);
+                                sd.ShowTaskbarInfoOnMinimize = ConvertToBoolean(parts[1], true);
                             else if (parts[0] == IGNORE_VERSION)
                                 sd.IgnoreVersion = parts[1];
+                            else if (parts[0] == MINIMIZE_TASKBAR)
+                                sd.MinimizeTaskbar = ConvertToBoolean(parts[1], true);
                         }
                     }
                     sr.Close();
@@ -88,6 +92,19 @@ namespace MangaDownloader.Utils
             }
             catch { }
             return sd;
+        }
+
+        private static bool ConvertToBoolean(String str, bool defaultValue)
+        {
+            try
+            {
+                int i;
+                return Int32.TryParse(str, out i) ? Convert.ToBoolean(i) : Convert.ToBoolean(str);
+            }
+            catch
+            {
+                return defaultValue;
+            }
         }
     }
 
@@ -102,6 +119,7 @@ namespace MangaDownloader.Utils
         public string DownloadFolder;
         public bool ShowTaskbarInfoOnMinimize;
         public string IgnoreVersion;
+        public bool MinimizeTaskbar;
 
         public SettingsData()
         {
@@ -114,6 +132,7 @@ namespace MangaDownloader.Utils
             DownloadFolder = Application.StartupPath;
             ShowTaskbarInfoOnMinimize = true;
             IgnoreVersion = "";
+            MinimizeTaskbar = true;
         }
     }
 }

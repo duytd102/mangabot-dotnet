@@ -14,37 +14,35 @@ namespace WebScraper.Scrapers.Implement
 {
     class TruyenTranh8Scraper : IScraper
     {
-        private const String BASE_LIST_URL = "http://truyentranh8.com/danh_sach_truyen/";
+        private const String BASE_LIST_URL = "http://truyentranh8.net/danh_sach_truyen/";
 
         public int GetTotalPages()
         {
             string src = HttpUtils.MakeHttpGet(BASE_LIST_URL);
-            string pattern = "<p[^>]*?class\\s*=\\s*[\"|']\\s*page\\s*[\"|'].*?>(?<TEXT>.*?)<\\w+[^>]*?class\\s*=\\s*[\"|']\\s*product-note\\s*[\"|'].*?>";
-            string aPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<PAGE_URL>.*?)[\"|'].*?>.*?</a>";
 
-            Match p = Regex.Match(src, pattern, RegexOptions.IgnoreCase);
-            MatchCollection aTags = Regex.Matches(p.Groups["TEXT"].Value, aPattern, RegexOptions.IgnoreCase);
-            if (aTags.Count > 0)
-            {
-                Match last = aTags[aTags.Count - 1];
-                string url = last.Groups["PAGE_URL"].Value;
-                return int.Parse(Regex.Replace(url, "[^\\d]+", ""));
-            }
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(src);
+
+            HtmlNode tblChap = doc.GetElementbyId("tblChap");
+            HtmlNode lastA = tblChap.Descendants().LastOrDefault(
+                x => x.Name.Equals("a") && x.GetAttributeValue("data-page", null) != null);
+            if (lastA != null)
+                return lastA.GetAttributeValue("data-page", 1);
+
             return 1;
         }
 
         public List<Manga> GetMangaList(int pageIndex)
         {
-            List<Manga> mangaList = new List<Manga>();
             string listUrl = pageIndex > 1 ? String.Format("{0}page={1}", BASE_LIST_URL, pageIndex) : BASE_LIST_URL;
             string src = HttpUtils.MakeHttpGet(listUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode container = doc.DocumentNode.Descendants().First(
-                x => x.GetAttributeValue("class", "").Contains("listNewChaps"));
-            List<HtmlNode> trTags = container.Descendants().Where(x => x.Name.Equals("tr")).ToList();
+            HtmlNode tblChap = doc.GetElementbyId("tblChap");
+            List<HtmlNode> trTags = tblChap.Descendants().Where(x => x.Name.Equals("tr")).ToList();
 
+            List<Manga> mangaList = new List<Manga>();
             foreach (HtmlNode tr in trTags)
             {
                 HtmlNode td = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td")

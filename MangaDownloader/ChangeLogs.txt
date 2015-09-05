@@ -1,4 +1,14 @@
-﻿Version 1.15 (2015-07-19)
+﻿Version 1.16 (2015-09-06)
+[Feature]
+- New option to enable/disable to minimize to the taskbar when close app
+[Enhancement]
+- Support .NET Framework 2.0 or later
+- Remove truyentranhnhanh.com because it's no longer available
+[Bugfix]
+- mangafox.me
+- truyentranh8.net
+
+Version 1.15 (2015-07-19)
 [Enhancement]
 - Improve how to update automatically
 [Bugfix]

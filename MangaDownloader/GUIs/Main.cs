@@ -1307,12 +1307,6 @@ namespace MangaDownloader.GUIs
             tsMangaCommands_Resize(sender, e);
         }
 
-        private void tsmiTruyenTranhNhanh_Click(object sender, EventArgs e)
-        {
-            setCurrentSite(MangaSite.TRUYENTRANHNHANH);
-            tsMangaCommands_Resize(sender, e);
-        }
-
         private void tsmiTruyenTranh8_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.TRUYENTRANH8);

@@ -94,9 +94,6 @@ namespace MangaDownloader.Utils
                 case MangaSite.TRUYENTRANHTUAN:
                     return Properties.Resources.truyentranhtuan_logo;
 
-                case MangaSite.TRUYENTRANHNHANH:
-                    return Properties.Resources.truyentranhnhanh_logo;
-
                 case MangaSite.TRUYENTRANH8:
                     return Properties.Resources.truyentranh8_logo;
 

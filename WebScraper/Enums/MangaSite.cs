@@ -14,7 +14,6 @@ namespace WebScraper.Enums
         MANGAVN,
         MANGA24H,
         TRUYENTRANHTUAN,
-        TRUYENTRANHNHANH,
         TRUYENTRANH8,
         IZMANGA,
         OTAKUFC,

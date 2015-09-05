@@ -40,8 +40,6 @@ namespace WebScraper.Utils
                     return MangaSite.MANGA24H;
                 else if (host.IndexOf(truyentranhtuan) >= 0)
                     return MangaSite.TRUYENTRANHTUAN;
-                else if (host.IndexOf(truyentranhnhanh) >= 0)
-                    return MangaSite.TRUYENTRANHNHANH;
                 else if (host.IndexOf(truyentranh8) >= 0)
                     return MangaSite.TRUYENTRANH8;
                 else if (host.IndexOf(izmanga) >= 0)

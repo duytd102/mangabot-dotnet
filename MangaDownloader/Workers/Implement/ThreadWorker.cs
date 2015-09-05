@@ -68,17 +68,17 @@ namespace MangaDownloader.Workers.Implement
             switch (task.Type)
             {
                 case Enums.LinkType.MANGA:
-                    GoogleAnalyticsUtils.SendEvent(Properties.Settings.Default.AppName, CommonProperties.MDVersion, task.Site.ToString(), EventAction.DOWNLOAD_MANGA, task.Url);
+                    GoogleAnalyticsUtils.SendEvent(GlobalProperties.APP_NAME, CommonProperties.MDVersion, task.Site.ToString(), EventAction.DOWNLOAD_MANGA, task.Url);
                     DownloadManga(e, task);
                     break;
 
                 case Enums.LinkType.CHAPTER:
-                    GoogleAnalyticsUtils.SendEvent(Properties.Settings.Default.AppName, CommonProperties.MDVersion, task.Site.ToString(), EventAction.DOWNLOAD_CHAPTER, task.Url);
+                    GoogleAnalyticsUtils.SendEvent(GlobalProperties.APP_NAME, CommonProperties.MDVersion, task.Site.ToString(), EventAction.DOWNLOAD_CHAPTER, task.Url);
                     DownloadChapter(e, task);
                     break;
 
                 case Enums.LinkType.PAGE:
-                    GoogleAnalyticsUtils.SendEvent(Properties.Settings.Default.AppName, CommonProperties.MDVersion, task.Site.ToString(), EventAction.DOWNLOAD_PAGE, task.Url);
+                    GoogleAnalyticsUtils.SendEvent(GlobalProperties.APP_NAME, CommonProperties.MDVersion, task.Site.ToString(), EventAction.DOWNLOAD_PAGE, task.Url);
                     DownloadPage(task.Name, task.Url, task.Site, parentFolderPath);
                     executor.ReportProgress(1, new DownloadData(task.Sender, 100));
                     break;

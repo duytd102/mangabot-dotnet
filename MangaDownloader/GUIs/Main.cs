@@ -95,7 +95,7 @@ namespace MangaDownloader.GUIs
 
             SettingsManager sm = SettingsManager.GetInstance();
 
-            this.Text = String.Format("{0} v{1}", sm.GetSettings().AppName, CommonProperties.MDVersion);
+            this.Text = String.Format("{0} v{1}", GlobalProperties.APP_NAME, CommonProperties.MDVersion);
 
             concurrentWorkersLimit = sm.GetAppSettings().TotalConcurrentWorkers;
 
@@ -129,7 +129,7 @@ namespace MangaDownloader.GUIs
 
             Thread gaThread = new Thread(new ThreadStart(() =>
             {
-                GoogleAnalyticsUtils.SendView(Properties.Settings.Default.AppName, CommonProperties.MDVersion, Properties.Settings.Default.GaScreen);
+                GoogleAnalyticsUtils.SendView(GlobalProperties.APP_NAME, CommonProperties.MDVersion, GlobalProperties.GA_SCREEN);
             }));
             gaThread.IsBackground = true;
             gaThread.Start();

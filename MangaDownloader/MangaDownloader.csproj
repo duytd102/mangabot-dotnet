@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalExceptionCatcher.cs" />
+    <Compile Include="GlobalProperties.cs" />
     <Compile Include="GUIs\AdvancedSearch.cs">
       <SubType>Form</SubType>
     </Compile>

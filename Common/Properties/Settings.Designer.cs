@@ -74,7 +74,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2015-09-06")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-09-07")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));

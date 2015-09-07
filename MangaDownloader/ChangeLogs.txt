@@ -1,4 +1,4 @@
-﻿Version 1.16 (2015-09-06)
+﻿Version 1.16 (2015-09-07)
 [Feature]
 - New option to enable/disable to minimize to the taskbar when close app
 [Enhancement]

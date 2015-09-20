@@ -132,7 +132,7 @@ namespace WebScraper.Scrapers.Implement
                     .FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("danhsach")).Descendants()
                     .Where(x => x.GetAttributeValue("class", "").Contains("row")).ToList();
 
-                foreach(HtmlNode r in rows)
+                foreach (HtmlNode r in rows)
                 {
                     try
                     {
@@ -182,6 +182,7 @@ namespace WebScraper.Scrapers.Implement
                         Match m = Regex.Match(url, ".+&url=(?<ACTUAL_URL>[^&]+)");
                         url = m.Groups["ACTUAL_URL"].Value.Trim();
                     }
+                    url = FixPhotoUrl(url);
                     url = WebUtility.HtmlDecode(url);
 
                     page = new Page();
@@ -202,6 +203,36 @@ namespace WebScraper.Scrapers.Implement
         {
             string queryString = String.Format("Url=tatca&OrderBy=1&PageIndex={0}", pageIndex);
             return HttpUtils.MakeHttpGet(ROOT_MANGALIST_URL, queryString);
+        }
+
+        private String FixPhotoUrl(String url)
+        {
+            String dest = url.Replace("2.bp.blogspot.com", "1.bp.blogspot.com")
+                .Replace("3.bp.blogspot.com", "1.bp.blogspot.com")
+                .Replace("4.bp.blogspot.com", "1.bp.blogspot.com")
+                .Replace("?imgmax=6000", "")
+                .Replace("?imgmax=3000", "")
+                .Replace("?imgmax=2000", "")
+                .Replace("?imgmax=1600", "")
+                .Replace("?imgmax=0", "");
+
+            bool isBlogspot = Regex.IsMatch(dest, "1.bp.blogspot.com");
+            bool isImgur = Regex.IsMatch(dest, "i.imgur.com");
+
+            if (isBlogspot)
+            {
+                String[] parts = dest.Split(new String[] { "1.bp.blogspot.com" }, StringSplitOptions.RemoveEmptyEntries);
+                return parts.Length > 1 ? "http://1.bp.blogspot.com" + parts[1] + "?imgmax=0" : dest;
+            }
+
+            if (isImgur)
+            {
+                Regex re = new Regex("(http:\\/\\/i.imgur.com\\/[A-Za-z0-9]{7});");
+                String match = re.Match(dest).Value;
+                return "http://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&resize_h=0&rewriteMime=image/*&url=" + match + ".jpg";
+            }
+
+            return dest;
         }
     }
 }

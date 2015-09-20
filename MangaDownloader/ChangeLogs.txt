@@ -1,4 +1,8 @@
-﻿Version 1.16 (2015-09-07)
+﻿Version 1.17 (2015-09-20)
+[Bugfix]
+- Fix blogtruyen url
+
+Version 1.16 (2015-09-07)
 [Feature]
 - New option to enable/disable to minimize to the taskbar when close app
 [Enhancement]

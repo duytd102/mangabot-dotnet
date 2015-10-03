@@ -15,10 +15,10 @@
       <Value Profile="(Default)">https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloader-latest-version.csv</Value>
     </Setting>
     <Setting Name="MDVersion" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">1.17</Value>
+      <Value Profile="(Default)">1.18</Value>
     </Setting>
     <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2015-09-20</Value>
+      <Value Profile="(Default)">2015-10-03</Value>
     </Setting>
   </Settings>
 </SettingsFile>

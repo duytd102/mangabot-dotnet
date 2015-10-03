@@ -227,7 +227,7 @@ namespace WebScraper.Scrapers.Implement
 
             if (isImgur)
             {
-                Regex re = new Regex("(http:\\/\\/i.imgur.com\\/[A-Za-z0-9]{7});");
+                Regex re = new Regex("http:\\/\\/i.imgur.com\\/[A-Za-z0-9]{7}");
                 String match = re.Match(dest).Value;
                 return "http://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&resize_h=0&rewriteMime=image/*&url=" + match + ".jpg";
             }

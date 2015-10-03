@@ -65,7 +65,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.17")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.18")]
         public string MDVersion {
             get {
                 return ((string)(this["MDVersion"]));
@@ -74,7 +74,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2015-09-20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2015-10-03")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));

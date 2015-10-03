@@ -1,4 +1,8 @@
-﻿Version 1.17 (2015-09-20)
+﻿Version 1.18 (2015-10-03)
+[Bugfix]
+- Fix blogtruyen url
+
+Version 1.17 (2015-09-20)
 [Bugfix]
 - Fix blogtruyen url
 

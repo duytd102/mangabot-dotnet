@@ -177,6 +177,7 @@ namespace MangaDownloader.GUIs
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.VECHAI));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.OTAKUFC));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.HOCVIENTRUYENTRANH));
+            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAPARK));
             mangaList.Sort(new Comparison<Manga>((Manga m1, Manga m2) => { return m1.Name.CompareTo(m2.Name); }));
         }
 

@@ -19,6 +19,7 @@ namespace WebScraper.Enums
         HOCVIENTRUYENTRANH,
 
         MANGAFOX,
-        KISSMANGA
+        KISSMANGA,
+        MANGAPARK
     }
 }

@@ -106,6 +106,9 @@ namespace MangaDownloader.Utils
                 case MangaSite.HOCVIENTRUYENTRANH:
                     return Properties.Resources.hocvientruyentranh;
 
+                case MangaSite.MANGAPARK:
+                    return Properties.Resources.mangapark;
+
                 default:
                     // TODO Add logo for more sites
                     throw new NotImplementedException();

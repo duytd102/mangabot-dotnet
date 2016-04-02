@@ -283,6 +283,16 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mangapark {
+            get {
+                object obj = ResourceManager.GetObject("mangapark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap multidownload {
             get {
                 object obj = ResourceManager.GetObject("multidownload", resourceCulture);

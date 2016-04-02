@@ -1413,5 +1413,11 @@ namespace MangaDownloader.GUIs
             setCurrentSite(MangaSite.HOCVIENTRUYENTRANH);
             tsMangaCommands_Resize(sender, e);
         }
+
+        private void mangaParkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.MANGAPARK);
+            tsMangaCommands_Resize(sender, e);
+        }
     }
 }

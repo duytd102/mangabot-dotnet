@@ -252,8 +252,7 @@ namespace MangaDownloader.GUIs
 
         private void tsmiMangaVN_Click(object sender, EventArgs e)
         {
-            setCurrentSite(MangaSite.MANGAVN);
-            tsMangaCommands_Resize(sender, e);
+
         }
 
         private void tsmiMangaFox_Click(object sender, EventArgs e)

@@ -172,7 +172,6 @@ namespace MangaDownloader.GUIs
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.KISSMANGA));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGA24H));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAFOX));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAVN));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.TRUYENTRANH8));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.TRUYENTRANHTUAN));
             mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.VECHAI));

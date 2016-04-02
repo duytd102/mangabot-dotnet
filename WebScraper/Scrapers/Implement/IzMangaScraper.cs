@@ -14,12 +14,12 @@ namespace WebScraper.Scrapers.Implement
 {
     class IzMangaScraper : IScraper
     {
-        private const String BASE_LIST_URL = "http://izmanga.com/danh_sach_truyen?type=new&category=all&alpha=all&state=all&group=all&page=";
+        private const String BASE_LIST_URL = "http://izmanga.com/danh-sach-truyen?type=new&category=all&alpha=all&page={0}&state=all&group=all";
 
         public int GetTotalPages()
         {
             string pattern = @".+?page=(?<PAGE_INDEX>\d+?)&.*?";
-            string src = HttpUtils.MakeHttpGet(BASE_LIST_URL + 1);
+            string src = HttpUtils.MakeHttpGet(String.Format(BASE_LIST_URL, 1));
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
@@ -39,7 +39,7 @@ namespace WebScraper.Scrapers.Implement
         public List<Manga> GetMangaList(int pageIndex)
         {
             List<Manga> mangaList = new List<Manga>();
-            string listUrl = String.Format("{0}{1}", BASE_LIST_URL, pageIndex);
+            string listUrl = String.Format(BASE_LIST_URL, pageIndex);
             string src = HttpUtils.MakeHttpGet(listUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);

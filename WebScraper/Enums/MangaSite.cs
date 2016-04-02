@@ -11,7 +11,6 @@ namespace WebScraper.Enums
 
         BLOGTRUYEN,
         VECHAI,
-        MANGAVN,
         MANGA24H,
         TRUYENTRANHTUAN,
         TRUYENTRANH8,

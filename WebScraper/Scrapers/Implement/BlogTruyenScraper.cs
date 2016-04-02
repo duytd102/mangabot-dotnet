@@ -40,11 +40,9 @@ namespace WebScraper.Scrapers.Implement
 
         public List<Manga> GetMangaList(int pageIndex)
         {
-            List<Manga> mangaList = new List<Manga>();
-            Manga manga;
             string blockFilter = "<(?<TAG>\\w+)[^>]*?class\\s*=\\s*[\"|']\\s*tiptip[^>]*?[\"|'][^>]*?>(?<TEXT>.*?)</\\k<TAG>>";
             string nameAndUrlFilter = "<a[^>]*?href\\s*=\\s*[\"|'](?<MANGA_URL>.*?)[\"|'][^>]*?>(?<MANGA_NAME>.*?)</a>";
-            string name, url;
+            List<Manga> mangaList = new List<Manga>();
             try
             {
                 Uri rootUrl = new Uri(DOMAIN);
@@ -54,21 +52,12 @@ namespace WebScraper.Scrapers.Implement
                 {
                     Match nameAndUrlGroup = Regex.Match(blk.Groups["TEXT"].Value, nameAndUrlFilter, RegexOptions.IgnoreCase);
 
-                    name = Regex.Replace(nameAndUrlGroup.Groups["MANGA_NAME"].Value, "<img.*?>", "", RegexOptions.IgnoreCase).Trim();
-                    name = WebUtility.HtmlDecode(name);
+                    String name = Regex.Replace(nameAndUrlGroup.Groups["MANGA_NAME"].Value, "<img.*?>", "", RegexOptions.IgnoreCase).Trim();
 
-                    url = nameAndUrlGroup.Groups["MANGA_URL"].Value.Trim().Replace("../", "");
-                    if (url.IndexOf(rootUrl.Scheme + "://" + rootUrl.Host) < 0)
-                    {
-                        if (!url.StartsWith("/")) url = "/" + url;
-                        url = rootUrl.Scheme + "://" + rootUrl.Host + url;
-                    }
-                    url = WebUtility.HtmlDecode(url);
-
-                    manga = new Manga();
+                    Manga manga = new Manga();
                     manga.ID = Guid.NewGuid().ToString();
-                    manga.Name = name;
-                    manga.Url = url;
+                    manga.Name = WebUtility.HtmlDecode(name);
+                    manga.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, nameAndUrlGroup.Groups["MANGA_URL"].Value));
                     manga.LocalPath = "";
                     manga.Site = MangaSite.BLOGTRUYEN;
                     mangaList.Add(manga);

@@ -85,9 +85,6 @@ namespace MangaDownloader.Utils
                 case MangaSite.MANGAFOX:
                     return Properties.Resources.mangafox_logo;
 
-                case MangaSite.MANGAVN:
-                    return Properties.Resources.mangavn_logo;
-
                 case MangaSite.MANGA24H:
                     return Properties.Resources.manga24h_logo;
 

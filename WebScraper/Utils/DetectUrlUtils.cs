@@ -11,7 +11,6 @@ namespace WebScraper.Utils
         const string blogtruyen = "blogtruyen.com";
         const string mangafox = "mangafox.me";
         const string vechai = "vechai.info";
-        const string mangavn = "mangavn.net";
         const string manga24h = "manga24h.com";
         const string truyentranhtuan = "truyentranhtuan.com";
         const string truyentranhnhanh = "truyentranhnhanh.com";
@@ -34,8 +33,6 @@ namespace WebScraper.Utils
                     return MangaSite.MANGAFOX;
                 else if (host.IndexOf(vechai) >= 0)
                     return MangaSite.VECHAI;
-                else if (host.IndexOf(mangavn) >= 0)
-                    return MangaSite.MANGAVN;
                 else if (host.IndexOf(manga24h) >= 0)
                     return MangaSite.MANGA24H;
                 else if (host.IndexOf(truyentranhtuan) >= 0)

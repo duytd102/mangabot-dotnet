@@ -66,19 +66,20 @@ namespace WebScraper.Scrapers.Implement
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode table = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "").Contains("chapt-table"));
-            List<HtmlNode> trTags = table.Descendants().Where(x => x.Name.Equals("tr")).ToList();
-            foreach (HtmlNode tr in trTags)
+            HtmlNode baseEle = doc.DocumentNode.Descendants().FirstOrDefault(x => x.Name.Equals("base", StringComparison.CurrentCultureIgnoreCase));
+            string domainOrBaseUrl = baseEle == null ? DOMAIN : baseEle.GetAttributeValue("href", "").Trim();
+            List<HtmlNode> tables = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("chapt-table")).ToList();
+            foreach (HtmlNode table in tables)
             {
-                HtmlNode td = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td"));
-                if (td != null)
+                HtmlNode chaptName = table.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("chap_name"));
+                if (chaptName != null)
                 {
-                    HtmlNode a = td.Element("a");
+                    HtmlNode a = chaptName.Element("a");
 
                     Chapter chapter = new Chapter();
                     chapter.ID = Guid.NewGuid().ToString();
                     chapter.Name = WebUtility.HtmlDecode(a.InnerText.Trim());
-                    chapter.Url = DOMAIN + WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
+                    chapter.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(domainOrBaseUrl, a.GetAttributeValue("href", "").Trim()));
                     chapter.Site = MangaSite.MANGA24H;
 
                     if (String.IsNullOrEmpty(chapter.Name) || String.IsNullOrEmpty(chapter.Url))
@@ -87,6 +88,7 @@ namespace WebScraper.Scrapers.Implement
                     chapterList.Add(chapter);
                 }
             }
+
             return chapterList;
         }
 

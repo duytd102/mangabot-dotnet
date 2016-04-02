@@ -1,4 +1,10 @@
-﻿Version 1.18 (2015-10-03)
+﻿Version 1.19 (2016-04-02)
+[Remove]
+- Do not support mangavn, kissmanga
+[Bugfix]
+- Fix blogtruyen, izmanga, manga24h, truyentranh8
+
+Version 1.18 (2015-10-03)
 [Bugfix]
 - Fix blogtruyen url
 

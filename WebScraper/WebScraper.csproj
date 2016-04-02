@@ -73,7 +73,6 @@
     <Compile Include="Scrapers\Implement\Manga24hScraper.cs" />
     <Compile Include="Scrapers\Implement\MangaFoxScraper.cs" />
     <Compile Include="Scrapers\Implement\BlogTruyenScraper.cs" />
-    <Compile Include="Scrapers\Implement\MangaVnScraper.cs" />
     <Compile Include="Scrapers\Implement\IzMangaScraper.cs" />
     <Compile Include="Scrapers\Implement\OtakufcScraper.cs" />
     <Compile Include="Scrapers\Implement\TruyenTranh8Scraper.cs" />

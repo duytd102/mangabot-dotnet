@@ -14,6 +14,7 @@ namespace WebScraper.Scrapers.Implement
 {
     class TruyenTranh8Scraper : IScraper
     {
+        const string DOMAIN = "http://truyentranh8.net";
         private const String BASE_LIST_URL = "http://truyentranh8.net/danh_sach_truyen/";
 
         public int GetTotalPages()
@@ -55,7 +56,7 @@ namespace WebScraper.Scrapers.Implement
                     Manga manga = new Manga();
                     manga.ID = Guid.NewGuid().ToString();
                     manga.Name = WebUtility.HtmlDecode(a.InnerText.Trim());
-                    manga.Url = WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
+                    manga.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, a.GetAttributeValue("href", "")));
                     manga.Site = MangaSite.TRUYENTRANH8;
 
                     if (String.IsNullOrEmpty(manga.Name) || String.IsNullOrEmpty(manga.Url))
@@ -87,7 +88,7 @@ namespace WebScraper.Scrapers.Implement
                 Chapter chapter = new Chapter();
                 chapter.ID = Guid.NewGuid().ToString();
                 chapter.Name = WebUtility.HtmlDecode(title.InnerText.Trim());
-                chapter.Url = WebUtility.HtmlDecode(a.GetAttributeValue("href", "").Trim());
+                chapter.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, a.GetAttributeValue("href", "")));
                 chapter.PublishedDate = date.InnerText.Trim();
                 chapter.Site = MangaSite.TRUYENTRANH8;
 

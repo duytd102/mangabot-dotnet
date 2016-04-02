@@ -109,7 +109,6 @@
             this.tsmiManga24h = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTruyenTranhTuan = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiVeChai = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMangaVN = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiIZManga = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOtakuFC = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglishSites = new System.Windows.Forms.ToolStripMenuItem();
@@ -874,7 +873,6 @@
             this.tsmiManga24h,
             this.tsmiTruyenTranhTuan,
             this.tsmiVeChai,
-            this.tsmiMangaVN,
             this.tsmiIZManga,
             this.tsmiOtakuFC});
             this.tsmiVietnameseSites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -931,14 +929,6 @@
             this.tsmiVeChai.Text = "VeChai";
             this.tsmiVeChai.Click += new System.EventHandler(this.tsmiVeChai_Click);
             // 
-            // tsmiMangaVN
-            // 
-            this.tsmiMangaVN.Image = global::MangaDownloader.Properties.Resources.mangavn_logo;
-            this.tsmiMangaVN.Name = "tsmiMangaVN";
-            this.tsmiMangaVN.Size = new System.Drawing.Size(196, 22);
-            this.tsmiMangaVN.Text = "MangaVN";
-            this.tsmiMangaVN.Click += new System.EventHandler(this.tsmiMangaVN_Click);
-            // 
             // tsmiIZManga
             // 
             this.tsmiIZManga.Image = global::MangaDownloader.Properties.Resources.izmanga_logo;
@@ -968,7 +958,7 @@
             // 
             this.tsmiMangaFox.Image = global::MangaDownloader.Properties.Resources.mangafox_logo;
             this.tsmiMangaFox.Name = "tsmiMangaFox";
-            this.tsmiMangaFox.Size = new System.Drawing.Size(132, 22);
+            this.tsmiMangaFox.Size = new System.Drawing.Size(152, 22);
             this.tsmiMangaFox.Text = "MangaFox";
             this.tsmiMangaFox.Click += new System.EventHandler(this.tsmiMangaFox_Click);
             // 
@@ -976,8 +966,9 @@
             // 
             this.tsmiKissManga.Image = global::MangaDownloader.Properties.Resources.kissmanga_logo;
             this.tsmiKissManga.Name = "tsmiKissManga";
-            this.tsmiKissManga.Size = new System.Drawing.Size(132, 22);
+            this.tsmiKissManga.Size = new System.Drawing.Size(152, 22);
             this.tsmiKissManga.Text = "KissManga";
+            this.tsmiKissManga.Visible = false;
             this.tsmiKissManga.Click += new System.EventHandler(this.tsmiKissManga_Click);
             // 
             // tsmiAdvancedSearch
@@ -1206,7 +1197,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tsmiChapterDownload;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMangaVN;
         private System.Windows.Forms.ToolStripButton tsbtSiteUpdate;
         private System.Windows.Forms.ToolStripLabel tslbSiteLogo;
         private System.Windows.Forms.ToolStripMenuItem tsmiManga24h;

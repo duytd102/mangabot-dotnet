@@ -19,8 +19,6 @@ namespace WebScraper.Scrapers
                     return new MangaFoxScraper();
                 case MangaSite.VECHAI:
                     return new VeChaiScraper();
-                case MangaSite.MANGAVN:
-                    return new MangaVnScraper();
                 case MangaSite.MANGA24H:
                     return new Manga24hScraper();
                 case MangaSite.TRUYENTRANHTUAN:

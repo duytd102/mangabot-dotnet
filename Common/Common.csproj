@@ -84,6 +84,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StringUtils.cs" />
+    <Compile Include="UrlUtils.cs" />
     <Compile Include="VersionUtils.cs" />
     <Compile Include="WindowUtils.cs" />
     <Compile Include="ZipUtils.cs" />

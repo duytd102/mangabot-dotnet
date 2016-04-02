@@ -103,7 +103,10 @@ namespace Common
 
                 return sb.ToString();
             }
-            catch { }
+            catch (Exception e)
+            {
+                string aa = e.Message;
+            }
             return "";
         }
 

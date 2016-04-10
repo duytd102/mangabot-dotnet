@@ -1,26 +1,24 @@
 ﻿using Common;
 using MangaDownloader.Enums;
-using MangaDownloader.Properties;
 using MangaDownloader.Settings;
 using MangaDownloader.Utils;
 using MangaDownloader.Workers;
 using MangaDownloader.Workers.Data;
+using Microsoft.CSharp;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using WebScraper.Data;
 using WebScraper.Enums;
 using WebScraper.Processors;
-using WebScraper.Scrapers;
-using WebScraper.Utils;
 
 namespace MangaDownloader.GUIs
 {
@@ -341,7 +339,7 @@ namespace MangaDownloader.GUIs
             tslbSlash.Visible = false;
             tsbtnChapter.Visible = false;
             tsbtnManga.Visible = true;
-            tsbtnManga.Text = "Manga: " + mangaName;
+            tsbtnManga.Text = mangaName;
             tsbtnManga.Tag = mangaUrl;
             tslbLoading.Visible = true;
 
@@ -362,7 +360,7 @@ namespace MangaDownloader.GUIs
             {
                 tslbSlash.Visible = true;
                 tsbtnChapter.Visible = true;
-                tsbtnChapter.Text = "Chapter: " + chapterName;
+                tsbtnChapter.Text = chapterName;
                 tsbtnChapter.Tag = chapterUrl;
                 tslbLoading.Visible = true;
 

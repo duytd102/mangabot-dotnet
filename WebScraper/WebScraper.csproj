@@ -63,6 +63,7 @@
     <Compile Include="..\Common\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BotCrawler.cs" />
     <Compile Include="Data\Chapter.cs" />
     <Compile Include="Data\Manga.cs" />
     <Compile Include="Data\Page.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Scrapers\Implement\VeChaiScraper.cs" />
     <Compile Include="Scrapers\IScraper.cs" />
     <Compile Include="Scrapers\ScraperFactory.cs" />
+    <Compile Include="ScriptManager.cs" />
     <Compile Include="Utils\DetectUrlUtils.cs" />
   </ItemGroup>
   <ItemGroup>

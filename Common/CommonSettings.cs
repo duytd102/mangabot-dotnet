@@ -8,6 +8,10 @@ namespace Common
 {
     public class CommonSettings
     {
+        public enum Mode { DEV, BETA, PROD }
+
+        private static Mode appMode;
+
         public static string AppName()
         {
             return "Manga Bot";
@@ -18,6 +22,24 @@ namespace Common
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             return fvi.FileMajorPart + "." + fvi.FileMinorPart;
+        }
+
+        public static Mode AppMode
+        {
+            get
+            {
+#if (!DEBUG)
+                    appMode = Mode.PROD;
+#else
+                appMode = (Mode)Enum.Parse(typeof(Mode), Properties.Settings.Default.AppMode);
+#endif
+                return appMode;
+            }
+            set
+            {
+                appMode = value;
+            }
+
         }
 
         public static string CheckVersionUrl()
@@ -42,11 +64,7 @@ namespace Common
 
         public static string GaTrackingId()
         {
-            #if (!DEBUG)
-                return "UA-61053646-1";
-            #else
-                return "UA-61053646-2";
-            #endif
+            return AppMode == Mode.PROD ? "UA-61053646-1" : "UA-61053646-2";
         }
     }
 }

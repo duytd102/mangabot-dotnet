@@ -14,129 +14,159 @@ namespace WebScraper.Scrapers.Implement
     internal class MangaFoxScraper : IScraper
     {
         const string ROOT_URL = "http://mangafox.me/directory/";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/mangafox.txt";
+        const string CLASS_NAME = "WebScraper.Scrapers.Implement.MangaFoxScraper";
 
         public int GetTotalPages()
         {
-            String navPattern = "<div[^>]*?id\\s*=\\s*['|\"]\\s*nav\\s*['|\"][^>]*?>.*?</ul>";
-            String liPattern = "<li>(?<TEXT>.*?)</li>";
-            String aPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<PAGINATION_URL>[^>]*?)[\"|'][^>]*?>(?<PAGINATION_NUMBER>.*?)</a>";
-            try
+            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
             {
-                String firstPageSrc = HttpUtils.DoGetWithDecompression(ROOT_URL);
-                Match navMatch = Regex.Match(firstPageSrc, navPattern);
-                MatchCollection liMatchCollection = Regex.Matches(navMatch.Value, liPattern);
-                Match maxPageMatch = liMatchCollection[liMatchCollection.Count - 2];
-                Match aMatch = Regex.Match(maxPageMatch.Groups["TEXT"].Value, aPattern);
-                String maxPage = aMatch.Groups["PAGINATION_NUMBER"].Value;
-                return int.Parse(maxPage);
+                return new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
             }
-            catch {  }
-            return 0;
+            else
+            {
+                String navPattern = "<div[^>]*?id\\s*=\\s*['|\"]\\s*nav\\s*['|\"][^>]*?>.*?</ul>";
+                String liPattern = "<li>(?<TEXT>.*?)</li>";
+                String aPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<PAGINATION_URL>[^>]*?)[\"|'][^>]*?>(?<PAGINATION_NUMBER>.*?)</a>";
+                try
+                {
+                    String firstPageSrc = HttpUtils.DoGetWithDecompression(ROOT_URL);
+                    Match navMatch = Regex.Match(firstPageSrc, navPattern);
+                    MatchCollection liMatchCollection = Regex.Matches(navMatch.Value, liPattern);
+                    Match maxPageMatch = liMatchCollection[liMatchCollection.Count - 2];
+                    Match aMatch = Regex.Match(maxPageMatch.Groups["TEXT"].Value, aPattern);
+                    String maxPage = aMatch.Groups["PAGINATION_NUMBER"].Value;
+                    return int.Parse(maxPage);
+                }
+                catch { }
+                return 0;
+            }
         }
 
         public List<Manga> GetMangaList(int pageIndex)
         {
-            String mangaListPattern = "<div[^>]*?id\\s*=\\s*['|\"]\\s*mangalist\\s*['|\"][^>]*?>.*?</ul>";
-            String liPattern = "<li>(?<TEXT>.*?)</li>";
-            String mangaTitlePattern = "<a[^>]*?class\\s*=\\s*[\"|']title[^>]*?href\\s*=\\s*[\"|'](?<MANGA_URL>.*?)[\"|'].*?>(?<MANGA_TITLE>.*?)</a>";
-            String mangaPageUrl = String.Format("{0}{1}.htm", ROOT_URL, pageIndex);
-            List<Manga> mangaList = new List<Manga>();
-            Manga manga;
-            String name, url;
-            try
+            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
             {
-                String mangaSrc = HttpUtils.DoGetWithDecompression(mangaPageUrl);
-                Match mangaListMatch = Regex.Match(mangaSrc, mangaListPattern);
-                MatchCollection liMatchCollection = Regex.Matches(mangaListMatch.Value, liPattern);
-                foreach (Match li in liMatchCollection)
-                {
-                    Match mangaTitleMatch = Regex.Match(li.Groups["TEXT"].Value, mangaTitlePattern);
-                    name = WebUtility.HtmlDecode(mangaTitleMatch.Groups["MANGA_TITLE"].Value);
-                    url = WebUtility.HtmlDecode(mangaTitleMatch.Groups["MANGA_URL"].Value);
-
-                    manga = new Manga();
-                    manga.ID = Guid.NewGuid().ToString();
-                    manga.Name = name.Trim();
-                    manga.Url = url.Trim();
-                    manga.LocalPath = "";
-                    manga.Site = MangaSite.MANGAFOX;
-                    mangaList.Add(manga);
-                }
+                return new BotCrawler<List<Manga>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
             }
-            catch {  }
-            return mangaList;
+            else
+            {
+                String mangaListPattern = "<div[^>]*?id\\s*=\\s*['|\"]\\s*mangalist\\s*['|\"][^>]*?>.*?</ul>";
+                String liPattern = "<li>(?<TEXT>.*?)</li>";
+                String mangaTitlePattern = "<a[^>]*?class\\s*=\\s*[\"|']title[^>]*?href\\s*=\\s*[\"|'](?<MANGA_URL>.*?)[\"|'].*?>(?<MANGA_TITLE>.*?)</a>";
+                String mangaPageUrl = String.Format("{0}{1}.htm", ROOT_URL, pageIndex);
+                List<Manga> mangaList = new List<Manga>();
+                Manga manga;
+                String name, url;
+                try
+                {
+                    String mangaSrc = HttpUtils.DoGetWithDecompression(mangaPageUrl);
+                    Match mangaListMatch = Regex.Match(mangaSrc, mangaListPattern);
+                    MatchCollection liMatchCollection = Regex.Matches(mangaListMatch.Value, liPattern);
+                    foreach (Match li in liMatchCollection)
+                    {
+                        Match mangaTitleMatch = Regex.Match(li.Groups["TEXT"].Value, mangaTitlePattern);
+                        name = WebUtility.HtmlDecode(mangaTitleMatch.Groups["MANGA_TITLE"].Value);
+                        url = WebUtility.HtmlDecode(mangaTitleMatch.Groups["MANGA_URL"].Value);
+
+                        manga = new Manga();
+                        manga.ID = Guid.NewGuid().ToString();
+                        manga.Name = name.Trim();
+                        manga.Url = url.Trim();
+                        manga.LocalPath = "";
+                        manga.Site = MangaSite.MANGAFOX;
+                        mangaList.Add(manga);
+                    }
+                }
+                catch { }
+                return mangaList;
+            }
         }
 
         public List<Chapter> GetChapterList(string mangaUrl)
         {
-            String chaptersBlockPattern = "<div[^>]*?id\\s*=\\s*['|\"]\\s*chapters\\s*['|\"].*?>.*?<div[^>]*?id\\s*=\\s*['|\"]\\s*footer\\s*['|\"].*?>";
-            String chapterListPattern = "<ul[^>]*?class\\s*=\\s*['|\"]\\s*chlist\\s*['|\"].*?>(?<CHAPTER_LIST>.*?)</ul>";
-            String chapterInfoPattern = "<li>(?<CHAPTER_INFO>.*?)</li>";
-            String chapterUrlPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<CHAPTER_URL>[^>]*?)[\"|'][^>]*?class\\s*=\\s*[\"|']tips[^>]*?>(?<CHAPTER_TITLE>.*?)</a>";
-            String chapterNamePattern = "<span[^>]*?class\\s*=\\s*[\"|']\\s*title.*?>(?<CHAPTER_NAME>.*?)</span>";
-            List<Chapter> chapterList = new List<Chapter>();
-            Chapter chapter;
-            try
+            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
             {
-                String mangaSrc = HttpUtils.DoGetWithDecompression(mangaUrl);
-                Match chaptersBlockMatch = Regex.Match(mangaSrc, chaptersBlockPattern);
-                MatchCollection chapterListMatchCollection = Regex.Matches(chaptersBlockMatch.Value, chapterListPattern);
-                foreach (Match chapterListMatch in chapterListMatchCollection)
+                return new BotCrawler<List<Chapter>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+            }
+            else
+            {
+                String chaptersBlockPattern = "<div[^>]*?id\\s*=\\s*['|\"]\\s*chapters\\s*['|\"].*?>.*?<div[^>]*?id\\s*=\\s*['|\"]\\s*footer\\s*['|\"].*?>";
+                String chapterListPattern = "<ul[^>]*?class\\s*=\\s*['|\"]\\s*chlist\\s*['|\"].*?>(?<CHAPTER_LIST>.*?)</ul>";
+                String chapterInfoPattern = "<li>(?<CHAPTER_INFO>.*?)</li>";
+                String chapterUrlPattern = "<a[^>]*?href\\s*=\\s*[\"|'](?<CHAPTER_URL>[^>]*?)[\"|'][^>]*?class\\s*=\\s*[\"|']tips[^>]*?>(?<CHAPTER_TITLE>.*?)</a>";
+                String chapterNamePattern = "<span[^>]*?class\\s*=\\s*[\"|']\\s*title.*?>(?<CHAPTER_NAME>.*?)</span>";
+                List<Chapter> chapterList = new List<Chapter>();
+                Chapter chapter;
+                try
                 {
-                    MatchCollection chapterInfoMatchCollection = Regex.Matches(chapterListMatch.Groups["CHAPTER_LIST"].Value, chapterInfoPattern);
-                    foreach (Match chapterInfoMatch in chapterInfoMatchCollection)
+                    String mangaSrc = HttpUtils.DoGetWithDecompression(mangaUrl);
+                    Match chaptersBlockMatch = Regex.Match(mangaSrc, chaptersBlockPattern);
+                    MatchCollection chapterListMatchCollection = Regex.Matches(chaptersBlockMatch.Value, chapterListPattern);
+                    foreach (Match chapterListMatch in chapterListMatchCollection)
                     {
-                        Match chapterUrlMatch = Regex.Match(chapterInfoMatch.Groups["CHAPTER_INFO"].Value, chapterUrlPattern);
-                        Match chapterNameMatch = Regex.Match(chapterInfoMatch.Groups["CHAPTER_INFO"].Value, chapterNamePattern);
+                        MatchCollection chapterInfoMatchCollection = Regex.Matches(chapterListMatch.Groups["CHAPTER_LIST"].Value, chapterInfoPattern);
+                        foreach (Match chapterInfoMatch in chapterInfoMatchCollection)
+                        {
+                            Match chapterUrlMatch = Regex.Match(chapterInfoMatch.Groups["CHAPTER_INFO"].Value, chapterUrlPattern);
+                            Match chapterNameMatch = Regex.Match(chapterInfoMatch.Groups["CHAPTER_INFO"].Value, chapterNamePattern);
 
-                        String name = String.Format("{0} {1}", chapterUrlMatch.Groups["CHAPTER_TITLE"].Value, chapterNameMatch.Groups["CHAPTER_NAME"].Value);
-                        String url = chapterUrlMatch.Groups["CHAPTER_URL"].Value;
+                            String name = String.Format("{0} {1}", chapterUrlMatch.Groups["CHAPTER_TITLE"].Value, chapterNameMatch.Groups["CHAPTER_NAME"].Value);
+                            String url = chapterUrlMatch.Groups["CHAPTER_URL"].Value;
 
-                        chapter = new Chapter();
-                        chapter.ID = Guid.NewGuid().ToString();
-                        chapter.Name = WebUtility.HtmlDecode(name).Trim();
-                        chapter.Url = WebUtility.HtmlDecode(url).Trim();
-                        chapter.Site = MangaSite.MANGAFOX;
-                        chapter.LocalPath = "";
-                        chapterList.Add(chapter);
+                            chapter = new Chapter();
+                            chapter.ID = Guid.NewGuid().ToString();
+                            chapter.Name = WebUtility.HtmlDecode(name).Trim();
+                            chapter.Url = WebUtility.HtmlDecode(url).Trim();
+                            chapter.Site = MangaSite.MANGAFOX;
+                            chapter.LocalPath = "";
+                            chapterList.Add(chapter);
+                        }
                     }
                 }
+                catch { }
+                return chapterList;
             }
-            catch {  }
-            return chapterList;
         }
 
         public List<Page> GetPageList(string chapterUrl)
         {
-            String formPattern = "<form[^>]*?id\\s*=\\s*['|\"]\\s*top_bar\\s*['|\"].*?>.*?</form>";
-            String optionPattern = "<option[^>]*?>(?<PAGE_INDEX>.*?)</option>";
-            List<Page> pageList = new List<Page>();
-            Page page;
-            String pageUrl;
-            int index = 1;
-            try
+            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
             {
-                String partialChapterUrl = GetParentPath(chapterUrl);
-                String chapterSrc = HttpUtils.DoGetWithDecompression(chapterUrl);
-                Match formMatch = Regex.Match(chapterSrc, formPattern);
-                MatchCollection optionMatchCollection = Regex.Matches(formMatch.Value, optionPattern);
-                int maxPage = int.Parse(optionMatchCollection[optionMatchCollection.Count - 2].Groups["PAGE_INDEX"].Value);
-                for (int i = 1; i <= maxPage; i++)
-                {
-                    pageUrl = String.Format("{0}{1}.html", partialChapterUrl, i);
-
-                    page = new Page();
-                    page.ID = Guid.NewGuid().ToString();
-                    page.Name = String.Format("Trang {0}", StringUtils.GenerateOrdinal(maxPage, index));
-                    page.Url = ExtractPageImage(WebUtility.HtmlDecode(pageUrl));
-                    page.LocalPath = "";
-                    page.Site = MangaSite.MANGAFOX;
-                    pageList.Add(page);
-                    index++;
-                }
+                return new BotCrawler<List<Page>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
             }
-            catch {  }
-            return pageList;
+            else
+            {
+                String formPattern = "<form[^>]*?id\\s*=\\s*['|\"]\\s*top_bar\\s*['|\"].*?>.*?</form>";
+                String optionPattern = "<option[^>]*?>(?<PAGE_INDEX>.*?)</option>";
+                List<Page> pageList = new List<Page>();
+                Page page;
+                String pageUrl;
+                int index = 1;
+                try
+                {
+                    String partialChapterUrl = GetParentPath(chapterUrl);
+                    String chapterSrc = HttpUtils.DoGetWithDecompression(chapterUrl);
+                    Match formMatch = Regex.Match(chapterSrc, formPattern);
+                    MatchCollection optionMatchCollection = Regex.Matches(formMatch.Value, optionPattern);
+                    int maxPage = int.Parse(optionMatchCollection[optionMatchCollection.Count - 2].Groups["PAGE_INDEX"].Value);
+                    for (int i = 1; i <= maxPage; i++)
+                    {
+                        pageUrl = String.Format("{0}{1}.html", partialChapterUrl, i);
+
+                        page = new Page();
+                        page.ID = Guid.NewGuid().ToString();
+                        page.Name = String.Format("Trang {0}", StringUtils.GenerateOrdinal(maxPage, index));
+                        page.Url = ExtractPageImage(WebUtility.HtmlDecode(pageUrl));
+                        page.LocalPath = "";
+                        page.Site = MangaSite.MANGAFOX;
+                        pageList.Add(page);
+                        index++;
+                    }
+                }
+                catch { }
+                return pageList;
+            }
         }
 
         private String ExtractPageImage(String pageUrl)

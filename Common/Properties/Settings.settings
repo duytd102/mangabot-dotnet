@@ -8,5 +8,8 @@
     <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
       <Value Profile="(Default)">2016-04-10</Value>
     </Setting>
+    <Setting Name="AppMode" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BETA</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

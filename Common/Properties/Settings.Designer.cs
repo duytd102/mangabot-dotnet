@@ -43,5 +43,14 @@ namespace Common.Properties {
                 return ((global::System.DateTime)(this["ReleaseDate"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BETA")]
+        public string AppMode {
+            get {
+                return ((string)(this["AppMode"]));
+            }
+        }
     }
 }

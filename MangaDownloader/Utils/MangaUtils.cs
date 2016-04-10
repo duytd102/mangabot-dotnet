@@ -80,19 +80,19 @@ namespace MangaDownloader.Utils
                     return Properties.Resources.blogtruyen_logo;
 
                 case MangaSite.VECHAI:
-                    return Properties.Resources.vechai_logo;
+                    return Properties.Resources.vechai;
 
                 case MangaSite.MANGAFOX:
                     return Properties.Resources.mangafox_logo;
 
                 case MangaSite.MANGA24H:
-                    return Properties.Resources.manga24h_logo;
+                    return Properties.Resources.manga24h;
 
                 case MangaSite.TRUYENTRANHTUAN:
                     return Properties.Resources.truyentranhtuan_logo;
 
                 case MangaSite.TRUYENTRANH8:
-                    return Properties.Resources.truyentranh8_logo;
+                    return Properties.Resources.truyentranh8;
 
                 case MangaSite.IZMANGA:
                     return Properties.Resources.izmanga_logo;

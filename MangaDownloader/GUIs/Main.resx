@@ -254,6 +254,18 @@
         GWrTBaIJQVklQDzXXpqOHfB6UqlQmDhEiUKOpUQEjzvqeAPSK5ZaQbhQ+Y//2Q==
 </value>
   </data>
+  <data name="tsmiHVTT.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAYNJREFUOE+d
+        kz9IQlEUxm9iIPQHygYXBWmS0FyEprZAh6YcQxoSbEmaIlwiaGkJWgJxSBqaaggEF2lsjJa2hqBB0KIl
+        aurr+971PhQSzA9+3MO795x7/txn/tACmbLmeFKAFWuOry0yZ01f/8pqiZyRA9KcMOaZK3prmcTIUK2S
+        W4JUD9nkiTz2bHFHdsiADglmySVpEJ7ChTE/08Y8cE9l6QIXaI/4qufzebx0Ouh2u0Crhd14HPs8yJM4
+        tQ7KTMqSa2taqVaUyuXtRq32hWoV75UK1sJhbPJ7m9wTFq4gkvpwbk1jJonqc/V4h+W0To4iEXwnEnhj
+        sL4Acua2leq6It6Y1OmbYBBIp3EcjaIWiwG5HNqplJx1bpE0ddZJjdPInLLLoRA+Mhl8JpNeIDnrG/c0
+        PgXxb5cUbcOavgrzgcBriWkXyYwxHIjXffc2BqSOahzqhdS/aq9ItH9CCuRP6f3LQchWnQ6+Je9WzX5k
+        KZCa6rKR6mRoBqNI/4cy6QtqzC/0JIKrVA0sowAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="notifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>285, 43</value>
   </metadata>

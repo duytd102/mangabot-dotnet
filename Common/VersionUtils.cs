@@ -11,8 +11,8 @@ namespace Common
     {
         public static bool CheckForUpdates(out VersionData newVersion)
         {
-            string currentVersion = Properties.Settings.Default.MDVersion;
-            String versionUrl = Properties.Settings.Default.VersionURL;
+            string currentVersion = CommonSettings.AppVersion();
+            String versionUrl = CommonSettings.CheckVersionUrl();
             string response = HttpUtils.MakeHttpGetWithAppendLine(versionUrl);
             List<VersionData> list = Read(response);
             if (list.Count > 0)

@@ -11,7 +11,7 @@ namespace AutoUpdate
 {
     static class Program
     {
-        private static string MD_APP_NAME = "Manga Downloader.exe";
+        private static string MD_APP_NAME = "Manga Bot.exe";
         private static string AUTO_UPDATE_APP_NAME = "Auto Update.exe";
         private static string path;
 
@@ -21,8 +21,6 @@ namespace AutoUpdate
         [STAThread]
         static void Main(string[] args)
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
             if (args.Length > 0)
             {
                 Thread.Sleep(5000);

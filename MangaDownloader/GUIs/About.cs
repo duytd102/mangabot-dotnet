@@ -11,7 +11,7 @@ namespace MangaDownloader.GUIs
 {
     public partial class About : BaseForm
     {
-        const String AUTO_UPDATE_APP_NAME = "AutoUpdate.exe";
+        const String AUTO_UPDATE_APP_NAME = "Auto Update.exe";
 
         public About()
         {
@@ -20,7 +20,7 @@ namespace MangaDownloader.GUIs
 
         private void About_Load(object sender, EventArgs e)
         {
-            lbVersion.Text = String.Format("Version: {0} ({1:yyyy-MM-dd})", CommonProperties.MDVersion, CommonProperties.ReleaseDate);
+            lbVersion.Text = String.Format("Version: {0} ({1:yyyy-MM-dd})", CommonSettings.AppVersion(), CommonSettings.ReleaseDate());
             tbDescription.Text = GetDesc();
         }
 
@@ -35,14 +35,16 @@ namespace MangaDownloader.GUIs
 
             StringBuilder bd = new StringBuilder();
             bd.AppendLine("A tool for downloading manga from the internet.");
-            bd.AppendLine("It's TOTALLY FREE 4EVER (NO ADS).");
+            bd.AppendLine("It's TOTALLY FREE FOREVER (NO ADS).");
             bd.AppendLine("Feel free to feedback to me any errors or more features.");
             bd.AppendLine();
             bd.AppendLine("=== Contact ===");
             bd.AppendLine("Author: Duy Tran");
             bd.AppendLine("Email: dangduy2910@gmail.com");
-            bd.AppendLine("Website: https://tdduy89.wordpress.com/");
-            bd.AppendLine("          or: http://tdduy89.blogspot.com/");
+            bd.AppendLine("Website: https://mangabot.wordpress.com/");
+            bd.AppendLine("               https://flashmangadownloader.wordpress.com/");
+            bd.AppendLine("               https://tdduy89.wordpress.com/");
+            bd.AppendLine("               https://tdduy89.blogspot.com/");
             bd.AppendLine();
             bd.AppendLine("=== Changelogs ===");
             foreach (var l in lines)

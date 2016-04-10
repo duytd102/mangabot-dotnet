@@ -11,8 +11,8 @@ namespace Common
 {
     public class GoogleAnalyticsUtils
     {
-        private static String GA_URL = Common.Properties.Settings.Default.GaBaseURL;
-        private static String TRACKING_ID = Common.Properties.Settings.Default.GaTrackingID;
+        private static String GA_URL = CommonSettings.GaBaseUrl();
+        private static String TRACKING_ID = CommonSettings.GaTrackingId();
         private static String CID = Common.Properties.Settings.Default.GaClientID;
 
         static GoogleAnalyticsUtils()

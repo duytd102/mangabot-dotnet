@@ -95,7 +95,7 @@ namespace MangaDownloader.GUIs
 
             SettingsManager sm = SettingsManager.GetInstance();
 
-            this.Text = String.Format("{0} v{1}", GlobalProperties.APP_NAME, CommonProperties.MDVersion);
+            this.Text = String.Format("{0} v{1}", CommonSettings.AppName(), CommonSettings.AppVersion());
 
             concurrentWorkersLimit = sm.GetAppSettings().TotalConcurrentWorkers;
 
@@ -129,7 +129,7 @@ namespace MangaDownloader.GUIs
 
             Thread gaThread = new Thread(new ThreadStart(() =>
             {
-                GoogleAnalyticsUtils.SendView(GlobalProperties.APP_NAME, CommonProperties.MDVersion, GlobalProperties.GA_SCREEN);
+                GoogleAnalyticsUtils.SendView(CommonSettings.AppName(), CommonSettings.AppVersion(), CommonSettings.MainScreen());
             }));
             gaThread.IsBackground = true;
             gaThread.Start();
@@ -146,14 +146,7 @@ namespace MangaDownloader.GUIs
                         string ignoreVersion = sd.IgnoreVersion;
                         if (!ignoreVersion.Equals(vd.Version))
                         {
-                            DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == System.Windows.Forms.DialogResult.Yes)
-                                RunAutoUpdate();
-                            else
-                            {
-                                sd.IgnoreVersion = vd.Version;
-                                SettingsManager.SaveChanges();
-                            }
+                            RunAutoUpdate();
                         }
                     }
                 }
@@ -1257,14 +1250,14 @@ namespace MangaDownloader.GUIs
         private void RunAutoUpdate()
         {
             AutoUpdate au = new AutoUpdate();
-            if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (au.ShowDialog() == DialogResult.OK)
             {
                 VersionData vd = au.VersionData;
                 DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == System.Windows.Forms.DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     Download d = new Download(vd.URL);
-                    if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    if (d.ShowDialog() == DialogResult.OK)
                     {
                         try
                         {
@@ -1273,6 +1266,12 @@ namespace MangaDownloader.GUIs
                         }
                         catch { }
                     }
+                }
+                else
+                {
+                    SettingsData sd = SettingsManager.GetInstance().GetAppSettings();
+                    sd.IgnoreVersion = vd.Version;
+                    SettingsManager.SaveChanges();
                 }
             }
         }

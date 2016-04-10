@@ -2,23 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Common.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="GaBaseURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://www.google-analytics.com/collect</Value>
-    </Setting>
-    <Setting Name="GaTrackingID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">UA-61053646-2</Value>
-    </Setting>
     <Setting Name="GaClientID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="VersionURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloader-latest-version.csv</Value>
-    </Setting>
-    <Setting Name="MDVersion" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">1.20</Value>
-    </Setting>
     <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2016-04-03</Value>
+      <Value Profile="(Default)">2016-04-10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -89,7 +89,7 @@ namespace MangaDownloader.GUIs
 
         private void UpdateText(string text)
         {
-            lblDesc.Invoke(new MethodInvoker(() => { lblDesc.Text = text; }));
+            try { lblDesc.Invoke(new MethodInvoker(() => { lblDesc.Text = text; })); } catch { }
         }
 
         private string ByteToMB(long b)

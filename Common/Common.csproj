@@ -70,7 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonProperties.cs" />
+    <Compile Include="CommonSettings.cs" />
     <Compile Include="EnumUtils.cs" />
     <Compile Include="EventAction.cs" />
     <Compile Include="FileUtils.cs" />
@@ -83,6 +83,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="StringUtils.cs" />
     <Compile Include="UrlUtils.cs" />
     <Compile Include="VersionUtils.cs" />

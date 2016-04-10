@@ -23,24 +23,6 @@ namespace Common.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.google-analytics.com/collect")]
-        public string GaBaseURL {
-            get {
-                return ((string)(this["GaBaseURL"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UA-61053646-2")]
-        public string GaTrackingID {
-            get {
-                return ((string)(this["GaTrackingID"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -55,26 +37,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloa" +
-            "der-latest-version.csv")]
-        public string VersionURL {
-            get {
-                return ((string)(this["VersionURL"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.20")]
-        public string MDVersion {
-            get {
-                return ((string)(this["MDVersion"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2016-04-03")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-04-10")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));

@@ -69,7 +69,7 @@
             this.lbAppName.Name = "lbAppName";
             this.lbAppName.Size = new System.Drawing.Size(398, 38);
             this.lbAppName.TabIndex = 0;
-            this.lbAppName.Text = "Manga Downloader";
+            this.lbAppName.Text = "Manga Bot";
             this.lbAppName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // About

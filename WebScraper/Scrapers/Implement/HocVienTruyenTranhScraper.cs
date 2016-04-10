@@ -24,7 +24,7 @@ namespace WebScraper.Scrapers.Implement
                 x => x.Name.Equals("ul") && x.GetAttributeValue("class", "").Contains("pagination"));
             if (paginator != null)
             {
-                HtmlNode a = paginator.Descendants().Last(x => x.Name.Equals("a") && x.GetAttributeValue("rel", "").Length == 0);
+                HtmlNode a = paginator.Descendants().LastOrDefault(x => x.Name.Equals("a") && x.GetAttributeValue("rel", "").Length == 0);
                 return int.Parse(a.InnerText);
             }
             return 1;
@@ -45,7 +45,7 @@ namespace WebScraper.Scrapers.Implement
                 HtmlNode td = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td"));
                 if (td != null)
                 {
-                    HtmlNode a = td.Descendants().First(x => x.Name.Equals("a"));
+                    HtmlNode a = td.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
 
                     Manga manga = new Manga();
                     manga.ID = Guid.NewGuid().ToString();
@@ -76,7 +76,7 @@ namespace WebScraper.Scrapers.Implement
                 HtmlNode td = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td"));
                 if (td != null)
                 {
-                    HtmlNode a = td.Descendants().First(x => x.Name.Equals("a"));
+                    HtmlNode a = td.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
 
                     Chapter chapter = new Chapter();
                     chapter.ID = Guid.NewGuid().ToString();

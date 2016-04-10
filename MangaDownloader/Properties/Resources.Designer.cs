@@ -263,9 +263,9 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap manga24h_logo {
+        internal static System.Drawing.Bitmap manga24h {
             get {
-                object obj = ResourceManager.GetObject("manga24h_logo", resourceCulture);
+                object obj = ResourceManager.GetObject("manga24h", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -306,6 +306,16 @@ namespace MangaDownloader.Properties {
         internal static System.Drawing.Bitmap new_4 {
             get {
                 object obj = ResourceManager.GetObject("new_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap otakufc {
+            get {
+                object obj = ResourceManager.GetObject("otakufc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,9 +443,9 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap truyentranh8_logo {
+        internal static System.Drawing.Bitmap truyentranh8 {
             get {
-                object obj = ResourceManager.GetObject("truyentranh8_logo", resourceCulture);
+                object obj = ResourceManager.GetObject("truyentranh8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -463,9 +473,9 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap vechai_logo {
+        internal static System.Drawing.Bitmap vechai {
             get {
-                object obj = ResourceManager.GetObject("vechai_logo", resourceCulture);
+                object obj = ResourceManager.GetObject("vechai", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

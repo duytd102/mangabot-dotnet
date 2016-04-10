@@ -28,7 +28,7 @@ namespace WebScraper.Scrapers.Implement
 
             if (paginator != null)
             {
-                HtmlNode lastPage = paginator.Descendants().Last(x => x.Name.Equals("a"));
+                HtmlNode lastPage = paginator.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
                 Match p = Regex.Match(lastPage.GetAttributeValue("href", ""), pattern, RegexOptions.IgnoreCase);
                 return int.Parse(p.Groups["PAGE_INDEX"].Value);
             }
@@ -80,7 +80,7 @@ namespace WebScraper.Scrapers.Implement
                 x => x.GetAttributeValue("class", "").Contains("row")).ToList();
             foreach (HtmlNode c in list)
             {
-                HtmlNode title = c.Descendants().First(x => x.Name.Equals("a"));
+                HtmlNode title = c.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
 
                 Chapter chapter = new Chapter();
                 chapter.ID = Guid.NewGuid().ToString();

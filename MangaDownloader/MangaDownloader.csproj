@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MangaDownloader</RootNamespace>
-    <AssemblyName>Manga Downloader</AssemblyName>
+    <AssemblyName>Manga Bot</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -86,8 +86,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="GlobalExceptionCatcher.cs" />
-    <Compile Include="GlobalProperties.cs" />
     <Compile Include="GUIs\AdvancedSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +324,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\mangapark1.png" />
+    <None Include="Resources\hocvientruyentranh1.png" />
+    <None Include="Resources\truyentranh8.png" />
+    <None Include="Resources\vechai.png" />
+    <None Include="Resources\otakufc.png" />
+    <None Include="Resources\manga24h.png" />
+    <None Include="Resources\48x481.png" />
+    <None Include="Resources\48x48.png" />
     <None Include="Resources\mangapark.png" />
     <None Include="Resources\hocvientruyentranh.png" />
     <None Include="Resources\kissmanga_logo.png" />

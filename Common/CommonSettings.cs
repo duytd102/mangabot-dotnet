@@ -28,7 +28,7 @@ namespace Common
             get
             {
 #if (!DEBUG)
-                    appMode = Mode.PROD;
+                    appMode = AppMode.PROD;
 #else
                 appMode = (AppMode)Enum.Parse(typeof(AppMode), Properties.Settings.Default.AppMode);
 #endif

@@ -140,7 +140,7 @@ namespace MangaDownloader.GUIs
                     if (VersionUtils.CheckForUpdates(out vd))
                     {
                         UpdateVersionHighlight(vd);
-                        SettingsData sd = SettingsManager.GetInstance().GetAppSettings();
+                        ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
                         string ignoreVersion = sd.IgnoreVersion;
                         if (!ignoreVersion.Equals(vd.Version))
                         {
@@ -182,7 +182,7 @@ namespace MangaDownloader.GUIs
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SettingsData sd = SettingsManager.GetInstance().GetAppSettings();
+            ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
             if (sd.MinimizeTaskbar)
             {
                 e.Cancel = true;
@@ -1267,7 +1267,7 @@ namespace MangaDownloader.GUIs
                 }
                 else
                 {
-                    SettingsData sd = SettingsManager.GetInstance().GetAppSettings();
+                    ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
                     sd.IgnoreVersion = vd.Version;
                     SettingsManager.SaveChanges();
                 }

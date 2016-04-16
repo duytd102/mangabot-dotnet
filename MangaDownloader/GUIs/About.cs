@@ -41,7 +41,8 @@ namespace MangaDownloader.GUIs
             bd.AppendLine("=== Contact ===");
             bd.AppendLine("Author: Duy Tran");
             bd.AppendLine("Email: dangduy2910@gmail.com");
-            bd.AppendLine("Website: https://mangabot.wordpress.com/");
+            bd.AppendLine("Website: http://mangabot.github.io/");
+            bd.AppendLine("               https://mangabot.wordpress.com/");
             bd.AppendLine("               https://flashmangadownloader.wordpress.com/");
             bd.AppendLine("               https://tdduy89.wordpress.com/");
             bd.AppendLine("               https://tdduy89.blogspot.com/");

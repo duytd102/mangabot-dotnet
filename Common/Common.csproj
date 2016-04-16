@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonSettings.cs" />
+    <Compile Include="ConfigurationIO.cs" />
     <Compile Include="EnumUtils.cs" />
     <Compile Include="EventAction.cs" />
     <Compile Include="FileUtils.cs" />
@@ -84,7 +85,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="StringUtils.cs" />
     <Compile Include="UrlUtils.cs" />
     <Compile Include="VersionUtils.cs" />
@@ -92,7 +92,9 @@
     <Compile Include="ZipUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

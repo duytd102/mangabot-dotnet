@@ -1,31 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Web;
 
 namespace Common
 {
     public class GoogleAnalyticsUtils
     {
-        private static String GA_URL = CommonSettings.GaBaseUrl();
-        private static String TRACKING_ID = CommonSettings.GaTrackingId();
-        private static String CID = Common.Properties.Settings.Default.GaClientID;
+        private static string GA_URL = CommonSettings.GaBaseUrl();
+        private static string TRACKING_ID = CommonSettings.GaTrackingId();
+        private static string CID = "";
 
         static GoogleAnalyticsUtils()
         {
-            if (String.IsNullOrEmpty(CID))
+            ConfigurationData cd = ConfigurationIO.Read();
+
+            CID = Properties.Settings.Default.GaClientID;
+
+            if (string.IsNullOrWhiteSpace(CID))
             {
-                Common.Properties.Settings.Default.GaClientID = Guid.NewGuid().ToString();
-                Common.Properties.Settings.Default.Save();
+                CID = cd.ClientID;
+
+                if (string.IsNullOrWhiteSpace(CID))
+                {
+                    CID = Guid.NewGuid().ToString().Replace("-", "");
+                }
             }
-            CID = Common.Properties.Settings.Default.GaClientID;
+
+            Properties.Settings.Default.GaClientID = CID;
+            Properties.Settings.Default.Save();
+
+            cd.ClientID = CID;
+            ConfigurationIO.Write(cd);
         }
 
-        public static void SendEvent(String appName, String appVersion, String site, EventAction eventAction, String url)
+        public static void SendEvent(string appName, string appVersion, string site, EventAction eventAction, string url)
         {
             NameValueCollection values = GetDefaultParams(appName, appVersion);
             values["t"] = "event";                      // HIT TYPE
@@ -36,7 +44,7 @@ namespace Common
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }
 
-        public static void SendError(String appName, String appVersion, Exception e)
+        public static void SendError(string appName, string appVersion, Exception e)
         {
             NameValueCollection values = GetDefaultParams(appName, appVersion);
             values["t"] = "exception";      // HIT TYPE
@@ -45,7 +53,7 @@ namespace Common
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }
 
-        public static void SendView(String appName, String appVersion, String screen)
+        public static void SendView(string appName, string appVersion, string screen)
         {
             NameValueCollection values = GetDefaultParams(appName, appVersion);
             values["t"] = "screenview";     // HIT TYPE
@@ -54,7 +62,7 @@ namespace Common
             HttpUtils.MakeHttpGet(GA_URL, collection2String(values));
         }
 
-        private static NameValueCollection GetDefaultParams(String appName, String appVersion)
+        private static NameValueCollection GetDefaultParams(string appName, string appVersion)
         {
             NameValueCollection values = new NameValueCollection();
             values["v"] = "1";                      // VERSION
@@ -67,7 +75,7 @@ namespace Common
             return values;
         }
 
-        private static String collection2String(NameValueCollection values)
+        private static string collection2String(NameValueCollection values)
         {
             string str = "";
             foreach (string item in values)

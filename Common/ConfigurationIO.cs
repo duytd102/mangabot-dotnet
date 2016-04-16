@@ -1,15 +1,12 @@
-﻿using CsvHelper;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
-namespace MangaDownloader.Utils
+namespace Common
 {
-    class SettingsUtils
+    public class ConfigurationIO
     {
+        private static string CLIENT_ID = "ClientID";
         private static string TOTAL_WORKERS = "TotalWorkers";
         private static string SHORTCUT = "Shortcut";
         private static string ZIP = "ZIP";
@@ -21,18 +18,19 @@ namespace MangaDownloader.Utils
         private static string IGNORE_VERSION = "IgnoreVersion";
         private static string MINIMIZE_TASKBAR = "MinimizeTaskbar";
 
-        public static void Write(SettingsData sd)
+        public static void Write(ConfigurationData sd)
         {
             try
             {
-                string folder = Application.StartupPath + "\\data";
+                string folder = AppDomain.CurrentDomain.BaseDirectory + "\\data";
                 Directory.CreateDirectory(folder);
 
                 string configPath = folder + "\\configuration";
                 using (StreamWriter sw = new StreamWriter(configPath, false, Encoding.UTF8))
                 {
                     StringBuilder builder = new StringBuilder();
-                    builder.AppendFormat("{0}={1}{2}", TOTAL_WORKERS, sd.TotalConcurrentWorkers, Environment.NewLine)
+                    builder.AppendFormat("{0}={1}{2}", CLIENT_ID, sd.ClientID, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", TOTAL_WORKERS, sd.TotalConcurrentWorkers, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", SHORTCUT, sd.AutoCreateShortcut ? 1 : 0, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", ZIP, sd.AutoCreateZip ? 1 : 0, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", PDF, sd.AutoCreatePdf ? 1 : 0, Environment.NewLine)
@@ -49,12 +47,12 @@ namespace MangaDownloader.Utils
             catch { }
         }
 
-        public static SettingsData Read()
+        public static ConfigurationData Read()
         {
-            SettingsData sd = new SettingsData();
+            ConfigurationData sd = new ConfigurationData();
             try
             {
-                string folder = Application.StartupPath + "\\data";
+                string folder = AppDomain.CurrentDomain.BaseDirectory + "\\data";
                 Directory.CreateDirectory(folder);
 
                 string configPath = folder + "\\configuration";
@@ -64,8 +62,11 @@ namespace MangaDownloader.Utils
                     {
                         string line = sr.ReadLine();
                         string[] parts = line.Split('=');
-                        if (parts.Length == 2) {
-                            if (parts[0] == TOTAL_WORKERS)
+                        if (parts.Length == 2)
+                        {
+                            if (parts[0] == CLIENT_ID)
+                                sd.ClientID = parts[1];
+                            else if (parts[0] == TOTAL_WORKERS)
                                 sd.TotalConcurrentWorkers = int.Parse(parts[1]);
                             else if (parts[0] == SHORTCUT)
                                 sd.AutoCreateShortcut = ConvertToBoolean(parts[1], true);
@@ -108,8 +109,9 @@ namespace MangaDownloader.Utils
         }
     }
 
-    class SettingsData
+    public class ConfigurationData
     {
+        public string ClientID;
         public int TotalConcurrentWorkers;
         public bool AutoCreateShortcut;
         public bool AutoCreateZip;
@@ -121,15 +123,16 @@ namespace MangaDownloader.Utils
         public string IgnoreVersion;
         public bool MinimizeTaskbar;
 
-        public SettingsData()
+        public ConfigurationData()
         {
+            ClientID = "";
             TotalConcurrentWorkers = 3;
             AutoCreateShortcut = true;
             AutoCreateZip = false;
             AutoCreatePdf = false;
             AutoCleanup = false;
             AutoShutdown = false;
-            DownloadFolder = Application.StartupPath;
+            DownloadFolder = AppDomain.CurrentDomain.BaseDirectory;
             ShowTaskbarInfoOnMinimize = true;
             IgnoreVersion = "";
             MinimizeTaskbar = true;

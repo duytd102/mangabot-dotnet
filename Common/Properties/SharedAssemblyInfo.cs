@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("A tool for downloading manga from the internet")]
+[assembly: AssemblyDescription("Manga Downloader help you to download manga from websites to your computer to view them later.")]
 [assembly: AssemblyCompany("Duy Tran")]
 //[assembly: AssemblyProduct("Manga Bot")]
 [assembly: AssemblyCopyright("Copyright © DuyTran 2016")]

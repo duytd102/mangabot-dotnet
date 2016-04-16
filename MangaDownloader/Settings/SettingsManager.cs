@@ -1,11 +1,5 @@
-﻿using MangaDownloader.Properties;
-using MangaDownloader.Utils;
+﻿using Common;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using WebScraper.Enums;
 
 namespace MangaDownloader.Settings
@@ -13,7 +7,7 @@ namespace MangaDownloader.Settings
     class SettingsManager
     {
         private static SettingsManager instance;
-        private static SettingsData settingsData;
+        private static ConfigurationData configData;
 
         private SettingsManager() { }
 
@@ -26,12 +20,12 @@ namespace MangaDownloader.Settings
 
         public static void Import()
         {
-            settingsData = SettingsUtils.Read();
+            configData = ConfigurationIO.Read();
         }
 
         public static void SaveChanges()
         {
-            SettingsUtils.Write(settingsData);
+            ConfigurationIO.Write(configData);
         }
 
         public Properties.Settings GetSettings()
@@ -39,9 +33,9 @@ namespace MangaDownloader.Settings
             return Properties.Settings.Default;
         }
 
-        public SettingsData GetAppSettings()
+        public ConfigurationData GetAppSettings()
         {
-            return settingsData;
+            return configData;
         }
 
         public String GetDownloadFolderPath(MangaSite site)

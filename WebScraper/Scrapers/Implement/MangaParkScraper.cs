@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace WebScraper.Scrapers.Implement
 
         int IScraper.GetTotalPages()
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
             }
@@ -55,7 +56,7 @@ namespace WebScraper.Scrapers.Implement
 
         List<Manga> IScraper.GetMangaList(int pageIndex)
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<List<Manga>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
             }
@@ -87,7 +88,7 @@ namespace WebScraper.Scrapers.Implement
 
         List<Chapter> IScraper.GetChapterList(string mangaUrl)
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<List<Chapter>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
             }
@@ -139,7 +140,7 @@ namespace WebScraper.Scrapers.Implement
 
         List<Page> IScraper.GetPageList(string chapterUrl)
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<List<Page>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
             }

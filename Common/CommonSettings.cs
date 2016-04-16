@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,9 +9,7 @@ namespace Common
 {
     public class CommonSettings
     {
-        public enum Mode { DEV, BETA, PROD }
-
-        private static Mode appMode;
+        private static AppMode appMode;
 
         public static string AppName()
         {
@@ -24,14 +23,14 @@ namespace Common
             return fvi.FileMajorPart + "." + fvi.FileMinorPart;
         }
 
-        public static Mode AppMode
+        public static AppMode AppMode
         {
             get
             {
 #if (!DEBUG)
                     appMode = Mode.PROD;
 #else
-                appMode = (Mode)Enum.Parse(typeof(Mode), Properties.Settings.Default.AppMode);
+                appMode = (AppMode)Enum.Parse(typeof(AppMode), Properties.Settings.Default.AppMode);
 #endif
                 return appMode;
             }
@@ -64,7 +63,7 @@ namespace Common
 
         public static string GaTrackingId()
         {
-            return AppMode == Mode.PROD ? "UA-61053646-1" : "UA-61053646-2";
+            return AppMode == AppMode.PROD ? "UA-61053646-1" : "UA-61053646-2";
         }
     }
 }

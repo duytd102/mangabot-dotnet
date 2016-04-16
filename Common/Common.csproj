@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="CommonSettings.cs" />
     <Compile Include="ConfigurationIO.cs" />
+    <Compile Include="Enums\AppMode.cs" />
     <Compile Include="EnumUtils.cs" />
     <Compile Include="EventAction.cs" />
     <Compile Include="FileUtils.cs" />

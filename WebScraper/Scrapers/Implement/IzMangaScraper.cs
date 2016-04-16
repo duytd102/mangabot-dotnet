@@ -1,14 +1,13 @@
 ﻿using Common;
+using Common.Enums;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using WebScraper.Data;
 using WebScraper.Enums;
-using WebScraper.Utils;
 
 namespace WebScraper.Scrapers.Implement
 {
@@ -20,7 +19,7 @@ namespace WebScraper.Scrapers.Implement
 
         public int GetTotalPages()
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
             }
@@ -47,7 +46,7 @@ namespace WebScraper.Scrapers.Implement
 
         public List<Manga> GetMangaList(int pageIndex)
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<List<Manga>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
             }
@@ -85,7 +84,7 @@ namespace WebScraper.Scrapers.Implement
 
         public List<Chapter> GetChapterList(string mangaUrl)
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<List<Chapter>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
             }
@@ -121,7 +120,7 @@ namespace WebScraper.Scrapers.Implement
 
         public List<Page> GetPageList(string chapterUrl)
         {
-            if (CommonSettings.AppMode == CommonSettings.Mode.BETA || CommonSettings.AppMode == CommonSettings.Mode.PROD)
+            if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
                 return new BotCrawler<List<Page>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
             }

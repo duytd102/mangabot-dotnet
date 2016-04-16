@@ -6,10 +6,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2016-04-16</Value>
+      <Value Profile="(Default)">2016-04-17</Value>
     </Setting>
     <Setting Name="AppMode" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">BETA</Value>
+      <Value Profile="(Default)">DEV</Value>
     </Setting>
   </Settings>
 </SettingsFile>

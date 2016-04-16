@@ -1,4 +1,4 @@
-﻿Version 2.0 (2016-04-16)
+﻿Version 2.0 (2016-04-17)
 I decide to change the name to "Manga Bot" because "Manga Downloader" is a very common name so it is difficult to search my application on search engine.
 - App name is changed to "Manga Bot"
 - Ability to quickly support & bugfix

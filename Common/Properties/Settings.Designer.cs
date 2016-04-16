@@ -37,7 +37,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2016-04-16")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-04-17")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));
@@ -46,7 +46,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BETA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DEV")]
         public string AppMode {
             get {
                 return ((string)(this["AppMode"]));

@@ -1,4 +1,5 @@
-﻿using Microsoft.CSharp;
+﻿using Common;
+using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -47,9 +48,9 @@ namespace WebScraper
             string script = ScriptManager.GetInstance().GetScript(url);
 
             CompilerParameters compilerParams = new CompilerParameters(new[] {
-                "Common.dll",
-                "WebScraper.dll",
-                "HtmlAgilityPack.dll",
+                "bin\\Common.dll",
+                "bin\\WebScraper.dll",
+                "bin\\HtmlAgilityPack.dll",
                 "System.dll",
                 "System.Core.dll",
                 "System.Data.dll",
@@ -74,6 +75,7 @@ namespace WebScraper
                 {
                     text += "\r\n" + ce.ToString();
                 }
+                LogHelpers.Log("Error: " + text);
                 throw new Exception(text);
             }
 

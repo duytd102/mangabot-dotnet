@@ -5,11 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using WebScraper.Data;
 using WebScraper.Enums;
-using WebScraper.Utils;
 
 namespace WebScraper.Scrapers.Implement
 {
@@ -24,7 +22,9 @@ namespace WebScraper.Scrapers.Implement
         {
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                return new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
+                int total = new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
+                LogHelpers.Log("Total Pages: " + total);
+                return total;
             }
             else
             {
@@ -50,50 +50,51 @@ namespace WebScraper.Scrapers.Implement
 
         public List<Manga> GetMangaList(int pageIndex)
         {
+            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
+
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                return new BotCrawler<List<Manga>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                results = new BotCrawler<List<Dictionary<String, String>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
             }
             else
             {
-
                 string blockFilter = "<(?<TAG>\\w+)[^>]*?class\\s*=\\s*[\"|']\\s*tiptip[^>]*?[\"|'][^>]*?>(?<TEXT>.*?)</\\k<TAG>>";
                 string nameAndUrlFilter = "<a[^>]*?href\\s*=\\s*[\"|'](?<MANGA_URL>.*?)[\"|'][^>]*?>(?<MANGA_NAME>.*?)</a>";
-                List<Manga> mangaList = new List<Manga>();
+                string queryString = String.Format("Url=tatca&OrderBy=1&PageIndex={0}", pageIndex);
                 try
                 {
-                    Uri rootUrl = new Uri(DOMAIN);
-                    String mangaListHtmlSrc = GetHtmlSrcOfMangaList(pageIndex);
+                    string mangaListHtmlSrc = HttpUtils.MakeHttpGet(ROOT_MANGALIST_URL, queryString);
+
                     MatchCollection blockes = Regex.Matches(mangaListHtmlSrc, blockFilter, RegexOptions.IgnoreCase);
                     foreach (Match blk in blockes)
                     {
                         Match nameAndUrlGroup = Regex.Match(blk.Groups["TEXT"].Value, nameAndUrlFilter, RegexOptions.IgnoreCase);
-
                         String name = Regex.Replace(nameAndUrlGroup.Groups["MANGA_NAME"].Value, "<img.*?>", "", RegexOptions.IgnoreCase).Trim();
-
-                        Manga manga = new Manga();
-                        manga.ID = Guid.NewGuid().ToString();
-                        manga.Name = WebUtility.HtmlDecode(name);
-                        manga.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, nameAndUrlGroup.Groups["MANGA_URL"].Value));
-                        manga.LocalPath = "";
-                        manga.Site = MangaSite.BLOGTRUYEN;
-                        mangaList.Add(manga);
+                        
+                        results.Add(new Dictionary<string, string>()
+                        {
+                            { "id", Guid.NewGuid().ToString() },
+                            { "name", name },
+                            { "url", nameAndUrlGroup.Groups["MANGA_URL"].Value }
+                        });
                     }
                 }
                 catch { }
-                return mangaList;
             }
+
+            return DictionaryToList.ToMangaList(DOMAIN, MangaSite.BLOGTRUYEN, results);
         }
 
         public List<Chapter> GetChapterList(string mangaUrl)
         {
+            List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
+
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                return new BotCrawler<List<Chapter>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
             }
             else
             {
-                List<Chapter> chapterList = new List<Chapter>();
                 String mangaHtmlSrc = HttpUtils.MakeHttpGet(mangaUrl);
                 HtmlDocument chapterDoc = new HtmlDocument();
                 chapterDoc.LoadHtml(mangaHtmlSrc);
@@ -123,13 +124,12 @@ namespace WebScraper.Scrapers.Implement
                             if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(url))
                                 continue;
 
-                            Chapter chapter = new Chapter();
-                            chapter.ID = Guid.NewGuid().ToString();
-                            chapter.Name = name;
-                            chapter.Url = url;
-                            chapter.PublishedDate = publishedDate.InnerText;
-                            chapter.Site = MangaSite.BLOGTRUYEN;
-                            chapterList.Add(chapter);
+                            results.Add(new Dictionary<string, string>()
+                            {
+                                { "id", Guid.NewGuid().ToString() },
+                                { "name", name },
+                                { "url", url }
+                            });
                         }
                         catch (Exception) { }
                     }
@@ -171,8 +171,9 @@ namespace WebScraper.Scrapers.Implement
                         catch { }
                     }
                 }
-                return chapterList;
             }
+
+            return DictionaryToList.ToChapterList(DOMAIN, MangaSite.BLOGTRUYEN, results);
         }
 
         public List<Page> GetPageList(string chapterUrl)

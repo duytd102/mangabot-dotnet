@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using WebScraper.Data;
 using WebScraper.Enums;
 
@@ -14,8 +12,8 @@ namespace WebScraper.Scrapers.Implement
 {
     class HocVienTruyenTranhScraper : IScraper
     {
-        const String BASE_LIST_URL = "http://truyen.academyvn.com/manga/all?page=";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/hocvientruyentranh.txt";
+        const string BASE_LIST_URL = "http://truyen.academyvn.com/manga/all?page=";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/hocvientruyentranh.cs";
         const string CLASS_NAME = "WebScraper.Scrapers.Implement.HocVienTruyenTranhScraper";
 
         public int GetTotalPages()

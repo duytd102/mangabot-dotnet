@@ -3,6 +3,7 @@ using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 namespace WebScraper
@@ -46,17 +47,19 @@ namespace WebScraper
         public T Invoke(string fullClassName, string methodName, object[] parameters = null)
         {
             string script = ScriptManager.GetInstance().GetScript(url);
-
-            CompilerParameters compilerParams = new CompilerParameters(new[] {
-                "bin\\Common.dll",
-                "bin\\WebScraper.dll",
-                "bin\\HtmlAgilityPack.dll",
+            string folder = AppDomain.CurrentDomain.BaseDirectory;
+            
+            List<string> libs = new List<string>()
+            {
                 "System.dll",
                 "System.Core.dll",
-                "System.Data.dll",
+                "System.Linq.dll",
                 "System.Xml.dll",
-                "System.Xml.Linq.dll",
-            });
+                File.Exists(folder + "\\Common.dll") ? "Common.dll" : "bin\\Common.dll",
+                File.Exists(folder + "\\HtmlAgilityPack.dll") ? "HtmlAgilityPack.dll" : "bin\\HtmlAgilityPack.dll"
+            };
+            
+            CompilerParameters compilerParams = new CompilerParameters(libs.ToArray());
             compilerParams.GenerateInMemory = true;
             compilerParams.GenerateExecutable = false;
             compilerParams.TreatWarningsAsErrors = false;

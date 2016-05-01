@@ -1,12 +1,9 @@
 ﻿using Common;
 using Common.Enums;
-using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using WebScraper.Data;
 using WebScraper.Enums;
+using WebScraper.Scrapers.Scripts;
 
 namespace WebScraper.Scrapers.Implement
 {
@@ -14,7 +11,7 @@ namespace WebScraper.Scrapers.Implement
     {
         const string DOMAIN = "http://blogtruyen.com";
         const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/blogtruyen.cs";
-        const string CLASS_NAME = "WebScraper.Scrapers.Implement.BlogTruyenScript";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.BlogTruyenScript";
 
         public int GetTotalPages()
         {

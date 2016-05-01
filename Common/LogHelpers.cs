@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Common.Enums;
+using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -15,17 +14,20 @@ namespace Common
 
         static LogHelpers()
         {
-            filePath = AppDomain.CurrentDomain.BaseDirectory + "\\ .log";
+            filePath = AppDomain.CurrentDomain.BaseDirectory + "\\debug.log";
         }
 
         public static void Log(string msg)
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(filePath, true, Encoding.UTF8))
+                if (CommonSettings.AppMode != AppMode.PROD)
                 {
-                    sw.WriteLine(Regex.Replace(msg, "(\\r|\\n|\\t|\\s{4})+", ""));
-                    sw.Close();
+                    using (StreamWriter sw = new StreamWriter(filePath, true, Encoding.UTF8))
+                    {
+                        sw.WriteLine(Regex.Replace(msg, "(\\r|\\n|\\t|\\s{4})+", ""));
+                        sw.Close();
+                    }
                 }
             }
             catch { }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace WebScraper.Scrapers.Implement
+namespace WebScraper.Scrapers.Scripts
 {
     class BlogTruyenScript
     {
@@ -53,7 +53,7 @@ namespace WebScraper.Scrapers.Implement
                     string name = Regex.Replace(nameAndUrlGroup.Groups["MANGA_NAME"].Value, "<img.*?>", "", RegexOptions.IgnoreCase).Trim();
                     string url = nameAndUrlGroup.Groups["MANGA_URL"].Value;
 
-                    if ((string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(url)) == false)
+                    if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
                     {
                         results.Add(new Dictionary<string, string>()
                             {
@@ -89,7 +89,7 @@ namespace WebScraper.Scrapers.Implement
                         string name = title.InnerText.Trim();
                         string url = title.GetAttributeValue("href", "").Replace("../", "").Trim();
 
-                        if ((string.IsNullOrEmpty(name) || string.IsNullOrEmpty(url)) == false)
+                        if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
                         {
                             results.Add(new Dictionary<string, string>()
                                 {
@@ -118,7 +118,7 @@ namespace WebScraper.Scrapers.Implement
                         string name = info.InnerText.Trim();
                         string url = info.GetAttributeValue("href", "").Replace("../", "").Trim();
 
-                        if ((string.IsNullOrEmpty(name) || string.IsNullOrEmpty(url)) == false)
+                        if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
                         {
                             results.Add(new Dictionary<string, string>()
                                 {

@@ -1,8 +1,5 @@
 ﻿using MangaDownloader.Workers.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MangaDownloader.Workers
 {

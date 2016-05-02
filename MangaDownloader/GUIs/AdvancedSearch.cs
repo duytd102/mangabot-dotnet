@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using MangaDownloader.Enums;
 using MangaDownloader.Utils;
 using MangaDownloader.Workers.Data;
@@ -7,13 +8,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using WebScraper.Data;
-using WebScraper.Enums;
 
 namespace MangaDownloader.GUIs
 {
@@ -167,17 +165,17 @@ namespace MangaDownloader.GUIs
         {
             // TODO import manga list if has more site
             mangaList = new List<Manga>();
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.BLOGTRUYEN));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.IZMANGA));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.KISSMANGA));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGA24H));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAFOX));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.TRUYENTRANH8));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.TRUYENTRANHTUAN));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.VECHAI));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.OTAKUFC));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.HOCVIENTRUYENTRANH));
-            mangaList.AddRange(MangaUtils.Import(WebScraper.Enums.MangaSite.MANGAPARK));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.BLOGTRUYEN));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.IZMANGA));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.KISSMANGA));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.MANGA24H));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAFOX));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANH8));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANHTUAN));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.VECHAI));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.OTAKUFC));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.HOCVIENTRUYENTRANH));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAPARK));
             mangaList.Sort(new Comparison<Manga>((Manga m1, Manga m2) => { return m1.Name.CompareTo(m2.Name); }));
         }
 

@@ -1,5 +1,5 @@
-﻿using System;
-using WebScraper.Enums;
+﻿using Common.Enums;
+using System;
 using WebScraper.Scrapers.Implement;
 
 namespace WebScraper.Scrapers

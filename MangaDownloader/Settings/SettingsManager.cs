@@ -1,6 +1,6 @@
 ﻿using Common;
+using Common.Enums;
 using System;
-using WebScraper.Enums;
 
 namespace MangaDownloader.Settings
 {

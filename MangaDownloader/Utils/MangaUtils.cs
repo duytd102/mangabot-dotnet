@@ -1,4 +1,5 @@
-﻿using CsvHelper;
+﻿using Common.Enums;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,7 +7,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using WebScraper.Data;
-using WebScraper.Enums;
 
 namespace MangaDownloader.Utils
 {

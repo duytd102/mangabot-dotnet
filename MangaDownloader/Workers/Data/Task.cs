@@ -1,9 +1,6 @@
-﻿using MangaDownloader.Enums;
+﻿using Common.Enums;
+using MangaDownloader.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WebScraper.Enums;
 
 namespace MangaDownloader.Workers.Data
 {

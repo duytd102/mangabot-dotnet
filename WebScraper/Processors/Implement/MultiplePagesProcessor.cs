@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using WebScraper.Data;
-using WebScraper.Enums;
 using WebScraper.Scrapers;
 
 namespace WebScraper.Processors.Implement

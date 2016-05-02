@@ -1,12 +1,6 @@
 ﻿using MangaDownloader.Settings;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MangaDownloader.GUIs
@@ -29,13 +23,14 @@ namespace MangaDownloader.GUIs
             cbTurnOffComputerWhenDone.Checked = commonSettings.AutoShutdown;
             tbDefaultFolder.Text = commonSettings.DownloadFolder;
             cbMinimizeTaskbar.Checked = commonSettings.MinimizeTaskbar;
+            nudUpdateAfter.Value = commonSettings.UpdateAfter;
         }
 
         private void btBrowse_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog d = new FolderBrowserDialog();
             d.SelectedPath = tbDefaultFolder.Text;
-            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (d.ShowDialog() == DialogResult.OK)
                 tbDefaultFolder.Text = d.SelectedPath;
         }
 
@@ -52,6 +47,7 @@ namespace MangaDownloader.GUIs
                 commonSettings.AutoShutdown = cbTurnOffComputerWhenDone.Checked;
                 commonSettings.DownloadFolder = tbDefaultFolder.Text;
                 commonSettings.MinimizeTaskbar = cbMinimizeTaskbar.Checked;
+                commonSettings.UpdateAfter = (int)nudUpdateAfter.Value;
                 SettingsManager.SaveChanges();
                 this.Close();
             }

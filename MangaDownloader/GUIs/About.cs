@@ -1,6 +1,4 @@
 ﻿using Common;
-using MangaDownloader.Settings;
-using MangaDownloader.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;

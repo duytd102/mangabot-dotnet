@@ -68,7 +68,6 @@
     <Compile Include="Data\Chapter.cs" />
     <Compile Include="Data\Manga.cs" />
     <Compile Include="Data\Page.cs" />
-    <Compile Include="Enums\MangaSite.cs" />
     <Compile Include="Processors\Implement\MultiplePagesProcessor.cs" />
     <Compile Include="Processors\IProcessor.cs" />
     <Compile Include="Processors\ProcessorFactory.cs" />

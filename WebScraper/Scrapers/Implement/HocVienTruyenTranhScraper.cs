@@ -2,7 +2,6 @@
 using Common.Enums;
 using System.Collections.Generic;
 using WebScraper.Data;
-using WebScraper.Enums;
 using WebScraper.Scrapers.Scripts;
 
 namespace WebScraper.Scrapers.Implement

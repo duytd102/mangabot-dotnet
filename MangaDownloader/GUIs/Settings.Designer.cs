@@ -41,14 +41,18 @@
             this.nudTotalWorkers = new System.Windows.Forms.NumericUpDown();
             this.cbTurnOffComputerWhenDone = new System.Windows.Forms.CheckBox();
             this.cbMinimizeTaskbar = new System.Windows.Forms.CheckBox();
+            this.nudUpdateAfter = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalWorkers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUpdateAfter)).BeginInit();
             this.SuspendLayout();
             // 
             // btBrowse
             // 
             this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btBrowse.Image = global::MangaDownloader.Properties.Resources.folder_explore;
-            this.btBrowse.Location = new System.Drawing.Point(231, 204);
+            this.btBrowse.Location = new System.Drawing.Point(231, 237);
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(35, 22);
             this.btBrowse.TabIndex = 28;
@@ -69,7 +73,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Location = new System.Drawing.Point(103, 240);
+            this.btnSave.Location = new System.Drawing.Point(103, 272);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 25;
@@ -81,7 +85,7 @@
             // 
             this.tbDefaultFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDefaultFolder.Location = new System.Drawing.Point(12, 204);
+            this.tbDefaultFolder.Location = new System.Drawing.Point(12, 237);
             this.tbDefaultFolder.Name = "tbDefaultFolder";
             this.tbDefaultFolder.Size = new System.Drawing.Size(213, 22);
             this.tbDefaultFolder.TabIndex = 24;
@@ -89,7 +93,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 187);
+            this.label3.Location = new System.Drawing.Point(9, 220);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 14);
             this.label3.TabIndex = 23;
@@ -187,11 +191,54 @@
             this.cbMinimizeTaskbar.Text = "Minimize to the taskbar when I close";
             this.cbMinimizeTaskbar.UseVisualStyleBackColor = true;
             // 
+            // nudUpdateAfter
+            // 
+            this.nudUpdateAfter.Location = new System.Drawing.Point(180, 183);
+            this.nudUpdateAfter.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nudUpdateAfter.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudUpdateAfter.Name = "nudUpdateAfter";
+            this.nudUpdateAfter.Size = new System.Drawing.Size(39, 22);
+            this.nudUpdateAfter.TabIndex = 31;
+            this.nudUpdateAfter.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 185);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(165, 14);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "Auto-update manga list after";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(225, 185);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 14);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "day(s)";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 282);
+            this.ClientSize = new System.Drawing.Size(281, 314);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.nudUpdateAfter);
             this.Controls.Add(this.cbMinimizeTaskbar);
             this.Controls.Add(this.cbTurnOffComputerWhenDone);
             this.Controls.Add(this.btBrowse);
@@ -214,6 +261,7 @@
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalWorkers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUpdateAfter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,5 +282,8 @@
         private System.Windows.Forms.Button btBrowse;
         private System.Windows.Forms.CheckBox cbTurnOffComputerWhenDone;
         private System.Windows.Forms.CheckBox cbMinimizeTaskbar;
+        private System.Windows.Forms.NumericUpDown nudUpdateAfter;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -1,23 +1,20 @@
 ﻿using Common;
+using Common.Enums;
 using MangaDownloader.Enums;
 using MangaDownloader.Settings;
 using MangaDownloader.Utils;
 using MangaDownloader.Workers;
 using MangaDownloader.Workers.Data;
-using Microsoft.CSharp;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using WebScraper.Data;
-using WebScraper.Enums;
 using WebScraper.Processors;
 
 namespace MangaDownloader.GUIs
@@ -152,6 +149,8 @@ namespace MangaDownloader.GUIs
             }));
             versionThread.IsBackground = true;
             versionThread.Start();
+
+            AutoUpdateMangaList();
 
             System.Timers.Timer t = new System.Timers.Timer(5000);
             t.Elapsed += t_Elapsed;
@@ -422,6 +421,7 @@ namespace MangaDownloader.GUIs
         {
             tslbMangaLoading.Visible = false;
             tsbtSiteUpdate.Visible = true;
+            ConfigurationIO.WriteSiteUpdatedDate(currentSite, DateTime.Now.Date);
         }
 
         private void UpdateMangaListGridView(List<Manga> mangaList)
@@ -1415,6 +1415,63 @@ namespace MangaDownloader.GUIs
         {
             setCurrentSite(MangaSite.MANGAPARK);
             tsMangaCommands_Resize(sender, e);
+        }
+
+        BackgroundWorker autoUpdateMangaListWorker = new BackgroundWorker();
+        Common.Enums.MangaSite autoUpdateMangaSite = Common.Enums.MangaSite.UNKNOWN;
+
+        private void AutoUpdateMangaList()
+        {
+            autoUpdateMangaListWorker.WorkerReportsProgress = true;
+            autoUpdateMangaListWorker.DoWork += AutoUpdateMangaListWorker_DoWork;
+            autoUpdateMangaListWorker.ProgressChanged += AutoUpdateMangaListWorker_ProgressChanged;
+            autoUpdateMangaListWorker.RunWorkerCompleted += AutoUpdateMangaListWorker_RunWorkerCompleted;
+            Common.Enums.MangaSite site = checkAndRunAutoUpdateMangaList();
+            if (site != Common.Enums.MangaSite.UNKNOWN)
+            {
+                autoUpdateMangaSite = site;
+                autoUpdateMangaListWorker.RunWorkerAsync(site);
+            }
+        }
+
+        private Common.Enums.MangaSite checkAndRunAutoUpdateMangaList()
+        {
+            ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
+            Dictionary<Common.Enums.MangaSite, DateTime> sites = ConfigurationIO.ReadSiteDates();
+            foreach (Common.Enums.MangaSite s in sites.Keys)
+            {
+                DateTime dt = sites[s];
+                DateTime afterDays = dt.AddDays(sd.UpdateAfter);
+                if (afterDays.Date <= DateTime.Now.Date)
+                {
+                    return s;
+                }
+            }
+            return Common.Enums.MangaSite.UNKNOWN;
+        }
+
+        private void AutoUpdateMangaListWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LogHelpers.Log(autoUpdateMangaSite.ToString() + " - " + e.ProgressPercentage);
+        }
+
+        private void AutoUpdateMangaListWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            ConfigurationIO.WriteSiteUpdatedDate(autoUpdateMangaSite, DateTime.Now.Date);
+            Common.Enums.MangaSite site = checkAndRunAutoUpdateMangaList();
+            if (site != Common.Enums.MangaSite.UNKNOWN)
+            {
+                autoUpdateMangaSite = site;
+                autoUpdateMangaListWorker.RunWorkerAsync(site);
+            }
+        }
+
+        private void AutoUpdateMangaListWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            MangaSite site = (MangaSite)e.Argument;
+            IProcessor processor = ProcessorFactory.CreateProcessor(site);
+            processor.ScrapOneMangaPageComplete += processor_ScrapOneMangaPageComplete;
+            processor.GetMangaList();
         }
     }
 }

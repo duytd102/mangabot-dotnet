@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -17,12 +20,79 @@ namespace Common
         private static string SHOW_TASKBAR_INFO = "ShowInfo";
         private static string IGNORE_VERSION = "IgnoreVersion";
         private static string MINIMIZE_TASKBAR = "MinimizeTaskbar";
+        private static string UPDATE_AFTER = "UpdateAfter";
+
+        private static ConfigurationData config = new ConfigurationData();
+        private static Dictionary<MangaSite, DateTime> siteUpdatedDates = new Dictionary<MangaSite, DateTime>();
+
+        public static ConfigurationData Read()
+        {
+            try
+            {
+                config = new ConfigurationData();
+                siteUpdatedDates.Clear();
+
+                string folder = AppDomain.CurrentDomain.BaseDirectory + "data";
+                Directory.CreateDirectory(folder);
+
+                string configPath = folder + "\\configuration";
+                using (StreamReader sr = new StreamReader(configPath, Encoding.UTF8))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] parts = line.Split('=');
+                        if (parts.Length == 2)
+                        {
+                            if (parts[0] == CLIENT_ID)
+                                config.ClientID = parts[1];
+                            else if (parts[0] == TOTAL_WORKERS)
+                                config.TotalConcurrentWorkers = int.Parse(parts[1]);
+                            else if (parts[0] == SHORTCUT)
+                                config.AutoCreateShortcut = ConvertToBoolean(parts[1], true);
+                            else if (parts[0] == ZIP)
+                                config.AutoCreateZip = ConvertToBoolean(parts[1], false);
+                            else if (parts[0] == PDF)
+                                config.AutoCreatePdf = ConvertToBoolean(parts[1], false);
+                            else if (parts[0] == CLEANUP)
+                                config.AutoCleanup = ConvertToBoolean(parts[1], false);
+                            else if (parts[0] == SHUTDOWN)
+                                config.AutoShutdown = ConvertToBoolean(parts[1], false);
+                            else if (parts[0] == DOWNLOAD_FOLDER)
+                                config.DownloadFolder = parts[1];
+                            else if (parts[0] == SHOW_TASKBAR_INFO)
+                                config.ShowTaskbarInfoOnMinimize = ConvertToBoolean(parts[1], true);
+                            else if (parts[0] == IGNORE_VERSION)
+                                config.IgnoreVersion = parts[1];
+                            else if (parts[0] == MINIMIZE_TASKBAR)
+                                config.MinimizeTaskbar = ConvertToBoolean(parts[1], true);
+                            else if (parts[0] == UPDATE_AFTER)
+                                config.UpdateAfter = int.Parse(parts[1]);
+
+                            foreach (MangaSite ms in Enum.GetValues(typeof(MangaSite)))
+                            {
+                                if (ms.ToString().Equals(parts[0], StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    DateTime dt = DateTime.ParseExact(parts[1], "yyyyMMdd", CultureInfo.CurrentCulture);
+                                    siteUpdatedDates.Add(ms, dt);
+                                }
+                            }
+                        }
+                    }
+                    sr.Close();
+                }
+            }
+            catch { }
+            return config;
+        }
 
         public static void Write(ConfigurationData sd)
         {
             try
             {
-                string folder = AppDomain.CurrentDomain.BaseDirectory + "\\data";
+                config = new ConfigurationData(sd);
+
+                string folder = AppDomain.CurrentDomain.BaseDirectory + "data";
                 Directory.CreateDirectory(folder);
 
                 string configPath = folder + "\\configuration";
@@ -39,60 +109,47 @@ namespace Common
                         .AppendFormat("{0}={1}{2}", DOWNLOAD_FOLDER, sd.DownloadFolder, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", SHOW_TASKBAR_INFO, sd.ShowTaskbarInfoOnMinimize ? 1 : 0, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", IGNORE_VERSION, sd.IgnoreVersion, Environment.NewLine)
-                        .AppendFormat("{0}={1}", MINIMIZE_TASKBAR, sd.MinimizeTaskbar ? 1 : 0);
-                    sw.WriteLine(builder.ToString());
+                        .AppendFormat("{0}={1}{2}", MINIMIZE_TASKBAR, sd.MinimizeTaskbar ? 1 : 0, Environment.NewLine)
+                        .AppendFormat("{0}={1}{2}", UPDATE_AFTER, sd.UpdateAfter, Environment.NewLine);
+
+                    foreach (MangaSite s in siteUpdatedDates.Keys)
+                    {
+                        builder.AppendFormat("{0}={1}{2}", s.ToString(), siteUpdatedDates[s].ToString("yyyyMMdd"), Environment.NewLine);
+                    }
+
+                    sw.Write(builder.ToString());
                     sw.Close();
                 }
             }
             catch { }
         }
 
-        public static ConfigurationData Read()
+        public static Dictionary<MangaSite, DateTime> ReadSiteDates()
         {
-            ConfigurationData sd = new ConfigurationData();
+            return siteUpdatedDates;
+        }
+
+        public static void WriteSiteUpdatedDate(MangaSite site, DateTime dt)
+        {
             try
             {
-                string folder = AppDomain.CurrentDomain.BaseDirectory + "\\data";
+                string folder = AppDomain.CurrentDomain.BaseDirectory + "data";
                 Directory.CreateDirectory(folder);
 
                 string configPath = folder + "\\configuration";
-                using (StreamReader sr = new StreamReader(configPath, Encoding.UTF8))
+
+                if (siteUpdatedDates.ContainsKey(site))
                 {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        string[] parts = line.Split('=');
-                        if (parts.Length == 2)
-                        {
-                            if (parts[0] == CLIENT_ID)
-                                sd.ClientID = parts[1];
-                            else if (parts[0] == TOTAL_WORKERS)
-                                sd.TotalConcurrentWorkers = int.Parse(parts[1]);
-                            else if (parts[0] == SHORTCUT)
-                                sd.AutoCreateShortcut = ConvertToBoolean(parts[1], true);
-                            else if (parts[0] == ZIP)
-                                sd.AutoCreateZip = ConvertToBoolean(parts[1], false);
-                            else if (parts[0] == PDF)
-                                sd.AutoCreatePdf = ConvertToBoolean(parts[1], false);
-                            else if (parts[0] == CLEANUP)
-                                sd.AutoCleanup = ConvertToBoolean(parts[1], false);
-                            else if (parts[0] == SHUTDOWN)
-                                sd.AutoShutdown = ConvertToBoolean(parts[1], false);
-                            else if (parts[0] == DOWNLOAD_FOLDER)
-                                sd.DownloadFolder = parts[1];
-                            else if (parts[0] == SHOW_TASKBAR_INFO)
-                                sd.ShowTaskbarInfoOnMinimize = ConvertToBoolean(parts[1], true);
-                            else if (parts[0] == IGNORE_VERSION)
-                                sd.IgnoreVersion = parts[1];
-                            else if (parts[0] == MINIMIZE_TASKBAR)
-                                sd.MinimizeTaskbar = ConvertToBoolean(parts[1], true);
-                        }
-                    }
-                    sr.Close();
+                    siteUpdatedDates[site] = dt;
                 }
+                else
+                {
+                    siteUpdatedDates.Add(site, dt);
+                }
+                
+                Write(config);
             }
             catch { }
-            return sd;
         }
 
         private static bool ConvertToBoolean(String str, bool defaultValue)
@@ -100,7 +157,7 @@ namespace Common
             try
             {
                 int i;
-                return Int32.TryParse(str, out i) ? Convert.ToBoolean(i) : Convert.ToBoolean(str);
+                return int.TryParse(str, out i) ? Convert.ToBoolean(i) : Convert.ToBoolean(str);
             }
             catch
             {
@@ -122,6 +179,7 @@ namespace Common
         public bool ShowTaskbarInfoOnMinimize;
         public string IgnoreVersion;
         public bool MinimizeTaskbar;
+        public int UpdateAfter;
 
         public ConfigurationData()
         {
@@ -136,6 +194,23 @@ namespace Common
             ShowTaskbarInfoOnMinimize = true;
             IgnoreVersion = "";
             MinimizeTaskbar = true;
+            UpdateAfter = 7;
+        }
+
+        public ConfigurationData(ConfigurationData cd)
+        {
+            ClientID = cd.ClientID;
+            TotalConcurrentWorkers = cd.TotalConcurrentWorkers;
+            AutoCreateShortcut = cd.AutoCreateShortcut;
+            AutoCreateZip = cd.AutoCreateZip;
+            AutoCreatePdf = cd.AutoCreatePdf;
+            AutoCleanup = cd.AutoCleanup;
+            AutoShutdown = cd.AutoShutdown;
+            DownloadFolder = cd.DownloadFolder;
+            ShowTaskbarInfoOnMinimize = cd.ShowTaskbarInfoOnMinimize;
+            IgnoreVersion = cd.IgnoreVersion;
+            MinimizeTaskbar = cd.MinimizeTaskbar;
+            UpdateAfter = cd.UpdateAfter;
         }
     }
 }

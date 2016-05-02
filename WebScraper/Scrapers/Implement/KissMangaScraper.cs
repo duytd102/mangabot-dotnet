@@ -1,13 +1,12 @@
 ﻿using Common;
+using Common.Enums;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using WebScraper.Data;
-using WebScraper.Enums;
 
 namespace WebScraper.Scrapers.Implement
 {

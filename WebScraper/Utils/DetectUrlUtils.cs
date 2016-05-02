@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WebScraper.Enums;
+﻿using Common.Enums;
+using System;
 
 namespace WebScraper.Utils
 {

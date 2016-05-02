@@ -1,14 +1,8 @@
 ﻿using Common;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -16,7 +10,7 @@ namespace MangaDownloader.GUIs
 {
     public partial class Download : BaseForm
     {
-        private string unZipFolder = String.Format("{0}/{1}", Application.StartupPath, Guid.NewGuid().ToString());
+        private string unZipFolder = String.Format("{0}{1}", Path.GetTempPath(), Guid.NewGuid().ToString());
         private string zipFile = "";
         private string downloadUrl = "";
 

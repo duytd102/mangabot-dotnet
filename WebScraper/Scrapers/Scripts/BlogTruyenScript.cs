@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace WebScraper.Scrapers.Scripts
 {
-    class BlogTruyenScript
+    public class BlogTruyenScript
     {
         const string ROOT_MANGALIST_URL = "http://blogtruyen.com/ListStory/GetListStory/";
 

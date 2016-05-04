@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WebScraper.Scrapers.Scripts
 {
-    class HocVienTruyenTranhScript
+    public class HocVienTruyenTranhScript
     {
         const string BASE_LIST_URL = "http://truyen.academyvn.com/manga/all?page=";
 

@@ -88,6 +88,8 @@
     <Compile Include="Scrapers\Implement\VeChaiScraper.cs" />
     <Compile Include="Scrapers\IScraper.cs" />
     <Compile Include="Scrapers\ScraperFactory.cs" />
+    <Compile Include="Scrapers\Scripts\Manga24hScript.cs" />
+    <Compile Include="Scrapers\Scripts\IzMangaScript.cs" />
     <Compile Include="ScriptManager.cs" />
     <Compile Include="Utils\DetectUrlUtils.cs" />
   </ItemGroup>

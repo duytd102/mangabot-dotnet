@@ -1417,28 +1417,32 @@ namespace MangaDownloader.GUIs
             tsMangaCommands_Resize(sender, e);
         }
 
+
+
         BackgroundWorker autoUpdateMangaListWorker = new BackgroundWorker();
-        Common.Enums.MangaSite autoUpdateMangaSite = Common.Enums.MangaSite.UNKNOWN;
+        IProcessor autoUpdateProcessor;
+        MangaSite autoUpdateMangaSite = MangaSite.UNKNOWN;
+        List<Manga> autoUpdateMangaList = new List<Manga>();
 
         private void AutoUpdateMangaList()
         {
-            autoUpdateMangaListWorker.WorkerReportsProgress = true;
+            autoUpdateMangaListWorker.WorkerSupportsCancellation = true;
             autoUpdateMangaListWorker.DoWork += AutoUpdateMangaListWorker_DoWork;
-            autoUpdateMangaListWorker.ProgressChanged += AutoUpdateMangaListWorker_ProgressChanged;
             autoUpdateMangaListWorker.RunWorkerCompleted += AutoUpdateMangaListWorker_RunWorkerCompleted;
-            Common.Enums.MangaSite site = checkAndRunAutoUpdateMangaList();
-            if (site != Common.Enums.MangaSite.UNKNOWN)
+
+            MangaSite site = checkAndRunAutoUpdateMangaList();
+            if (site != MangaSite.UNKNOWN)
             {
                 autoUpdateMangaSite = site;
                 autoUpdateMangaListWorker.RunWorkerAsync(site);
             }
         }
 
-        private Common.Enums.MangaSite checkAndRunAutoUpdateMangaList()
+        private MangaSite checkAndRunAutoUpdateMangaList()
         {
             ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
-            Dictionary<Common.Enums.MangaSite, DateTime> sites = ConfigurationIO.ReadSiteDates();
-            foreach (Common.Enums.MangaSite s in sites.Keys)
+            Dictionary<MangaSite, DateTime> sites = ConfigurationIO.ReadSiteDates();
+            foreach (MangaSite s in sites.Keys)
             {
                 DateTime dt = sites[s];
                 DateTime afterDays = dt.AddDays(sd.UpdateAfter);
@@ -1447,31 +1451,51 @@ namespace MangaDownloader.GUIs
                     return s;
                 }
             }
-            return Common.Enums.MangaSite.UNKNOWN;
+            return MangaSite.UNKNOWN;
         }
 
-        private void AutoUpdateMangaListWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void AutoUpdateMangaListWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            LogHelpers.Log(autoUpdateMangaSite.ToString() + " - " + e.ProgressPercentage);
+            autoUpdateMangaList.Clear();
+
+            MangaSite site = (MangaSite)e.Argument;
+            autoUpdateProcessor = ProcessorFactory.CreateProcessor(site);
+            autoUpdateProcessor.ScrapOneMangaPageComplete += AutoUpdateProcessor_ScrapOneMangaPageComplete;
+            autoUpdateProcessor.GetMangaList();
         }
 
         private void AutoUpdateMangaListWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (autoUpdateProcessor.IsCancel() == false)
+            {
+                string autoUpdateFilePath = Path.GetTempFileName();
+                MangaUtils.SaveListToFile(autoUpdateFilePath, autoUpdateMangaSite, autoUpdateMangaList);
+                try
+                {
+                    File.Copy(autoUpdateFilePath, Application.StartupPath + "\\data\\" + autoUpdateMangaSite.ToString().ToLower(), true);
+                }
+                catch { }
+            }
+
             ConfigurationIO.WriteSiteUpdatedDate(autoUpdateMangaSite, DateTime.Now.Date);
-            Common.Enums.MangaSite site = checkAndRunAutoUpdateMangaList();
-            if (site != Common.Enums.MangaSite.UNKNOWN)
+            MangaSite site = checkAndRunAutoUpdateMangaList();
+            if (site != MangaSite.UNKNOWN)
             {
                 autoUpdateMangaSite = site;
                 autoUpdateMangaListWorker.RunWorkerAsync(site);
             }
         }
 
-        private void AutoUpdateMangaListWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void AutoUpdateProcessor_ScrapOneMangaPageComplete(int totalManga, int totalPages, int pageIndex, List<Manga> partialList)
         {
-            MangaSite site = (MangaSite)e.Argument;
-            IProcessor processor = ProcessorFactory.CreateProcessor(site);
-            processor.ScrapOneMangaPageComplete += processor_ScrapOneMangaPageComplete;
-            processor.GetMangaList();
+            autoUpdateMangaList.AddRange(partialList);
+
+            if (mangaWorker.IsBusy && currentSite == autoUpdateMangaSite)
+            {
+                autoUpdateProcessor.Cancel();
+                autoUpdateMangaListWorker.CancelAsync();
+            }
         }
+        
     }
 }

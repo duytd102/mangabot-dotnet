@@ -14,11 +14,22 @@ namespace WebScraper.Processors.Implement
         int limitRows;
         MangaSite currentSite;
         IScraper scraper;
+        bool cancelled = false;
 
         public MultiplePagesProcessor(MangaSite site)
         {
             currentSite = site;
             scraper = ScraperFactory.CreateScraper(site);
+        }
+
+        public void Cancel()
+        {
+            cancelled = true;
+        }
+
+        public bool IsCancel()
+        {
+            return cancelled;
         }
 
         public int GetTotalPages()
@@ -36,20 +47,23 @@ namespace WebScraper.Processors.Implement
 
             for (int i = 1; i <= totalPages; i++)
             {
-                partialList = scraper.GetMangaList(i);
-                mangaList.AddRange(partialList);
-
-                if (i == 1)
+                if (cancelled == false)
                 {
-                    limitRows = partialList.Count;
-                    totalManga = limitRows * totalPages;
-                }
-                else if (i < totalPages && limitRows != partialList.Count)
-                {
-                    limitRows = 200;
-                }
+                    partialList = scraper.GetMangaList(i);
+                    mangaList.AddRange(partialList);
 
-                ScrapOneMangaPageComplete(totalManga, totalPages, i, partialList);
+                    if (i == 1)
+                    {
+                        limitRows = partialList.Count;
+                        totalManga = limitRows * totalPages;
+                    }
+                    else if (i < totalPages && limitRows != partialList.Count)
+                    {
+                        limitRows = 200;
+                    }
+
+                    ScrapOneMangaPageComplete(totalManga, totalPages, i, partialList);
+                }
             }
 
             return mangaList;

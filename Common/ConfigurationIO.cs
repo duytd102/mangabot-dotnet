@@ -83,7 +83,8 @@ namespace Common
                 }
             }
             catch { }
-            return config;
+
+            return new ConfigurationData(config);
         }
 
         public static void Write(ConfigurationData sd)
@@ -111,10 +112,27 @@ namespace Common
                         .AppendFormat("{0}={1}{2}", IGNORE_VERSION, sd.IgnoreVersion, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", MINIMIZE_TASKBAR, sd.MinimizeTaskbar ? 1 : 0, Environment.NewLine)
                         .AppendFormat("{0}={1}{2}", UPDATE_AFTER, sd.UpdateAfter, Environment.NewLine);
-
-                    foreach (MangaSite s in siteUpdatedDates.Keys)
+                    
+                    foreach (MangaSite ms in Enum.GetValues(typeof(MangaSite)))
                     {
-                        builder.AppendFormat("{0}={1}{2}", s.ToString(), siteUpdatedDates[s].ToString("yyyyMMdd"), Environment.NewLine);
+                        if (ms == MangaSite.UNKNOWN) continue;
+
+                        bool exists = false;
+
+                        foreach (MangaSite s in siteUpdatedDates.Keys)
+                        {
+                            exists = true;
+                            break;
+                        }
+
+                        if (exists)
+                        {
+                            builder.AppendFormat("{0}={1}{2}", ms.ToString(), siteUpdatedDates[ms].ToString("yyyyMMdd"), Environment.NewLine);
+                        }
+                        else
+                        {
+                            builder.AppendFormat("{0}={1}{2}", ms.ToString(), DateTime.Now.ToString("yyyyMMdd"), Environment.NewLine);
+                        }
                     }
 
                     sw.Write(builder.ToString());
@@ -126,7 +144,12 @@ namespace Common
 
         public static Dictionary<MangaSite, DateTime> ReadSiteDates()
         {
-            return siteUpdatedDates;
+            Dictionary<MangaSite, DateTime> dic = new Dictionary<MangaSite, DateTime>();
+            foreach(MangaSite s in siteUpdatedDates.Keys)
+            {
+                dic.Add(s, siteUpdatedDates[s]);
+            }
+            return dic;
         }
 
         public static void WriteSiteUpdatedDate(MangaSite site, DateTime dt)

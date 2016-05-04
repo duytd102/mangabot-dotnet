@@ -40,6 +40,30 @@ namespace MangaDownloader.Utils
             catch { }
         }
 
+        public static void SaveListToFile(string filePath, MangaSite site, List<Manga> mangaList)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8))
+                {
+                    var csv = new CsvWriter(sw);
+                    csv.WriteField("Name");
+                    csv.WriteField("Url");
+                    csv.NextRecord();
+
+                    foreach (Manga manga in mangaList)
+                    {
+                        csv.WriteField(manga.Name);
+                        csv.WriteField(manga.Url);
+                        csv.NextRecord();
+                    }
+
+                    sw.Close();
+                }
+            }
+            catch { }
+        }
+
         public static List<Manga> Import(MangaSite site)
         {
             try

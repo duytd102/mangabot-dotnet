@@ -1,6 +1,5 @@
 ﻿using Common;
 using Common.Enums;
-using System;
 using System.Collections.Generic;
 using WebScraper.Data;
 using WebScraper.Scrapers.Scripts;
@@ -10,7 +9,6 @@ namespace WebScraper.Scrapers.Implement
     class Manga24hScraper : IScraper
     {
         private const string DOMAIN = "http://manga24h.com/";
-        private const string FIRST_PAGE_URL = "http://manga24h.com/danhsach";
         const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/manga24h.cs";
         const string CLASS_NAME = "WebScraper.Scrapers.Implement.Manga24hScraper";
 

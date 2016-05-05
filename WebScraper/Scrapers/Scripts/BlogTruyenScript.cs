@@ -166,9 +166,9 @@ namespace WebScraper.Scrapers.Scripts
                                 { "name", "Trang " + StringUtils.GenerateOrdinal(pageBlockes.Count, index) },
                                 { "url", url }
                             });
-                    }
 
-                    index++;
+                        index++;
+                    }
                 }
             }
             catch { }

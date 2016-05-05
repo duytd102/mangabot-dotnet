@@ -114,8 +114,9 @@ namespace WebScraper.Scrapers.Scripts
                                 { "name", "Trang " + StringUtils.GenerateOrdinal(imgList.Count, index) },
                                 { "url", url }
                             });
+
+                        index++;
                     }
-                    index++;
                 }
             }
             return pageList;

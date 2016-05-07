@@ -68,17 +68,23 @@ namespace WebScraper
             {
                 compilerParams.ReferencedAssemblies.Add(assemblyName);
             }
+            
+            /**
+             * Because I embedded Common.dll into app, so must load assembly of this app once execute the code.
+             * Remember to exclude some classes of Common.dll (HttpUtils, StringUtils) to prevent obfuscating code.
+             */
+            compilerParams.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
 
             CSharpCodeProvider provider = new CSharpCodeProvider(new Dictionary<string, string> { { "CompilerVersion", "v4.0" } });
             CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, script);
             if (results.Errors.HasErrors)
             {
-                string text = "Compile error: ";
+                string text = "Compile Assembly Failed: ";
                 foreach (CompilerError ce in results.Errors)
                 {
                     text += "\r\n" + ce.ToString();
                 }
-                LogHelpers.Log("Error: " + text);
+                LogHelpers.Log(text);
                 throw new Exception(text);
             }
 

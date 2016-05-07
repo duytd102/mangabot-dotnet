@@ -55,7 +55,6 @@ namespace WebScraper
                 "System.Core.dll",
                 "System.Linq.dll",
                 "System.Xml.dll",
-                File.Exists(folder + "\\Common.dll") ? "Common.dll" : "bin\\Common.dll",
                 File.Exists(folder + "\\HtmlAgilityPack.dll") ? "HtmlAgilityPack.dll" : "bin\\HtmlAgilityPack.dll"
             };
             

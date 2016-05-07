@@ -9,8 +9,8 @@ namespace WebScraper.Scrapers.Implement
     internal class MangaFoxScraper : IScraper
     {
         private const string DOMAIN = "http://mangafox.me/";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/mangafox.cs";
-        const string CLASS_NAME = "WebScraper.Scrapers.Implement.MangaFoxScraper";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/MangaFoxScript.cs";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.MangaFoxScript";
 
         public int GetTotalPages()
         {

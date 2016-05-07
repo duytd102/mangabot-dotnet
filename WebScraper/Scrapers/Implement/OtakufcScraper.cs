@@ -1,11 +1,6 @@
 ﻿using Common;
 using Common.Enums;
-using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text.RegularExpressions;
 using WebScraper.Data;
 using WebScraper.Scrapers.Scripts;
 
@@ -14,8 +9,8 @@ namespace WebScraper.Scrapers.Implement
     class OtakufcScraper : IScraper
     {
         private const string DOMAIN = "http://otakufc.com/";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/otakufc.cs";
-        const string CLASS_NAME = "WebScraper.Scrapers.Implement.OtakufcScraper";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/OtakufcScript.cs";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.OtakufcScript";
 
         public int GetTotalPages()
         {

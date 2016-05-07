@@ -9,7 +9,7 @@ namespace WebScraper.Scrapers.Implement
     class HocVienTruyenTranhScraper : IScraper
     {
         const string DOMAIN = "http://truyen.academyvn.com/";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/hocvientruyentranh.cs";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/HocVienTruyenTranhScript.cs";
         const string CLASS_NAME = "WebScraper.Scrapers.Scripts.HocVienTruyenTranhScript";
 
         public int GetTotalPages()

@@ -74,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scrapers\DictionaryToList.cs" />
     <Compile Include="Scrapers\Scripts\BlogTruyenScript.cs" />
+    <Compile Include="Scrapers\Scripts\VeChaiScript.cs" />
+    <Compile Include="Scrapers\Scripts\TruyenTranhTuanScript.cs" />
+    <Compile Include="Scrapers\Scripts\TruyenTranh8Script.cs" />
     <Compile Include="Scrapers\Scripts\OtakufcScript.cs" />
     <Compile Include="Scrapers\Scripts\MangaParkScript.cs" />
     <Compile Include="Scrapers\Scripts\HocVienTruyenTranhScript.cs" />

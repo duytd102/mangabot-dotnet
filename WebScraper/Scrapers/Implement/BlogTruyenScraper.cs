@@ -9,7 +9,7 @@ namespace WebScraper.Scrapers.Implement
     class BlogTruyenScraper : IScraper
     {
         const string DOMAIN = "http://blogtruyen.com";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/blogtruyen.cs";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/BlogTruyenScript.cs";
         const string CLASS_NAME = "WebScraper.Scrapers.Scripts.BlogTruyenScript";
 
         public int GetTotalPages()

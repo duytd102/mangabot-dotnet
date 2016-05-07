@@ -9,8 +9,8 @@ namespace WebScraper.Scrapers.Implement
     class IzMangaScraper : IScraper
     {
         private const string DOMAIN = "http://izmanga.com/";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/izmanga.cs";
-        const string CLASS_NAME = "WebScraper.Scrapers.Implement.IzMangaScraper";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/IzMangaScript.cs";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.IzMangaScript";
 
         public int GetTotalPages()
         {

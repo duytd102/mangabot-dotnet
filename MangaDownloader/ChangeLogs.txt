@@ -1,9 +1,13 @@
-﻿Version 2.0 (2016-04-17)
+﻿Version 2.0 (2016-05-07)
 I decide to change the name to "Manga Bot" because "Manga Downloader" is a very common name so it is difficult to search my application on search engine.
+[New Feature]
 - App name is changed to "Manga Bot"
+- Auto-update manga list
 - Ability to quickly support & bugfix
+[Enhancement]
 - Update logo of manga sites
 - Resort the order of sites by download times
+[Bugfix]
 - Fix vechai.info
 
 Version 1.20 (2016-04-03)

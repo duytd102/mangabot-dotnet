@@ -1,10 +1,6 @@
 ﻿using Common;
 using Common.Enums;
-using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using WebScraper.Data;
 using WebScraper.Scrapers.Scripts;
 
@@ -13,8 +9,8 @@ namespace WebScraper.Scrapers.Implement
     class MangaParkScraper : IScraper
     {
         const string DOMAIN = "http://mangapark.me/";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/mangapark.cs";
-        const string CLASS_NAME = "WebScraper.Scrapers.Implement.MangaParkScraper";
+        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/MangaParkScript.cs";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.MangaParkScript";
 
         int IScraper.GetTotalPages()
         {

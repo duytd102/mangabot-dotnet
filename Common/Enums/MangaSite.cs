@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Common.Enums
+﻿namespace Common.Enums
 {
     public enum MangaSite
     {
@@ -17,9 +12,12 @@ namespace Common.Enums
         IZMANGA,
         OTAKUFC,
         HOCVIENTRUYENTRANH,
+        LHMANGA,
+        HAMTRUYEN,
 
         MANGAFOX,
         KISSMANGA,
-        MANGAPARK
+        MANGAPARK,
+        MANGASEE
     }
 }

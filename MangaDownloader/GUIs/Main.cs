@@ -1496,6 +1496,11 @@ namespace MangaDownloader.GUIs
                 autoUpdateMangaListWorker.CancelAsync();
             }
         }
-        
+
+        private void tsmiLHManga_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.LHMANGA);
+            tsMangaCommands_Resize(sender, e);
+        }
     }
 }

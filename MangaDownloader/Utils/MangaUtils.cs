@@ -133,6 +133,9 @@ namespace MangaDownloader.Utils
                 case MangaSite.MANGAPARK:
                     return Properties.Resources.mangapark;
 
+                case MangaSite.LHMANGA:
+                    return Properties.Resources.lhmanga;
+
                 default:
                     // TODO Add logo for more sites
                     throw new NotImplementedException();

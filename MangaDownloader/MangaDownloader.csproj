@@ -323,6 +323,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\lhmanga.png" />
     <None Include="Resources\mangapark1.png" />
     <None Include="Resources\hocvientruyentranh1.png" />
     <None Include="Resources\truyentranh8.png" />

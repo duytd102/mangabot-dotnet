@@ -17,6 +17,7 @@ namespace WebScraper.Utils
         const string otakufc = "otakufc.com";
         const string hvtt = "truyen.academyvn.com";
         const string mangapark = "mangapark.me";
+        const string lhmanga = "lhmanga.com";
 
         public static MangaSite GetSite(String url)
         {
@@ -57,6 +58,9 @@ namespace WebScraper.Utils
 
                 else if (host.IndexOf(mangapark) >= 0)
                     return MangaSite.MANGAPARK;
+
+                else if (host.IndexOf(lhmanga) >= 0)
+                    return MangaSite.LHMANGA;
             }
             catch { }
 

@@ -46,7 +46,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BETA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DEV")]
         public string AppMode {
             get {
                 return ((string)(this["AppMode"]));

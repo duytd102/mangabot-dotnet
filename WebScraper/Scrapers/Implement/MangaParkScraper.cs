@@ -9,19 +9,19 @@ namespace WebScraper.Scrapers.Implement
     class MangaParkScraper : IScraper
     {
         const string DOMAIN = "http://mangapark.me/";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/MangaParkScript.cs";
         const string CLASS_NAME = "WebScraper.Scrapers.Scripts.MangaParkScript";
 
         int IScraper.GetTotalPages()
         {
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                return new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
+                try
+                {
+                    return new BotCrawler<int>(MangaSite.MANGAPARK).Invoke(CLASS_NAME, "GetTotalPages");
+                }
+                catch { }
             }
-            else
-            {
-                return new MangaParkScript().GetTotalPages();
-            }
+            return new MangaParkScript().GetTotalPages();
         }
 
         List<Manga> IScraper.GetMangaList(int pageIndex)
@@ -30,7 +30,14 @@ namespace WebScraper.Scrapers.Implement
 
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                try
+                {
+                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.MANGAPARK).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                }
+                catch
+                {
+                    results = new MangaParkScript().GetMangaList(pageIndex);
+                }
             }
             else
             {
@@ -46,7 +53,14 @@ namespace WebScraper.Scrapers.Implement
 
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                try
+                {
+                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.MANGAPARK).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                }
+                catch
+                {
+                    results = new MangaParkScript().GetChapterList(mangaUrl);
+                }
             }
             else
             {
@@ -62,7 +76,14 @@ namespace WebScraper.Scrapers.Implement
 
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
+                try
+                {
+                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.MANGAPARK).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
+                }
+                catch
+                {
+                    results = new MangaParkScript().GetPageList(chapterUrl);
+                }
             }
             else
             {

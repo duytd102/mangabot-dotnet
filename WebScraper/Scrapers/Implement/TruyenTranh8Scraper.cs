@@ -9,19 +9,19 @@ namespace WebScraper.Scrapers.Implement
     public class TruyenTranh8Scraper : IScraper
     {
         const string DOMAIN = "http://truyentranh8.net";
-        const string SCRIPT_URL = "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/scripts/TruyenTranh8Script.cs";
         const string CLASS_NAME = "WebScraper.Scrapers.Scripts.TruyenTranh8Script";
 
         public int GetTotalPages()
         {
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                return new BotCrawler<int>(SCRIPT_URL).Invoke(CLASS_NAME, "GetTotalPages");
+                try
+                {
+                    return new BotCrawler<int>(MangaSite.TRUYENTRANH8).Invoke(CLASS_NAME, "GetTotalPages");
+                }
+                catch { }
             }
-            else
-            {
-                return new TruyenTranh8Script().GetTotalPages();
-            }
+            return new TruyenTranh8Script().GetTotalPages();
         }
 
         public List<Manga> GetMangaList(int pageIndex)
@@ -30,7 +30,14 @@ namespace WebScraper.Scrapers.Implement
 
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                try
+                {
+                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.TRUYENTRANH8).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                }
+                catch
+                {
+                    results = new TruyenTranh8Script().GetMangaList(pageIndex);
+                }
             }
             else
             {
@@ -46,7 +53,14 @@ namespace WebScraper.Scrapers.Implement
 
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                try
+                {
+                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.TRUYENTRANH8).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                }
+                catch
+                {
+                    results = new TruyenTranh8Script().GetChapterList(mangaUrl);
+                }
             }
             else
             {
@@ -62,7 +76,14 @@ namespace WebScraper.Scrapers.Implement
 
             if (CommonSettings.AppMode == AppMode.BETA || CommonSettings.AppMode == AppMode.PROD)
             {
-                results = new BotCrawler<List<Dictionary<string, string>>>(SCRIPT_URL).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
+                try
+                {
+                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.TRUYENTRANH8).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
+                }
+                catch
+                {
+                    results = new TruyenTranh8Script().GetPageList(chapterUrl);
+                }
             }
             else
             {

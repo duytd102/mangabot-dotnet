@@ -32,8 +32,8 @@ namespace MangaDownloader.GUIs
             }
 
             StringBuilder bd = new StringBuilder();
-            bd.AppendLine("A tool for downloading manga from the internet.");
-            bd.AppendLine("It's TOTALLY FREE FOREVER (NO ADS).");
+            bd.AppendLine("An amazing tool aims to download manga around the world.");
+            bd.AppendLine("It's 100% FREE FOREVER (NO ADS).");
             bd.AppendLine("Feel free to feedback to me any errors or more features.");
             bd.AppendLine();
             bd.AppendLine("=== Contact ===");
@@ -41,7 +41,6 @@ namespace MangaDownloader.GUIs
             bd.AppendLine("Email: dangduy2910@gmail.com");
             bd.AppendLine("Website: http://mangabot.github.io/");
             bd.AppendLine("               https://mangabot.wordpress.com/");
-            bd.AppendLine("               https://flashmangadownloader.wordpress.com/");
             bd.AppendLine("               https://tdduy89.wordpress.com/");
             bd.AppendLine("               https://tdduy89.blogspot.com/");
             bd.AppendLine();

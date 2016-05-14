@@ -125,7 +125,7 @@ namespace MangaDownloader.Utils
                     return Properties.Resources.kissmanga_logo;
 
                 case MangaSite.OTAKUFC:
-                    return null;
+                    return Properties.Resources.otakufc;
 
                 case MangaSite.HOCVIENTRUYENTRANH:
                     return Properties.Resources.hocvientruyentranh;

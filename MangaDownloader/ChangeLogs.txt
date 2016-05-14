@@ -1,4 +1,10 @@
-﻿Version 2.0 (2016-05-08)
+﻿Version 2.1 (2016-05-15)
+[New]
+- Support lhmanga.com
+[Bugfix]
+- Bandwidth limit
+
+Version 2.0 (2016-05-08)
 I decide to change the name to "Manga Bot" because "Manga Downloader" is a very common name so it is difficult to search my application on search engine.
 [New Feature]
 - App name is changed to "Manga Bot"

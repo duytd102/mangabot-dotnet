@@ -38,9 +38,10 @@ namespace MangaDownloader.Settings
             return configData;
         }
 
-        public String GetDownloadFolderPath(MangaSite site)
+        public string GetDownloadFolderPath(MangaSite site)
         {
-            return GetAppSettings().DownloadFolder + "\\" + site.ToString();
+            string path = GetAppSettings().DownloadFolder;
+            return path + (path.EndsWith("\\") ? "" : "\\") + site.ToString();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
@@ -10,18 +11,11 @@ namespace WebScraper
 {
     class BotCrawler<T>
     {
-        private string url;
-        private List<string> referencedAssemblies = new List<string>();
+        private MangaSite site;
 
-        public BotCrawler(string url)
+        public BotCrawler(MangaSite site)
         {
-            this.url = url;
-        }
-
-        public BotCrawler(string url, List<string> assemblyNames)
-        {
-            this.url = url;
-            this.referencedAssemblies = assemblyNames;
+            this.site = site;
         }
 
         /// <summary>
@@ -46,7 +40,12 @@ namespace WebScraper
         /// <returns></returns>
         public T Invoke(string fullClassName, string methodName, object[] parameters = null)
         {
-            string script = ScriptManager.GetInstance().GetScript(url);
+            string script = ScriptManager.GetInstance().GetScript(site);
+            if (string.IsNullOrWhiteSpace(script))
+            {
+                throw new DllNotFoundException();
+            }
+
             string folder = AppDomain.CurrentDomain.BaseDirectory;
             
             List<string> libs = new List<string>()
@@ -63,16 +62,18 @@ namespace WebScraper
             compilerParams.GenerateExecutable = false;
             compilerParams.TreatWarningsAsErrors = false;
 
-            foreach (string assemblyName in referencedAssemblies)
-            {
-                compilerParams.ReferencedAssemblies.Add(assemblyName);
-            }
-            
             /**
              * Because I embedded Common.dll into app, so must load assembly of this app once execute the code.
              * Remember to exclude some classes of Common.dll (HttpUtils, StringUtils) to prevent obfuscating code.
              */
-            compilerParams.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
+            if (CommonSettings.AppMode == AppMode.PROD)
+            {
+                compilerParams.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
+            }
+            else
+            {
+                compilerParams.ReferencedAssemblies.Add("Common.dll");
+            }
 
             CSharpCodeProvider provider = new CSharpCodeProvider(new Dictionary<string, string> { { "CompilerVersion", "v4.0" } });
             CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, script);

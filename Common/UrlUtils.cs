@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Common
 {
@@ -23,7 +20,7 @@ namespace Common
                 // e.g: ../manga/one-shot.html
                 return root.Scheme + "://" + root.Host + fixedUrl.Replace("../", "/");
             }
-            else if (fixedUrl.StartsWith(root.Scheme + "://" + root.Host) == false)
+            else if (fixedUrl.StartsWith("http://" + root.Host) == false && fixedUrl.StartsWith("https://" + root.Host) == false)
             {
                 // Following links will relate with the path in <base> element.
                 // e.g: manga/one-shot.html

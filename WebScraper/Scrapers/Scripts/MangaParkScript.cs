@@ -91,24 +91,27 @@ namespace WebScraper.Scrapers.Scripts
                     }
                 }
 
-                HtmlNode volume = stream.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("volume"));
-                List<HtmlNode> chapters = volume.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("chapter")).Elements("li").ToList();
-                foreach (HtmlNode chapterNode in chapters)
+                List<HtmlNode> volumes = stream.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("volume")).ToList();
+                foreach(HtmlNode volume in volumes)
                 {
-                    HtmlNode chapterName = chapterNode.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
-                    HtmlNode a = chapterNode.Descendants().LastOrDefault(x => x.Name.Equals("a"));
-                    
-                    string name = version + chapterName.InnerText.Trim();
-                    string url = a.GetAttributeValue("href", "").Trim();
-
-                    if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
+                    List<HtmlNode> chapters = volume.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("chapter")).Elements("li").ToList();
+                    foreach (HtmlNode chapterNode in chapters)
                     {
-                        chapterList.Add(new Dictionary<string, string>()
+                        HtmlNode chapterName = chapterNode.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
+                        HtmlNode a = chapterNode.Descendants().LastOrDefault(x => x.Name.Equals("a"));
+
+                        string name = version + chapterName.InnerText.Trim();
+                        string url = a.GetAttributeValue("href", "").Trim();
+
+                        if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
+                        {
+                            chapterList.Add(new Dictionary<string, string>()
                             {
                                 { "id", Guid.NewGuid().ToString() },
                                 { "name", name },
                                 { "url", url }
                             });
+                        }
                     }
                 }
             }

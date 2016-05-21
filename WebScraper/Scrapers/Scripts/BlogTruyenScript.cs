@@ -188,19 +188,11 @@ namespace WebScraper.Scrapers.Scripts
                 .Replace("?imgmax=0", "");
 
             bool isBlogspot = Regex.IsMatch(dest, "1.bp.blogspot.com");
-            bool isImgur = Regex.IsMatch(dest, "i.imgur.com");
 
             if (isBlogspot)
             {
                 string[] parts = dest.Split(new string[] { "1.bp.blogspot.com" }, StringSplitOptions.RemoveEmptyEntries);
                 return parts.Length > 1 ? "http://1.bp.blogspot.com" + parts[1] + "?imgmax=0" : dest;
-            }
-
-            if (isImgur)
-            {
-                Regex re = new Regex("http:\\/\\/i.imgur.com\\/[A-Za-z0-9]{7}");
-                string match = re.Match(dest).Value;
-                return "http://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&resize_h=0&rewriteMime=image/*&url=" + match + ".jpg";
             }
 
             return dest;

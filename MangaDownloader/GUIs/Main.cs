@@ -133,15 +133,31 @@ namespace MangaDownloader.GUIs
             {
                 try
                 {
-                    VersionData vd;
-                    if (VersionUtils.CheckForUpdates(out vd))
+                    DateTime cv = CommonSettings.CheckVersionDate();
+                    if (cv.Date < DateTime.Now.Date)
                     {
-                        UpdateVersionHighlight(vd);
-                        ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
-                        string ignoreVersion = sd.IgnoreVersion;
-                        if (!ignoreVersion.Equals(vd.Version))
+                        VersionData vd;
+                        if (VersionUtils.CheckForUpdates(out vd))
                         {
-                            RunAutoUpdate();
+                            UpdateVersionHighlight(vd.Version, vd.URL);
+
+                            CommonSettings.SetDateAfterCheckVersion(DateTime.Now.Date);
+                            CommonSettings.SetNextVersion(vd.Version);
+                            CommonSettings.SetNextVersionURL(vd.URL);
+
+                            //ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
+                            //string ignoreVersion = sd.IgnoreVersion;
+                            //if (!ignoreVersion.Equals(vd.Version))
+                            //{
+                            //    RunAutoUpdate();
+                            //}
+                        }
+                    }
+                    else
+                    {
+                        if (CommonSettings.AppVersion().Equals(CommonSettings.NextVersion()) == false)
+                        {
+                            UpdateVersionHighlight(CommonSettings.NextVersion(), CommonSettings.NextVersionURL());
                         }
                     }
                 }
@@ -169,12 +185,12 @@ namespace MangaDownloader.GUIs
             }
         }
 
-        private void UpdateVersionHighlight(VersionData vd)
+        private void UpdateVersionHighlight(string version, string url)
         {
             msTop.Invoke(new MethodInvoker(() =>
             {
-                tsmiNewVersion.Text = "New version " + vd.Version;
-                tsmiNewVersion.Tag = vd.URL;
+                tsmiNewVersion.Text = "New version " + version;
+                tsmiNewVersion.Tag = url;
                 tsmiNewVersion.Visible = true;
             }));
         }
@@ -1235,16 +1251,47 @@ namespace MangaDownloader.GUIs
             EnableOrDisableTurnOffComputerOption();
         }
 
-        private void tsmiCheckForUpdates_Click(object sender, EventArgs e)
-        {
-            RunAutoUpdate();
-        }
-
         private void tsmiNewVersion_Click(object sender, EventArgs e)
         {
-            RunAutoUpdate();
+            try
+            {
+                Process.Start(CommonSettings.NextVersionURL());
+            }
+            catch { }
         }
 
+        private void tsmiCheckForUpdates_Click(object sender, EventArgs e)
+        {
+            VersionData vd;
+            if (VersionUtils.CheckForUpdates(out vd))
+            {
+                CommonSettings.SetDateAfterCheckVersion(DateTime.Now.Date);
+                CommonSettings.SetNextVersion(vd.Version);
+                CommonSettings.SetNextVersionURL(vd.URL);
+
+                DialogResult result = MessageBox.Show("A new version " + vd.Version + " is available! Would you like to update now?", CommonSettings.AppName(), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        Process.Start(CommonSettings.NextVersionURL());
+                    }
+                    catch { }
+                }
+                else
+                {
+                    //ConfigurationData sd = SettingsManager.GetInstance().GetAppSettings();
+                    //sd.IgnoreVersion = vd.Version;
+                    //SettingsManager.SaveChanges();
+                }
+            }
+            else
+            {
+                MessageBox.Show(CommonSettings.AppName() + " is up to date (" + CommonSettings.AppVersion() + ")", CommonSettings.AppName(), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        [Obsolete("Will be use once find a free host allow to get direct link")]
         private void RunAutoUpdate()
         {
             AutoUpdate au = new AutoUpdate();

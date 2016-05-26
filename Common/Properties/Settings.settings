@@ -6,10 +6,19 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ReleaseDate" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2016-05-15</Value>
+      <Value Profile="(Default)">2016-05-27</Value>
     </Setting>
     <Setting Name="AppMode" Type="System.String" Scope="Application">
       <Value Profile="(Default)">BETA</Value>
+    </Setting>
+    <Setting Name="CheckVersionDate" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2016-05-27</Value>
+    </Setting>
+    <Setting Name="NextVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NextVersionURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

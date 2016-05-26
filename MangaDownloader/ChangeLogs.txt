@@ -1,4 +1,8 @@
-﻿Version 2.1 (2016-05-15)
+﻿Version 2.2 (2016-05-27)
+[New]
+- No longer support auto update (do not find any free host to get permanent direct link)
+
+Version 2.1 (2016-05-15)
 [New]
 - Support lhmanga.com
 [Bugfix]

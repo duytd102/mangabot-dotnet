@@ -9,7 +9,7 @@ namespace MangaDownloader
         public static void UnhandledThreadExceptionHandler(object sender, ThreadExceptionEventArgs e)
         {
             GoogleAnalyticsUtils.SendError(CommonSettings.AppName(), CommonSettings.AppVersion(), e.Exception);
-            MessageBox.Show("An unexpected error has occurred. Please report it to me via email dangduy2910@gmail.com.", "Unexpected error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Oops, something went wrong! Make sure to update the latest version or leave a comment to report bugs at http://mangabot.github.io. Thank you.", CommonSettings.AppName(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
         }
     }

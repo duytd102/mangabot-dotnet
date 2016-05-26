@@ -43,7 +43,7 @@ namespace Common
 
         public static string CheckVersionUrl()
         {
-            return "https://dl.dropboxusercontent.com/u/148375006/apps/manga-downloader/manga-downloader-latest-version.csv";
+            return "https://drive.google.com/uc?export=download&id=0BwclU1yWN7VGVHBTenA3NURaVkU";
         }
 
         public static DateTime ReleaseDate()
@@ -64,6 +64,40 @@ namespace Common
         public static string GaTrackingId()
         {
             return AppMode == AppMode.PROD ? "UA-61053646-1" : "UA-61053646-2";
+        }
+
+        public static DateTime CheckVersionDate()
+        {
+            return Properties.Settings.Default.CheckVersionDate;
+        }
+
+        public static void SetDateAfterCheckVersion(DateTime dt)
+        {
+            Properties.Settings.Default.CheckVersionDate = dt;
+            Properties.Settings.Default.Save();
+        }
+
+        public static string NextVersion()
+        {
+            string version = Properties.Settings.Default.NextVersion;
+            return string.IsNullOrWhiteSpace(version) ? AppVersion() : version;
+        }
+
+        public static void SetNextVersion(string nextVersion)
+        {
+            Properties.Settings.Default.NextVersion = nextVersion;
+            Properties.Settings.Default.Save();
+        }
+
+        public static string NextVersionURL()
+        {
+            return Properties.Settings.Default.NextVersionURL;
+        }
+
+        public static void SetNextVersionURL(string nextVersionUrl)
+        {
+            Properties.Settings.Default.NextVersionURL = nextVersionUrl;
+            Properties.Settings.Default.Save();
         }
     }
 }

@@ -32,17 +32,15 @@ namespace MangaDownloader.GUIs
             }
 
             StringBuilder bd = new StringBuilder();
-            bd.AppendLine("An amazing tool aims to download manga around the world.");
+            bd.AppendLine("An amazing tool aims to download manga over the world.");
             bd.AppendLine("It's 100% FREE FOREVER (NO ADS).");
             bd.AppendLine("Feel free to feedback to me any errors or more features.");
             bd.AppendLine();
             bd.AppendLine("=== Contact ===");
             bd.AppendLine("Author: Duy Tran");
             bd.AppendLine("Email: dangduy2910@gmail.com");
-            bd.AppendLine("Website: http://mangabot.github.io/");
-            bd.AppendLine("               https://mangabot.wordpress.com/");
-            bd.AppendLine("               https://tdduy89.wordpress.com/");
-            bd.AppendLine("               https://tdduy89.blogspot.com/");
+            bd.AppendLine("Website: http://mangabot.github.io");
+            bd.AppendLine("               http://tdduy89.github.io");
             bd.AppendLine();
             bd.AppendLine("=== Changelogs ===");
             foreach (var l in lines)
@@ -53,11 +51,11 @@ namespace MangaDownloader.GUIs
         private void btCheckUpdates_Click(object sender, EventArgs e)
         {
             AutoUpdate au = new AutoUpdate();
-            if (au.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (au.ShowDialog() == DialogResult.OK)
             {
                 VersionData vd = au.VersionData;
                 DialogResult result = MessageBox.Show("Are you sure you want to download new version " + vd.Version + "?", "New version", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == System.Windows.Forms.DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     try
                     {

@@ -37,7 +37,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2016-05-15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-05-27")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));
@@ -50,6 +50,42 @@ namespace Common.Properties {
         public string AppMode {
             get {
                 return ((string)(this["AppMode"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-05-27")]
+        public global::System.DateTime CheckVersionDate {
+            get {
+                return ((global::System.DateTime)(this["CheckVersionDate"]));
+            }
+            set {
+                this["CheckVersionDate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NextVersion {
+            get {
+                return ((string)(this["NextVersion"]));
+            }
+            set {
+                this["NextVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NextVersionURL {
+            get {
+                return ((string)(this["NextVersionURL"]));
+            }
+            set {
+                this["NextVersionURL"] = value;
             }
         }
     }

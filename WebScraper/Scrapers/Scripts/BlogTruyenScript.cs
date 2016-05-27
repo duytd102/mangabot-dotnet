@@ -151,9 +151,9 @@ namespace WebScraper.Scrapers.Scripts
                 foreach (Match blk in pageBlockes)
                 {
                     string url = blk.Groups["URL"].Value.Trim();
-                    if (url.IndexOf("&url=", StringComparison.CurrentCulture) > -1)
+                    Match m = Regex.Match(url, ".+(&|&amp;)url=(?<ACTUAL_URL>[^&]+)", RegexOptions.IgnoreCase);
+                    if (m.Success)
                     {
-                        Match m = Regex.Match(url, ".+&url=(?<ACTUAL_URL>[^&]+)");
                         url = m.Groups["ACTUAL_URL"].Value.Trim();
                     }
                     url = FixPhotoUrl(url);
@@ -164,7 +164,7 @@ namespace WebScraper.Scrapers.Scripts
                             {
                                 { "id", Guid.NewGuid().ToString() },
                                 { "name", "Trang " + StringUtils.GenerateOrdinal(pageBlockes.Count, index) },
-                                { "url", url }
+                                { "url", Uri.UnescapeDataString(url) }
                             });
 
                         index++;

@@ -3,6 +3,7 @@ using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace WebScraper.Scrapers.Scripts
 {
@@ -106,13 +107,20 @@ namespace WebScraper.Scrapers.Scripts
                 foreach (HtmlNode img in imgList)
                 {
                     string url = img.GetAttributeValue("src", "").Trim();
+
+                    Match m = Regex.Match(url, ".+(&|&amp;)url=(?<ACTUAL_URL>[^&]+)", RegexOptions.IgnoreCase);
+                    if (m.Success)
+                    {
+                        url = m.Groups["ACTUAL_URL"].Value.Trim();
+                    }
+
                     if (string.IsNullOrWhiteSpace(url) == false)
                     {
                         pageList.Add(new Dictionary<string, string>()
                             {
                                 { "id", Guid.NewGuid().ToString() },
                                 { "name", "Trang " + StringUtils.GenerateOrdinal(imgList.Count, index) },
-                                { "url", url }
+                                { "url", Uri.UnescapeDataString(url) }
                             });
 
                         index++;

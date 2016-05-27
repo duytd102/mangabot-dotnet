@@ -2,7 +2,7 @@
 using Common.Enums;
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Web;
 using WebScraper.Data;
 
 namespace WebScraper.Scrapers
@@ -16,8 +16,8 @@ namespace WebScraper.Scrapers
             {
                 Manga manga = new Manga();
                 manga.ID = Guid.NewGuid().ToString();
-                manga.Name = WebUtility.HtmlDecode(dic["name"]);
-                manga.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, dic["url"]));
+                manga.Name = HttpUtility.HtmlDecode(dic["name"]);
+                manga.Url = HttpUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, dic["url"]));
                 manga.Site = site;
                 mangaList.Add(manga);
             }
@@ -31,8 +31,8 @@ namespace WebScraper.Scrapers
             {
                 Chapter chapter = new Chapter();
                 chapter.ID = Guid.NewGuid().ToString();
-                chapter.Name = WebUtility.HtmlDecode(dic["name"]);
-                chapter.Url = WebUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, dic["url"]));
+                chapter.Name = HttpUtility.HtmlDecode(dic["name"]);
+                chapter.Url = HttpUtility.HtmlDecode(UrlUtils.FixUrl(DOMAIN, dic["url"]));
                 chapter.Site = site;
                 chapterList.Add(chapter);
             }
@@ -48,7 +48,7 @@ namespace WebScraper.Scrapers
                 Page page = new Page();
                 page.ID = Guid.NewGuid().ToString();
                 page.Name = "Trang " + StringUtils.GenerateOrdinal(results.Count, index);
-                page.Url = dic["url"];
+                page.Url = HttpUtility.UrlDecode(dic["url"]);
                 page.Site = site;
                 pageList.Add(page);
                 index++;

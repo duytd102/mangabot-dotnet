@@ -9,7 +9,7 @@
       <Value Profile="(Default)">2016-05-28</Value>
     </Setting>
     <Setting Name="AppMode" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">BETA</Value>
+      <Value Profile="(Default)">DEV</Value>
     </Setting>
     <Setting Name="CheckVersionDate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">2016-05-28</Value>

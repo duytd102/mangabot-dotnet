@@ -69,24 +69,27 @@ namespace WebScraper.Scrapers.Scripts
             doc.LoadHtml(src);
 
             List<HtmlNode> aTags = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("itemprop", "").Contains("itemListElement")).ToList();
-
             foreach (HtmlNode a in aTags)
             {
-                HtmlNode title = a.Descendants().First(x => x.Name.Equals("h2"));
-                HtmlNode date = title.Descendants().First(x => x.GetAttributeValue("itemprop", "").Contains("datePublished"));
-                title.RemoveChild(date);
-                
-                string name = title.InnerText.Trim();
-                string url = a.GetAttributeValue("href", "");
-
-                if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
+                HtmlNode title = a.Descendants().FirstOrDefault(x => x.Name.Equals("h2"));
+                if (title != null)
                 {
-                    chapterList.Add(new Dictionary<string, string>()
+                    HtmlNode nameNode = title.Descendants().FirstOrDefault(x => x.Name.Equals("strong"));
+                    if (nameNode != null)
+                    {
+                        string name = nameNode.InnerText.Trim();
+                        string url = a.GetAttributeValue("href", "");
+
+                        if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
                         {
-                            { "id", Guid.NewGuid().ToString() },
-                            { "name", name },
-                            { "url", url }
-                        });
+                            chapterList.Add(new Dictionary<string, string>()
+                                {
+                                    { "id", Guid.NewGuid().ToString() },
+                                    { "name", name },
+                                    { "url", url }
+                                });
+                        }
+                    }
                 }
             }
 

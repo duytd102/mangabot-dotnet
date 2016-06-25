@@ -9,7 +9,7 @@ namespace WebScraper.Scrapers.Scripts
 {
     public class BlogTruyenScript
     {
-        const string ROOT_MANGALIST_URL = "http://blogtruyen.com/ListStory/GetListStory/";
+        const string ROOT_MANGALIST_URL = "http://blogtruyen.com/ajax/Search/AjaxLoadListManga?key=tatca&orderBy=1&p=";
 
         public int GetTotalPages()
         {
@@ -17,10 +17,9 @@ namespace WebScraper.Scrapers.Scripts
             try
             {
                 string pagingFilter = "<(?<TAG>\\w+)[^>]*?class\\s*=\\s*['|\"]\\s*page\\s*['|\"][^>]*?>.*?</\\k<TAG>>";
-                string pagingIndexFilter = "<a[^>]*?href[^>]*?LoadPage\\s*\\((?<INDEX>\\d+)\\)[^>]*?>(?<TEXT>.*?)</a>";
+                string pagingIndexFilter = "<a[^>]*?href[^>]*?LoadListMangaPage\\s*\\((?<INDEX>\\d+)\\)[^>]*?>(?<TEXT>.*?)</a>";
                 string pagingBlock = "";
-                string queryString = string.Format("Url=tatca&OrderBy=1&PageIndex={0}", 1);
-                string firstPageOfMangaListHtmlSrc = HttpUtils.MakeHttpGet(ROOT_MANGALIST_URL, queryString);
+                string firstPageOfMangaListHtmlSrc = HttpUtils.MakeHttpGet(ROOT_MANGALIST_URL + 1);
                 MatchCollection mc = Regex.Matches(firstPageOfMangaListHtmlSrc, pagingFilter, RegexOptions.IgnoreCase);
                 foreach (Match m in mc)
                 {
@@ -42,9 +41,8 @@ namespace WebScraper.Scrapers.Scripts
             {
                 string blockFilter = "<(?<TAG>\\w+)[^>]*?class\\s*=\\s*[\"|']\\s*tiptip[^>]*?[\"|'][^>]*?>(?<TEXT>.*?)</\\k<TAG>>";
                 string nameAndUrlFilter = "<a[^>]*?href\\s*=\\s*[\"|'](?<MANGA_URL>.*?)[\"|'][^>]*?>(?<MANGA_NAME>.*?)</a>";
-                string queryString = string.Format("Url=tatca&OrderBy=1&PageIndex={0}", pageIndex);
 
-                string mangaListHtmlSrc = HttpUtils.MakeHttpGet(ROOT_MANGALIST_URL, queryString);
+                string mangaListHtmlSrc = HttpUtils.MakeHttpGet(ROOT_MANGALIST_URL + pageIndex);
 
                 MatchCollection blockes = Regex.Matches(mangaListHtmlSrc, blockFilter, RegexOptions.IgnoreCase);
                 foreach (Match blk in blockes)
@@ -71,9 +69,13 @@ namespace WebScraper.Scrapers.Scripts
 
         public List<Dictionary<string, string>> GetChapterList(string mangaUrl)
         {
+            string mangaUrlPattern = @"(http://|https://)?blogtruyen.com/(?<MANGA_ID>[^/]*?)/.*";
+            string mangaId = Regex.Match(mangaUrl, mangaUrlPattern, RegexOptions.IgnoreCase).Groups["MANGA_ID"].Value;
+            string ajaxUrl = "http://blogtruyen.com/ajax/Chapter/PartialLoadListChapter?mangaId=" + mangaId;
+
             List<Dictionary<string, string>> results = new List<Dictionary<string, string>>();
 
-            string mangaHtmlSrc = HttpUtils.MakeHttpGet(mangaUrl);
+            string mangaHtmlSrc = HttpUtils.MakeHttpGet(ajaxUrl);
             HtmlDocument chapterDoc = new HtmlDocument();
             chapterDoc.LoadHtml(mangaHtmlSrc);
 

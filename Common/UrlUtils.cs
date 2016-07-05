@@ -20,16 +20,16 @@ namespace Common
                 // e.g: ../manga/one-shot.html
                 return root.Scheme + "://" + root.Host + fixedUrl.Replace("../", "/");
             }
-            else if (fixedUrl.StartsWith("http://" + root.Host) == false && fixedUrl.StartsWith("https://" + root.Host) == false)
+            else if (fixedUrl.StartsWith("http://") || fixedUrl.StartsWith("https://"))
+            {
+                return fixedUrl;
+            }
+            else
             {
                 // Following links will relate with the path in <base> element.
                 // e.g: manga/one-shot.html
                 // manga24h.com
                 return domainOrBaseUrl + fixedUrl;
-            }
-            else
-            {
-                return fixedUrl;
             }
         }
     }

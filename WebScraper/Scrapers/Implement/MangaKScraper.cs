@@ -22,7 +22,7 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch { }
             }
-            return new TruyenTranhMoiScript().GetTotalPages();
+            return new MangaKScript().GetTotalPages();
         }
 
         public List<Manga> GetMangaList(int pageIndex)
@@ -37,12 +37,12 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch
                 {
-                    results = new TruyenTranhMoiScript().GetMangaList(pageIndex);
+                    results = new MangaKScript().GetMangaList(pageIndex);
                 }
             }
             else
             {
-                results = new TruyenTranhMoiScript().GetMangaList(pageIndex);
+                results = new MangaKScript().GetMangaList(pageIndex);
             }
 
             return DictionaryToList.ToMangaList(DOMAIN, SITE, results);
@@ -60,12 +60,12 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch
                 {
-                    results = new TruyenTranhMoiScript().GetChapterList(mangaUrl);
+                    results = new MangaKScript().GetChapterList(mangaUrl);
                 }
             }
             else
             {
-                results = new TruyenTranhMoiScript().GetChapterList(mangaUrl);
+                results = new MangaKScript().GetChapterList(mangaUrl);
             }
 
             return DictionaryToList.ToChapterList(DOMAIN, SITE, results);
@@ -83,12 +83,12 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch
                 {
-                    results = new TruyenTranhMoiScript().GetPageList(chapterUrl);
+                    results = new MangaKScript().GetPageList(chapterUrl);
                 }
             }
             else
             {
-                results = new TruyenTranhMoiScript().GetPageList(chapterUrl);
+                results = new MangaKScript().GetPageList(chapterUrl);
             }
 
             return DictionaryToList.ToPageList(SITE, results);

@@ -73,10 +73,10 @@ namespace WebScraper.Scrapers.Scripts
             doc.LoadHtml(src);
 
             List<HtmlNode> list = doc.DocumentNode.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("chapter-list")).Descendants()
-                .Where(x => x.GetAttributeValue("class", "").Contains("row"))
-                .Where(x => x.Name.Equals("a")).ToList();
-            foreach (HtmlNode a in list)
+                .Where(x => x.GetAttributeValue("class", "").Contains("row")).ToList();
+            foreach (HtmlNode item in list)
             {
+                HtmlNode a = item.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
                 string name = a.InnerText.Trim();
                 string url = a.GetAttributeValue("href", "");
 

@@ -108,9 +108,6 @@ namespace MangaDownloader.Utils
                 case MangaSite.TRUYENTRANHNET:
                     return Properties.Resources.vechai;
 
-                case MangaSite.MANGAFOX:
-                    return Properties.Resources.mangafox_logo;
-
                 case MangaSite.TRUYENTRANHTUAN:
                     return Properties.Resources.truyentranhtuan_logo;
 
@@ -120,14 +117,8 @@ namespace MangaDownloader.Utils
                 case MangaSite.IZTRUYENTRANH:
                     return Properties.Resources.izmanga_logo;
 
-                case MangaSite.KISSMANGA:
-                    return Properties.Resources.kissmanga_logo;
-
                 case MangaSite.HOCVIENTRUYENTRANH:
                     return Properties.Resources.hocvientruyentranh;
-
-                case MangaSite.MANGAPARK:
-                    return Properties.Resources.mangapark;
 
                 case MangaSite.LHMANGA:
                     return Properties.Resources.lhmanga;
@@ -140,6 +131,17 @@ namespace MangaDownloader.Utils
 
                 case MangaSite.UPTRUYEN:
                     return Properties.Resources.uptruyen_favicon;
+
+
+
+                case MangaSite.MANGAFOX:
+                    return Properties.Resources.mangafox_logo;
+
+                case MangaSite.MANGAPARK:
+                    return Properties.Resources.mangapark;
+
+                case MangaSite.KISSMANGA:
+                    return Properties.Resources.kissmanga_logo;
 
                 default:
                     // TODO Add logo for more sites

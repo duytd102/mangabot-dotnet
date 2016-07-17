@@ -1,6 +1,5 @@
 ﻿using Common.Enums;
 using System;
-using WebScraper.Scrapers.Implement;
 
 namespace WebScraper.Scrapers
 {
@@ -11,31 +10,45 @@ namespace WebScraper.Scrapers
             switch (site)
             {
                 case MangaSite.BLOGTRUYEN:
-                    return new BlogTruyenScraper();
-                case MangaSite.MANGAFOX:
-                    return new MangaFoxScraper();
+                    return new DefaultScraper(MangaSite.BLOGTRUYEN, "WebScraper.Scrapers.Scripts.BlogTruyenScript", "http://blogtruyen.com");
+
                 case MangaSite.TRUYENTRANHNET:
-                    return new TruyenTranhNetScraper();
+                    return new DefaultScraper(MangaSite.TRUYENTRANHNET, "WebScraper.Scrapers.Scripts.TruyenTranhNetScript", "http://truyentranh.net");
+
                 case MangaSite.TRUYENTRANHTUAN:
-                    return new TruyenTranhTuanScraper();
+                    return new DefaultScraper(MangaSite.TRUYENTRANHTUAN, "WebScraper.Scrapers.Scripts.TruyenTranhTuanScript", "http://truyentranhtuan.com/");
+
                 case MangaSite.TRUYENTRANH8:
-                    return new TruyenTranh8Scraper();
+                    return new DefaultScraper(MangaSite.TRUYENTRANH8, "WebScraper.Scrapers.Scripts.TruyenTranh8Script", "http://truyentranh8.net");
+
                 case MangaSite.IZTRUYENTRANH:
-                    return new IzMangaScraper();
-                case MangaSite.KISSMANGA:
-                    return new KissMangaScraper();
+                    return new DefaultScraper(MangaSite.IZTRUYENTRANH, "WebScraper.Scrapers.Scripts.IzTruyenTranhScript", "http://iztruyentranh.com/");
+
                 case MangaSite.HOCVIENTRUYENTRANH:
-                    return new HocVienTruyenTranhScraper();
-                case MangaSite.MANGAPARK:
-                    return new MangaParkScraper();
+                    return new DefaultScraper(MangaSite.HOCVIENTRUYENTRANH, "WebScraper.Scrapers.Scripts.HocVienTruyenTranhScript", "http://truyen.academyvn.com/");
+
                 case MangaSite.LHMANGA:
-                    return new LHMangaScraper();
+                    return new DefaultScraper(MangaSite.LHMANGA, "WebScraper.Scrapers.Scripts.LHMangaScript", "http://lhmanga.com/");
+
                 case MangaSite.TRUYENTRANHMOI:
-                    return new TruyenTranhMoiScraper();
+                    return new DefaultScraper(MangaSite.TRUYENTRANHMOI, "WebScraper.Scrapers.Scripts.TruyenTranhMoiScript", "http://truyentranhmoi.com");
+
                 case MangaSite.MANGAK:
-                    return new MangaKScraper();
+                    return new DefaultScraper(MangaSite.MANGAK, "WebScraper.Scrapers.Scripts.MangaKScript", "http://mangak.info");
+
                 case MangaSite.UPTRUYEN:
-                    return new UpTruyenScraper();
+                    return new DefaultScraper(MangaSite.UPTRUYEN, "WebScraper.Scrapers.Scripts.UpTruyenScript", "http://uptruyen.com");
+
+
+
+                case MangaSite.MANGAFOX:
+                    return new DefaultScraper(MangaSite.MANGAFOX, "WebScraper.Scrapers.Scripts.MangaFoxScript", "http://mangafox.me/");
+
+                case MangaSite.MANGAPARK:
+                    return new DefaultScraper(MangaSite.MANGAPARK, "WebScraper.Scrapers.Scripts.MangaParkScript", "http://mangapark.me/");
+
+                case MangaSite.KISSMANGA:
+                    return new DefaultScraper(MangaSite.KISSMANGA, "", "");
 
                 default:
                     // TODO implement if has more sites

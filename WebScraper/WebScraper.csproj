@@ -74,15 +74,18 @@
     <Compile Include="Processors\ProcessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scrapers\DictionaryToList.cs" />
+    <Compile Include="Scrapers\DefaultScraper.cs" />
     <Compile Include="Scrapers\Implement\LHMangaScraper.cs" />
     <Compile Include="Scrapers\Implement\MangaKScraper.cs" />
     <Compile Include="Scrapers\Implement\TruyenTranhMoiScraper.cs" />
+    <Compile Include="Scrapers\Implement\TruyenTranhOnlineScraper.cs" />
     <Compile Include="Scrapers\Implement\UpTruyenScraper.cs" />
     <Compile Include="Scrapers\Scripts\BlogTruyenScript.cs" />
     <Compile Include="Scrapers\Scripts\LHMangaScript.cs" />
     <Compile Include="Scrapers\Scripts\MangaKScript.cs" />
     <Compile Include="Scrapers\Scripts\TruyenTranhMoiScript.cs" />
     <Compile Include="Scrapers\Scripts\TruyenTranhNetScript.cs" />
+    <Compile Include="Scrapers\Scripts\TruyenTranhOnlineScript.cs" />
     <Compile Include="Scrapers\Scripts\TruyenTranhTuanScript.cs" />
     <Compile Include="Scrapers\Scripts\TruyenTranh8Script.cs" />
     <Compile Include="Scrapers\Scripts\MangaParkScript.cs" />
@@ -99,10 +102,11 @@
     <Compile Include="Scrapers\IScraper.cs" />
     <Compile Include="Scrapers\ScraperFactory.cs" />
     <Compile Include="Scrapers\Scripts\MangaFoxScript.cs" />
-    <Compile Include="Scrapers\Scripts\IzMangaScript.cs" />
+    <Compile Include="Scrapers\Scripts\IzTruyenTranhScript.cs" />
     <Compile Include="Scrapers\Scripts\UpTruyenScript.cs" />
     <Compile Include="ScriptManager.cs" />
     <Compile Include="Utils\DetectUrlUtils.cs" />
+    <Compile Include="Utils\MethodInvoker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

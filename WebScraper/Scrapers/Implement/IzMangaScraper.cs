@@ -21,7 +21,7 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch { }
             }
-            return new IzMangaScript().GetTotalPages();
+            return new IzTruyenTranhScript().GetTotalPages();
         }
 
         public List<Manga> GetMangaList(int pageIndex)
@@ -36,12 +36,12 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch
                 {
-                    results = new IzMangaScript().GetMangaList(pageIndex);
+                    results = new IzTruyenTranhScript().GetMangaList(pageIndex);
                 }
             }
             else
             {
-                results = new IzMangaScript().GetMangaList(pageIndex);
+                results = new IzTruyenTranhScript().GetMangaList(pageIndex);
             }
 
             return DictionaryToList.ToMangaList(DOMAIN, MangaSite.IZTRUYENTRANH, results);
@@ -59,12 +59,12 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch
                 {
-                    results = new IzMangaScript().GetChapterList(mangaUrl);
+                    results = new IzTruyenTranhScript().GetChapterList(mangaUrl);
                 }
             }
             else
             {
-                results = new IzMangaScript().GetChapterList(mangaUrl);
+                results = new IzTruyenTranhScript().GetChapterList(mangaUrl);
             }
 
             return DictionaryToList.ToChapterList(DOMAIN, MangaSite.IZTRUYENTRANH, results);
@@ -82,12 +82,12 @@ namespace WebScraper.Scrapers.Implement
                 }
                 catch
                 {
-                    results = new IzMangaScript().GetPageList(chapterUrl);
+                    results = new IzTruyenTranhScript().GetPageList(chapterUrl);
                 }
             }
             else
             {
-                results = new IzMangaScript().GetPageList(chapterUrl);
+                results = new IzTruyenTranhScript().GetPageList(chapterUrl);
             }
 
             return DictionaryToList.ToPageList(MangaSite.IZTRUYENTRANH, results);

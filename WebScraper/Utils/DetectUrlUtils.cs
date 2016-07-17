@@ -6,21 +6,22 @@ namespace WebScraper.Utils
     public class DetectUrlUtils
     {
         const string blogtruyen = "blogtruyen.com";
-        const string mangafox = "mangafox.me";
         const string truyentranhnet = "truyentranh.net";
         const string manga24h = "manga24h.com";
         const string truyentranhtuan = "truyentranhtuan.com";
         const string truyentranhnhanh = "truyentranhnhanh.com";
         const string truyentranh8 = "truyentranh8.net";
         const string iztruyentranh = "iztruyentranh.com";
-        const string kissmanga = "kissmanga.com";
         const string otakufc = "otakufc.com";
         const string hvtt = "truyen.academyvn.com";
-        const string mangapark = "mangapark.me";
         const string lhmanga = "lhmanga.com";
         const string truyentranhmoi = "truyentranhmoi.com";
         const string mangak = "mangak.info";
         const string uptruyen = "uptruyen.com";
+        
+        const string mangafox = "mangafox.me";
+        const string mangapark = "mangapark.me";
+        const string kissmanga = "kissmanga.com";
 
         public static MangaSite GetSite(String url)
         {
@@ -31,9 +32,6 @@ namespace WebScraper.Utils
 
                 if (host.IndexOf(blogtruyen) >= 0)
                     return MangaSite.BLOGTRUYEN;
-
-                else if (host.IndexOf(mangafox) >= 0)
-                    return MangaSite.MANGAFOX;
 
                 else if (host.IndexOf(truyentranhnet) >= 0)
                     return MangaSite.TRUYENTRANHNET;
@@ -47,14 +45,8 @@ namespace WebScraper.Utils
                 else if (host.IndexOf(iztruyentranh) >= 0)
                     return MangaSite.IZTRUYENTRANH;
 
-                else if (host.IndexOf(kissmanga) >= 0)
-                    return MangaSite.KISSMANGA;
-
                 else if (host.IndexOf(hvtt) >= 0)
                     return MangaSite.HOCVIENTRUYENTRANH;
-
-                else if (host.IndexOf(mangapark) >= 0)
-                    return MangaSite.MANGAPARK;
 
                 else if (host.IndexOf(lhmanga) >= 0)
                     return MangaSite.LHMANGA;
@@ -67,6 +59,18 @@ namespace WebScraper.Utils
 
                 else if (host.IndexOf(uptruyen) >= 0)
                     return MangaSite.UPTRUYEN;
+
+
+
+
+                else if (host.IndexOf(mangafox) >= 0)
+                    return MangaSite.MANGAFOX;
+
+                else if (host.IndexOf(mangapark) >= 0)
+                    return MangaSite.MANGAPARK;
+
+                else if (host.IndexOf(kissmanga) >= 0)
+                    return MangaSite.KISSMANGA;
             }
             catch { }
 

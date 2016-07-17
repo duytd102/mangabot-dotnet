@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace WebScraper.Scrapers.Scripts
 {
-    public class IzMangaScript
+    public class IzTruyenTranhScript
     {
         private const string BASE_LIST_URL = "http://izmanga.com/danh-sach-truyen?type=new&category=all&alpha=all&page={0}&state=all&group=all";
 

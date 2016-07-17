@@ -1564,5 +1564,11 @@ namespace MangaDownloader.GUIs
             setCurrentSite(MangaSite.UPTRUYEN);
             tsMangaCommands_Resize(sender, e);
         }
+
+        private void tsmiTruyenTranhOnline_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.TRUYENTRANHONLINE);
+            tsMangaCommands_Resize(sender, e);
+        }
     }
 }

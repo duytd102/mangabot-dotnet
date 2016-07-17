@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.cmsMangaMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMangaAddToQueue = new System.Windows.Forms.ToolStripMenuItem();
@@ -438,8 +438,8 @@
             // 
             this.colMangaNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colMangaNo.DataPropertyName = "no";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colMangaNo.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colMangaNo.DefaultCellStyle = dataGridViewCellStyle1;
             this.colMangaNo.HeaderText = "No";
             this.colMangaNo.Name = "colMangaNo";
             this.colMangaNo.ReadOnly = true;
@@ -977,6 +977,7 @@
             this.tsmiTruyenTranhOnline.Size = new System.Drawing.Size(204, 22);
             this.tsmiTruyenTranhOnline.Text = "truyentranhonline.vn";
             this.tsmiTruyenTranhOnline.Visible = false;
+            this.tsmiTruyenTranhOnline.Click += new System.EventHandler(this.tsmiTruyenTranhOnline_Click);
             // 
             // tsmiHamTruyen
             // 

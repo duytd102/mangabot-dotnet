@@ -1,6 +1,6 @@
 ﻿Version 2.3 (2016-07-17)
 [New]
-- Support truyentranhmoi.com, mangak.info, uptruyen.com, truyentranhonline.vn
+- Support truyentranhmoi.com, mangak.info, uptruyen.com
 - Vechai moved to truyentranh.net
 - izmanga.com moved to iztruyentranh.com
 [Bugfix]

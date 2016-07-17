@@ -168,12 +168,10 @@ namespace MangaDownloader.GUIs
             mangaList.AddRange(MangaUtils.Import(MangaSite.BLOGTRUYEN));
             mangaList.AddRange(MangaUtils.Import(MangaSite.IZTRUYENTRANH));
             mangaList.AddRange(MangaUtils.Import(MangaSite.KISSMANGA));
-            mangaList.AddRange(MangaUtils.Import(MangaSite.MANGA24H));
             mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAFOX));
             mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANH8));
             mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANHTUAN));
             mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANHNET));
-            mangaList.AddRange(MangaUtils.Import(MangaSite.OTAKUFC));
             mangaList.AddRange(MangaUtils.Import(MangaSite.HOCVIENTRUYENTRANH));
             mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAPARK));
             mangaList.AddRange(MangaUtils.Import(MangaSite.LHMANGA));

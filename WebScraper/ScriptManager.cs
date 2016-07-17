@@ -10,8 +10,7 @@ namespace WebScraper
     {
         private static ScriptManager instance;
         private static List<string> scriptLinkRepo = new List<string>() {
-            "https://drive.google.com/uc?export=download&id=0BwclU1yWN7VGbk53ck44RFJESms",
-            "https://dl.dropboxusercontent.com/u/148375006/apps/mangabot/script-repo.csv"
+            "https://drive.google.com/uc?export=download&id=0BwclU1yWN7VGbk53ck44RFJESms"
         };
         private static Dictionary<MangaSite, List<string>> scriptLinks = new Dictionary<MangaSite, List<string>>();
         private static Dictionary<MangaSite, string> scriptSrcs = new Dictionary<MangaSite, string>();
@@ -54,9 +53,9 @@ namespace WebScraper
                             }
                             sr.Close();
                         }
+                        break;
                     }
                     catch { }
-                    break;
                 }
             }
         }

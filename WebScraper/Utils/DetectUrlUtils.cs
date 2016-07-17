@@ -38,9 +38,6 @@ namespace WebScraper.Utils
                 else if (host.IndexOf(truyentranhnet) >= 0)
                     return MangaSite.TRUYENTRANHNET;
 
-                else if (host.IndexOf(manga24h) >= 0)
-                    return MangaSite.MANGA24H;
-
                 else if (host.IndexOf(truyentranhtuan) >= 0)
                     return MangaSite.TRUYENTRANHTUAN;
 
@@ -52,9 +49,6 @@ namespace WebScraper.Utils
 
                 else if (host.IndexOf(kissmanga) >= 0)
                     return MangaSite.KISSMANGA;
-
-                else if (host.IndexOf(otakufc) >= 0)
-                    return MangaSite.OTAKUFC;
 
                 else if (host.IndexOf(hvtt) >= 0)
                     return MangaSite.HOCVIENTRUYENTRANH;

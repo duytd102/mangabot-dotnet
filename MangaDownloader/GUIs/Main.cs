@@ -58,6 +58,10 @@ namespace MangaDownloader.GUIs
         int concurrentWorkersLimit = 3;
         bool isStoppingQueue = false;
         String newAutoUpdatePath;
+        BackgroundWorker autoUpdateMangaListWorker = new BackgroundWorker();
+        IProcessor autoUpdateProcessor;
+        MangaSite autoUpdateMangaSite = MangaSite.UNKNOWN;
+        List<Manga> autoUpdateMangaList = new List<Manga>();
 
         public MainForm()
             : base()
@@ -85,7 +89,7 @@ namespace MangaDownloader.GUIs
             tsmiNewVersion.Visible = false;
 
             SettingsManager.Import();
-            
+
             EnableOrDisableTurnOffComputerOption();
 
             currentSite = CommonSettings.LatestSite();
@@ -425,16 +429,24 @@ namespace MangaDownloader.GUIs
         void mangaWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             mangaList.Clear();
+
             IProcessor processor = ProcessorFactory.CreateProcessor(currentSite);
             processor.ScrapOneMangaPageComplete += processor_ScrapOneMangaPageComplete;
             e.Result = processor.GetMangaList();
         }
 
-        void processor_ScrapOneMangaPageComplete(int totalManga, int totalPages, int pageIndex, List<Manga> partialList)
+        void processor_ScrapOneMangaPageComplete(IProcessor invoker, int totalManga, int totalPages, int pageIndex, List<Manga> partialList)
         {
-            mangaList.AddRange(partialList);
-            MangaUtils.Export(currentSite, mangaList);
-            AppendMangaListGridView(totalManga, partialList);
+            if (mangaWorker.CancellationPending == false)
+            {
+                mangaList.AddRange(partialList);
+                MangaUtils.Export(currentSite, mangaList);
+                AppendMangaListGridView(totalManga, partialList);
+            }
+            else
+            {
+                invoker.Cancel();
+            }
         }
 
         void mangaWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1342,12 +1354,6 @@ namespace MangaDownloader.GUIs
             mangaWorker.RunWorkerAsync();
         }
 
-        private void tsmiManga24h_Click(object sender, EventArgs e)
-        {
-            setCurrentSite(MangaSite.MANGA24H);
-            tsMangaCommands_Resize(sender, e);
-        }
-
         private void tsmiTruyenTranhTuan_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.TRUYENTRANHTUAN);
@@ -1450,12 +1456,6 @@ namespace MangaDownloader.GUIs
             tsMangaCommands_Resize(sender, e);
         }
 
-        private void tsmiOtakuFC_Click(object sender, EventArgs e)
-        {
-            setCurrentSite(MangaSite.OTAKUFC);
-            tsMangaCommands_Resize(sender, e);
-        }
-
         private void tsmiHVTT_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.HOCVIENTRUYENTRANH);
@@ -1467,13 +1467,6 @@ namespace MangaDownloader.GUIs
             setCurrentSite(MangaSite.MANGAPARK);
             tsMangaCommands_Resize(sender, e);
         }
-
-
-
-        BackgroundWorker autoUpdateMangaListWorker = new BackgroundWorker();
-        IProcessor autoUpdateProcessor;
-        MangaSite autoUpdateMangaSite = MangaSite.UNKNOWN;
-        List<Manga> autoUpdateMangaList = new List<Manga>();
 
         private void AutoUpdateMangaList()
         {
@@ -1537,7 +1530,7 @@ namespace MangaDownloader.GUIs
             }
         }
 
-        private void AutoUpdateProcessor_ScrapOneMangaPageComplete(int totalManga, int totalPages, int pageIndex, List<Manga> partialList)
+        private void AutoUpdateProcessor_ScrapOneMangaPageComplete(IProcessor invoker, int totalManga, int totalPages, int pageIndex, List<Manga> partialList)
         {
             autoUpdateMangaList.AddRange(partialList);
 

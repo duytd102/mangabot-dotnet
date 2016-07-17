@@ -8,7 +8,7 @@ namespace WebScraper.Processors
 {
     public interface IProcessor
     {
-        event Action<int, int, int, List<Manga>> ScrapOneMangaPageComplete;
+        event Action<IProcessor, int, int, int, List<Manga>> ScrapOneMangaPageComplete;
 
 
         int GetTotalPages();

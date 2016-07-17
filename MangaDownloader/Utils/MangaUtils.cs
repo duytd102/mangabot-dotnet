@@ -111,9 +111,6 @@ namespace MangaDownloader.Utils
                 case MangaSite.MANGAFOX:
                     return Properties.Resources.mangafox_logo;
 
-                case MangaSite.MANGA24H:
-                    return Properties.Resources.manga24h;
-
                 case MangaSite.TRUYENTRANHTUAN:
                     return Properties.Resources.truyentranhtuan_logo;
 
@@ -125,9 +122,6 @@ namespace MangaDownloader.Utils
 
                 case MangaSite.KISSMANGA:
                     return Properties.Resources.kissmanga_logo;
-
-                case MangaSite.OTAKUFC:
-                    return Properties.Resources.otakufc;
 
                 case MangaSite.HOCVIENTRUYENTRANH:
                     return Properties.Resources.hocvientruyentranh;

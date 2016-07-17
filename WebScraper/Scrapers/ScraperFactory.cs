@@ -16,8 +16,6 @@ namespace WebScraper.Scrapers
                     return new MangaFoxScraper();
                 case MangaSite.TRUYENTRANHNET:
                     return new TruyenTranhNetScraper();
-                case MangaSite.MANGA24H:
-                    return new Manga24hScraper();
                 case MangaSite.TRUYENTRANHTUAN:
                     return new TruyenTranhTuanScraper();
                 case MangaSite.TRUYENTRANH8:
@@ -26,8 +24,6 @@ namespace WebScraper.Scrapers
                     return new IzMangaScraper();
                 case MangaSite.KISSMANGA:
                     return new KissMangaScraper();
-                case MangaSite.OTAKUFC:
-                    return new OtakufcScraper();
                 case MangaSite.HOCVIENTRUYENTRANH:
                     return new HocVienTruyenTranhScraper();
                 case MangaSite.MANGAPARK:

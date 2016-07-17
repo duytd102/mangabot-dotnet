@@ -8,7 +8,7 @@ namespace WebScraper.Processors.Implement
 {
     class MultiplePagesProcessor : IProcessor
     {
-        public event Action<int, int, int, List<Manga>> ScrapOneMangaPageComplete;
+        public event Action<IProcessor, int, int, int, List<Manga>> ScrapOneMangaPageComplete;
 
         int totalPages;
         int limitRows;
@@ -62,7 +62,7 @@ namespace WebScraper.Processors.Implement
                         limitRows = 200;
                     }
 
-                    ScrapOneMangaPageComplete(totalManga, totalPages, i, partialList);
+                    ScrapOneMangaPageComplete(this, totalManga, totalPages, i, partialList);
                 }
             }
 

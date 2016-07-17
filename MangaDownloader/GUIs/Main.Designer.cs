@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.cmsMangaMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMangaAddToQueue = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,6 +114,7 @@
             this.tsmiMangaK = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUpTruyen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTruyenTranhOnline = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHamTruyen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEnglishSites = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMangaFox = new System.Windows.Forms.ToolStripMenuItem();
             this.mangaParkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -437,8 +438,8 @@
             // 
             this.colMangaNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colMangaNo.DataPropertyName = "no";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colMangaNo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colMangaNo.DefaultCellStyle = dataGridViewCellStyle2;
             this.colMangaNo.HeaderText = "No";
             this.colMangaNo.Name = "colMangaNo";
             this.colMangaNo.ReadOnly = true;
@@ -881,7 +882,8 @@
             this.tsmiTruyenTranhMoi,
             this.tsmiMangaK,
             this.tsmiUpTruyen,
-            this.tsmiTruyenTranhOnline});
+            this.tsmiTruyenTranhOnline,
+            this.tsmiHamTruyen});
             this.tsmiVietnameseSites.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiVietnameseSites.Image = global::MangaDownloader.Properties.Resources.vn;
             this.tsmiVietnameseSites.Name = "tsmiVietnameseSites";
@@ -975,6 +977,13 @@
             this.tsmiTruyenTranhOnline.Size = new System.Drawing.Size(204, 22);
             this.tsmiTruyenTranhOnline.Text = "truyentranhonline.vn";
             this.tsmiTruyenTranhOnline.Visible = false;
+            // 
+            // tsmiHamTruyen
+            // 
+            this.tsmiHamTruyen.Name = "tsmiHamTruyen";
+            this.tsmiHamTruyen.Size = new System.Drawing.Size(204, 22);
+            this.tsmiHamTruyen.Text = "hamtruyen.vn";
+            this.tsmiHamTruyen.Visible = false;
             // 
             // tsmiEnglishSites
             // 
@@ -1269,5 +1278,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiMangaK;
         private System.Windows.Forms.ToolStripMenuItem tsmiUpTruyen;
         private System.Windows.Forms.ToolStripMenuItem tsmiTruyenTranhOnline;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHamTruyen;
     }
 }

@@ -37,7 +37,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2016-05-28")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-07-17")]
         public global::System.DateTime ReleaseDate {
             get {
                 return ((global::System.DateTime)(this["ReleaseDate"]));
@@ -55,7 +55,7 @@ namespace Common.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2016-05-28")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-07-17")]
         public global::System.DateTime CheckVersionDate {
             get {
                 return ((global::System.DateTime)(this["CheckVersionDate"]));
@@ -86,6 +86,18 @@ namespace Common.Properties {
             }
             set {
                 this["NextVersionURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BLOGTRUYEN")]
+        public string LatestSite {
+            get {
+                return ((string)(this["LatestSite"]));
+            }
+            set {
+                this["LatestSite"] = value;
             }
         }
     }

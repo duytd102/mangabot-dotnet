@@ -14,15 +14,15 @@ namespace WebScraper.Scrapers
                     return new BlogTruyenScraper();
                 case MangaSite.MANGAFOX:
                     return new MangaFoxScraper();
-                case MangaSite.VECHAI:
-                    return new VeChaiScraper();
+                case MangaSite.TRUYENTRANHNET:
+                    return new TruyenTranhNetScraper();
                 case MangaSite.MANGA24H:
                     return new Manga24hScraper();
                 case MangaSite.TRUYENTRANHTUAN:
                     return new TruyenTranhTuanScraper();
                 case MangaSite.TRUYENTRANH8:
                     return new TruyenTranh8Scraper();
-                case MangaSite.IZMANGA:
+                case MangaSite.IZTRUYENTRANH:
                     return new IzMangaScraper();
                 case MangaSite.KISSMANGA:
                     return new KissMangaScraper();
@@ -34,6 +34,12 @@ namespace WebScraper.Scrapers
                     return new MangaParkScraper();
                 case MangaSite.LHMANGA:
                     return new LHMangaScraper();
+                case MangaSite.TRUYENTRANHMOI:
+                    return new TruyenTranhMoiScraper();
+                case MangaSite.MANGAK:
+                    return new MangaKScraper();
+                case MangaSite.UPTRUYEN:
+                    return new UpTruyenScraper();
 
                 default:
                     // TODO implement if has more sites

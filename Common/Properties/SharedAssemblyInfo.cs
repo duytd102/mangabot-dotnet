@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("Manga Downloader help you to download manga from websites to your computer to view them later.")]
+[assembly: AssemblyDescription("Manga Bot aims to download manga from some popular websites.")]
 [assembly: AssemblyCompany("Duy Tran")]
 //[assembly: AssemblyProduct("Manga Bot")]
 [assembly: AssemblyCopyright("Copyright © DuyTran 2016")]
@@ -37,5 +37,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.2")]
-[assembly: AssemblyInformationalVersion("2.2")]
+[assembly: AssemblyVersion("2.3")]
+[assembly: AssemblyInformationalVersion("2.3")]

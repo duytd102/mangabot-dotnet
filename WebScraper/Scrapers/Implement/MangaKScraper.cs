@@ -6,10 +6,11 @@ using WebScraper.Scrapers.Scripts;
 
 namespace WebScraper.Scrapers.Implement
 {
-    class IzMangaScraper : IScraper
+    class MangaKScraper : IScraper
     {
-        private const string DOMAIN = "http://iztruyentranh.com/";
-        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.IzMangaScript";
+        const string DOMAIN = "http://mangak.info";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.MangaKScript";
+        const MangaSite SITE = MangaSite.MANGAK;
 
         public int GetTotalPages()
         {
@@ -17,11 +18,11 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    return new BotCrawler<int>(MangaSite.IZTRUYENTRANH).Invoke(CLASS_NAME, "GetTotalPages");
+                    return new BotCrawler<int>(SITE).Invoke(CLASS_NAME, "GetTotalPages");
                 }
                 catch { }
             }
-            return new IzMangaScript().GetTotalPages();
+            return new TruyenTranhMoiScript().GetTotalPages();
         }
 
         public List<Manga> GetMangaList(int pageIndex)
@@ -32,19 +33,19 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.IZTRUYENTRANH).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                    results = new BotCrawler<List<Dictionary<string, string>>>(SITE).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
                 }
                 catch
                 {
-                    results = new IzMangaScript().GetMangaList(pageIndex);
+                    results = new TruyenTranhMoiScript().GetMangaList(pageIndex);
                 }
             }
             else
             {
-                results = new IzMangaScript().GetMangaList(pageIndex);
+                results = new TruyenTranhMoiScript().GetMangaList(pageIndex);
             }
 
-            return DictionaryToList.ToMangaList(DOMAIN, MangaSite.IZTRUYENTRANH, results);
+            return DictionaryToList.ToMangaList(DOMAIN, SITE, results);
         }
 
         public List<Chapter> GetChapterList(string mangaUrl)
@@ -55,19 +56,19 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.IZTRUYENTRANH).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                    results = new BotCrawler<List<Dictionary<string, string>>>(SITE).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
                 }
                 catch
                 {
-                    results = new IzMangaScript().GetChapterList(mangaUrl);
+                    results = new TruyenTranhMoiScript().GetChapterList(mangaUrl);
                 }
             }
             else
             {
-                results = new IzMangaScript().GetChapterList(mangaUrl);
+                results = new TruyenTranhMoiScript().GetChapterList(mangaUrl);
             }
 
-            return DictionaryToList.ToChapterList(DOMAIN, MangaSite.IZTRUYENTRANH, results);
+            return DictionaryToList.ToChapterList(DOMAIN, SITE, results);
         }
 
         public List<Page> GetPageList(string chapterUrl)
@@ -78,19 +79,19 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.IZTRUYENTRANH).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
+                    results = new BotCrawler<List<Dictionary<string, string>>>(SITE).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
                 }
                 catch
                 {
-                    results = new IzMangaScript().GetPageList(chapterUrl);
+                    results = new TruyenTranhMoiScript().GetPageList(chapterUrl);
                 }
             }
             else
             {
-                results = new IzMangaScript().GetPageList(chapterUrl);
+                results = new TruyenTranhMoiScript().GetPageList(chapterUrl);
             }
 
-            return DictionaryToList.ToPageList(MangaSite.IZTRUYENTRANH, results);
+            return DictionaryToList.ToPageList(SITE, results);
         }
     }
 }

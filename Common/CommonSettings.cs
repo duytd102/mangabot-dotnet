@@ -99,5 +99,17 @@ namespace Common
             Properties.Settings.Default.NextVersionURL = nextVersionUrl;
             Properties.Settings.Default.Save();
         }
+
+        public static MangaSite LatestSite()
+        {
+            MangaSite site = MangaSite.BLOGTRUYEN;
+            return Enum.TryParse(Properties.Settings.Default.LatestSite, true, out site) ? site : MangaSite.BLOGTRUYEN;
+        }
+
+        public static void SetLatestSite(MangaSite site)
+        {
+            Properties.Settings.Default.LatestSite = site.ToString();
+            Properties.Settings.Default.Save();
+        }
     }
 }

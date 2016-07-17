@@ -293,6 +293,16 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mangak_favicon {
+            get {
+                object obj = ResourceManager.GetObject("mangak_favicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mangapark {
             get {
                 object obj = ResourceManager.GetObject("mangapark", resourceCulture);
@@ -463,9 +473,39 @@ namespace MangaDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap truyentranhmoi_favicon {
+            get {
+                object obj = ResourceManager.GetObject("truyentranhmoi_favicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap truyentranhonline_favicon {
+            get {
+                object obj = ResourceManager.GetObject("truyentranhonline_favicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap truyentranhtuan_logo {
             get {
                 object obj = ResourceManager.GetObject("truyentranhtuan_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap uptruyen_favicon {
+            get {
+                object obj = ResourceManager.GetObject("uptruyen_favicon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

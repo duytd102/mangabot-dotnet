@@ -69,23 +69,25 @@ namespace MangaDownloader.Utils
             try
             {
                 List<Manga> mangaList = new List<Manga>();
-                Manga manga;
 
-                String mangaFilePath = Application.StartupPath + "\\data\\" + site.ToString().ToLower();
-                using (StreamReader sr = new StreamReader(mangaFilePath, Encoding.UTF8))
+                string mangaFilePath = Application.StartupPath + "\\data\\" + site.ToString().ToLower();
+                if (File.Exists(mangaFilePath))
                 {
-                    var csv = new CsvReader(sr);
-                    while (csv.Read())
+                    using (StreamReader sr = new StreamReader(mangaFilePath, Encoding.UTF8))
                     {
-                        manga = new Manga();
-                        manga.ID = Guid.NewGuid().ToString();
-                        manga.Name = csv.GetField<string>(0);
-                        manga.Url = csv.GetField<string>(1);
-                        manga.Site = site;
-                        mangaList.Add(manga);
-                    }
+                        var csv = new CsvReader(sr);
+                        while (csv.Read())
+                        {
+                            Manga manga = new Manga();
+                            manga.ID = Guid.NewGuid().ToString();
+                            manga.Name = csv.GetField<string>(0);
+                            manga.Url = csv.GetField<string>(1);
+                            manga.Site = site;
+                            mangaList.Add(manga);
+                        }
 
-                    sr.Close();
+                        sr.Close();
+                    }
                 }
 
                 return mangaList;
@@ -103,7 +105,7 @@ namespace MangaDownloader.Utils
                 case MangaSite.BLOGTRUYEN:
                     return Properties.Resources.blogtruyen_logo;
 
-                case MangaSite.VECHAI:
+                case MangaSite.TRUYENTRANHNET:
                     return Properties.Resources.vechai;
 
                 case MangaSite.MANGAFOX:
@@ -118,7 +120,7 @@ namespace MangaDownloader.Utils
                 case MangaSite.TRUYENTRANH8:
                     return Properties.Resources.truyentranh8;
 
-                case MangaSite.IZMANGA:
+                case MangaSite.IZTRUYENTRANH:
                     return Properties.Resources.izmanga_logo;
 
                 case MangaSite.KISSMANGA:
@@ -135,6 +137,15 @@ namespace MangaDownloader.Utils
 
                 case MangaSite.LHMANGA:
                     return Properties.Resources.lhmanga;
+                    
+                case MangaSite.TRUYENTRANHMOI:
+                    return Properties.Resources.truyentranhmoi_favicon;
+
+                case MangaSite.MANGAK:
+                    return Properties.Resources.mangak_favicon;
+
+                case MangaSite.UPTRUYEN:
+                    return Properties.Resources.uptruyen_favicon;
 
                 default:
                     // TODO Add logo for more sites

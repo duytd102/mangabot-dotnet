@@ -1,4 +1,12 @@
-﻿Version 2.2 (2016-05-28)
+﻿Version 2.3 (2016-07-17)
+[New]
+- Support truyentranhmoi.com, mangak.info, uptruyen.com, truyentranhonline.vn
+- Vechai moved to truyentranh.net
+- izmanga.com moved to iztruyentranh.com
+[Bugfix]
+- Fix truyentranh8.net
+
+Version 2.2 (2016-05-28)
 [New]
 - No longer support auto update (do not find any free host to get permanent direct link)
 [Enhancement]

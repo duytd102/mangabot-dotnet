@@ -325,6 +325,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="manga-downloader-logo_48.ico" />
+    <None Include="Resources\truyentranhonline_favicon.png" />
+    <None Include="Resources\uptruyen_favicon.png" />
+    <None Include="Resources\mangak_favicon.png" />
+    <None Include="Resources\truyentranhmoi_favicon.png" />
     <None Include="Resources\lhmanga.png" />
     <None Include="Resources\mangapark1.png" />
     <None Include="Resources\hocvientruyentranh1.png" />

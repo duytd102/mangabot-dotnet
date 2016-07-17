@@ -166,17 +166,20 @@ namespace MangaDownloader.GUIs
             // TODO import manga list if has more site
             mangaList = new List<Manga>();
             mangaList.AddRange(MangaUtils.Import(MangaSite.BLOGTRUYEN));
-            mangaList.AddRange(MangaUtils.Import(MangaSite.IZMANGA));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.IZTRUYENTRANH));
             mangaList.AddRange(MangaUtils.Import(MangaSite.KISSMANGA));
             mangaList.AddRange(MangaUtils.Import(MangaSite.MANGA24H));
             mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAFOX));
             mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANH8));
             mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANHTUAN));
-            mangaList.AddRange(MangaUtils.Import(MangaSite.VECHAI));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANHNET));
             mangaList.AddRange(MangaUtils.Import(MangaSite.OTAKUFC));
             mangaList.AddRange(MangaUtils.Import(MangaSite.HOCVIENTRUYENTRANH));
             mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAPARK));
             mangaList.AddRange(MangaUtils.Import(MangaSite.LHMANGA));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.TRUYENTRANHMOI));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.MANGAK));
+            mangaList.AddRange(MangaUtils.Import(MangaSite.UPTRUYEN));
             mangaList.Sort(new Comparison<Manga>((Manga m1, Manga m2) => { return m1.Name.CompareTo(m2.Name); }));
         }
 

@@ -6,10 +6,11 @@ using WebScraper.Scrapers.Scripts;
 
 namespace WebScraper.Scrapers.Implement
 {
-    class VeChaiScraper : IScraper
+    class TruyenTranhMoiScraper : IScraper
     {
-        private const string DOMAIN = "http://vechai.info/";
-        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.VeChaiScript";
+        const string DOMAIN = "http://truyentranhmoi.com";
+        const string CLASS_NAME = "WebScraper.Scrapers.Scripts.TruyenTranhMoiScript";
+        const MangaSite SITE = MangaSite.TRUYENTRANHMOI;
 
         public int GetTotalPages()
         {
@@ -17,11 +18,11 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    return new BotCrawler<int>(MangaSite.VECHAI).Invoke(CLASS_NAME, "GetTotalPages");
+                    return new BotCrawler<int>(SITE).Invoke(CLASS_NAME, "GetTotalPages");
                 }
                 catch { }
             }
-            return new VeChaiScript().GetTotalPages();
+            return new TruyenTranhMoiScript().GetTotalPages();
         }
 
         public List<Manga> GetMangaList(int pageIndex)
@@ -32,19 +33,19 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.VECHAI).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
+                    results = new BotCrawler<List<Dictionary<string, string>>>(SITE).Invoke(CLASS_NAME, "GetMangaList", new object[] { pageIndex });
                 }
                 catch
                 {
-                    results = new VeChaiScript().GetMangaList(pageIndex);
+                    results = new TruyenTranhMoiScript().GetMangaList(pageIndex);
                 }
             }
             else
             {
-                results = new VeChaiScript().GetMangaList(pageIndex);
+                results = new TruyenTranhMoiScript().GetMangaList(pageIndex);
             }
 
-            return DictionaryToList.ToMangaList(DOMAIN, MangaSite.VECHAI, results);
+            return DictionaryToList.ToMangaList(DOMAIN, SITE, results);
         }
 
         public List<Chapter> GetChapterList(string mangaUrl)
@@ -55,19 +56,19 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.VECHAI).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
+                    results = new BotCrawler<List<Dictionary<string, string>>>(SITE).Invoke(CLASS_NAME, "GetChapterList", new object[] { mangaUrl });
                 }
                 catch
                 {
-                    results = new VeChaiScript().GetChapterList(mangaUrl);
+                    results = new TruyenTranhMoiScript().GetChapterList(mangaUrl);
                 }
             }
             else
             {
-                results = new VeChaiScript().GetChapterList(mangaUrl);
+                results = new TruyenTranhMoiScript().GetChapterList(mangaUrl);
             }
 
-            return DictionaryToList.ToChapterList(DOMAIN, MangaSite.VECHAI, results);
+            return DictionaryToList.ToChapterList(DOMAIN, SITE, results);
         }
 
         public List<Page> GetPageList(string chapterUrl)
@@ -78,19 +79,19 @@ namespace WebScraper.Scrapers.Implement
             {
                 try
                 {
-                    results = new BotCrawler<List<Dictionary<string, string>>>(MangaSite.VECHAI).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
+                    results = new BotCrawler<List<Dictionary<string, string>>>(SITE).Invoke(CLASS_NAME, "GetPageList", new object[] { chapterUrl });
                 }
                 catch
                 {
-                    results = new VeChaiScript().GetPageList(chapterUrl);
+                    results = new TruyenTranhMoiScript().GetPageList(chapterUrl);
                 }
             }
             else
             {
-                results = new VeChaiScript().GetPageList(chapterUrl);
+                results = new TruyenTranhMoiScript().GetPageList(chapterUrl);
             }
 
-            return DictionaryToList.ToPageList(MangaSite.VECHAI, results);
+            return DictionaryToList.ToPageList(SITE, results);
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace WebScraper.Scrapers.Scripts
 {
-    public class VeChaiScript
+    public class TruyenTranhNetScript
     {
-        private const string ROOT_LIST = "http://vechai.info/danh-sach.tall.html?p=";
+        private const string ROOT_LIST = "http://truyentranh.net/danh-sach.tall.html?p=";
 
         public int GetTotalPages()
         {

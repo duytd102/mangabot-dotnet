@@ -85,8 +85,10 @@ namespace MangaDownloader.GUIs
             tsmiNewVersion.Visible = false;
 
             SettingsManager.Import();
-
+            
             EnableOrDisableTurnOffComputerOption();
+
+            currentSite = CommonSettings.LatestSite();
 
             SettingsManager sm = SettingsManager.GetInstance();
 
@@ -113,7 +115,7 @@ namespace MangaDownloader.GUIs
             {
                 try
                 {
-                    ImportMangaList();
+                    setCurrentSite(currentSite);
                     importTaskList();
                     //loadingForm.Invoke(new MethodInvoker(() => { loadingForm.Close(); }));
                 }
@@ -252,7 +254,7 @@ namespace MangaDownloader.GUIs
 
         private void tsmiVeChai_Click(object sender, EventArgs e)
         {
-            setCurrentSite(MangaSite.VECHAI);
+            setCurrentSite(MangaSite.TRUYENTRANHNET);
             tsMangaCommands_Resize(sender, e);
         }
 
@@ -273,6 +275,8 @@ namespace MangaDownloader.GUIs
             if (mangaWorker.IsBusy) mangaWorker.CancelAsync();
 
             currentSite = site;
+            CommonSettings.SetLatestSite(site);
+
             tslbSiteLogo.Image = MangaUtils.GetLogo(currentSite);
             tslbSiteLogo.Text = EnumUtils.Capitalize(site);
 
@@ -1358,7 +1362,7 @@ namespace MangaDownloader.GUIs
 
         private void tsmiIZManga_Click(object sender, EventArgs e)
         {
-            setCurrentSite(MangaSite.IZMANGA);
+            setCurrentSite(MangaSite.IZTRUYENTRANH);
             tsMangaCommands_Resize(sender, e);
         }
 
@@ -1547,6 +1551,24 @@ namespace MangaDownloader.GUIs
         private void tsmiLHManga_Click(object sender, EventArgs e)
         {
             setCurrentSite(MangaSite.LHMANGA);
+            tsMangaCommands_Resize(sender, e);
+        }
+
+        private void tsmiTruyenTranhMoi_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.TRUYENTRANHMOI);
+            tsMangaCommands_Resize(sender, e);
+        }
+
+        private void tsmiMangaK_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.MANGAK);
+            tsMangaCommands_Resize(sender, e);
+        }
+
+        private void tsmiUpTruyen_Click(object sender, EventArgs e)
+        {
+            setCurrentSite(MangaSite.UPTRUYEN);
             tsMangaCommands_Resize(sender, e);
         }
     }

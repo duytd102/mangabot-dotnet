@@ -158,7 +158,7 @@ namespace WebScraper.Scrapers.Scripts
                     {
                         url = m.Groups["ACTUAL_URL"].Value.Trim();
                     }
-                    url = FixPhotoUrl(url);
+                    url = RewriteGoogleImage(url);
 
                     if (string.IsNullOrWhiteSpace(url) == false)
                     {
@@ -178,26 +178,53 @@ namespace WebScraper.Scrapers.Scripts
             return results;
         }
 
-        private string FixPhotoUrl(string url)
+        private string RewriteGoogleImage(string url)
         {
-            string dest = url.Replace("2.bp.blogspot.com", "1.bp.blogspot.com")
-                .Replace("3.bp.blogspot.com", "1.bp.blogspot.com")
-                .Replace("4.bp.blogspot.com", "1.bp.blogspot.com")
-                .Replace("?imgmax=6000", "")
-                .Replace("?imgmax=3000", "")
-                .Replace("?imgmax=2000", "")
-                .Replace("?imgmax=1600", "")
-                .Replace("?imgmax=0", "");
-
-            bool isBlogspot = Regex.IsMatch(dest, "1.bp.blogspot.com");
-
-            if (isBlogspot)
+            string reUrl = url;
+            if (string.IsNullOrWhiteSpace(url) == false)
             {
-                string[] parts = dest.Split(new string[] { "1.bp.blogspot.com" }, StringSplitOptions.RemoveEmptyEntries);
-                return parts.Length > 1 ? "http://1.bp.blogspot.com" + parts[1] + "?imgmax=0" : dest;
-            }
+                reUrl = url.Trim();
 
-            return dest;
+                Match match = Regex.Match(reUrl, @"^.+(&|\?)url=");
+                if (match.Success)
+                {
+                    reUrl = reUrl.Replace(match.Value, "");
+                }
+
+                match = Regex.Match(reUrl, @"(https?:\/\/)lh(\d)(\.bp\.blogspot\.com)");
+                if (match.Success)
+                {
+                    reUrl = reUrl.Replace(match.Value, match.Groups[1].ToString() + match.Groups[2].ToString() + match.Groups[3].ToString());
+                }
+
+                match = Regex.Match(reUrl, @"(https?:\/\/)lh\d\.(googleusercontent|ggpht)\.com");
+                if (match.Success)
+                {
+                    reUrl = reUrl.Replace(match.Value, match.Groups[1].ToString() + "4.bp.blogspot.com");
+                }
+
+                match = Regex.Match(reUrl, @"\?.+$");
+                if (match.Success)
+                {
+                    reUrl = reUrl.Replace(match.Value, "");
+                }
+
+                if (reUrl.Contains("blogspot.com") && Regex.IsMatch(reUrl, @"\/(s|w|h)0\/") == false)
+                {
+                    match = Regex.Match(reUrl, @"\/(s|h|w)\d+\/");
+                    if (match.Success)
+                    {
+                        reUrl = reUrl.Replace(match.Value, "/");
+                    }
+                    reUrl += "?imgmax=0";
+                }
+
+                if (reUrl.Contains("i.imgur.com"))
+                {
+                    reUrl = "//images-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=" + reUrl;
+                }
+            }
+            return reUrl;
         }
     }
 }

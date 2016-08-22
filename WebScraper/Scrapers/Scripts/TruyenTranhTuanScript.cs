@@ -82,11 +82,17 @@ namespace WebScraper.Scrapers.Scripts
         {
             int index = 1;
             List<Dictionary<string, string>> pageList = new List<Dictionary<string, string>>();
+            const string googleServer = @"slides_page_url_path\s*=\s*\[\s*(?<urls>[^\]]+)\]";
+            const string newServer = @"slides_page_path\s*=\s*\[\s*(?<urls>[^\]]+)\]";
 
-            const string pattern = @"slides_page_url_path\s*=\s*\[\s*(?<urls>[^\]]+)\]";
             string src = HttpUtils.MakeHttpGet(chapterUrl);
 
-            Match arr = Regex.Match(src, pattern);
+            Match arr = Regex.Match(src, googleServer);
+            if (!arr.Success)
+            {
+                arr = Regex.Match(src, newServer);
+            }
+
             string grp = arr.Groups["urls"].Value;
             string[] list = grp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string u in list)

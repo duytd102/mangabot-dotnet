@@ -221,7 +221,7 @@ namespace WebScraper.Scrapers.Scripts
 
                 if (reUrl.Contains("i.imgur.com"))
                 {
-                    reUrl = "//images-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=" + reUrl;
+                    //reUrl = "http://images-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=" + reUrl;
                 }
             }
             return reUrl;

@@ -98,31 +98,128 @@ namespace WebScraper.Scrapers.Scripts
 
         public List<Dictionary<string, string>> GetPageList(string chapterUrl)
         {
+            string src = HttpUtils.MakeHttpGet(chapterUrl);
+
             int index = 1;
             List<Dictionary<string, string>> pageList = new List<Dictionary<string, string>>();
 
-            const string pattern = "lstImages.push\\([\"|'](?<URL>.+?)[\"|']\\)";
-
-            string src = HttpUtils.MakeHttpGet(chapterUrl);
-            MatchCollection list = Regex.Matches(src, pattern, RegexOptions.IgnoreCase);
-            foreach (Match img in list)
+            const string scriptPattern = "<script[^>]*?>(?<TEXT>.*?)</script>";
+            MatchCollection scripts = Regex.Matches(src, scriptPattern, RegexOptions.IgnoreCase);
+            foreach (Match script in scripts)
             {
-                string url = img.Groups["URL"].Value.Trim();
-
-                if (string.IsNullOrWhiteSpace(url) == false)
+                string sc = script.Groups["TEXT"].Value;
+                const string fn = @"eval\(.+?}\((?<TEXT>.+?)\)\)";
+                Match fnm = Regex.Match(sc, fn);
+                if (fnm.Success)
                 {
-                    pageList.Add(new Dictionary<string, string>()
-                        {
-                            { "id", Guid.NewGuid().ToString() },
-                            { "name", "Trang " + StringUtils.GenerateOrdinal(list.Count, index) },
-                            { "url", url }
-                        });
+                    sc = fnm.Groups["TEXT"].Value;
 
-                    index++;
+                    const string cover = "(?<COVER>['\"])(?<TEXT>.+?)\\k<COVER>";
+                    string p; int a; int c; string[] k; int e; Dictionary<string, string> d;
+
+                    string[] parts = sc.Split(',');
+                    if (parts.Length >= 5)
+                    {
+                        p = Regex.Match(parts[0], cover).Groups["TEXT"].Value;
+                        a = int.Parse(parts[1]);
+                        c = int.Parse(parts[2]);
+                        k = Regex.Match(parts[3], cover).Groups["TEXT"].Value.Split('|');
+                        e = int.Parse(parts[4]);
+                        d = new Dictionary<string, string>();
+
+                        string deobfusCode = Deobfuscating(p, a, c, k, e, d);
+
+                        const string lstImagesPattern = "lstImages\\[(?<INDEX>\\d+)\\]=\"(?<URL>.+?)\"";
+                        const string lstImagesVIPPattern = "lstImagesVIP\\[(?<INDEX>\\d+)\\]=\"(?<URL>.+?)\"";
+
+                        MatchCollection imgList = Regex.Matches(deobfusCode, lstImagesPattern);
+                        MatchCollection vipList = Regex.Matches(deobfusCode, lstImagesVIPPattern);
+
+                        Dictionary<int, string> imgDic = new Dictionary<int, string>();
+                        Dictionary<int, string> vipDic = new Dictionary<int, string>();
+
+                        foreach (Match im in imgList)
+                        {
+                            imgDic.Add(int.Parse(im.Groups["INDEX"].Value), im.Groups["URL"].Value);
+                        }
+
+                        foreach (Match im in vipList)
+                        {
+                            vipDic.Add(int.Parse(im.Groups["INDEX"].Value), im.Groups["URL"].Value);
+                        }
+
+                        List<int> imgIndex = SortKeys(imgDic);
+
+                        foreach (var i in imgIndex)
+                        {
+                            string url = imgDic[i].Trim();
+
+                            if (vipDic.ContainsKey(i) && !string.IsNullOrWhiteSpace(vipDic[i]))
+                            {
+                                url = vipDic[i].Trim();
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(url))
+                            {
+                                pageList.Add(new Dictionary<string, string>()
+                                    {
+                                        { "id", Guid.NewGuid().ToString() },
+                                        { "name", "Trang " + StringUtils.GenerateOrdinal(imgIndex.Count, index) },
+                                        { "url", url }
+                                    });
+
+                                index++;
+                            }
+                        }
+                    }
                 }
             }
 
             return pageList;
+        }
+
+        private List<int> SortKeys(Dictionary<int, string> dic)
+        {
+            List<int> list = dic.Keys.ToList();
+            list.Sort();
+            return list;
+        }
+
+        private static string Deobfuscating(string p, int a, int c, string[] k, int e, Dictionary<string, string> d)
+        {
+            while (--c >= 0)
+            {
+                if (c < k.Length && !string.IsNullOrEmpty(k[c]))
+                {
+                    d[fn2(c, a)] = k[c];
+                }
+                else
+                {
+                    d[fn2(c, a)] = fn2(c, a);
+                }
+            }
+            c = 1;
+            return new Regex(@"\b\w+\b").Replace(p, match => d[match.Value]);
+        }
+
+        private static string fn2(int c, int a)
+        {
+            return (c < a ? "" : fn2(c / a, a)) + ((c = c % a) > 35 ? Convert.ToChar(c + 29).ToString() : toRadix(c, 36));
+        }
+
+        private static string toRadix(decimal N, int radix)
+        {
+            string HexN = "";
+            decimal Q = Math.Floor(Math.Abs(N));
+            int R;
+            while (true)
+            {
+                R = (int)Q % radix;
+                HexN = "0123456789abcdefghijklmnopqrstuvwxyz"[R] + HexN;
+                Q = (Q - R) / radix;
+                if (Q == 0) break;
+            }
+            return ((N < 0) ? "-" + HexN : HexN);
         }
     }
 }

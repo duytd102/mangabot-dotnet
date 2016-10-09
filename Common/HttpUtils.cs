@@ -83,10 +83,9 @@ namespace Common
 
                 HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(url);
                 httpRequest.Method = "GET";
-                //httpRequest.ContentType = "application/x-www-form-urlencoded";
-                httpRequest.ContentType = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+                httpRequest.ContentType = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
                 httpRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36";
+                httpRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36";
 
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpRequest.GetResponse();
                 Stream responseStream = httpWebResponse.GetResponseStream();

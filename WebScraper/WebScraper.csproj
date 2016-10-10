@@ -66,6 +66,11 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BotCrawler.cs" />
+    <Compile Include="Properties\Cloudflare.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Cloudflare.settings</DependentUpon>
+    </Compile>
     <Compile Include="Data\Chapter.cs" />
     <Compile Include="Data\Manga.cs" />
     <Compile Include="Data\Page.cs" />
@@ -73,6 +78,7 @@
     <Compile Include="Processors\IProcessor.cs" />
     <Compile Include="Processors\ProcessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scrapers\CloudflareScraper.cs" />
     <Compile Include="Scrapers\DictionaryToList.cs" />
     <Compile Include="Scrapers\DefaultScraper.cs" />
     <Compile Include="Scrapers\Scripts\BlogTruyenScript.cs" />
@@ -91,6 +97,7 @@
     <Compile Include="Scrapers\Scripts\IzTruyenTranhScript.cs" />
     <Compile Include="Scrapers\Scripts\UpTruyenScript.cs" />
     <Compile Include="ScriptManager.cs" />
+    <Compile Include="Utils\CloudflareHttpUtils.cs" />
     <Compile Include="Utils\DetectUrlUtils.cs" />
     <Compile Include="Utils\MethodInvoker.cs" />
   </ItemGroup>
@@ -101,6 +108,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Cloudflare.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Cloudflare.Designer.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

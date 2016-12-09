@@ -28,7 +28,7 @@ namespace WebScraper.Scrapers
                     return new DefaultScraper(MangaSite.HOCVIENTRUYENTRANH, "WebScraper.Scrapers.Scripts.HocVienTruyenTranhScript", "http://truyen.academyvn.com/");
 
                 case MangaSite.LHMANGA:
-                    return new DefaultScraper(MangaSite.LHMANGA, "WebScraper.Scrapers.Scripts.LHMangaScript", "http://lhmanga.com/");
+                    return new DefaultScraper(MangaSite.LHMANGA, "WebScraper.Scrapers.Scripts.LHMangaScript", "http://lhmanga.net/");
 
                 case MangaSite.TRUYENTRANHMOI:
                     return new DefaultScraper(MangaSite.TRUYENTRANHMOI, "WebScraper.Scrapers.Scripts.TruyenTranhMoiScript", "http://truyentranhmoi.com");
@@ -48,10 +48,10 @@ namespace WebScraper.Scrapers
                     return new DefaultScraper(MangaSite.MANGAPARK, "WebScraper.Scrapers.Scripts.MangaParkScript", "http://mangapark.me/");
 
                 case MangaSite.KISSMANGA:
-                    return new DefaultScraper(MangaSite.KISSMANGA, "", "");
+                    return new DefaultScraper(MangaSite.KISSMANGA, "WebScraper.Scrapers.Scripts.KissMangaScript", "http://kissmanga.com/");
+
 
                 default:
-                    // TODO implement if has more sites
                     throw new NotImplementedException();
             }
         }

@@ -3,13 +3,12 @@ using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace WebScraper.Scrapers.Scripts
 {
     public class LHMangaScript
     {
-        private const string LIST_PAGE_URL = "http://lhmanga.com/danh-sach-truyen/?trang=";
+        private const string LIST_PAGE_URL = "http://lhmanga.net/danh-sach-truyen/?trang=";
 
         public int GetTotalPages()
         {

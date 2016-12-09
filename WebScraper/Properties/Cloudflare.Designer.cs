@@ -23,12 +23,15 @@ namespace WebScraper.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string KISSMANGA {
             get {
                 return ((string)(this["KISSMANGA"]));
+            }
+            set {
+                this["KISSMANGA"] = value;
             }
         }
     }

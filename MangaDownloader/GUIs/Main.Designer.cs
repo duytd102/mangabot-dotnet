@@ -1001,7 +1001,7 @@
             // 
             this.tsmiMangaFox.Image = global::MangaDownloader.Properties.Resources.mangafox_logo;
             this.tsmiMangaFox.Name = "tsmiMangaFox";
-            this.tsmiMangaFox.Size = new System.Drawing.Size(157, 22);
+            this.tsmiMangaFox.Size = new System.Drawing.Size(158, 22);
             this.tsmiMangaFox.Text = "mangafox.me";
             this.tsmiMangaFox.Click += new System.EventHandler(this.tsmiMangaFox_Click);
             // 
@@ -1009,7 +1009,7 @@
             // 
             this.mangaParkToolStripMenuItem.Image = global::MangaDownloader.Properties.Resources.mangapark;
             this.mangaParkToolStripMenuItem.Name = "mangaParkToolStripMenuItem";
-            this.mangaParkToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.mangaParkToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mangaParkToolStripMenuItem.Text = "mangapark.me";
             this.mangaParkToolStripMenuItem.Click += new System.EventHandler(this.mangaParkToolStripMenuItem_Click);
             // 
@@ -1017,9 +1017,8 @@
             // 
             this.tsmiKissManga.Image = global::MangaDownloader.Properties.Resources.kissmanga_logo;
             this.tsmiKissManga.Name = "tsmiKissManga";
-            this.tsmiKissManga.Size = new System.Drawing.Size(157, 22);
-            this.tsmiKissManga.Text = "KissManga";
-            this.tsmiKissManga.Visible = false;
+            this.tsmiKissManga.Size = new System.Drawing.Size(158, 22);
+            this.tsmiKissManga.Text = "kissmanga.com";
             this.tsmiKissManga.Click += new System.EventHandler(this.tsmiKissManga_Click);
             // 
             // tsmiAdvancedSearch

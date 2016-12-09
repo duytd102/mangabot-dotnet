@@ -14,7 +14,7 @@ namespace WebScraper.Utils
         const string iztruyentranh = "iztruyentranh.com";
         const string otakufc = "otakufc.com";
         const string hvtt = "truyen.academyvn.com";
-        const string lhmanga = "lhmanga.com";
+        const string lhmanga = "lhmanga.net";
         const string truyentranhmoi = "truyentranhmoi.com";
         const string mangak = "mangak.info";
         const string uptruyen = "uptruyen.com";
@@ -23,7 +23,7 @@ namespace WebScraper.Utils
         const string mangapark = "mangapark.me";
         const string kissmanga = "kissmanga.com";
 
-        public static MangaSite GetSite(String url)
+        public static MangaSite GetSite(string url)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace WebScraper.Utils
             return MangaSite.UNKNOWN;
         }
 
-        public static bool IsSupportedSite(String url)
+        public static bool IsSupportedSite(string url)
         {
             return GetSite(url) != MangaSite.UNKNOWN;
         }

@@ -14,12 +14,12 @@
         TRUYENTRANHMOI,
         MANGAK,
         UPTRUYEN,
-        TRUYENTRANHONLINE,
-        HAMTRUYEN,
+        //TRUYENTRANHONLINE,
+        //HAMTRUYEN,
 
         MANGAFOX,
         KISSMANGA,
         MANGAPARK,
-        MANGASEE
+        //MANGASEE
     }
 }

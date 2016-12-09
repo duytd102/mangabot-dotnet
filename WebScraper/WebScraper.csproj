@@ -49,12 +49,19 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net40\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Jurassic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jurassic.2.2.1\lib\net35\Jurassic.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,6 +73,11 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BotCrawler.cs" />
+    <Compile Include="Properties\Domain.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Domain.settings</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Cloudflare.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -78,10 +90,10 @@
     <Compile Include="Processors\IProcessor.cs" />
     <Compile Include="Processors\ProcessorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scrapers\CloudflareScraper.cs" />
     <Compile Include="Scrapers\DictionaryToList.cs" />
     <Compile Include="Scrapers\DefaultScraper.cs" />
     <Compile Include="Scrapers\Scripts\BlogTruyenScript.cs" />
+    <Compile Include="Scrapers\Scripts\KissMangaScript.cs" />
     <Compile Include="Scrapers\Scripts\LHMangaScript.cs" />
     <Compile Include="Scrapers\Scripts\MangaKScript.cs" />
     <Compile Include="Scrapers\Scripts\TruyenTranhMoiScript.cs" />
@@ -100,6 +112,7 @@
     <Compile Include="Utils\CloudflareHttpUtils.cs" />
     <Compile Include="Utils\DetectUrlUtils.cs" />
     <Compile Include="Utils\MethodInvoker.cs" />
+    <Compile Include="Utils\rests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -109,13 +122,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Properties\Domain.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Domain.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Cloudflare.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Cloudflare.Designer.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

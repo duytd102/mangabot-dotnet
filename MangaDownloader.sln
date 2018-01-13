@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaDownloader", "MangaDownloader\MangaDownloader.csproj", "{7769B488-2327-4BC8-8D1B-2931AC470073}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate", "AutoUpdate\AutoUpdate.csproj", "{CE1B576F-77CF-419F-99E1-00B709C48791}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{AA48A747-2C00-43F5-99DC-D6462C30F96E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAssembly", "SmartAssembly\SmartAssembly.csproj", "{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,8 +101,23 @@ Global
 		{AA48A747-2C00-43F5-99DC-D6462C30F96E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AA48A747-2C00-43F5-99DC-D6462C30F96E}.Release|x86.ActiveCfg = Release|Any CPU
 		{AA48A747-2C00-43F5-99DC-D6462C30F96E}.Release|x86.Build.0 = Release|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|x86.Build.0 = Debug|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|x86.ActiveCfg = Release|Any CPU
+		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C77449BD-2B35-4965-B85D-5913A16C132D}
 	EndGlobalSection
 EndGlobal

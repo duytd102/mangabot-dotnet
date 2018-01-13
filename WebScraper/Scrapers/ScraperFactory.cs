@@ -7,6 +7,7 @@ namespace WebScraper.Scrapers
     {
         public static IScraper CreateScraper(MangaSite site)
         {
+            // TODO implement manga list
             switch (site)
             {
                 case MangaSite.BLOGTRUYEN:
@@ -28,10 +29,10 @@ namespace WebScraper.Scrapers
                     return new DefaultScraper(MangaSite.HOCVIENTRUYENTRANH, "WebScraper.Scrapers.Scripts.HocVienTruyenTranhScript", "http://truyen.academyvn.com/");
 
                 case MangaSite.LHMANGA:
-                    return new DefaultScraper(MangaSite.LHMANGA, "WebScraper.Scrapers.Scripts.LHMangaScript", "http://lhmanga.net/");
+                    return new DefaultScraper(MangaSite.LHMANGA, "WebScraper.Scrapers.Scripts.LHMangaScript", "http://truyentranhlh.com/");
 
                 case MangaSite.TRUYENTRANHMOI:
-                    return new DefaultScraper(MangaSite.TRUYENTRANHMOI, "WebScraper.Scrapers.Scripts.TruyenTranhMoiScript", "http://truyentranhmoi.com");
+                    return new DefaultScraper(MangaSite.TRUYENTRANHMOI, "WebScraper.Scrapers.Scripts.TruyenTranhMoiScript", "http://2.truyentranhmoi.com");
 
                 case MangaSite.MANGAK:
                     return new DefaultScraper(MangaSite.MANGAK, "WebScraper.Scrapers.Scripts.MangaKScript", "http://mangak.info");
@@ -42,7 +43,7 @@ namespace WebScraper.Scrapers
 
 
                 case MangaSite.MANGAFOX:
-                    return new DefaultScraper(MangaSite.MANGAFOX, "WebScraper.Scrapers.Scripts.MangaFoxScript", "http://mangafox.me/");
+                    return new DefaultScraper(MangaSite.MANGAFOX, "WebScraper.Scrapers.Scripts.MangaFoxScript", "http://mangafox.la/");
 
                 case MangaSite.MANGAPARK:
                     return new DefaultScraper(MangaSite.MANGAPARK, "WebScraper.Scrapers.Scripts.MangaParkScript", "http://mangapark.me/");

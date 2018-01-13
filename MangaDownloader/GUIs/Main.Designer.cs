@@ -1019,6 +1019,7 @@
             this.tsmiKissManga.Name = "tsmiKissManga";
             this.tsmiKissManga.Size = new System.Drawing.Size(158, 22);
             this.tsmiKissManga.Text = "kissmanga.com";
+            this.tsmiKissManga.Visible = false;
             this.tsmiKissManga.Click += new System.EventHandler(this.tsmiKissManga_Click);
             // 
             // tsmiAdvancedSearch

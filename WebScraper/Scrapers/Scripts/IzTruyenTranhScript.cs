@@ -9,7 +9,7 @@ namespace WebScraper.Scrapers.Scripts
 {
     public class IzTruyenTranhScript
     {
-        private const string BASE_LIST_URL = "http://izmanga.com/danh-sach-truyen?type=new&category=all&alpha=all&page={0}&state=all&group=all";
+        private const string BASE_LIST_URL = "http://iztruyentranh.com/danh-sach-truyen?type=new&category=all&alpha=all&page={0}&state=all&group=all";
 
         public int GetTotalPages()
         {
@@ -34,7 +34,7 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetMangaList(int pageIndex)
         {
             List<Dictionary<string, string>> mangaList = new List<Dictionary<string, string>>();
-            
+
             string listUrl = String.Format(BASE_LIST_URL, pageIndex);
             string src = HttpUtils.MakeHttpGet(listUrl);
             HtmlDocument doc = new HtmlDocument();
@@ -45,10 +45,10 @@ namespace WebScraper.Scrapers.Scripts
             {
                 HtmlNode h3 = m.Descendants().FirstOrDefault(x => x.Name.Equals("h3"));
                 HtmlNode a = h3.Element("a");
-                
+
                 string name = a.InnerText.Trim();
                 string url = a.GetAttributeValue("href", "").Trim();
-                
+
                 if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
                 {
                     mangaList.Add(new Dictionary<string, string>()
@@ -66,7 +66,7 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetChapterList(string mangaUrl)
         {
             List<Dictionary<string, string>> chapterList = new List<Dictionary<string, string>>();
-            
+
             string src = HttpUtils.MakeHttpGet(mangaUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
@@ -99,35 +99,26 @@ namespace WebScraper.Scrapers.Scripts
         {
             int index = 1;
             List<Dictionary<string, string>> pageList = new List<Dictionary<string, string>>();
-            const string pattern = @"data\s*=\s*'(?<urls>[^']+)'";
-            
+
             string src = HttpUtils.MakeHttpGet(chapterUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            List<HtmlNode> scriptTags = doc.DocumentNode.Descendants().Where(x => x.Name.Equals("script")).ToList();
-            foreach (HtmlNode script in scriptTags)
+            HtmlNode vungdoc = doc.GetElementbyId("vungdoc");
+            List<HtmlNode> imgList = vungdoc.Descendants().Where(x => x.Name.Equals("img")).ToList();
+            foreach (HtmlNode img in imgList)
             {
-                Match imageData = Regex.Match(script.InnerHtml, pattern, RegexOptions.IgnoreCase);
-                string urls = imageData.Groups["urls"].Value;
-                if (string.IsNullOrEmpty(urls) == false)
+                string url = img.GetAttributeValue("src", "");
+                if (!string.IsNullOrWhiteSpace(url))
                 {
-                    string[] ua = urls.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (string u in ua)
+                    pageList.Add(new Dictionary<string, string>()
                     {
-                        if (string.IsNullOrWhiteSpace(u) == false)
-                        {
-                            pageList.Add(new Dictionary<string, string>()
-                            {
-                                { "id", Guid.NewGuid().ToString() },
-                                { "name", "Trang " + StringUtils.GenerateOrdinal(ua.Length, index) },
-                                { "url", u }
-                            });
+                        { "id", Guid.NewGuid().ToString() },
+                        { "name", "Trang " + StringUtils.GenerateOrdinal(imgList.Count, index) },
+                        { "url", url }
+                    });
 
-                            index++;
-                        }
-                    }
+                    index++;
                 }
             }
 

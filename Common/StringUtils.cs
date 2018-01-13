@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SmartAssembly.Attributes;
 
 namespace Common
 {
+    // Exclude this method because it is used by WebScaper which invokes this method by method name via reflection
+    [DoNotObfuscate()]
     public class StringUtils
     {
+        [DoNotObfuscate()]
         public static string GenerateOrdinal(int totalRows, int currentRowIndex)
         {
             string name = "";

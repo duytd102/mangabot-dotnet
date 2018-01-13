@@ -1,4 +1,8 @@
-﻿Version 2.4 (2016-09-10)
+﻿Version 2.5 (2018-01-14)
+[Bugfix]
+- Fix broken crawlers
+
+Version 2.4 (2016-09-10)
 [Bugfix]
 - Not working with mangafox.me
 
@@ -12,7 +16,7 @@ Version 2.3 (2016-07-17)
 
 Version 2.2 (2016-05-28)
 [New]
-- No longer support auto update (do not find any free host to get permanent direct link)
+- No longer support auto update (not found any free host to get permanent direct link)
 [Enhancement]
 - Fix links
 - Bypass antivirus programs

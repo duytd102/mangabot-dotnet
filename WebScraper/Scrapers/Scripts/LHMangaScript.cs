@@ -8,48 +8,47 @@ namespace WebScraper.Scrapers.Scripts
 {
     public class LHMangaScript
     {
-        private const string LIST_PAGE_URL = "http://lhmanga.net/danh-sach-truyen/?trang=";
+        private const string LIST_PAGE_URL = "http://truyentranhlh.com/manga-list.html?listType=pagination&page={0}&artist=&author=&group=&m_status=&name=&genre=&ungenre=&sort=views&sort_type=DESC";
 
         public int GetTotalPages()
         {
-            string src = HttpUtils.MakeHttpGet(LIST_PAGE_URL + 1);
+            string src = HttpUtils.MakeHttpGet(String.Format(LIST_PAGE_URL, 1));
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode ul = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "").Contains("pagination"));
-            HtmlNode a = ul.LastChild.Descendants().First();
+            HtmlNode ul = doc.DocumentNode.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("pagination"));
+            List<HtmlNode> liList = ul.Descendants("li").ToList();
+            HtmlNode a = liList[liList.Count - 2].Descendants().FirstOrDefault(x => x.Name.Equals("a"));
             string href = a.GetAttributeValue("href", "");
-            int idx = 1;
-            return int.TryParse(href.Replace(LIST_PAGE_URL, ""), out idx) ? idx : 1;
+            return int.TryParse(a.InnerText, out int idx) ? idx : 1;
         }
 
         public List<Dictionary<string, string>> GetMangaList(int pageIndex)
         {
             List<Dictionary<string, string>> mangaList = new List<Dictionary<string, string>>();
-            
-            string src = HttpUtils.MakeHttpGet(LIST_PAGE_URL + pageIndex);
+
+            string src = HttpUtils.MakeHttpGet(String.Format(LIST_PAGE_URL, pageIndex));
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode panelManga = doc.DocumentNode.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("panel-manga"));
-            List<HtmlNode> mangaNodes = panelManga.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("manga")).ToList();
+            List<HtmlNode> mangaNodes = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("row-list")).ToList();
             foreach (HtmlNode mn in mangaNodes)
             {
                 try
                 {
-                    HtmlNode nameNode = mn.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("manga-name"));
-                    HtmlNode a = nameNode.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
+                    HtmlNode heading = mn.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("media-heading"));
+                    HtmlNode a = heading.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
                     string name = a.InnerText.Trim();
                     string url = a.GetAttributeValue("href", "").Trim();
 
                     if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
                     {
                         mangaList.Add(new Dictionary<string, string>()
-                            {
-                                { "id", Guid.NewGuid().ToString() },
-                                { "name", name },
-                                { "url", url }
-                            });
+                        {
+                            { "id", Guid.NewGuid().ToString() },
+                            { "name", name },
+                            { "url", url }
+                        });
                     }
                 }
                 catch { }
@@ -66,9 +65,9 @@ namespace WebScraper.Scrapers.Scripts
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode chapterTable = doc.DocumentNode.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("table-chapter"));
+            HtmlNode chapterTable = doc.GetElementbyId("tab-chapper");
             List<HtmlNode> trList = chapterTable.Descendants().Where(x => x.Name.Equals("tr")).ToList();
-            foreach(HtmlNode tr in trList)
+            foreach (HtmlNode tr in trList)
             {
                 HtmlNode td = tr.Descendants().FirstOrDefault(x => x.Name.Equals("td"));
                 if (td != null)
@@ -101,19 +100,18 @@ namespace WebScraper.Scrapers.Scripts
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            HtmlNode chapterContent = doc.GetElementbyId("content_chap");
-            List<HtmlNode> imgList = chapterContent.Descendants().Where(x => x.Name.Equals("img")).ToList();
+            List<HtmlNode> imgList = doc.DocumentNode.Descendants().Where(x => x.Name.Equals("img")).ToList();
             foreach (HtmlNode img in imgList)
             {
                 string url = img.GetAttributeValue("src", "");
-                if (string.IsNullOrWhiteSpace(url) == false)
+                if (!string.IsNullOrWhiteSpace(url))
                 {
                     pageList.Add(new Dictionary<string, string>()
-                        {
-                            { "id", Guid.NewGuid().ToString() },
-                            { "name", "Trang " + StringUtils.GenerateOrdinal(imgList.Count, index) },
-                            { "url", url }
-                        });
+                    {
+                        { "id", Guid.NewGuid().ToString() },
+                        { "name", "Trang " + StringUtils.GenerateOrdinal(imgList.Count, index) },
+                        { "url", url }
+                    });
 
                     index++;
                 }

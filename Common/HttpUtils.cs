@@ -1,14 +1,16 @@
-﻿using System;
+﻿using SmartAssembly.Attributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 
 namespace Common
 {
+    // Exclude this method because it is used by WebScaper which invokes this method by method name via reflection
+    [DoNotObfuscate()]
     public class HttpUtils
     {
         /// <summary>
@@ -56,7 +58,7 @@ namespace Common
         {
             string p = "";
             IEnumerator ie = dataModel.Keys.GetEnumerator();
-            while(ie.MoveNext())
+            while (ie.MoveNext())
             {
                 string key = ie.Current as string;
                 p += p.Length > 0 ? "&" : "";
@@ -73,6 +75,7 @@ namespace Common
         ///                             Có dạng: name1=value1&amp;name2=value2&amp;...
         /// </param>
         /// <returns></returns>
+        [DoNotObfuscate()]
         public static string MakeHttpGet(string url, string queryString = "")
         {
             try
@@ -117,6 +120,7 @@ namespace Common
         ///                             Có dạng: name1=value1&amp;name2=value2&amp;...
         /// </param>
         /// <returns></returns>
+        [DoNotObfuscate()]
         public static string DoGetWithDecompression(string url, string queryString = "")
         {
             try

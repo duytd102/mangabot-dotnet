@@ -27,7 +27,7 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetMangaList(int pageIndex)
         {
             List<Dictionary<string, string>> mangaList = new List<Dictionary<string, string>>();
-            
+
             string listUrl = pageIndex > 1 ? String.Format("{0}page={1}", BASE_LIST_URL, pageIndex) : BASE_LIST_URL;
             string src = HttpUtils.MakeHttpGet(listUrl);
             HtmlDocument doc = new HtmlDocument();
@@ -63,33 +63,28 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetChapterList(string mangaUrl)
         {
             List<Dictionary<string, string>> chapterList = new List<Dictionary<string, string>>();
-            
+
             string src = HttpUtils.MakeHttpGet(mangaUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            List<HtmlNode> aTags = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("itemprop", "").Contains("itemListElement")).ToList();
+            HtmlNode chapListElement = doc.GetElementbyId("ChapList");
+            List<HtmlNode> aTags = chapListElement.Descendants().Where(x => x.GetAttributeValue("itemprop", "").Contains("itemListElement")).ToList();
             foreach (HtmlNode a in aTags)
             {
-                HtmlNode title = a.Descendants().FirstOrDefault(x => x.Name.Equals("h2"));
-                if (title != null)
-                {
-                    HtmlNode nameNode = title.Descendants().FirstOrDefault(x => x.Name.Equals("strong"));
-                    if (nameNode != null)
-                    {
-                        string name = nameNode.InnerText.Trim();
-                        string url = a.GetAttributeValue("href", "");
+                string url = a.GetAttributeValue("href", "");
 
-                        if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
-                        {
-                            chapterList.Add(new Dictionary<string, string>()
-                                {
-                                    { "id", Guid.NewGuid().ToString() },
-                                    { "name", name },
-                                    { "url", url }
-                                });
-                        }
-                    }
+                HtmlNode title = a.Descendants().FirstOrDefault(x => x.Name.Equals("h2"));
+                string name = title == null ? "" : title.InnerText.Trim();
+
+                if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
+                {
+                    chapterList.Add(new Dictionary<string, string>()
+                    {
+                        { "id", Guid.NewGuid().ToString() },
+                        { "name", name },
+                        { "url", url }
+                    });
                 }
             }
 

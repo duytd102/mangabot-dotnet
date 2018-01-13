@@ -8,7 +8,7 @@ namespace WebScraper.Scrapers.Scripts
 {
     public class MangaFoxScript
     {
-        private const string ROOT_URL = "http://mangafox.me/directory/";
+        private const string ROOT_URL = "http://mangafox.la/directory/";
 
         public int GetTotalPages()
         {

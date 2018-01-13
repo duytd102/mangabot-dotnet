@@ -26,38 +26,30 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetMangaList(int pageIndex)
         {
             List<Dictionary<string, string>> mangaList = new List<Dictionary<string, string>>();
-            
+
             string listUrl = ROOT_LIST + pageIndex;
             string src = HttpUtils.MakeHttpGet(listUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
-            List<HtmlNode> tables = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("table")).ToList();
-            foreach (HtmlNode table in tables)
-            {
-                List<HtmlNode> trList = table.Descendants().Where(x => x.Name.Equals("tr")).ToList();
-                foreach (HtmlNode tr in trList)
-                {
-                    List<HtmlNode> tdList = tr.Elements("td").ToList();
-                    foreach (HtmlNode td in tdList)
-                    {
-                        HtmlNode a = td.Descendants().FirstOrDefault(x => x.Name.Equals("a"));
-                        if (a != null)
-                        {
-                            string name = GetInnerTextWithoutElements(a);
-                            string url = a.GetAttributeValue("href", "").Trim();
+            HtmlNode loadList = doc.GetElementbyId("loadlist");
+            List<HtmlNode> mangaElements = loadList.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("mainpage-manga")).ToList();
 
-                            if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
-                            {
-                                mangaList.Add(new Dictionary<string, string>()
-                                    {
-                                        { "id", Guid.NewGuid().ToString() },
-                                        { "name", name },
-                                        { "url", url }
-                                    });
-                            }
-                        }
-                    }
+            foreach (HtmlNode mangaElement in mangaElements)
+            {
+                HtmlNode a = mangaElement.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("media-body"))
+                    .Descendants().FirstOrDefault(x => x.Name.Equals("a"));
+                string name = a.InnerText.Trim();
+                string url = a.GetAttributeValue("href", "").Trim();
+
+                if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(url))
+                {
+                    mangaList.Add(new Dictionary<string, string>()
+                    {
+                        { "id", Guid.NewGuid().ToString() },
+                        { "name", name },
+                        { "url", url }
+                    });
                 }
             }
 
@@ -67,7 +59,7 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetChapterList(string mangaUrl)
         {
             List<Dictionary<string, string>> chapterList = new List<Dictionary<string, string>>();
-            
+
             string src = HttpUtils.MakeHttpGet(mangaUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);

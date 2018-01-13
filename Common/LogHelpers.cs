@@ -14,7 +14,11 @@ namespace Common
 
         static LogHelpers()
         {
-            filePath = AppDomain.CurrentDomain.BaseDirectory + "\\debug.log";
+            try
+            {
+                filePath = AppDomain.CurrentDomain.BaseDirectory + "\\debug.log";
+            }
+            catch { }
         }
 
         public static void Log(string msg)

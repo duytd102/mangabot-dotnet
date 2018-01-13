@@ -92,6 +92,7 @@
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="StringUtils.cs" />
     <Compile Include="UrlUtils.cs" />
+    <Compile Include="VersionData.cs" />
     <Compile Include="VersionUtils.cs" />
     <Compile Include="WindowUtils.cs" />
     <Compile Include="ZipUtils.cs" />
@@ -105,6 +106,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartAssembly\SmartAssembly.csproj">
+      <Project>{ec292b23-b5d9-49e2-bff1-d5d15ffbc80e}</Project>
+      <Name>SmartAssembly</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

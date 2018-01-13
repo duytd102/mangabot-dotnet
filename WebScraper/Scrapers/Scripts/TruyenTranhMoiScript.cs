@@ -8,7 +8,7 @@ namespace WebScraper.Scrapers.Scripts
 {
     public class TruyenTranhMoiScript
     {
-        const string BASE_LIST_URL = "http://truyentranhmoi.com/danh-sach/";
+        const string BASE_LIST_URL = "http://2.truyentranhmoi.com/danh-sach/";
 
         public int GetTotalPages()
         {

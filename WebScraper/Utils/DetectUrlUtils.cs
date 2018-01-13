@@ -14,12 +14,12 @@ namespace WebScraper.Utils
         const string iztruyentranh = "iztruyentranh.com";
         const string otakufc = "otakufc.com";
         const string hvtt = "truyen.academyvn.com";
-        const string lhmanga = "lhmanga.net";
-        const string truyentranhmoi = "truyentranhmoi.com";
+        const string lhmanga = "truyentranhlh.com";
+        const string truyentranhmoi = "2.truyentranhmoi.com";
         const string mangak = "mangak.info";
         const string uptruyen = "uptruyen.com";
         
-        const string mangafox = "mangafox.me";
+        const string mangafox = "mangafox.la";
         const string mangapark = "mangapark.me";
         const string kissmanga = "kissmanga.com";
 

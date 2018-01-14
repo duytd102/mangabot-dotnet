@@ -1,4 +1,4 @@
-﻿using Common.Enums;
+﻿using SmartAssembly.Attributes;
 using System;
 using System.IO;
 using System.Text;
@@ -6,9 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace Common
 {
+    [DoNotObfuscate()]
+    [DoNotPrune()]
     public class LogHelpers
     {
-        private static string filePath = "";
+        private static string debugPath = "";
+        private static string errorPath = "";
 
         private LogHelpers() { }
 
@@ -16,20 +19,74 @@ namespace Common
         {
             try
             {
-                filePath = AppDomain.CurrentDomain.BaseDirectory + "\\debug.log";
+                debugPath = "debug.log";
+                errorPath = "errors.log";
             }
             catch { }
         }
 
-        public static void Log(string msg)
+        private static bool IsFileLogEnable()
+        {
+            //return CommonSettings.AppMode != AppMode.PROD;
+            return true;
+        }
+
+        private static string AppendTime(string msg)
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd") + ": " + Regex.Replace(msg, "(\\r|\\n|\\t|\\s{4})+", "");
+        }
+
+        private static void DeleteIfTooLarge(string path)
+        {
+            FileInfo fi = new FileInfo(path);
+            if (fi.Exists)
+            {
+                const long MB5 = 5 * 1000 * 1000;
+                long size = fi.Length;
+                if (size > MB5)
+                {
+                    try
+                    {
+                        fi.Delete();
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        [DoNotObfuscate()]
+        [DoNotPrune()]
+        public static void LogDebug(string msg)
         {
             try
             {
-                if (CommonSettings.AppMode != AppMode.PROD)
+                if (IsFileLogEnable())
                 {
-                    using (StreamWriter sw = new StreamWriter(filePath, true, Encoding.UTF8))
+                    DeleteIfTooLarge(debugPath);
+
+                    using (StreamWriter sw = new StreamWriter(debugPath, true, Encoding.UTF8))
                     {
-                        sw.WriteLine(Regex.Replace(msg, "(\\r|\\n|\\t|\\s{4})+", ""));
+                        sw.WriteLine(AppendTime(msg));
+                        sw.Close();
+                    }
+                }
+            }
+            catch { }
+        }
+
+        [DoNotObfuscate()]
+        [DoNotPrune()]
+        public static void LogError(string msg)
+        {
+            try
+            {
+                if (IsFileLogEnable())
+                {
+                    DeleteIfTooLarge(errorPath);
+
+                    using (StreamWriter sw = new StreamWriter(errorPath, true, Encoding.UTF8))
+                    {
+                        sw.WriteLine(AppendTime(msg));
                         sw.Close();
                     }
                 }

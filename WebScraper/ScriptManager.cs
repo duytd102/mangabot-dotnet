@@ -10,7 +10,6 @@ namespace WebScraper
     {
         private static ScriptManager instance;
         private static List<string> scriptLinkRepo = new List<string>() {
-            "https://drive.google.com/uc?export=download&id=0B8UtpGtiVBF3aXFIZ3JPVTFLNGM",
             "https://drive.google.com/uc?export=download&id=0BwclU1yWN7VGbk53ck44RFJESms"
         };
         private static Dictionary<MangaSite, List<string>> scriptLinks = new Dictionary<MangaSite, List<string>>();
@@ -18,10 +17,10 @@ namespace WebScraper
 
         private ScriptManager()
         {
-            foreach(string link in scriptLinkRepo)
+            foreach (string link in scriptLinkRepo)
             {
                 string repoSrc = HttpUtils.MakeHttpGetWithAppendLine(link);
-                if(string.IsNullOrWhiteSpace(repoSrc) == false)
+                if (string.IsNullOrWhiteSpace(repoSrc) == false)
                 {
                     try
                     {
@@ -78,7 +77,7 @@ namespace WebScraper
                 if (scriptLinks.ContainsKey(site))
                 {
                     List<string> links = scriptLinks[site];
-                    foreach(string l in links)
+                    foreach (string l in links)
                     {
                         string src = HttpUtils.MakeHttpGetWithAppendLine(l);
                         if (string.IsNullOrWhiteSpace(src) == false)

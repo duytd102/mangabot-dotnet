@@ -16,10 +16,14 @@ namespace WebScraper.Scrapers.Scripts
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
 
+            LogHelpers.LogDebug("LHMANGA: pagesource " + src);
             HtmlNode ul = doc.DocumentNode.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("pagination"));
+            LogHelpers.LogDebug("LHMANGA: found pagination.");
+            LogHelpers.LogDebug("LHMANGA: " + ul.OuterHtml);
             List<HtmlNode> liList = ul.Descendants("li").ToList();
             HtmlNode a = liList[liList.Count - 2].Descendants().FirstOrDefault(x => x.Name.Equals("a"));
             string href = a.GetAttributeValue("href", "");
+            LogHelpers.LogDebug("LHMANGA: last page index " + a.OuterHtml);
             return int.TryParse(a.InnerText, out int idx) ? idx : 1;
         }
 

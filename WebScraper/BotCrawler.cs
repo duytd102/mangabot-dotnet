@@ -47,7 +47,7 @@ namespace WebScraper
             }
 
             string folder = AppDomain.CurrentDomain.BaseDirectory;
-            
+
             List<string> libs = new List<string>()
             {
                 "System.dll",
@@ -57,11 +57,13 @@ namespace WebScraper
                 "System.Web.dll",
                 File.Exists(folder + "\\HtmlAgilityPack.dll") ? "HtmlAgilityPack.dll" : "bin\\HtmlAgilityPack.dll"
             };
-            
-            CompilerParameters compilerParams = new CompilerParameters(libs.ToArray());
-            compilerParams.GenerateInMemory = true;
-            compilerParams.GenerateExecutable = false;
-            compilerParams.TreatWarningsAsErrors = false;
+
+            CompilerParameters compilerParams = new CompilerParameters(libs.ToArray())
+            {
+                GenerateInMemory = true,
+                GenerateExecutable = false,
+                TreatWarningsAsErrors = false
+            };
 
             /**
              * Because I embedded Common.dll into app, so must load assembly of this app once execute the code.
@@ -80,12 +82,12 @@ namespace WebScraper
             CompilerResults results = provider.CompileAssemblyFromSource(compilerParams, script);
             if (results.Errors.HasErrors)
             {
-                string text = "Compile Assembly Failed: ";
+                string text = "Compile Assembly Failed: " + fullClassName + "." + methodName;
                 foreach (CompilerError ce in results.Errors)
                 {
                     text += "\r\n" + ce.ToString();
                 }
-                LogHelpers.Log(text);
+                LogHelpers.LogError(text);
                 throw new Exception(text);
             }
 

@@ -23,9 +23,17 @@ namespace WebScraper.Scrapers.Scripts
 
             if (paginator != null)
             {
+                LogHelpers.LogDebug("IZTRUYENTRANH: found pagination.");
+                LogHelpers.LogDebug("IZTRUYENTRANH: " + paginator.OuterHtml);
                 HtmlNode lastPage = paginator.Descendants().LastOrDefault(x => x.Name.Equals("a"));
                 Match p = Regex.Match(lastPage.GetAttributeValue("href", ""), pattern, RegexOptions.IgnoreCase);
-                return int.Parse(p.Groups["PAGE_INDEX"].Value);
+                int totalPages = int.Parse(p.Groups["PAGE_INDEX"].Value);
+                LogHelpers.LogDebug("IZTRUYENTRANH: PAGE_INDEX = " + totalPages);
+                return totalPages;
+            }
+            else
+            {
+                LogHelpers.LogDebug("IZTRUYENTRANH: pagination is null.");
             }
 
             return 1;

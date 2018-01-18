@@ -11,6 +11,7 @@ namespace Common
 {
     // Exclude this method because it is used by WebScaper which invokes this method by method name via reflection
     [DoNotObfuscate()]
+    [DoNotPrune()]
     public class HttpUtils
     {
         /// <summary>
@@ -76,6 +77,7 @@ namespace Common
         /// </param>
         /// <returns></returns>
         [DoNotObfuscate()]
+        [DoNotPrune()]
         public static string MakeHttpGet(string url, string queryString = "")
         {
             try
@@ -121,6 +123,7 @@ namespace Common
         /// </param>
         /// <returns></returns>
         [DoNotObfuscate()]
+        [DoNotPrune()]
         public static string DoGetWithDecompression(string url, string queryString = "")
         {
             try
@@ -193,6 +196,7 @@ namespace Common
             return "";
         }
 
+        [DoNotPrune()]
         public static string MakeHttpGetWithAppendLine(string url, string queryString = "")
         {
             try

@@ -936,6 +936,7 @@
             this.tsmiLHManga.Name = "tsmiLHManga";
             this.tsmiLHManga.Size = new System.Drawing.Size(204, 22);
             this.tsmiLHManga.Text = "lhmanga.com";
+            this.tsmiLHManga.Visible = false;
             this.tsmiLHManga.Click += new System.EventHandler(this.tsmiLHManga_Click);
             // 
             // tsmiVeChai

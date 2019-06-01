@@ -46,7 +46,7 @@ namespace WebScraper.Scrapers
                     return new DefaultScraper(MangaSite.MANGAFOX, "WebScraper.Scrapers.Scripts.MangaFoxScript", "http://mangafox.la/");
 
                 case MangaSite.MANGAPARK:
-                    return new DefaultScraper(MangaSite.MANGAPARK, "WebScraper.Scrapers.Scripts.MangaParkScript", "http://mangapark.me/");
+                    return new DefaultScraper(MangaSite.MANGAPARK, "WebScraper.Scrapers.Scripts.MangaParkScript", "https://mangapark.net/");
 
                 case MangaSite.KISSMANGA:
                     return new DefaultScraper(MangaSite.KISSMANGA, "WebScraper.Scrapers.Scripts.KissMangaScript", "http://kissmanga.com/");

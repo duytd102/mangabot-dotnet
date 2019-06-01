@@ -20,7 +20,7 @@ namespace WebScraper.Utils
         const string uptruyen = "uptruyen.com";
         
         const string mangafox = "mangafox.la";
-        const string mangapark = "mangapark.me";
+        const string mangapark = "mangapark.net";
         const string kissmanga = "kissmanga.com";
 
         public static MangaSite GetSite(string url)

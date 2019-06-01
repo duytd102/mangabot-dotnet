@@ -9,8 +9,8 @@ namespace WebScraper.Scrapers.Scripts
 {
     public class MangaParkScript
     {
-        const string DOMAIN = "http://mangapark.me/";
-        const string BASE_LIST_URL = "http://mangapark.me/latest/";
+        const string DOMAIN = "https://mangapark.net/";
+        const string BASE_LIST_URL = "https://mangapark.net/latest/";
 
         public int GetTotalPages()
         {
@@ -43,7 +43,7 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetMangaList(int pageIndex)
         {
             List<Dictionary<string, string>> mangaList = new List<Dictionary<string, string>>();
-            
+
             string src = HttpUtils.MakeHttpGet(BASE_LIST_URL + pageIndex);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
@@ -51,19 +51,23 @@ namespace WebScraper.Scrapers.Scripts
             List<HtmlNode> items = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("item")).ToList();
             foreach (HtmlNode item in items)
             {
-                HtmlNode a = item.Descendants().FirstOrDefault(x => x.Name.Equals("ul")).Element("h3").Element("a");
-                string name = a.InnerText.Trim();
-                string url = a.GetAttributeValue("href", "").Trim();
-
-                if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
+                try
                 {
-                    mangaList.Add(new Dictionary<string, string>()
+                    HtmlNode a = item.Descendants().FirstOrDefault(x => x.Name.Equals("ul")).Element("h3").Element("a");
+                    string name = a.InnerText.Trim();
+                    string url = a.GetAttributeValue("href", "").Trim();
+
+                    if (string.IsNullOrWhiteSpace(name) == false && string.IsNullOrWhiteSpace(url) == false)
+                    {
+                        mangaList.Add(new Dictionary<string, string>()
                         {
                             { "id", Guid.NewGuid().ToString() },
                             { "name", name },
                             { "url", url }
                         });
+                    }
                 }
+                catch { }
             }
 
             return mangaList;
@@ -72,7 +76,7 @@ namespace WebScraper.Scrapers.Scripts
         public List<Dictionary<string, string>> GetChapterList(string mangaUrl)
         {
             List<Dictionary<string, string>> chapterList = new List<Dictionary<string, string>>();
-            
+
             string src = HttpUtils.MakeHttpGet(mangaUrl);
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(src);
@@ -92,7 +96,7 @@ namespace WebScraper.Scrapers.Scripts
                 }
 
                 List<HtmlNode> volumes = stream.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("volume")).ToList();
-                foreach(HtmlNode volume in volumes)
+                foreach (HtmlNode volume in volumes)
                 {
                     List<HtmlNode> chapters = volume.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("chapter")).Elements("li").ToList();
                     foreach (HtmlNode chapterNode in chapters)
@@ -129,21 +133,55 @@ namespace WebScraper.Scrapers.Scripts
             doc.LoadHtml(src);
 
             List<HtmlNode> canvasList = doc.DocumentNode.Descendants().Where(x => x.GetAttributeValue("class", "").Contains("canvas")).ToList();
-            foreach (HtmlNode canvas in canvasList)
+            if (canvasList.Count > 0)
             {
-                HtmlNode img = canvas.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("img-link")).Element("img");
-                string url = img.GetAttributeValue("src", "").Trim();
-
-                if (string.IsNullOrWhiteSpace(url) == false)
+                foreach (HtmlNode canvas in canvasList)
                 {
-                    pageList.Add(new Dictionary<string, string>()
+                    HtmlNode img = canvas.Descendants().FirstOrDefault(x => x.GetAttributeValue("class", "").Contains("img-link")).Element("img");
+                    string url = img.GetAttributeValue("src", "").Trim();
+
+                    if (string.IsNullOrWhiteSpace(url) == false)
+                    {
+                        pageList.Add(new Dictionary<string, string>()
                         {
                             { "id", Guid.NewGuid().ToString() },
                             { "name", "Trang " + StringUtils.GenerateOrdinal(canvasList.Count, index) },
                             { "url", url }
                         });
 
-                    index++;
+                        index++;
+                    }
+                }
+            }
+            else
+            {
+                const string scriptPattern = "<script[^>]*?>.*?_load_pages.*?\\[(?<TEXT>.*?)\\].*?</script>";
+                MatchCollection scripts = Regex.Matches(src, scriptPattern, RegexOptions.IgnoreCase);
+                foreach (Match script in scripts)
+                {
+                    string sc = script.Groups["TEXT"].Value;
+                    const string linkPattern = "http[s]?.+?\\\"";
+                    MatchCollection links = Regex.Matches(sc, linkPattern, RegexOptions.IgnoreCase);
+                    foreach (Match lnk in links)
+                    {
+                        if (string.IsNullOrEmpty(lnk.Value))
+                        {
+                            continue;
+                        }
+
+                        string url = lnk.Value.Replace("\\", "").Replace("\"", "");
+                        if (!string.IsNullOrWhiteSpace(url) && FileUtils.IsPhoto(url))
+                        {
+                            pageList.Add(new Dictionary<string, string>()
+                            {
+                                { "id", Guid.NewGuid().ToString() },
+                                { "name", "Trang " + StringUtils.GenerateOrdinal(links.Count, index) },
+                                { "url", url }
+                            });
+
+                            index++;
+                        }
+                    }
                 }
             }
 

@@ -107,12 +107,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SmartAssembly\SmartAssembly.csproj">
-      <Project>{ec292b23-b5d9-49e2-bff1-d5d15ffbc80e}</Project>
-      <Name>SmartAssembly</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

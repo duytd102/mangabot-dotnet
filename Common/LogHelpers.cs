@@ -1,13 +1,10 @@
-﻿using SmartAssembly.Attributes;
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Common
 {
-    [DoNotObfuscate()]
-    [DoNotPrune()]
     public class LogHelpers
     {
         private static string debugPath = "";
@@ -54,8 +51,6 @@ namespace Common
             }
         }
 
-        [DoNotObfuscate()]
-        [DoNotPrune()]
         public static void LogDebug(string msg)
         {
             try
@@ -74,8 +69,6 @@ namespace Common
             catch { }
         }
 
-        [DoNotObfuscate()]
-        [DoNotPrune()]
         public static void LogError(string msg)
         {
             try

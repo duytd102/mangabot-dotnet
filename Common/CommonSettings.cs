@@ -1,15 +1,13 @@
 ﻿using Common.Enums;
-using SmartAssembly.Attributes;
 using System;
 using System.Diagnostics;
 
 namespace Common
 {
     // Exclude this method because it is used by WebScaper which invokes this method by method name via reflection
-    [DoNotObfuscate()]
     public class CommonSettings
     {
-        [DoNotObfuscate()]
+
         private static AppMode appMode;
 
         public static string AppName()

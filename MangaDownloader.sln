@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate", "AutoUpdate\Au
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MangaBotInstaller", "MangaBotInstaller\MangaBotInstaller.vdproj", "{CB3223B5-241E-488A-96CE-F2304A600135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAssembly", "SmartAssembly\SmartAssembly.csproj", "{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,18 +93,6 @@ Global
 		{CB3223B5-241E-488A-96CE-F2304A600135}.Release|Any CPU.ActiveCfg = Release
 		{CB3223B5-241E-488A-96CE-F2304A600135}.Release|Mixed Platforms.ActiveCfg = Release
 		{CB3223B5-241E-488A-96CE-F2304A600135}.Release|x86.ActiveCfg = Release
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Debug|x86.Build.0 = Debug|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|x86.ActiveCfg = Release|Any CPU
-		{EC292B23-B5D9-49E2-BFF1-D5D15FFBC80E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
